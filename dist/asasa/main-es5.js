@@ -87,7 +87,7 @@
     /***/
     function _(module, exports, __webpack_require__) {
       module.exports = __webpack_require__(
-      /*! C:\Office\New folder\MyAsasa-master\src\main.ts */
+      /*! C:\Office\MyAsasa\src\main.ts */
       "zUnb");
       /***/
     },
@@ -3580,7 +3580,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](user_r1._id);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](user_r1.referenceId);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
@@ -8868,8 +8868,7 @@
 
       var _angular_flex_layout_extended__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/flex-layout/extended */
-      "znSr"); // import { NzSelectModule } from 'ng-zorro-antd/select';
-
+      "znSr");
 
       function AddInventoriesComponent_div_51_div_3_div_1_Template(rf, ctx) {
         if (rf & 1) {
@@ -9704,6 +9703,7 @@
           }];
           this.isInvalid = false;
           this.isInvalid1 = false;
+          this.selectedLocations = [];
           this.selectStringLocations = []; // Requirements for Map on the template, below;
 
           this.opacity = 1;
@@ -9843,6 +9843,7 @@
               for (var i = 0; i < this.user1.location.length; i++) {
                 console.log(this.user1.location[i].location);
                 this.selectStringLocations.push(this.user1.location[i].location);
+                this.selectedLocations.push(this.user1.location[i].location);
               }
 
               console.log(this.selectStringLocations);
@@ -9855,6 +9856,8 @@
             }
 
             console.log(this.addinventoryForm.value);
+            this.selectedCity = this.user.city.city;
+            console.log(this.selectedLocations);
           } // File Upload Functions below
 
         }, {
@@ -9935,6 +9938,17 @@
           value: function changeCity(city) {
             console.log(this.locations);
             this.locations = '';
+
+            if (this.user) {
+              console.log(city.city);
+              console.log(this.selectedCity);
+
+              if (this.selectedCity == city.city) {
+                this.selectStringLocations = this.selectedLocations;
+                console.log(this.selectStringLocations);
+              } else this.selectStringLocations = [];
+            }
+
             console.log(this.locations);
 
             if (city) {
@@ -11689,48 +11703,21 @@
           this.router = router;
           this.toastr = toastr;
           this.submitted = false;
-          this.accessType = [// { access: "super_admin" },
-          {
+          this.accessType = [{
             access: "agent"
           }, {
             access: "city_admin"
           }];
+          this.selectedLocations = [];
           this.selectStringLocations = [];
-          this.error_messages = {
-            password: [{
-              type: "required",
-              message: "password is required."
-            }, {
-              type: "minlength",
-              message: "password length."
-            }, {
-              type: "maxlength",
-              message: "password length."
-            }],
-            confirmpassword: [{
-              type: "required",
-              message: "password is required."
-            }, {
-              type: "minlength",
-              message: "password length."
-            }, {
-              type: "maxlength",
-              message: "password length."
-            }]
-          };
-        } // registerresponse: RegisterResponse;
-
+        }
 
         _createClass(SignupComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
             this.getUser();
             this.removeUser();
-            this.initialize(); // if (window.innerWidth < 600) {
-            //   this.mobileView = true;
-            // } else if (window.innerWidth > 600) {
-            //   this.mobileView = false;
-            // }
+            this.initialize();
 
             if (this.user) {
               this.updatefields();
@@ -11760,13 +11747,9 @@
             });
             this.registerForm.patchValue({
               password: this.user.password
-            });
-            this.registerForm.patchValue({
-              location: this.user.location
-            });
-            this.registerForm.patchValue({
-              city: this.user.city
-            });
+            }); // this.registerForm.patchValue({ location: this.user.location });
+            // this.registerForm.patchValue({ city: this.user.city });
+
             this.registerForm.patchValue({
               contact: this.user.contact
             });
@@ -11779,6 +11762,7 @@
               for (var i = 0; i < this.user.location.length; i++) {
                 console.log(this.user.location[i].location);
                 this.selectStringLocations.push(this.user.location[i].location);
+                this.selectedLocations.push(this.user.location[i].location);
               }
 
               console.log(this.selectStringLocations);
@@ -11789,6 +11773,10 @@
 
               console.log(this.user.city.city);
             }
+
+            this.selectedCity = this.user.city.city; // this.selectedLocations = this.user.location;
+
+            console.log(this.selectedLocations);
           }
         }, {
           key: "initialize",
@@ -11812,7 +11800,10 @@
                 contact: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
                 access: [""],
                 confirm_password: ["", [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].minLength(6)]]
-              });
+              } // {
+              //   validators: this.password.bind(this),
+              // }
+              );
             }
 
             this.getCities();
@@ -11823,12 +11814,12 @@
             var password = this.registerForm.get("password");
             var confirm_password = this.registerForm.get("confirm_password");
 
-            if (value === 'Pass' && event === confirm_password.value) {
-              this.abc = '';
-            } else if (value === 'Conf' && event === password.value) {
-              this.abc = '';
+            if (value === "Pass" && event === confirm_password.value) {
+              this.abc = "";
+            } else if (value === "Conf" && event === password.value) {
+              this.abc = "";
             } else {
-              this.abc = 'Password not matched';
+              this.abc = "Password not matched";
             }
           } // Calling Api to get the Cities
 
@@ -11867,7 +11858,23 @@
         }, {
           key: "changeCity",
           value: function changeCity(city) {
-            this.selectStringLocations = []; // if(this.user.city.city === city.city) {
+            console.log(this.registerForm.controls['location'].value);
+            this.registerForm.patchValue({
+              'location': 'cdf'
+            });
+            this.registerForm.controls.location.setValue('abc');
+            console.log(this.registerForm.controls['location'].value);
+            this.locations = '';
+
+            if (this.user) {
+              console.log(city.city);
+              console.log(this.selectedCity);
+
+              if (this.selectedCity == city.city) {
+                this.selectStringLocations = this.selectedLocations;
+                console.log(this.selectStringLocations);
+              } else this.selectStringLocations = [];
+            } // if(this.user.city.city === city.city) {
             //   console.log(this.user.city.city, city.city);
             //   if (this.user.location) {
             //     for (let i = 0; i < this.user.location.length; i++) {
@@ -11875,6 +11882,7 @@
             //     }
             //   }
             // }
+
 
             if (city) this.getLocations(city._id);
             this.registerForm.patchValue({
@@ -11885,10 +11893,11 @@
         }, {
           key: "changeLocation",
           value: function changeLocation(location) {
-            this.selectedLocations = location;
-            console.log(this.selectedLocations);
+            // this.selectedLocations = location;
+            // console.log(this.selectedLocations);
+            console.log(location);
             this.registerForm.patchValue({
-              location: this.selectedLocations
+              location: location
             });
           } // Patch the value of access input using this below function
 
@@ -13665,8 +13674,7 @@
           key: "ngOnInit",
           value: function ngOnInit() {
             this.initialize();
-          } // tslint:disable-next-line: typedef
-
+          }
         }, {
           key: "initialize",
           value: function initialize() {
@@ -13679,17 +13687,7 @@
             this.route.params.subscribe(function (param) {
               _this25.email = param.email;
             });
-
-            if (window.innerWidth < 600) {
-              this.mobileView = true;
-            } else if (window.innerWidth > 600) {
-              this.mobileView = false;
-            }
-          } // get email() {
-          //   return this.loginForm.get('email')
-          // }
-          // tslint:disable-next-line: typedef
-
+          }
         }, {
           key: "loginUser",
           value: function loginUser() {
@@ -13700,12 +13698,6 @@
             if (this.loginForm.invalid) {
               return;
             }
-
-            var value = this.loginForm.get('email').value;
-            value = value.toLowerCase();
-            this.loginForm.patchValue({
-              email: value
-            }); // console.log('user login data: ', this.loginForm.value);
 
             this.authService.login(this.loginForm.value).subscribe(function (data) {
               console.log('Subscribed Data: ', data);
@@ -13719,10 +13711,8 @@
 
               _this26.authService.setToken(token);
 
-              _this26.router.navigate(['profile', email]); // this.router.navigate(['/profile']);
-
-            }, // tslint:disable-next-line: no-unused-expression
-            function (error) {
+              _this26.router.navigate(['profile', email]);
+            }, function (error) {
               console.error(error.error.message);
               _this26.errorMessage = error;
 

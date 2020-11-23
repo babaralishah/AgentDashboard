@@ -1,13 +1,10 @@
-import * as $ from 'jquery';
-// import { NzSelectModule } from 'ng-zorro-antd/select';
+
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-// import { from } from 'rxjs';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/Authentication/authentication.service';
 import { ToastrService } from 'ngx-toastr';
 import * as mapboxgl from 'mapbox-gl';
-import { HttpErrorResponse } from '@angular/common/http';
 // import { MapserviceService } from "../services/mapservice.service";
 
 @Component({
@@ -20,7 +17,7 @@ export class AddInventoriesComponent implements OnInit {
   ad = 'Post Ad';
   locations: any;
   subsLocations: any;
-  selectedLocations: any;
+  // selectedLocations: any;
   city: any;
   user: any;
   user1: any;  
@@ -39,6 +36,8 @@ export class AddInventoriesComponent implements OnInit {
   greaterThanValue1;
   lessThanValue1;
   userList: any;
+  selectedLocations: any = [];
+  selectedCity: any;
   selectStringLocations: any = [];
 
   //////////////////////////////////
@@ -163,6 +162,7 @@ export class AddInventoriesComponent implements OnInit {
       for(let i=0; i< this.user1.location.length; i++) {
         console.log(this.user1.location[i].location);
         this.selectStringLocations.push(this.user1.location[i].location);
+        this.selectedLocations.push(this.user1.location[i].location);
       }
       console.log(this.selectStringLocations);
     }
@@ -175,6 +175,8 @@ export class AddInventoriesComponent implements OnInit {
     }
     console.log(this.addinventoryForm.value);
     
+    this.selectedCity = this.user.city.city;
+    console.log(this.selectedLocations);
   }
 
   // File Upload Functions below
@@ -257,6 +259,20 @@ export class AddInventoriesComponent implements OnInit {
     console.log(this.locations);
     
     this.locations = '';
+      
+    if(this.user){
+      console.log(city.city);
+      
+      console.log(this.selectedCity);
+  
+      if (this.selectedCity == city.city)
+      {
+        this.selectStringLocations = this.selectedLocations;
+        console.log(this.selectStringLocations);
+      }
+      else
+      this.selectStringLocations = [];
+    }
     console.log(this.locations);
     if(city){
     this.getLocations(city._id);

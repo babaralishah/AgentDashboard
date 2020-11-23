@@ -58,13 +58,13 @@ ___CSS_LOADER_EXPORT___.push([module.i, "/*!\n * Bootstrap v4.5.3 (https://getbo
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Office\New folder\MyAsasa-master\node_modules\bootstrap\dist\css\bootstrap.min.css */"q4sD");
-__webpack_require__(/*! C:\Office\New folder\MyAsasa-master\src\theme.less */"FoU6");
-__webpack_require__(/*! C:\Office\New folder\MyAsasa-master\src\custom-theme.scss */"E2ln");
-__webpack_require__(/*! C:\Office\New folder\MyAsasa-master\src\assets\scss\style.scss */"eKdF");
-__webpack_require__(/*! C:\Office\New folder\MyAsasa-master\src\styles.css */"OmL/");
-__webpack_require__(/*! C:\Office\New folder\MyAsasa-master\node_modules\bootstrap\dist\css\bootstrap.css */"+eM2");
-module.exports = __webpack_require__(/*! C:\Office\New folder\MyAsasa-master\node_modules\ngx-toastr\toastr.css */"G9EY");
+__webpack_require__(/*! C:\Office\MyAsasa\node_modules\bootstrap\dist\css\bootstrap.min.css */"q4sD");
+__webpack_require__(/*! C:\Office\MyAsasa\src\theme.less */"FoU6");
+__webpack_require__(/*! C:\Office\MyAsasa\src\custom-theme.scss */"E2ln");
+__webpack_require__(/*! C:\Office\MyAsasa\src\assets\scss\style.scss */"eKdF");
+__webpack_require__(/*! C:\Office\MyAsasa\src\styles.css */"OmL/");
+__webpack_require__(/*! C:\Office\MyAsasa\node_modules\bootstrap\dist\css\bootstrap.css */"+eM2");
+module.exports = __webpack_require__(/*! C:\Office\MyAsasa\node_modules\ngx-toastr\toastr.css */"G9EY");
 
 
 /***/ }),

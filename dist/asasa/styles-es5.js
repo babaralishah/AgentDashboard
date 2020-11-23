@@ -87,31 +87,31 @@
     /***/
     function _(module, exports, __webpack_require__) {
       __webpack_require__(
-      /*! C:\Office\New folder\MyAsasa-master\node_modules\bootstrap\dist\css\bootstrap.min.css */
+      /*! C:\Office\MyAsasa\node_modules\bootstrap\dist\css\bootstrap.min.css */
       "q4sD");
 
       __webpack_require__(
-      /*! C:\Office\New folder\MyAsasa-master\src\theme.less */
+      /*! C:\Office\MyAsasa\src\theme.less */
       "FoU6");
 
       __webpack_require__(
-      /*! C:\Office\New folder\MyAsasa-master\src\custom-theme.scss */
+      /*! C:\Office\MyAsasa\src\custom-theme.scss */
       "E2ln");
 
       __webpack_require__(
-      /*! C:\Office\New folder\MyAsasa-master\src\assets\scss\style.scss */
+      /*! C:\Office\MyAsasa\src\assets\scss\style.scss */
       "eKdF");
 
       __webpack_require__(
-      /*! C:\Office\New folder\MyAsasa-master\src\styles.css */
+      /*! C:\Office\MyAsasa\src\styles.css */
       "OmL/");
 
       __webpack_require__(
-      /*! C:\Office\New folder\MyAsasa-master\node_modules\bootstrap\dist\css\bootstrap.css */
+      /*! C:\Office\MyAsasa\node_modules\bootstrap\dist\css\bootstrap.css */
       "+eM2");
 
       module.exports = __webpack_require__(
-      /*! C:\Office\New folder\MyAsasa-master\node_modules\ngx-toastr\toastr.css */
+      /*! C:\Office\MyAsasa\node_modules\ngx-toastr\toastr.css */
       "G9EY");
       /***/
     },

@@ -40,7 +40,7 @@ TableFilterPipe.ɵpipe = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineP
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Office\New folder\MyAsasa-master\src\main.ts */"zUnb");
+module.exports = __webpack_require__(/*! C:\Office\MyAsasa\src\main.ts */"zUnb");
 
 
 /***/ }),
@@ -1760,7 +1760,7 @@ function InventoryComponent_tr_53_Template(rf, ctx) { if (rf & 1) {
 } if (rf & 2) {
     const user_r1 = ctx.$implicit;
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](user_r1._id);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](user_r1.referenceId);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", user_r1.city[0] == null ? null : user_r1.city[0].city, "");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](4);
@@ -4585,7 +4585,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/common */ "ofXK");
 /* harmony import */ var _ng_select_ng_select__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ng-select/ng-select */ "ZOsW");
 /* harmony import */ var _angular_flex_layout_extended__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/flex-layout/extended */ "znSr");
-// import { NzSelectModule } from 'ng-zorro-antd/select';
 
 
 
@@ -4966,6 +4965,7 @@ class AddInventoriesComponent {
         ];
         this.isInvalid = false;
         this.isInvalid1 = false;
+        this.selectedLocations = [];
         this.selectStringLocations = [];
         // Requirements for Map on the template, below;
         this.opacity = 1;
@@ -5063,6 +5063,7 @@ class AddInventoriesComponent {
             for (let i = 0; i < this.user1.location.length; i++) {
                 console.log(this.user1.location[i].location);
                 this.selectStringLocations.push(this.user1.location[i].location);
+                this.selectedLocations.push(this.user1.location[i].location);
             }
             console.log(this.selectStringLocations);
         }
@@ -5072,6 +5073,8 @@ class AddInventoriesComponent {
             console.log(this.user1.city[0]._id);
         }
         console.log(this.addinventoryForm.value);
+        this.selectedCity = this.user.city.city;
+        console.log(this.selectedLocations);
     }
     // File Upload Functions below
     handleFileInput(files) {
@@ -5150,6 +5153,16 @@ class AddInventoriesComponent {
     changeCity(city) {
         console.log(this.locations);
         this.locations = '';
+        if (this.user) {
+            console.log(city.city);
+            console.log(this.selectedCity);
+            if (this.selectedCity == city.city) {
+                this.selectStringLocations = this.selectedLocations;
+                console.log(this.selectStringLocations);
+            }
+            else
+                this.selectStringLocations = [];
+        }
         console.log(this.locations);
         if (city) {
             this.getLocations(city._id);
@@ -6070,34 +6083,16 @@ class SignupComponent {
         this.toastr = toastr;
         this.submitted = false;
         this.accessType = [
-            // { access: "super_admin" },
             { access: "agent" },
             { access: "city_admin" },
         ];
+        this.selectedLocations = [];
         this.selectStringLocations = [];
-        this.error_messages = {
-            password: [
-                { type: "required", message: "password is required." },
-                { type: "minlength", message: "password length." },
-                { type: "maxlength", message: "password length." },
-            ],
-            confirmpassword: [
-                { type: "required", message: "password is required." },
-                { type: "minlength", message: "password length." },
-                { type: "maxlength", message: "password length." },
-            ],
-        };
     }
-    // registerresponse: RegisterResponse;
     ngOnInit() {
         this.getUser();
         this.removeUser();
         this.initialize();
-        // if (window.innerWidth < 600) {
-        //   this.mobileView = true;
-        // } else if (window.innerWidth > 600) {
-        //   this.mobileView = false;
-        // }
         if (this.user) {
             this.updatefields();
         }
@@ -6115,8 +6110,8 @@ class SignupComponent {
         this.registerForm.patchValue({ fullname: this.user.fullname });
         this.registerForm.patchValue({ email: this.user.email });
         this.registerForm.patchValue({ password: this.user.password });
-        this.registerForm.patchValue({ location: this.user.location });
-        this.registerForm.patchValue({ city: this.user.city });
+        // this.registerForm.patchValue({ location: this.user.location });
+        // this.registerForm.patchValue({ city: this.user.city });
         this.registerForm.patchValue({ contact: this.user.contact });
         this.registerForm.patchValue({ access: this.user.access });
         console.log(this.registerForm);
@@ -6124,6 +6119,7 @@ class SignupComponent {
             for (let i = 0; i < this.user.location.length; i++) {
                 console.log(this.user.location[i].location);
                 this.selectStringLocations.push(this.user.location[i].location);
+                this.selectedLocations.push(this.user.location[i].location);
             }
             console.log(this.selectStringLocations);
         }
@@ -6132,6 +6128,9 @@ class SignupComponent {
             // this.registerForm.patchValue({ city: this.user.city });
             console.log(this.user.city.city);
         }
+        this.selectedCity = this.user.city.city;
+        // this.selectedLocations = this.user.location;
+        console.log(this.selectedLocations);
     }
     initialize() {
         if (this.user) {
@@ -6167,22 +6166,29 @@ class SignupComponent {
                 city: [""],
                 contact: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
                 access: [""],
-                confirm_password: ["", [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].minLength(6)]],
-            });
+                confirm_password: [
+                    "",
+                    [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].minLength(6)],
+                ],
+            }
+            // {
+            //   validators: this.password.bind(this),
+            // }
+            );
         }
         this.getCities();
     }
     password(event, value) {
         const password = this.registerForm.get("password");
         const confirm_password = this.registerForm.get("confirm_password");
-        if (value === 'Pass' && event === confirm_password.value) {
-            this.abc = '';
+        if (value === "Pass" && event === confirm_password.value) {
+            this.abc = "";
         }
-        else if (value === 'Conf' && event === password.value) {
-            this.abc = '';
+        else if (value === "Conf" && event === password.value) {
+            this.abc = "";
         }
         else {
-            this.abc = 'Password not matched';
+            this.abc = "Password not matched";
         }
     }
     // Calling Api to get the Cities
@@ -6210,7 +6216,21 @@ class SignupComponent {
     }
     //Function to change the city of --ng select city--
     changeCity(city) {
-        this.selectStringLocations = [];
+        console.log(this.registerForm.controls['location'].value);
+        this.registerForm.patchValue({ 'location': 'cdf' });
+        this.registerForm.controls.location.setValue('abc');
+        console.log(this.registerForm.controls['location'].value);
+        this.locations = '';
+        if (this.user) {
+            console.log(city.city);
+            console.log(this.selectedCity);
+            if (this.selectedCity == city.city) {
+                this.selectStringLocations = this.selectedLocations;
+                console.log(this.selectStringLocations);
+            }
+            else
+                this.selectStringLocations = [];
+        }
         // if(this.user.city.city === city.city) {
         //   console.log(this.user.city.city, city.city);
         //   if (this.user.location) {
@@ -6225,9 +6245,10 @@ class SignupComponent {
     }
     //Function to change the location of --ng select location--
     changeLocation(location) {
-        this.selectedLocations = location;
-        console.log(this.selectedLocations);
-        this.registerForm.patchValue({ location: this.selectedLocations });
+        // this.selectedLocations = location;
+        // console.log(this.selectedLocations);
+        console.log(location);
+        this.registerForm.patchValue({ location: location });
     }
     // Patch the value of access input using this below function
     changeAccess(access) {
@@ -7111,7 +7132,6 @@ class LoginComponent {
     ngOnInit() {
         this.initialize();
     }
-    // tslint:disable-next-line: typedef
     initialize() {
         this.loginForm = this.formBuilder.group({
             email: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].email, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
@@ -7120,26 +7140,12 @@ class LoginComponent {
         this.route.params.subscribe(param => {
             this.email = param.email;
         });
-        if (window.innerWidth < 600) {
-            this.mobileView = true;
-        }
-        else if (window.innerWidth > 600) {
-            this.mobileView = false;
-        }
     }
-    // get email() {
-    //   return this.loginForm.get('email')
-    // }
-    // tslint:disable-next-line: typedef
     loginUser() {
         this.submitted = true;
         if (this.loginForm.invalid) {
             return;
         }
-        var value = this.loginForm.get('email').value;
-        value = value.toLowerCase();
-        this.loginForm.patchValue({ email: value });
-        // console.log('user login data: ', this.loginForm.value);
         this.authService.login(this.loginForm.value).subscribe(data => {
             console.log('Subscribed Data: ', data);
             const msg = data.message;
@@ -7150,10 +7156,7 @@ class LoginComponent {
             });
             this.authService.setToken(token);
             this.router.navigate(['profile', email]);
-            // this.router.navigate(['/profile']);
-        }, 
-        // tslint:disable-next-line: no-unused-expression
-        (error) => {
+        }, (error) => {
             console.error(error.error.message);
             this.errorMessage = error;
             this.toastr.error(error.error.message, 'Error', {

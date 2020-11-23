@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthenticationService } from "../services/Authentication/authentication.service";
-import { Router, ActivatedRoute } from "@angular/router";
+import { Router } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 // import { first } from 'rxjs/operators';
 import { ToastrService } from "ngx-toastr";
@@ -12,18 +12,17 @@ import { ToastrService } from "ngx-toastr";
 export class SignupComponent implements OnInit {
   submitted = false;
   registerForm: FormGroup;
-  mobileView: boolean;
   cities: any;
   locations: any;
   // access: ['super_admin', 'agent', 'city_admin'];
   user: any;
-  abc:any;
+  abc: any;
   accessType = [
-    // { access: "super_admin" },
     { access: "agent" },
     { access: "city_admin" },
   ];
-  selectedLocations: any;
+  selectedLocations: any = [];
+  selectedCity: any;
   selectStringLocations: any = [];
 
   constructor(
@@ -32,17 +31,10 @@ export class SignupComponent implements OnInit {
     public router: Router,
     private toastr: ToastrService
   ) {}
-
-  // registerresponse: RegisterResponse;
   ngOnInit(): void {
     this.getUser();
     this.removeUser();
     this.initialize();
-    // if (window.innerWidth < 600) {
-    //   this.mobileView = true;
-    // } else if (window.innerWidth > 600) {
-    //   this.mobileView = false;
-    // }
     if (this.user) {
       this.updatefields();
     }
@@ -60,8 +52,8 @@ export class SignupComponent implements OnInit {
     this.registerForm.patchValue({ fullname: this.user.fullname });
     this.registerForm.patchValue({ email: this.user.email });
     this.registerForm.patchValue({ password: this.user.password });
-    this.registerForm.patchValue({ location: this.user.location });
-    this.registerForm.patchValue({ city: this.user.city });
+    // this.registerForm.patchValue({ location: this.user.location });
+    // this.registerForm.patchValue({ city: this.user.city });
     this.registerForm.patchValue({ contact: this.user.contact });
     this.registerForm.patchValue({ access: this.user.access });
     console.log(this.registerForm);
@@ -70,6 +62,7 @@ export class SignupComponent implements OnInit {
       for (let i = 0; i < this.user.location.length; i++) {
         console.log(this.user.location[i].location);
         this.selectStringLocations.push(this.user.location[i].location);
+        this.selectedLocations.push(this.user.location[i].location);
       }
       console.log(this.selectStringLocations);
     }
@@ -79,21 +72,11 @@ export class SignupComponent implements OnInit {
       // this.registerForm.patchValue({ city: this.user.city });
       console.log(this.user.city.city);
     }
+    this.selectedCity = this.user.city.city;
+    // this.selectedLocations = this.user.location;
+    console.log(this.selectedLocations);
+    
   }
-
-  error_messages = {
-    password: [
-      { type: "required", message: "password is required." },
-      { type: "minlength", message: "password length." },
-      { type: "maxlength", message: "password length." },
-    ],
-    confirmpassword: [
-      { type: "required", message: "password is required." },
-      { type: "minlength", message: "password length." },
-      { type: "maxlength", message: "password length." },
-    ],
-  };
-
   initialize() {
     if (this.user) {
       this.registerForm = this.formBuilder.group({
@@ -129,9 +112,12 @@ export class SignupComponent implements OnInit {
           city: [""],
           contact: ["", Validators.required],
           access: [""],
-          confirm_password:  ["", [Validators.required, Validators.minLength(6)]],
+          confirm_password: [
+            "",
+            [Validators.required, Validators.minLength(6)],
+          ],
           // validators: this.password.bind(this)
-        },
+        }
         // {
         //   validators: this.password.bind(this),
         // }
@@ -142,12 +128,12 @@ export class SignupComponent implements OnInit {
   password(event, value) {
     const password = this.registerForm.get("password");
     const confirm_password = this.registerForm.get("confirm_password");
-    if(value === 'Pass' && event === confirm_password.value) {
-      this.abc = '';
-    } else if(value === 'Conf' && event === password.value) {
-      this.abc = '';
-    } else{
-      this.abc = 'Password not matched';
+    if (value === "Pass" && event === confirm_password.value) {
+      this.abc = "";
+    } else if (value === "Conf" && event === password.value) {
+      this.abc = "";
+    } else {
+      this.abc = "Password not matched";
     }
   }
 
@@ -183,7 +169,26 @@ export class SignupComponent implements OnInit {
 
   //Function to change the city of --ng select city--
   changeCity(city) {
+    
+    console.log(this.registerForm.controls['location'].value);
+    this.registerForm.patchValue( {'location':'cdf'} );
+    this.registerForm.controls.location.setValue('abc');
+    console.log(this.registerForm.controls['location'].value);
+    
+    this.locations = '';
+    if(this.user){
+    console.log(city.city);
+    
+    console.log(this.selectedCity);
+
+    if (this.selectedCity == city.city)
+    {
+      this.selectStringLocations = this.selectedLocations;
+      console.log(this.selectStringLocations);
+    }
+    else
     this.selectStringLocations = [];
+  }
     // if(this.user.city.city === city.city) {
     //   console.log(this.user.city.city, city.city);
     //   if (this.user.location) {
@@ -192,24 +197,23 @@ export class SignupComponent implements OnInit {
     //     }
     //   }
     // }
-    
+
     if (city) this.getLocations(city._id);
     this.registerForm.patchValue({ city });
   }
 
   //Function to change the location of --ng select location--
   changeLocation(location) {
-    this.selectedLocations = location;
-    console.log(this.selectedLocations);
-    this.registerForm.patchValue({ location: this.selectedLocations });
+    // this.selectedLocations = location;
+    // console.log(this.selectedLocations);
+    console.log(location);
+    this.registerForm.patchValue({ location: location });
   }
 
   // Patch the value of access input using this below function
-  changeAccess(access)
- {
+  changeAccess(access) {
     // console.log(access.access);
-    if (access)
- this.registerForm.patchValue({ access: access.access });
+    if (access) this.registerForm.patchValue({ access: access.access });
   }
 
   // Function to register the user by sending whole form

@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Asasa Office\Projects\Angular\MyAsasa-master\src\polyfills.ts */"hN/g");
+module.exports = __webpack_require__(/*! C:\Office\New folder\MyAsasa-master\src\polyfills.ts */"hN/g");
 
 
 /***/ }),

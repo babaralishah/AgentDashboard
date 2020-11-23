@@ -1,0 +1,118 @@
+﻿<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+ -->
+<div class="container">
+    <div class="row center">
+        <img class="wave" src="assets/icons/wave.png">
+        <div class="container">
+            <div class="img">
+                <img src="assets/icons/bg.svg">
+            </div>
+            <div class="login-content text-center">
+                <div class="login">
+                    <form class="form-register" [formGroup]="loginForm" (ngSubmit)="loginUser()">
+                        <img src="assets/icons/avatar.svg">
+                        <h3>Welcome to Agent Dashboard</h3>
+                        <div class="input-div one" style="background-color: #fff; padding-left: 5px;">
+                            <div class="i">
+                                <i class="fa fa-user"></i>
+                            </div>
+                            <div class="div">
+                                <!-- <h5>Username</h5> -->
+                                <input type="text" class="input" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" type="email" name="email" formControlName="email" placeholder="Email address" required="" autofocus="" class="">
+                                <div *ngIf="submitted && f.email.errors" class="invalid-feedback text-left">
+                                    <div *ngIf="f.email.errors.required">Email is required</div>
+                                    <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-div pass" style="background-color: #fff;">
+                            <div class="i">
+                                <i class="fa fa-lock"></i>
+                            </div>
+                            <div class="div">
+                                <!-- <h5>Password</h5> -->
+                                <input type="password" class="input" class="input-field" type="password" formControlName="password" placeholder="Password" required="" class="" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+                                <div *ngIf="submitted && f.password.errors" class="invalid-feedback text-left">
+                                    <div *ngIf="f.password.errors.required">Password is required</div>
+                                    <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                       
+                        <input type="submit" class="btn" value="Login">
+                        <hr class="mt-4 mb-4">
+                         <!-- <div class="custom-control custom-checkbox mt-3">
+                             <p>
+                                <a class="text-center" routerLink="/forgetpass-component"> <b>Forget Password</b></a>
+                             </p>
+                             <p>
+                                Not Registered? <a class="text-center" routerLink="/signup-component"> <b>Sign up!</b></a>
+                             </p>
+                        </div> -->
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="col-5 left">
+            <div>
+                <img class="left-img" src="assets/icons/asasa.gif" />
+            </div>
+        </div>
+        <div class="col-1 v2 " *ngIf="mobileView ==false">
+            <div class="vl"></div>
+            Log - in
+            <div class="vl"></div>
+        </div>
+        <div class="col-6 right">
+            <h2 class="text-center">Welcome to my asasa</h2>
+            <form class="form-register" [formGroup]="loginForm" (ngSubmit)="loginUser()">
+                <div class="form-group" class='input-container'>
+                    <div class="input-group">
+                        <i class="fa fa-user icon"></i>
+                        <input class="form-control" class="input-field"
+                            [ngClass]="{ 'is-invalid': submitted && f.email.errors }" type="email" name="email"
+                            formControlName="email" placeholder="Email address" required="" autofocus=""
+                            class="form-control rounded-pill border-0 shadow-sm px-4">
+                        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                            <div *ngIf="f.email.errors.required">Email is required</div>
+                            <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <i class="fa fa-lock icon"></i>
+                        <input class="input-field" type="password" formControlName="password" placeholder="Password"
+                            required="" class="form-control rounded-pill border-0 shadow-sm px-4 text-primary"
+                            [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+                        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                            <div *ngIf="f.password.errors.required">Password is required</div>
+                            <div *ngIf="f.password.errors.minlength">Password must be at least 6
+                                characters
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <br>
+                    <button type="submit" class="btn btn-info rounded-pill">
+                        Login</button>
+                </div>
+                <div class="custom-control custom-checkbox mb-3">
+                    <a routerLink="/forgetpass-component"> <b>Forget Password</b></a>
+                    <br>
+                    Not Registered?
+                    <a routerLink="/register"> <b>Sign up!</b></a>
+                </div>
+            </form>
+        </div> -->
+    </div>
+</div>
+<link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+<script src="https://kit.fontawesome.com/a81368914c.js"></script>

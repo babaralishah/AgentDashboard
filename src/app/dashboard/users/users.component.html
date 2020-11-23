@@ -1,0 +1,125 @@
+<div class="">
+    <div class="row">
+        <div class="col-12">
+            <app-header></app-header>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2">
+            <!-- <app-header></app-header> -->
+            <app-dashboard></app-dashboard>
+        </div>
+        <div class="col-10">
+            <div class="user-class">
+                <br>
+                <h1><b>&nbsp;&nbsp;&nbsp;&nbsp;Users</b></h1>
+                <br>
+
+                <div class="row">
+                    <div class="col-2">
+                        <button class="btn btn-primary rounded-pill" routerLink="/register">Add New</button>
+                    </div>
+                    <div class="col-4">
+                        <div class="card-body ">
+
+                            <input class="form-control" type="search" [(ngModel)]="general_search" placeholder="Search topics or keywords">
+
+                        </div>
+                    </div>
+                </div>
+                <br><br><br>
+                <!-- Inventory management table is below -->
+                <table class="table table-hover" class="table table-hover table-light">
+                    <thead>
+                        <tr>
+                            <th scope="col">User ID</th>
+                            <th scope="col">Full Name</th>
+                            <th scope="col">Contact #</th>
+                            <th scope="col">Location Assigned</th>
+                            <th scope="col">Email Address</th>
+                            <th scope="col">Access</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Operations</th>
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <!-- <td>
+                    <input class="form-control" type="text" [(ngModel)]="data.userId" placeholder="Search">
+                </td>
+                <td>
+                    <input class="form-control" type="text" [(ngModel)]="data.fullname" placeholder="Search">
+                </td>
+                <td>
+                    <input class="form-control" type="text" [(ngModel)]="data.contact" placeholder="Search">
+                </td>
+                <td>
+                    <input class="form-control" type="text" [(ngModel)]="data.location" placeholder="Search">
+                </td>
+                <td>
+                    <input class="form-control" type="text" placeholder="">
+                </td>
+                <td>
+                    <input class="form-control" type="text" placeholder="">
+                </td>
+                <td>
+                    <input class="form-control" type="text" placeholder="">
+                </td>
+                <td>
+                    <i class="fa fa-search icon"></i>
+                </td> -->
+
+                        <tr *ngFor="let user of data | filter: general_search">
+                            <!-- | tableFilter06: data.fullname | tableFilter04: data.contact | tableFilter02: data.location | tableFilter: data.userId | filter: general_search"> -->
+                            <td>{{ user?._id }}</td>
+                            <td>
+                                <span *ngIf="user.fullname">{{ user.fullname | titlecase }}</span>
+                                <span *ngIf="!user.fullname">{{ user.name | titlecase }}</span>
+                            </td>
+                            <td>0{{ user.contact }}</td>
+                            <!-- <td>{{ user.location}}</td> -->
+
+                            <td>
+                                {{user.city?.city}}<span>&nbsp;&nbsp;</span><br><span class="badge badge-light" *ngFor="let loc of user.location">{{ loc.location }},  </span>
+                            </td>
+                            <td>{{ user.email }}</td>
+                            <td>{{user?.access}}</td>
+                            <td>{{user?.created | date: "dd/MM/yyyy"}}</td>
+
+                            <td><i class="fa fa-edit icon" (click)="setUser(user)"></i><a (click)="setUser(user)" role="button">Edit</a>
+
+                                <i class="fa fa-trash icon" (click)="confirmID(user._id)" data-toggle="modal" data-target="#exampleModal1"></i>
+
+                            </td>
+                            <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Delete Confirmation</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Are you sure you want to delete it?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteLead()">
+          Delete
+        </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- end of table -->
+            </div>
+        </div>
+    </div>
+</div>

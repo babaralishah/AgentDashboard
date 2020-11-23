@@ -1,0 +1,100 @@
+h2{
+  color: #38baa2;
+  font-weight: 600;
+  margin-left: 200px;
+  margin-top: -10px;
+}
+
+input{    
+  margin-left: 15px;
+  border: 2px solid #0000001a !important;
+  border-radius: 50rem!important;
+}
+i:before {
+  position: relative;
+  top: 30%;
+  font-size: 22px;
+  color: #38bba3;
+  margin-right: 1px;
+}
+.word {
+    color: #38baa2;
+    letter-spacing: 1px;
+    padding: 20 px;
+    font: bold 14px arial,sans-serif;
+    /* background:. #fff; */
+}
+.emailInput{
+margin-left: 12px;
+}
+.input-field { 
+  margin-left: 15px;
+	width: 100%; 
+	padding: 10px; 
+	text-align: center; 
+} 
+.input-icons i { 
+	position: absolute; 
+} 
+.input-container {
+	display: -ms-flexbox; /* IE10 */
+	display: flex;
+	width: 100%;
+	margin-bottom: 15px;
+  }
+.a{
+	text-align: left;
+}
+.vl{
+  border-left: 2.2px solid #38baa2;
+  height: 250px;
+  margin-left: 22px;
+}
+.v2{
+  margin-top: 40px ;
+  color: #38baa2;
+  font-weight: bold;
+}
+.login{
+	height:auto;
+  min-height: 100vh;
+}
+
+.btn{
+  /* padding: 0px; */
+  /* height: 30px; */
+  width: 100px;
+  font-size: 14px;
+  background-color: #38baa2 ;
+  color: white;
+  border: 1px solid transparent;
+}
+
+.btn1{
+  height: 30px;
+  width: 55px;
+  font-size: 12px;
+  background-color: #38baa2 ;
+  color: white;
+  border: 1px solid transparent;
+  border-radius: 3px;
+}
+
+.left-img{
+  width:45%;
+  margin-left: 80px;
+}
+
+.inputs{
+  margin-left: 15px;
+}
+.left{
+margin-top: 145px ;
+}
+.right{
+margin-top: 220px ;
+}
+.input-area1{
+  
+  margin-left: 20px;
+}

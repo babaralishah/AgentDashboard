@@ -1,0 +1,243 @@
+<div class=" register">
+    <div class="row">
+        <div class="col-md-2 register-left">
+            <img src="assets/icons/asasa.gif" alt="" />
+            <h2><b>Asasa Real Estate</b></h2>
+        </div>
+        <div class="col-md-10 col-sm-10 register-right">
+            <form class="form-register" [formGroup]="addleadForm">
+                <h2 class="register-heading">Add Lead</h2>
+                <div class="row register-form">
+                    <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                            <div class="input-group">
+                                ID
+                                <input type="number" class="form-control" formControlName="id" required
+                                    autocomplete="off" [ngClass]="{ 'is-invalid': submitted && f.id.errors }" />
+                                <div *ngIf="submitted && f.id.errors" class="invalid-feedback">
+                                    <div *ngIf="f.id.errors.required">Id is required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                            <div class="input-group">
+                                Client
+                                <input type="text" class="form-control" formControlName="client" required
+                                    autocomplete="off" [ngClass]="{ 'is-invalid': submitted && f.client.errors }" />
+                                <div *ngIf="submitted && f.client.errors" class="invalid-feedback">
+                                    <div *ngIf="f.client.errors.required">Client is required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <br>
+                        <div class="form-group">
+                            <div class="input-group">
+                                Type
+                                <input formControlName="type" class="form-control" type="text" list="productName2"
+                                    [ngClass]="{ 'is-invalid': submitted && f.type.errors }" />
+                                <div *ngIf="submitted && f.type.errors" class="invalid-feedback">
+                                    <div *ngIf="f.type.errors.required">Type is required</div>
+                                </div>
+                                <datalist id="productName2">
+                                    <option value="Buyer">Buyer</option>
+                                    <option value="Seller">Seller</option>
+                                    <option value="Else">Else</option>
+                                </datalist>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <br>
+                        <div class="form-group">
+                            <div class="input-group">
+                                Purpose
+                                <input formControlName="purpose" class="form-control" type="text" list="productName3"
+                                    [ngClass]="{ 'is-invalid': submitted && f.purpose.errors }" />
+                                <div *ngIf="submitted && f.purpose.errors" class="invalid-feedback">
+                                    <div *ngIf="f.purpose.errors.required">Purpose is required</div>
+                                </div>
+                                <datalist id="productName3">
+                                    <option value="Buy">Buy</option>
+                                    <option value="Sale">Sale</option>
+                                    <option value="Rent">Rent</option>
+                                </datalist>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <br><br>
+                        <div class="form-group">
+                            <div class="input-group">
+                                Property Type
+                                <input formControlName="prop_type" class="form-control" type="text" list="productName4"
+                                    [ngClass]="{ 'is-invalid': submitted && f.prop_type.errors }" />
+                                <div *ngIf="submitted && f.prop_type.errors" class="invalid-feedback">
+                                    <div *ngIf="f.prop_type.errors.required">Property Type is required</div>
+                                </div>
+                                <datalist id="productName4">
+                                    <option value="Apartment">Apartment</option>
+                                    <option value="House">House</option>
+                                    <option value="Residential Plot">Residential Plot</option>
+                                </datalist>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <br><br>
+                                Property Number
+                                <input type="number" class="form-control" formControlName="prop_no" required
+                                    autocomplete="off" [ngClass]="{ 'is-invalid': submitted && f.prop_no.errors }" />
+                                <div *ngIf="submitted && f.prop_no.errors" class="invalid-feedback">
+                                    <div *ngIf="f.prop_no.errors.required">Property Number is required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <br><br>
+                                Area
+                                <input type="text" class="form-control" formControlName="area" required
+                                    autocomplete="off" [ngClass]="{ 'is-invalid': submitted && f.area.errors }" />
+                                <div *ngIf="submitted && f.area.errors" class="invalid-feedback">
+                                    <div *ngIf="f.area.errors.required">Area is required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <br><br>
+                                Location
+                                <input type="text" class="form-control" formControlName="location" required
+                                    autocomplete="off" [ngClass]="{ 'is-invalid': submitted && f.location.errors }" />
+                                <div *ngIf="submitted && f.location.errors" class="invalid-feedback">
+                                    <div *ngIf="f.location.errors.required">Location is required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <br>
+                                Demand
+                                <input type="number" class="form-control" formControlName="demand" required
+                                    autocomplete="off" [ngClass]="{ 'is-invalid': submitted && f.demand.errors }" />
+                                <div *ngIf="submitted && f.demand.errors" class="invalid-feedback">
+                                    <div *ngIf="f.demand.errors.required">Demand is required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <br>
+                                Phone number
+                                <input type="number" class="form-control" formControlName="phone_no" required
+                                    autocomplete="off" [ngClass]="{ 'is-invalid': submitted && f.phone_no.errors }" />
+                                <div *ngIf="submitted && f.phone_no.errors" class="invalid-feedback">
+                                    <div *ngIf="f.phone_no.errors.required">Phone number is required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <br><br>
+                                Comment
+                                <input type="text" class="form-control" formControlName="comment" required
+                                    autocomplete="off" [ngClass]="{ 'is-invalid': submitted && f.comment.errors }" />
+                                <div *ngIf="submitted && f.comment.errors" class="invalid-feedback">
+                                    <div *ngIf="f.comment.errors.required">Comment is required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <br><br>
+                                Assigned To
+                                <input type="text" class="form-control" formControlName="assigned_to" required
+                                    autocomplete="off"
+                                    [ngClass]="{ 'is-invalid': submitted && f.assigned_to.errors }" />
+                                <div *ngIf="submitted && f.assigned_to.errors" class="invalid-feedback">
+                                    <div *ngIf="f.assigned_to.errors.required">Assigned To is required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <br><br>
+                        <div class="form-group">
+                            <div class="input-group">
+                                Admin Status
+                                <input formControlName="admin_status" class="form-control" type="text"
+                                    list="productName"
+                                    [ngClass]="{ 'is-invalid': submitted && f.admin_status.errors }" />
+                                <div *ngIf="submitted && f.admin_status.errors" class="invalid-feedback">
+                                    <div *ngIf="f.admin_status.errors.required">Admin status is required</div>
+                                </div>
+                                <datalist id="productName">
+                                    <option value="Pen">Pen</option>
+                                    <option value="Pencil">Pencil</option>
+                                    <option value="Paper">Paper</option>
+                                </datalist>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <br><br>
+                        <div class="form-group">
+                            <div class="input-group">
+                                Agent Status
+                                <input formControlName="agent_status" class="form-control" type="text"
+                                    list="productName1"
+                                    [ngClass]="{ 'is-invalid': submitted && f.agent_status.errors }" />
+                                <div *ngIf="submitted && f.agent_status.errors" class="invalid-feedback">
+                                    <div *ngIf="f.agent_status.errors.required">Agent Status is required</div>
+                                </div>
+                                <datalist id="productName1">
+                                    <option value="Pen">Pen</option>
+                                    <option value="Pencil">Pencil</option>
+                                    <option value="Paper">Paper</option>
+                                </datalist>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <br><br>
+                                Added On
+                                <input type="text" class="form-control" formControlName="added_on" required
+                                    autocomplete="off" [ngClass]="{ 'is-invalid': submitted && f.added_on.errors }" />
+                                <div *ngIf="submitted && f.added_on.errors" class="invalid-feedback">
+                                    <div *ngIf="f.added_on.errors.required">Added On is required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12">
+                        <br><br>
+                        <div class="form-group" class="pull-right">
+                            <button (click)="submitForm()" class="btn btn-primary">Add</button>
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

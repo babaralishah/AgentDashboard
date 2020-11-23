@@ -1,0 +1,106 @@
+<div class="inactive">
+    <br>
+    <br>
+    <h1><b>&nbsp;&nbsp;&nbsp;&nbsp;Inactive/Deleted Leads</b></h1>
+    <br>
+    <div class="pull-right">
+        <!-- <input type="text" placeholder="Search.." name="search">
+    <button type="submit"><i class="fa fa-search"></i></button> -->
+        <div class="card-body row">
+            <div class="col-auto">
+                <i class="fa fa-search icon"></i>
+            </div>
+            <!--end of col-->
+            <div class="col">
+                <input class="form-control" id="myInput" type="text" [(ngModel)]="general_search"
+                    placeholder="Search topic or keyword">
+            </div>
+
+            <!-- <button class="btn btn-primary rounded-pill" type="submit">Search</button> -->
+
+            <button class="btn btn-primary rounded-pill">Print</button>
+            <button class="btn btn-primary rounded-pill">Excel</button>&nbsp;&nbsp;&nbsp;&nbsp;
+        </div>
+    </div>
+    <br><br><br>
+    <!-- Inventory management table is below -->
+    <table class="table table-hover" class="table table-hover table-dark">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Client</th>
+                <th scope="col">Purpose</th>
+                <th scope="col">Prop. Type</th>
+                <th scope="col">Prop. #</th>
+                <th scope="col">Area</th>
+                <th scope="col">Location</th>
+                <th scope="col">Demand</th>
+                <th scope="col">Phone #</th>
+                <th scope="col">Lead Status</th>
+                <th scope="col">Deleted by</th>
+                <th scope="col">Added On</th>
+                <th scope="col">Operations</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <input class="form-control" type="text" [(ngModel)]="search_id" placeholder="">
+                </td>
+                <td>
+                    <input class="form-control" type="text" [(ngModel)]="search_client" placeholder="">
+                </td>
+                <td>
+                    <input class="form-control" type="text" placeholder="">
+                </td>
+                <td>
+                    <input class="form-control" type="text" placeholder="">
+                </td>
+                <td>
+                    <input class="form-control" type="text" placeholder="">
+                </td>
+                <td>
+                    <input class="form-control" type="text" [(ngModel)]="search_area" placeholder="">
+                </td>
+                <td>
+                    <input class="form-control" type="text" [(ngModel)]="search_location" placeholder="">
+                </td>
+                <td>
+                    <input class="form-control" type="text" [(ngModel)]="search_demand" placeholder="">
+                </td>
+                <td>
+                    <input class="form-control" type="text" placeholder="">
+                </td>
+                <td>
+                    <input class="form-control" type="text" placeholder="">
+                </td>
+                <td>
+                    <input class="form-control" type="text" placeholder="">
+                </td>
+                <td>
+                    <input class="form-control" type="text" placeholder="">
+                </td>
+                <td>
+                    <i class="fa fa-search icon"></i>
+                </td>
+            </tr>
+            <tr
+                *ngFor="let user of users | tableFilter06: search_client | tableFilter05: search_demand | tableFilter04: search_type | tableFilter03: search_area | tableFilter02: search_location | tableFilter: search_id | filter: general_search">
+                <td>{{ user.Id }}</td>
+                <td>{{ user.Client }}</td>
+                <td>{{ user.Purpose }}</td>
+                <td>{{ user.Prop_type }}</td>
+                <td>{{ user.Prop_num }}</td>
+                <td>{{ user.Area}}</td>
+                <td>{{ user.Location }}</td>
+                <td>{{ user.Demand }}</td>
+                <td>{{ user.Phone_num }}</td>
+                <td>{{ user.Comment }}</td>
+                <td>{{ user.Assigned_to}}</td>
+                <td>{{ user.Added_on}}</td>
+                <td>
+                    <button class="btn btn-primary rounded-pill">Delete</button>
+            </tr>
+        </tbody>
+    </table>
+</div>

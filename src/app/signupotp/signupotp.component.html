@@ -1,0 +1,56 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-5 col-md-5 left">
+            <div>
+
+                <img class="left-img" src="assets/icons/asasa.gif" />
+            </div>
+        </div>
+
+        <div class="col-1 v2">
+            <div class="vl"></div>
+            Verification
+            <div class="vl"></div>
+        </div>
+
+        <div class="col-sm-6 col-md-6 right">
+            <h2>Welcome to my asasa</h2>
+
+            <form class="form-register" [formGroup]="signupotpForm" (ngSubmit)="onSubmit()">
+				<div class="form-group">
+                <div class="input-group">
+                    <i class="fa fa-user icon"></i>
+                    <input type="text" class="form-control inputs" formControlName="code" name="code" id="code"  
+                        placeholder="Enter 6-digit verify code"
+                        [ngClass]="{ 'is-invalid': submitted && f.code.errors }">
+                    <div *ngIf="submitted && f.code.errors" class="invalid-feedback">
+                        <div *ngIf="f.code.errors.required">Code is required</div>
+                        <div *ngIf="f.code.errors.minlength">Code must be at least 6 characters</div>
+                        <div *ngIf="f.code.errors.maxlength">Code should not be greater than 6 characters</div>
+                        <div *ngIf="f.code.errors.pattern">Code must be a valid number sequence</div>
+                    </div>
+                </div>
+                </div>
+                <!-- <input id="customCheck1" type="checkbox" checked class="custom-control-input"> -->
+                <div class="form-group">
+					<button type="submit" class='btn'
+						class="btn btn-primary rounded-pill">Verify</button>
+				</div>
+                <button class="btn btn-primary rounded-pill" routerLink="/register-component">back</button>
+                <!-- <div class="form-group">
+                    <button class="btn btn-primary" routerLink="/newpass-component">Verify</button>
+                </div>
+                <button class="btn1 btn-primary" routerLink="/forgetpass-component">back</button> -->
+
+                <!-- </div> -->
+            </form>
+        </div>
+    </div>
+
+</div>

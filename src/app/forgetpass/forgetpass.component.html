@@ -1,0 +1,48 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-5 col-md-5 left">
+            <div>
+
+                <img class="left-img" src="assets/icons/asasa.gif" />
+            </div>
+        </div>
+
+        <div class="col-1 v2">
+            <div class="vl"></div>
+            Forget password
+            <div class="vl"></div>
+        </div>
+
+        <div class="col-sm-6 col-md-6 right">
+            <h2>Welcome to my asasa</h2>
+            <form class="form-register" [formGroup]="forgetPassForm" (ngSubmit)="onSubmit()">
+                <div class="form-group" class='input-container'>
+                    <div class="input-group">
+                        <i class="fa fa-user icon"></i>
+                        <input class="form-control" class="input-field" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" id="inputEmail" type="text" name="email" formControlName="email" placeholder="Email address" required="" autofocus="" class="form-control rounded-pill border-0 shadow-sm px-4">
+                        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                            <div *ngIf="f.email.errors.required">Email is required</div>
+                            <div *ngIf="f.email.errors.email">Email must be a valid email address
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="custom-control custom-checkbox mb-3"> -->
+                <input id="customCheck1" type="checkbox" checked class="custom-control-input">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-info rounded-pill">Get Code</button>
+                </div>
+                <button class="btn btn-info rounded-pill" routerLink="/">Back</button>
+                <!-- </div> -->
+
+            </form>
+        </div>
+
+    </div>
+</div>

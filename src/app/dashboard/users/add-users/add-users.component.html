@@ -1,0 +1,116 @@
+<div class=" register">
+    <div class="row">
+        <div class="col-md-2 register-left">
+            <img src="assets/icons/asasa.gif" alt="" />
+            <h2><b>Asasa Real Estate</b></h2>
+        </div>
+        <div class="col-md-10 col-sm-10 register-right">
+            <form class="form-register" [formGroup]="adduserForm">
+                <h2 class="register-heading">Add User</h2>
+                <div class="row register-form">
+                    <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                            <div class="">
+                                <!-- <br><br> -->
+                                User ID
+                                <input type="number" class="form-control" formControlName="userId" id="userId" required autocomplete="off" [ngClass]="{ 'is-invalid': submitted && f.userId.errors }" />
+                                <!-- <label for="nme"><span>Enter ID</span></label> -->
+                                <div *ngIf="submitted && f.userId.errors" class="invalid-feedback">
+                                    <div *ngIf="f.userId.errors.required">Id is required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                            <div class="">
+
+                                Full Name
+                                <input type="text" class="form-control" formControlName="fullname" id="fullname" required autocomplete="off" [ngClass]="{ 'is-invalid': submitted && f.fullname.errors }" />
+                                <!-- <label for="nme"><span>Enter Full Name</span></label> -->
+                                <div *ngIf="submitted && f.fullname.errors" class="invalid-feedback">
+                                    <div *ngIf="f.fullname.errors.required">Name is required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                            <div class="">
+                                <br> Contact #
+                                <input type="number" class="form-control" formControlName="contact" id="contact" required autocomplete="off" [ngClass]="{ 'is-invalid': submitted && f.contact.errors }" />
+                                <div *ngIf="submitted && f.contact.errors" class="invalid-feedback">
+                                    <div *ngIf="f.contact.errors.required">Contact is required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                            <div class="">
+                                <br> Location
+                                <input type="text" class="form-control" formControlName="location" required autocomplete="off" [ngClass]="{ 'is-invalid': submitted && f.location.errors }" />
+                                <div *ngIf="submitted && f.location.errors" class="invalid-feedback">
+                                    <div *ngIf="f.location.errors.required">Location is required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                            <div class="">
+                                <br><br> Email Address
+                                <input type="email" class="form-control" formControlName="email" required autocomplete="off" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                    <div *ngIf="f.email.errors.required">Email is required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Right side column -->
+                    <div class="col-md-6 col-sm-6">
+                        <!-- <br> -->
+                        <br><br>
+                        <div class="form-group">
+                            <div class="">
+                                Access
+                                <input formControlName="access" class="form-control" type="text" list="productName" [ngClass]="{ 'is-invalid': submitted && f.access.errors }" />
+                                <div *ngIf="submitted && f.access.errors" class="invalid-feedback">
+                                    <div *ngIf="f.access.errors.required">Access is required</div>
+                                </div>
+                                <datalist id="productName">
+                                    <option value="Pen">Pen</option>
+                                    <option value="Pencil">Pencil</option>
+                                    <option value="Paper">Paper</option>
+                                </datalist>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <br><br>
+                        <div class="form-group">
+                            <div class="">
+                                Status
+                                <input formControlName="status" class="form-control" type="text" list="productName1" [ngClass]="{ 'is-invalid': submitted && f.status.errors }" />
+                                <div *ngIf="submitted && f.status.errors" class="invalid-feedback">
+                                    <div *ngIf="f.status.errors.required">Status is required</div>
+                                </div>
+                                <datalist id="productName1">
+                                    <option value="Pen">Pen</option>
+                                    <option value="Pencil">Pencil</option>
+                                    <option value="Paper">Paper</option>
+                                </datalist>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12">
+                        <br><br>
+                        <div class="form-group" class="pull-right">
+                            <button (click)="submitForm()" class="btn btn-primary">Add</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

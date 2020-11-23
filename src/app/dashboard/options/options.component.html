@@ -1,0 +1,221 @@
+<div class=" register">
+    <div class="row">
+        <div class="col-md-2 register-left">
+            <img src="assets/icons/asasa.gif" alt="" />
+            <h2><b>Asasa Real Estate</b></h2>
+        </div>
+        <div class="col-md-10 col-sm-10 register-right">
+            <form class="form-register" [formGroup]="addoptionForm">
+                <h2 class="register-heading">Cities</h2>
+                <div class="row register-form">
+                    <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                            <div class="input-group">
+                                Add New City
+                                <input type="text" class="form-control" formControlName="add_newcity" required
+                                    autocomplete="off" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                            <div class="input-group">
+                                Added Cities
+                                <input type="text" class="form-control" formControlName="added_cities"
+                                    list="productName" />
+                                <datalist id="productName">
+                                    <option value="Pen">Pen</option>
+                                    <option value="Pencil">Pencil</option>
+                                    <option value="Paper">Paper</option>
+                                </datalist>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <br><br>
+                        <div class="form-group" class="pull-left">
+                            <button type="submit" class="btn btn-primary">Add City</button>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <br><br>
+                        <div class="form-group" class="pull-right">
+                            <button type="submit" class="btn btn-primary">Edit</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Locations -->
+
+                <h2 class="register-heading">Locations</h2>
+                <div class="row register-form">
+                    <div class="col-md-6 col-sm-6">
+                        <h3>Add New Location</h3>
+                        <div class="form-group">
+                            <div class="input-group"><br>
+                                Select City
+                                <input type="text" class="form-control" formControlName="add_newloc"
+                                    list="productName" />
+                                <datalist id="productName">
+                                    <option value="Pen">Pen</option>
+                                    <option value="Pencil">Pencil</option>
+                                    <option value="Paper">Paper</option>
+                                </datalist>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <h3>Added Locations</h3>
+                        <div class="form-group">
+                            <div class="input-group"><br>
+                                Select City
+                                <input type="text" class="form-control" formControlName="added_loc"
+                                    list="productName" />
+                                <datalist id="productName">
+                                    <option value="Pen">Pen</option>
+                                    <option value="Pencil">Pencil</option>
+                                    <option value="Paper">Paper</option>
+                                </datalist>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <br>
+                        <div class="form-group">
+                            <div class="input-group">
+                                Enter New Location
+                                <input type="text" class="form-control" formControlName="enter_newloc" required
+                                    autocomplete="off" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right side column -->
+                    <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <br>
+                                Select Location
+                                <input type="text" class="form-control" list="productName" />
+                                <datalist id="productName">
+                                    <option value="Pen">Pen</option>
+                                    <option value="Pencil">Pencil</option>
+                                    <option value="Paper">Paper</option>
+                                </datalist>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Left side column -->
+                    <div class="col-md-6 col-sm-6">
+                        <br>
+                        <div class="form-group">
+                            <div class="input-group">
+                                Select Added Locations
+                                <input type="text" class="form-control" list="productName" />
+                                <datalist id="productName">
+                                    <option value="Pen">Pen</option>
+                                    <option value="Pencil">Pencil</option>
+                                    <option value="Paper">Paper</option>
+                                </datalist>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12">
+                        <br><br>
+                        <div class="form-group" class="pull-left">
+                            <button type="submit" class="btn btn-primary">Add Location</button>
+
+                        </div>
+                        <div class="form-group" class="pull-right">
+                            <button type="submit" class="btn btn-primary">Edit</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Property Types -->
+
+                <h2 class="register-heading">Property Types</h2>
+                <div class="row register-form">
+                    <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                            <div class="input-group">
+                                Add New Type
+                                <input type="text" class="form-control" formControlName="add_newtype" required
+                                    autocomplete="off" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                            <div class="input-group">
+                                Added Types
+                                <input type="text" class="form-control" formControlName="added_type"
+                                    list="productName" />
+                                <datalist id="productName">
+                                    <option value="Pen">Pen</option>
+                                    <option value="Pencil">Pencil</option>
+                                    <option value="Paper">Paper</option>
+                                </datalist>
+                            </div>
+                        </div>
+                        <br><br>
+                    </div>
+                    <div class="col-md-12 col-sm-12">
+                        <div class="form-group" class="pull-left">
+                            <button type="submit" class="btn btn-primary">Add Property Type</button>
+
+                        </div>
+                        <div class="form-group" class="pull-right">
+                            <button type="submit" class="btn btn-primary">Edit</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <button type="submit" class="btn btn-danger">Delete</button>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Status Types -->
+
+                <h2 class="register-heading">Status Types</h2>
+                <div class="row register-form">
+                    <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                            <div class="input-group">
+                                Add New Status
+                                <input type="text" class="form-control" formControlName="add_newstatus" required
+                                    autocomplete="off" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                            <div class="input-group">
+                                Added Status
+                                <input type="text" class="form-control" formControlName="added_status"
+                                    list="productName" />
+                                <datalist id="productName">
+                                    <option value="Pen">Pen</option>
+                                    <option value="Pencil">Pencil</option>
+                                    <option value="Paper">Paper</option>
+                                </datalist>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 col-sm-12"><br><br>
+                        <div class="form-group" class="pull-left">
+                            <button type="submit" class="btn btn-primary">Add Status Type</button>
+
+                        </div>
+                        <div class="form-group" class="pull-right">
+                            <button type="submit" class="btn btn-primary">Edit</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <button type="submit" class="btn btn-danger">Delete</button>
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

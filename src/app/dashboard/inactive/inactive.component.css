@@ -1,0 +1,36 @@
+.fa-search:before {
+    margin-left: 39px;
+    content: "\f002";
+}
+th {
+    background-color: black;
+    color: white;
+} 
+.inactive {
+    overflow-x: hidden; /* Hide scrollbars */
+  }
+.fa{
+    margin-left: 25px;
+}
+
+.icon{
+    margin-top: 14px;
+}
+.btn{
+    margin-left: 25px;
+    width: 100px;
+    font-size: 14px;
+    background-color: #38baa2 ;
+    color: white;
+    border: 1px solid transparent;
+  }
+  .form-control-borderless {
+    border: none;
+    border: 1px solid whitesmoke;
+}
+/* 
+.form-control-borderless:hover, .form-control-borderless:active, .form-control-borderless:focus {
+    border: none;
+    outline: none;
+    box-shadow: none;
+} */

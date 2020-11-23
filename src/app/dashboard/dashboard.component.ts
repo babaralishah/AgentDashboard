@@ -1,0 +1,48 @@
+import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from '../services/Authentication/authentication.service';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+
+@Component({
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.css']
+})
+export class DashboardComponent implements OnInit {
+  tokendata: any;
+
+  constructor(
+    public authService: AuthenticationService,
+    public router: Router,
+    private toastr: ToastrService) { }
+
+  ngOnInit(): void {
+    this.tokenization();
+  }
+    // tslint:disable-next-line: typedef
+  async tokenization()
+  {
+    const token = await this.authService.getToken();
+    const decodedToken = await this.authService.getDecodedToken(token);
+    this.tokendata = decodedToken.data;
+    // console.log(this.tokendata);
+  }
+
+  // tslint:disable-next-line: typedef
+  isLogin() {
+
+    const token = this.authService.getToken();
+    // console.log(token);
+    return token;
+  }
+  // tslint:disable-next-line: typedef
+  logout() {
+    localStorage.removeItem('token');
+    this.toastr.success('Logged Out', 'Success', {
+      timeOut: 5000
+    });
+    console.log('\nlogout\n');
+    this.router.navigateByUrl('/');
+  }
+
+}

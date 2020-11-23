@@ -1,0 +1,532 @@
+.btn3 {
+    margin-left: 20px;
+    border-radius: 20px;
+}
+
+.ng-select {
+    display: block;
+    position: relative;
+    width: 300px;
+}
+
+.select-btn {
+    margin-top: 33px;
+}
+
+.nav-tabs {
+    border-bottom: 0px solid #dee2e6;
+}
+
+.steps {
+    color: #1f6e97;
+}
+
+b {
+    margin-top: 10px;
+}
+
+.btn-primary:not(:disabled):not(.disabled).active,
+.btn-primary:not(:disabled):not(.disabled):active,
+.show>.btn-primary.dropdown-toggle {
+    color: #fff;
+    background-color: #1f6e97;
+    border-color: #1f6e97;
+}
+
+.ant-radio-group-solid .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
+    color: #fff;
+    background: #38bba2;
+    border-color: #38bba2;
+}
+
+.tab-pane[_ngcontent-serverApp-c4] a[_ngcontent-serverApp-c4] {
+    margin: 2px;
+}
+
+.btn:not(:disabled):not(.disabled):hover {
+    color: #fff;
+    background-color: #1f6e97;
+    border-color: #1f6e97;
+}
+
+.btn:not(:disabled):not(.disabled) {
+    cursor: pointer;
+    color: white;
+}
+
+a:not([href]):not([tabindex]) {
+    color: inherit;
+    text-decoration: none;
+}
+
+.btn-outline-success {
+    border-color: darkgray;
+    margin: 10px;
+    border-radius: 20px;
+}
+
+.btn[_ngcontent-serverApp-c4] {
+    background: #1f6e97;
+    opacity: 0.85;
+}
+
+.dropdown-toggle1[_ngcontent-serverApp-c4] {
+    background: #dcdcdc;
+}
+
+.btn[_ngcontent-serverApp-c4] {
+    background: #1f6e97;
+    opacity: 0.85;
+}
+
+.dropdown-menu[_ngcontent-serverApp-c4] {
+    min-width: 15rem !important;
+}
+
+.keepopen[_ngcontent-serverApp-c4] {
+    color: white;
+}
+
+.area-unit1 {
+    margin-top: 48px;
+}
+
+.area-unit {
+    margin-left: 55px;
+}
+
+.price {
+    margin-left: 15px;
+}
+
+.btn1 {
+    margin-right: 60px;
+}
+
+.inventory {
+    overflow-x: hidden;
+    margin-left: -145px;
+    margin-top: 89px;
+}
+
+
+/* .activeB {
+    color: orange;
+} */
+
+.btn-secondary:not(:disabled):not(.disabled).active,
+.btn-secondary:not(:disabled):not(.disabled):active,
+.show>.btn-secondary.dropdown-toggle {
+    color: #fff;
+    background-color: #1f6e97;
+    border-color: #1f6e97;
+}
+
+.btn[_ngcontent-rqt-c127] {
+    width: 120px;
+    font-size: 14px;
+    background-color: #38baa2;
+    color: white;
+    border: 1px solid transparent;
+}
+
+.tab-pane {
+    margin: 2px;
+}
+
+.nav-tabs1 {
+    background: #38bba3;
+    border-radius: 1.5rem;
+    width: 40%;
+    margin-top: 0%;
+    margin-right: 0px;
+    float: left;
+    border: none;
+    padding: 12%;
+    color: #fff;
+    border-top-right-radius: 1.5rem;
+    border-bottom-right-radius: 1.5rem;
+}
+
+
+/* .register .nav-tabs {
+    margin-top: 17%;
+    margin-right: -30px;
+    border: none;
+    background: #38bba3;
+    border-radius: 1.5rem;
+    width: 40%;
+    float: left;
+    padding: 3px;
+} */
+
+.register .nav-tabs .nav-link {
+    padding: 12%;
+    /* height: 35px; */
+    /* font-weight: 600; */
+    color: #fff;
+    border-top-right-radius: 1.5rem;
+    border-bottom-right-radius: 1.5rem;
+}
+
+.register .nav-tabs .nav-link:hover {
+    border: none;
+}
+
+.register .nav-tabs .nav-link.active {
+    width: 100px;
+    color: #0f101187;
+    border: 2px solid #38bba3;
+    border-top-left-radius: 1.5rem;
+    border-bottom-left-radius: 1.5rem;
+}
+
+.heading1 {
+    margin-left: 0px;
+}
+
+img {
+    height: 140px;
+    width: 190px;
+    object-fit: cover;
+}
+
+.fileField {
+    width: 103px;
+    margin-top: -37px;
+    margin-left: 10px;
+    opacity: .01;
+}
+
+.upload-btn-wrapper[_ngcontent-serverApp-c16] {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.btn[_ngcontent-serverApp-c16] {
+    color: #ffffff;
+    background-color: #38baa2;
+    padding: 7px 11px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: bold;
+    margin-left: 6px;
+    margin-top: 7px;
+}
+
+.upload[_ngcontent-serverApp-c16] {
+    font-family: sans-serif;
+    margin-left: 4px;
+}
+
+.upload-btn-wrapper[_ngcontent-serverApp-c16] input[type="file"][_ngcontent-serverApp-c16] {
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.ant-radio-group-solid .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
+    color: #fff;
+    background: #38bba2;
+    border-color: #38bba2;
+}
+
+.radio-mid {
+    margin-top: 200px
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 200px; */
+    /* border: 3px solid green; */
+}
+
+h2 {
+    font: 200 25px/30px Scribble, "Scribble", Scribble;
+    color: whitesmoke;
+}
+
+html {
+    font-family: 'Lora', sans-serif;
+    width: 100%;
+}
+
+body {
+    margin: 5% auto 0 auto;
+    width: 90%;
+    max-width: 1125px;
+}
+
+h1 {
+    font-size: 28px;
+    margin-bottom: 2.5%;
+}
+
+input,
+span,
+label,
+textarea {
+    font-family: 'Ubuntu', sans-serif;
+    display: block;
+    /* margin: 10px; */
+    /* padding: 12px; */
+    border: none;
+    font-size: 14px;
+}
+
+textarea:focus,
+input:focus {
+    outline: 0;
+}
+
+
+/* The text where input field would be written */
+
+input.question,
+textarea.question {
+    font-size: 14px;
+    font-weight: 200;
+    border-radius: 2px;
+    margin: 0;
+    border: none;
+    width: 90%;
+    background: none;
+    transition: padding-top 0.1s ease, margin-top 0.1s ease;
+    overflow-x: hidden;
+    /* Hack to make "rows" attribute apply in Firefox. */
+}
+
+
+/* Underline and Placeholder */
+
+input.question+label,
+textarea.question+label {
+    display: block;
+    position: relative;
+    white-space: nowrap;
+    padding: 0;
+    margin: 0;
+    width: 90%;
+    border-top: 1px solid black;
+    -webkit-transition: width 0.5s ease;
+    transition: width 0.5s ease;
+    height: 0px;
+}
+
+input.question:focus+label,
+textarea.question:focus+label {
+    width: 100%;
+}
+
+input.question:focus,
+input.question:valid {
+    padding-top: -5px;
+    /* margin-top: -2px; */
+}
+
+textarea.question:valid,
+textarea.question:focus {
+    margin-top: 35px;
+}
+
+input.question:focus+label>span,
+input.question:valid+label>span {
+    top: -100px;
+    font-size: 22px;
+    color: #333;
+}
+
+textarea.question:focus+label>span,
+textarea.question:valid+label>span {
+    top: -150px;
+    font-size: 22px;
+    color: #333;
+}
+
+input.question:valid+label,
+textarea.question:valid+label {
+    border-color: black;
+}
+
+input.question:invalid,
+textarea.question:invalid {
+    box-shadow: none;
+}
+
+input.question+label>span,
+textarea.question+label>span {
+    font-weight: 300;
+    margin: 0;
+    position: absolute;
+    color: black;
+    font-size: 28px;
+    top: -66px;
+    left: 0px;
+    z-index: -1;
+    -webkit-transition: top 0.6s ease, font-size 0.6s ease, color 0.6s ease;
+    transition: top 0.6s ease, font-size 0.6s ease, color 0.6s ease;
+}
+
+input[type="submit"] {
+    -webkit-transition: opacity 0.5s ease, background 0.5s ease;
+    transition: opacity 0.5s ease, background 0.5s ease;
+    display: block;
+    opacity: 0;
+    margin: 10px 0 0 0;
+    padding: 10px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background: #EEE;
+}
+
+input[type="submit"]:active {
+    background: #999;
+}
+
+input.question:valid~input[type="submit"],
+textarea.question:valid~input[type="submit"] {
+    -webkit-animation: appear 1s forwards;
+    animation: appear 1s forwards;
+}
+
+input.question:invalid~input[type="submit"],
+textarea.question:invalid~input[type="submit"] {
+    display: none;
+}
+
+
+/* @-webkit-keyframes appear {
+      100% {
+        opacity: 0.9;
+      }
+    } */
+
+@keyframes appear {
+    100% {
+        opacity: 0.8;
+    }
+}
+
+
+/* 02 end */
+
+.form-control {
+    margin-top: 10px;
+    border: 1PX solid gray;
+    /* border-bottom: 1px solid; */
+    border-radius: px;
+    width: 100%;
+    /* color:#38baa2; */
+    height: 40px;
+}
+
+
+/*  */
+
+.btn {
+    /* margin-left: 40px; */
+    width: 120px;
+    font-size: 14px;
+    background-color: #38baa2;
+    color: white;
+    border: 1px solid transparent;
+}
+
+.btn-danger {
+    background-color: red;
+    border-radius: 5px;
+    height: 35px;
+    width: 100px;
+    font-size: 14px;
+    color: white;
+    border: 1px solid transparent;
+}
+
+.register {
+    overflow-x: hidden;
+    /* Hide scrollbars */
+    /* background: -webkit-linear-gradient(left, #38baa2, #0d6b92); */
+    /* background: -webkit-linear-gradient(left, rgb(26, 23, 23), #38baa2); */
+    /* margin-top: 3%; */
+    /* padding: 3%; */
+}
+
+.register-left {
+    text-align: center;
+    color: #fff;
+    margin-top: 4%;
+}
+
+.register-left input {
+    border: none;
+    border-radius: 1.5rem;
+    padding: 2%;
+    width: 60%;
+    background: #f8f9fa;
+    font-weight: bold;
+    color: #383d41;
+    margin-top: 30%;
+    margin-bottom: 3%;
+    cursor: pointer;
+}
+
+.register-right {
+    background: white;
+    border-top-left-radius: 10% 50%;
+    border-bottom-left-radius: 10% 50%;
+}
+
+
+/* Image Effects */
+
+.register-left img {
+    margin-top: 15%;
+    margin-bottom: 5%;
+    width: 70%;
+    -webkit-animation: mover 3s infinite alternate;
+    animation: mover 0.5s infinite alternate;
+}
+
+@-webkit-keyframes mover {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes mover {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-20px);
+    }
+}
+
+.register-left p {
+    font-weight: lighter;
+    padding: 12%;
+    margin-top: -9%;
+}
+
+.register .register-form {
+    padding: 12%;
+    margin-top: 0%;
+}
+
+.register-heading {
+    text-align: center;
+    /* margin-top: 8%; */
+    margin-bottom: -8%;
+    color: #495057;
+}

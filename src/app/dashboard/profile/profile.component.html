@@ -1,0 +1,142 @@
+<!-- <div id="main-wrapper" [ngClass]="{ 'show-sidebar': showMobileMenu }" dir="ltr" data-theme="light"
+  data-layout="vertical" [attr.data-sidebartype]="sidebartype" data-sidebar-position="absolute"
+  data-header-position="fixed" data-boxed-layout="full">
+  <header class="topbar" data-navbarbg="skin6">
+    <nav class="d-flex top-navbar navbar-expand-md navbar-light">
+      <div class="navbar-header" [ngClass]="expandLogo ? 'expand-logo' : ''" data-logobg="skin6">
+        <a (click)="showMobileMenu = !showMobileMenu"
+          class="nav-link sidebartoggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)">
+          <i class="mdi mdi-menu font-24 text-dark" [ngClass]="showMobileMenu ? 'ti-close' : 'ti-menu'"></i>
+        </a>
+        <a class="navbar-brand" href="/">
+          <b class="logo-icon d-block d-md-none d-lg-block">
+            <img src="assets/asasa/asasa_logo.png" alt="homepage" class="dark-logo"
+              style="width: 150px; height: 40px;" />
+          </b>
+          <span class="logo-text d-none d-md-block d-lg-none">
+            <img src="assets/asasa/asasa.gif" class="dark-logo" alt="homepage"
+              style="width: 40px; height: 40px;" />
+          </span>
+        </a>
+        <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)"
+          data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+          aria-expanded="false" aria-label="Toggle navigation">
+          <i class="ti-more"></i>
+        </a>
+      </div>
+      <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin6">
+        <app-navigation (toggleSidebar)="toggleSidebarType()" class="w-100"></app-navigation>
+      </div>
+    </nav>
+  </header>
+  <aside class="left-sidebar" data-sidebarbg="skin1" (mouseover)="Logo()" (mouseout)="Logo()">
+    <div class="scroll-sidebar" [perfectScrollbar]="config">
+      <app-sidebar></app-sidebar>
+    </div>
+  </aside>
+  <div class="page-wrapper">
+    <div class="container-fluid">
+      <div class="row mt-5">
+        <div class="col-md-8 col-lg-10 col-xl-6">
+          <div class="content">
+            <div class="card">
+                <div class="firstinfo"><img src="https://bootdey.com/img/Content/avatar/avatar6.png" />
+                    <div class="profileinfo">
+                        <h1>John Doe</h1>
+                        <h3>Swift developer</h3>
+                        <p class="bio">Lived all my life on the top of mount Fuji, learning the way to be a Ninja Dev.</p>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-5">
+        <div class="col-md-8 col-lg-10 col-xl-6 offset-md-4 offset-lg-2 col offset-xl-6">
+          <div class="content">
+            <div class="card">
+                <div class="firstinfo"><img src="https://bootdey.com/img/Content/avatar/avatar6.png" />
+                    <div class="profileinfo">
+                        <h1>John Doe</h1>
+                        <h3>Swift developer</h3>
+                        <p class="bio">Lived all my life on the top of mount Fuji, learning the way to be a Ninja Dev.</p>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<div>
+    <app-header></app-header>
+    <div class="row">
+        <div class="col-md-2">
+            <app-dashboard></app-dashboard>
+        </div>
+
+        <div class="col-md-10">
+            <div class="main main-raised">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="content">
+                            <div class="card">
+                                <div class="firstinfo">
+                                    <img *ngIf="!selectedFile" src="https://bootdey.com/img/Content/avatar/avatar6.png" />
+                                    <img *ngIf="selectedFile" [src]="selectedFile.src" />
+                                    <div class="profileinfo">
+                                        <h1>{{tokendata?.fullname}}</h1>
+                                        <span class=" badge badge-warning">{{tokendata?.access}}</span>
+
+                                        <p class="bio">Lived all my life on the top of mount Fuji, learning the way to be a Ninja Dev.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-8 col-lg-6">
+                        <div class="profile">
+
+                            <div class="upload-btn-wrapper  text-center input-container" style="float: left;">
+                                <button (click)="file.click()" class="btn text-center mr-2" style="width: 100px;">
+                    <i class="fa fa-camera" aria-hidden="true">&nbsp;</i>
+                    <span class="upload"><b>Upload</b></span>
+                  </button>
+                                <input #file type='file' class="fileField" (change)="onSelectFile($event)"><br><br>
+                            </div>
+                            <div class="upload-btn-wrapper  text-center" style=" float: left; margin-top: 15px;">
+                                <button (click)="updateImage()" class="btn text-center mr-2" style="width: 100px;">
+                    <i class="fa fa-save">&nbsp;</i>
+                    <span class="upload"><b>Save</b></span>
+                  </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="content">
+                            <div class="card1">
+                                <div class="firstinfo">
+                                    <div class="profileinfo mt-4">
+                                        <h2 class="bio d-flex justify-content-center align-item-center text-dark"><b>Email #:</b> &nbsp;&nbsp;&nbsp;&nbsp;{{tokendata?.email}}</h2>
+                                        <h2 class="bio d-flex justify-content-center align-item-center text-dark"><b>Contact #:</b> &nbsp;&nbsp;&nbsp;+92{{tokendata?.contact}}</h2>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

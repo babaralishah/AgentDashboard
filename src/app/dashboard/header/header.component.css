@@ -1,0 +1,96 @@
+.navbar {
+    z-index: 1000;
+    position: fixed;
+    width: 100%;
+    /* position: absolute; */
+    background: #31353d;
+    color: white;
+    /* position: fixed; */
+}
+
+.navbar-brand {
+    font-size: 1.75rem;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 16px;
+    text-decoration: none;
+}
+
+.lead {
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+.nav-link {
+    font-size: 1rem;
+    margin: 0 10px;
+}
+
+  .navbar {
+    height: 80px;
+  }
+  .navbar .navbar-brand img {
+    height: 80px !important;
+  }
+  .navbar .navbar-nav li {
+    padding: 0 12px;
+  }
+  .navbar .navbar-nav li a {
+    padding: 0;
+    color: #242424;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    display: inline-block;
+    text-decoration: none;
+  }
+  .navbar .navbar-nav li.active a {
+    color: #36bfba;
+  }
+  .navbar .navbar-nav li:hover a,
+  .navbar-toggler i:hover {
+    color: #36bfba;
+    transition: color 0.3s;
+  }
+  .navbar .navbar-nav li a::after {
+    content: "";
+    display: block;
+    margin-top: 5px;
+    width: 0;
+    height: 3px;
+    background: #36bfba;
+    transition: width 1s;
+  }
+  .navbar .navbar-nav li:hover a::after,
+  .navbar .navbar-nav li.active a::after {
+    width: 80%;
+  }
+  .navbar .navbar-nav li.item-has-child::after {
+    font-family: "FontAwesome";
+    content: "\f107";
+  }
+  .navbar-toggler {
+    border: 0;
+    outline: 0;
+  }
+  .navbar-toggler i {
+    color: #242424;
+    border: none;
+    outline: none;
+  }

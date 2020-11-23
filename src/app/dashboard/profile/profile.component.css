@@ -1,0 +1,224 @@
+.card1 {
+    width: 500px;
+    min-height: 200px;
+    padding: 25px;
+    border-radius: 15px;
+    background-color: white;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+    margin-left: 700px;
+}
+
+.fileField {
+    opacity: 0;
+    margin-left: -97px;
+    margin-left: -230px;
+    margin-top: 21px;
+}
+
+.badge {
+    font-size: 17px;
+}
+
+.badgescard,
+.firstinfo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    width: 100%;
+    min-height: 100%;
+    background: #00bcd4;
+    font-size: 16px;
+    overflow: hidden;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+.content {
+    position: relative;
+    animation: animatop 0.9s cubic-bezier(0.425, 1.14, 0.47, 1.125) forwards;
+}
+
+.btn {
+    background: #3abba2;
+    color: white;
+    font-family: fangsong;
+    cursor: pointer;
+}
+
+.card {
+    width: 500px;
+    min-height: 100px;
+    padding: 25px;
+    border-radius: 15px;
+    background-color: white;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+    margin-top: 140px;
+    margin-left: 30px;
+}
+
+.input-container {
+    margin-left: 100px;
+}
+
+@media only screen and (min-width: 1400px)and (max-width: 1500px) {
+    .card,
+    .profile,
+    .input-container {
+        margin-left: 70px;
+    }
+    .card1 {
+        margin-left: 600px;
+    }
+}
+
+@media only screen and (min-width: 1100px)and (max-width: 1400px) {
+    .card,
+    .profile {
+        margin-left: 130px;
+    }
+    .input-container {
+        margin-left: 30px;
+    }
+    .card1 {
+        margin-left: 400px;
+    }
+}
+
+@media only screen and (max-width: 1100px) {
+    .card,
+    .profile {
+        margin-left: 120px;
+    }
+    .card1 {
+        margin-left: 150px;
+    }
+    .input-container {
+        margin-left: 0;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    .card,
+    .profile {
+        margin-left: 20px;
+    }
+    .card1 {
+        margin-left: 20px;
+    }
+    .input-container {
+        margin-left: 0;
+    }
+}
+
+.card:after {
+    content: '';
+    display: block;
+    width: 190px;
+    height: 300px;
+    background: #38bba2;
+    position: absolute;
+    animation: rotatemagic 0.75s cubic-bezier(0.425, 1.04, 0.47, 1.105) 1s both;
+}
+
+.badgescard {
+    margin-left: -65px;
+    padding: 10px 20px;
+    border-radius: 3px;
+    background-color: #00bcd4;
+    color: #fff;
+    width: 630px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    z-index: -1;
+    left: 10px;
+    bottom: 10px;
+    animation: animainfos 0.5s cubic-bezier(0.425, 1.04, 0.47, 1.105) 0.75s forwards;
+}
+
+.badgescard span {
+    font-size: 1.6em;
+    margin: 0px 6px;
+    opacity: 0.6;
+}
+
+.firstinfo {
+    flex-direction: row;
+    z-index: 2;
+    position: relative;
+}
+
+.firstinfo img {
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+}
+
+.firstinfo .profileinfo {
+    padding: 0px 20px;
+    margin-left: 38px;
+}
+
+.firstinfo .profileinfo h1 {
+    font-size: 1.8em;
+}
+
+.firstinfo .profileinfo h3 {
+    font-size: 1.2em;
+    color: #00bcd4;
+    font-style: italic;
+}
+
+.firstinfo .profileinfo p.bio {
+    padding: 10px 0px;
+    color: #5A5A5A;
+    line-height: 1.2;
+    font-style: initial;
+}
+
+@keyframes animatop {
+    0% {
+        opacity: 0;
+        bottom: -500px;
+    }
+    100% {
+        opacity: 1;
+        bottom: 0px;
+    }
+}
+
+@keyframes animainfos {
+    0% {
+        bottom: 10px;
+    }
+    100% {
+        bottom: -42px;
+    }
+}
+
+@keyframes rotatemagic {
+    0% {
+        opacity: 0;
+        transform: rotate(0deg);
+        top: -24px;
+        left: -253px;
+    }
+    100% {
+        transform: rotate(-30deg);
+        top: -24px;
+        left: -78px;
+    }
+}

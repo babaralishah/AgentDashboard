@@ -14,7 +14,7 @@ import * as mapboxgl from 'mapbox-gl';
 })
 export class AddInventoriesComponent implements OnInit {
   cities: any;
-  ad = 'Post Ad';
+  formSendingStatus = 'Post Ad';
   locations: any;
   subsLocations: any;
   // selectedLocations: any;
@@ -31,10 +31,10 @@ export class AddInventoriesComponent implements OnInit {
   ];
   greaterThanValue ;
   lessThanValue;
-  isInvalid: boolean = false;
-  isInvalid1: boolean = false;
-  greaterThanValue1;
-  lessThanValue1;
+  isInvalid: boolean = false; //Contains the valid status of PRICE ranges
+  isInvalid1: boolean = false; //Contains the valid status of AREA ranges
+  greaterThanValue1; //Variable stores max area
+  lessThanValue1; //Variable stores min area
   userList: any;
   selectedLocations: any = [];
   selectedCity: any;
@@ -143,7 +143,7 @@ export class AddInventoriesComponent implements OnInit {
     }
     updatefields() {
     // this.addinventoryForm.patchValue({ form_title: 'Inventory' });
-    this.ad = 'Save'
+    this.formSendingStatus = 'Save'
     this.addinventoryForm.patchValue({ form_title: this.user1.form_title });
     this.addinventoryForm.patchValue({ _id: this.user1._id });
     // this.addinventoryForm.patchValue({ location: this.user1.location });
@@ -175,8 +175,10 @@ export class AddInventoriesComponent implements OnInit {
     }
     console.log(this.addinventoryForm.value);
     
-    this.selectedCity = this.user.city.city;
+    this.selectedCity = this.user1.city[0].city;
     console.log(this.selectedLocations);
+    console.log(this.selectedCity);
+    
   }
 
   // File Upload Functions below

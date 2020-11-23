@@ -170,10 +170,10 @@ export class SignupComponent implements OnInit {
   //Function to change the city of --ng select city--
   changeCity(city) {
     
-    console.log(this.registerForm.controls['location'].value);
-    this.registerForm.patchValue( {'location':'cdf'} );
-    this.registerForm.controls.location.setValue('abc');
-    console.log(this.registerForm.controls['location'].value);
+    // console.log(this.registerForm.controls['location'].value);
+    // this.registerForm.patchValue( {'location':'cdf'} );
+    // this.registerForm.controls.location.setValue('abc');
+    // console.log(this.registerForm.controls['location'].value);
     
     this.locations = '';
     if(this.user){

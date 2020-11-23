@@ -9690,7 +9690,7 @@
           this.authService = authService;
           this.router = router;
           this.toastr = toastr;
-          this.ad = 'Post Ad';
+          this.formSendingStatus = 'Post Ad';
           this.access_type = [{
             access: 'super_admin'
           }, {
@@ -9701,8 +9701,10 @@
           this.access_type1 = [{
             access: "all_agents"
           }];
-          this.isInvalid = false;
-          this.isInvalid1 = false;
+          this.isInvalid = false; //Contains the valid status of PRICE ranges
+
+          this.isInvalid1 = false; //Contains the valid status of AREA ranges
+
           this.selectedLocations = [];
           this.selectStringLocations = []; // Requirements for Map on the template, below;
 
@@ -9803,7 +9805,7 @@
           key: "updatefields",
           value: function updatefields() {
             // this.addinventoryForm.patchValue({ form_title: 'Inventory' });
-            this.ad = 'Save';
+            this.formSendingStatus = 'Save';
             this.addinventoryForm.patchValue({
               form_title: this.user1.form_title
             });
@@ -9856,8 +9858,9 @@
             }
 
             console.log(this.addinventoryForm.value);
-            this.selectedCity = this.user.city.city;
+            this.selectedCity = this.user1.city[0].city;
             console.log(this.selectedLocations);
+            console.log(this.selectedCity);
           } // File Upload Functions below
 
         }, {
@@ -10869,7 +10872,7 @@
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](7);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx.ad);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx.formSendingStatus);
           }
         },
         directives: [_header_header_component__WEBPACK_IMPORTED_MODULE_5__["HeaderComponent"], _dashboard_component__WEBPACK_IMPORTED_MODULE_6__["DashboardComponent"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["ɵangular_packages_forms_forms_y"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["NgControlStatusGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormGroupDirective"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["RadioControlValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["DefaultValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControlName"], _angular_common__WEBPACK_IMPORTED_MODULE_7__["NgIf"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["NumberValueAccessor"], _ng_select_ng_select__WEBPACK_IMPORTED_MODULE_8__["NgSelectComponent"], _angular_common__WEBPACK_IMPORTED_MODULE_7__["NgClass"], _angular_flex_layout_extended__WEBPACK_IMPORTED_MODULE_9__["DefaultClassDirective"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["NgModel"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["RequiredValidator"]],
@@ -11858,12 +11861,10 @@
         }, {
           key: "changeCity",
           value: function changeCity(city) {
-            console.log(this.registerForm.controls['location'].value);
-            this.registerForm.patchValue({
-              'location': 'cdf'
-            });
-            this.registerForm.controls.location.setValue('abc');
-            console.log(this.registerForm.controls['location'].value);
+            // console.log(this.registerForm.controls['location'].value);
+            // this.registerForm.patchValue( {'location':'cdf'} );
+            // this.registerForm.controls.location.setValue('abc');
+            // console.log(this.registerForm.controls['location'].value);
             this.locations = '';
 
             if (this.user) {

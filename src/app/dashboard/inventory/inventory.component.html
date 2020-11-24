@@ -13,11 +13,11 @@
 
     <div class="col-9">
         <div class="inventory"><br>
-            <h1><b>&nbsp;&nbsp;&nbsp;&nbsp;Inventory Management</b></h1>
+            <h1><b>Inventory Management</b></h1>
             <br>
             <div>
-                <button class="btn btn-primary rounded-pill" (click)="setFormTitle('Inventory')">Add New</button>
-                <!-- <button class="btn btn-primary rounded-pill">Filters</button> -->
+                <button class="btn btn-primary" (click)="setFormTitle('Inventory')">Add New</button>
+                <!-- <button class="btn btn-primary">Filters</button> -->
                 <!-- <div class="dropdown">
                         <button class="dropbtn" class="btn btn-primary rounded-pill">Select Agent</button>
                         <div class="dropdown-content">
@@ -30,16 +30,12 @@
 
             <div class="pull-right">
                 <div class="card-body row">
-                    <div class="col-auto">
-                        <i class="fa fa-search icon"></i>
-                    </div>
                     <!--end of col-->
                     <div class="col">
                         <input class="form-control" id="myInput" type="text" [(ngModel)]="general_search" placeholder="Search topic or keyword">
                     </div>
 
-                    <button onclick="window.print()" class="btn btn-primary rounded-pill">Print</button>
-                    <button class="btn btn-primary rounded-pill">Excel</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button onclick="window.print()" class="btn btn-primary">Print</button> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<button class="btn btn-primary">Excel</button>
                 </div>
             </div>
             <br><br><br>
@@ -97,12 +93,9 @@
                                 <span *ngFor="let loc of user.location">{{ loc.location }}<br></span>
                             </td> -->
 
-
-
                         <td>
-                            {{user.city[0]?.city}}<span>&nbsp;&nbsp;</span><br><span class="badge badge-light" *ngFor="let loc of user.location">{{ loc.location }},  </span>
+                            {{user.city[0]?.city}}<span></span><br><span class="badge badge-light" *ngFor="let loc of user.location">{{ loc.location }}, </span>
                         </td>
-
                         <td>{{ user.area }}</td>
                         <td>{{ user.client_type }}</td>
                         <td>{{ user.demand_price }}</td>

@@ -109,11 +109,12 @@
                             <!-- {{user.location[0].location}} -->
                         </div>
                     </div>
+
                     <div class="form-group" *ngIf="!user">
                         <div class="input-group">
                             <!-- <b>Select Location</b> -->
                             <i class="fas fa-street-view"></i>
-                            <ng-select class="ng-select inputs2" [multiple]="true" [items]="locations" bindLabel="location" bindValue="location" placeholder="Select Location" (change)="changeLocation($event)">
+                            <ng-select class="ng-select inputs2" [(ngModel)]="selectStringLocations" [multiple]="true" [ngModelOptions]="{standalone: true}" [items]="locations" bindLabel="location" bindValue="location" placeholder="Select Location" (change)="changeLocation($event)">
                             </ng-select>
                         </div>
                     </div>
@@ -122,10 +123,13 @@
                         <div class="input-group">
                             <!-- <b>Select Access</b> -->
                             <i class="fas fa-universal-access"></i>
-                            <ng-select class="ng-select inputs2" [items]="accessType" bindLabel="access" bindValue="access" placeholder="Select Access Type" (change)="changeAccess($event)">
+                            <ng-select class="ng-select inputs2" [items]="accessType" bindLabel="access" bindValue="access" placeholder="Select Access Type" [ngClass]="{ 'is-invalid': submitted && f.access.errors }" (change)="changeAccess($event)">
                                 <!-- <ng-select class="ng-select inputs2" [items]="access" bindLabel="access" bindValue="access" placeholder="Select Access Type" (change)="changeAccess($event)">
                             <option>dasdas</option> -->
                             </ng-select>
+                            <div *ngIf="submitted && f.access.errors" class="invalid-feedback">
+                                <div *ngIf="f.access.errors.required">Access is required</div>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group" *ngIf="user">
@@ -139,8 +143,8 @@
                             <!-- {{user.access}} -->
                         </div>
                     </div>
-                    <div class="form-group">
-                        <button type="submit" class='btn' class="btn btn-primary rounded-pill">
+                    <div class="form-group pull-right">
+                        <button type="submit" class='btn' class="btn btn-primary">
                             <span *ngIf="!user">Register</span>
                             <span *ngIf="user">Save</span>
                         </button>

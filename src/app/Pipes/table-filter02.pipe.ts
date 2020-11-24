@@ -1,6 +1,4 @@
 import { Pipe, PipeTransform } from '@angular/core';
-
-import { User } from '../dashboard/inventory/User';
 @Pipe({
   name: 'tableFilter02'
 })
@@ -10,7 +8,7 @@ export class TableFilter02Pipe implements PipeTransform {
     // user: User[],
     user: any,
     search_location: string
-  ): User[] {
+  ): typeof user {
 
     if (!user || !search_location) {
       return user;

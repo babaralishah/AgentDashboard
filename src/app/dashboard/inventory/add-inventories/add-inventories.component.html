@@ -110,12 +110,22 @@
                                     </ng-select>
                                 </div>
                             </div>
+
                             <div class="form-group" *ngIf="!user1">
+                                <div class="input-group">
+                                    <!-- <b>Select Location</b> -->
+                                    <!-- <i class="fas fa-street-view"></i> -->
+                                    <ng-select class="ng-select inputs2" [(ngModel)]="selectStringLocations" [multiple]="true" [ngModelOptions]="{standalone: true}" [items]="locations" bindLabel="location" bindValue="location" placeholder="Select Location" (change)="changeLocation($event)">
+                                    </ng-select>
+                                </div>
+                            </div>
+
+                            <!-- <div class="form-group" *ngIf="!user1">
                                 <div class="input-group">
                                     <ng-select class="ng-select" [multiple]="true" [items]="locations" bindLabel="location" bindValue="location" placeholder="Select Location" (change)="changeLocation($event)">
                                     </ng-select>
                                 </div>
-                            </div>
+                            </div> -->
 
                             <!--  -->
 

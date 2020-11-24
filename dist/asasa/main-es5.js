@@ -9811,8 +9811,10 @@
             });
             this.addinventoryForm.patchValue({
               _id: this.user1._id
-            }); // this.addinventoryForm.patchValue({ location: this.user1.location });
-
+            });
+            this.addinventoryForm.patchValue({
+              location: this.user1.location
+            });
             this.addinventoryForm.patchValue({
               assigned_to: this.user1.assigned_to
             });
@@ -9839,7 +9841,10 @@
             });
             this.addinventoryForm.patchValue({
               client_number: this.user1.client_number
-            }); // this.addinventoryForm.patchValue({ city: this.user1.city });
+            });
+            this.addinventoryForm.patchValue({
+              city: this.user1.city
+            });
 
             if (this.user1.location) {
               for (var i = 0; i < this.user1.location.length; i++) {
@@ -9948,6 +9953,7 @@
 
               if (this.selectedCity == city.city) {
                 this.selectStringLocations = this.selectedLocations;
+                console.log(this.selectedLocations);
                 console.log(this.selectStringLocations);
               } else this.selectStringLocations = [];
             }
@@ -11750,9 +11756,13 @@
             });
             this.registerForm.patchValue({
               password: this.user.password
-            }); // this.registerForm.patchValue({ location: this.user.location });
-            // this.registerForm.patchValue({ city: this.user.city });
-
+            });
+            this.registerForm.patchValue({
+              location: this.user.location
+            });
+            this.registerForm.patchValue({
+              city: this.user.city
+            });
             this.registerForm.patchValue({
               contact: this.user.contact
             });

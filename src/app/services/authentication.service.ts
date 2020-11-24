@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-// import { User } from '../login/User';
 import { Router } from '@angular/router';
 import { throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';

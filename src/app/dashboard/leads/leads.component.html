@@ -11,18 +11,15 @@
     <!-- </div> -->
     <div class="col-md-10 ">
         <div class="leads">
-            <h1><b>&nbsp;&nbsp;&nbsp;&nbsp;Leads Management</b></h1>
+            <h1><b>Leads Management</b></h1>
             <br>
             <div>
-                <button class="btn btn-primary rounded-pill" (click)="setFormTitle('Lead')">Add New</button>
+                <button class="btn btn-primary" (click)="setFormTitle('Lead')">Add New</button>
             </div>
             <div class="pull-right">
                 <!-- <input type="text" placeholder="Search.." name="search">
     <button type="submit"><i class="fa fa-search"></i></button> -->
                 <div class="card-body row">
-                    <div class="col-auto">
-                        <i class="fa fa-search icon"></i>
-                    </div>
                     <!--end of col-->
                     <div class="col">
                         <input class="form-control" id="myInput" type="text" [(ngModel)]="general_search" placeholder="Search topic or keyword">
@@ -30,8 +27,7 @@
 
                     <!-- <button class="btn btn-primary rounded-pill" type="submit">Search</button> -->
 
-                    <button onclick="window.print()" class="btn btn-primary rounded-pill">Print</button>
-                    <button class="btn btn-primary rounded-pill">Excel</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button onclick="window.print()" class="btn btn-primary">Print</button> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<button class="btn btn-primary">Excel</button>
                 </div>
             </div>
             <br><br><br>
@@ -110,7 +106,7 @@
             </tr> -->
                     <tr *ngFor="let user of user | filter: general_search">
                         <!-- | tableFilter06: search_client | tableFilter05: search_demand | tableFilter04: search_type | tableFilter03: search_area | tableFilter02: search_location | tableFilter: search_id -->
-                        <td>{{ user._id }}</td>
+                        <td>{{ user.referenceId }}</td>
 
                         <td><b>Name : </b>{{ user.client_name }} <br> <b>Number : </b>{{ user.client_number}}</td>
                         <!-- <td>{{ user.client_name }}</td> -->

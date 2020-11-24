@@ -17,10 +17,7 @@ export class SignupComponent implements OnInit {
   // access: ['super_admin', 'agent', 'city_admin'];
   user: any;
   abc: any;
-  accessType = [
-    { access: "agent" },
-    { access: "city_admin" },
-  ];
+  accessType = [{ access: "agent" }, { access: "city_admin" }];
   selectedLocations: any = [];
   selectedCity: any;
   selectStringLocations: any = [];
@@ -52,8 +49,8 @@ export class SignupComponent implements OnInit {
     this.registerForm.patchValue({ fullname: this.user.fullname });
     this.registerForm.patchValue({ email: this.user.email });
     this.registerForm.patchValue({ password: this.user.password });
-    // this.registerForm.patchValue({ location: this.user.location });
-    // this.registerForm.patchValue({ city: this.user.city });
+    this.registerForm.patchValue({ location: this.user.location });
+    this.registerForm.patchValue({ city: this.user.city });
     this.registerForm.patchValue({ contact: this.user.contact });
     this.registerForm.patchValue({ access: this.user.access });
     console.log(this.registerForm);
@@ -75,7 +72,6 @@ export class SignupComponent implements OnInit {
     this.selectedCity = this.user.city.city;
     // this.selectedLocations = this.user.location;
     console.log(this.selectedLocations);
-    
   }
   initialize() {
     if (this.user) {
@@ -108,10 +104,10 @@ export class SignupComponent implements OnInit {
             ],
           ],
           password: ["", [Validators.required, Validators.minLength(6)]],
-          location: [],
-          city: [""],
+          location: [, Validators.required],
+          city: ["", Validators.required],
           contact: ["", Validators.required],
-          access: [""],
+          access: ["", Validators.required],
           confirm_password: [
             "",
             [Validators.required, Validators.minLength(6)],
@@ -169,26 +165,32 @@ export class SignupComponent implements OnInit {
 
   //Function to change the city of --ng select city--
   changeCity(city) {
-    
-    // console.log(this.registerForm.controls['location'].value);
-    // this.registerForm.patchValue( {'location':'cdf'} );
-    // this.registerForm.controls.location.setValue('abc');
-    // console.log(this.registerForm.controls['location'].value);
-    
-    this.locations = '';
-    if(this.user){
-    console.log(city.city);
-    
-    console.log(this.selectedCity);
-
-    if (this.selectedCity == city.city)
-    {
-      this.selectStringLocations = this.selectedLocations;
-      console.log(this.selectStringLocations);
-    }
-    else
     this.selectStringLocations = [];
-  }
+    this.locations = [];
+    if (this.user) {
+      console.log(city.city);
+
+      console.log(this.selectedCity);
+
+      if (this.selectedCity == city.city) {
+        this.selectStringLocations = this.selectedLocations;
+        console.log(this.selectStringLocations);
+      }
+    }
+
+    if (city) this.getLocations(city._id);
+    this.registerForm.patchValue({ city });
+    this.locations = "";
+    if (this.user) {
+      console.log(city.city);
+
+      console.log(this.selectedCity);
+
+      if (this.selectedCity == city.city) {
+        this.selectStringLocations = this.selectedLocations;
+        console.log(this.selectStringLocations);
+      } else this.selectStringLocations = [];
+    }
     // if(this.user.city.city === city.city) {
     //   console.log(this.user.city.city, city.city);
     //   if (this.user.location) {

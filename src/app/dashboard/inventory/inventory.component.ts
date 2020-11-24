@@ -30,6 +30,7 @@ export class InventoryComponent implements OnInit {
     this.authService.getInventory().subscribe(
       (data) => {
         this.user = data.inventories;
+        
         console.log("Server response: ", this.user);
       },
       (err) => {
@@ -95,8 +96,11 @@ export class InventoryComponent implements OnInit {
       }
     });
   }
+  // Function to set user in the service in order to perform delete or edit operations later on
   setUser(user: any) {
     this.authService.setUser(user);
+    console.log(user);
+    
     this.authService.setFormTitle("Inventory");
     this.router.navigateByUrl("/add-inventories");
   }

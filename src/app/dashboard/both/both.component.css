@@ -61,15 +61,11 @@ th {
 }
 
 .fa {
-    margin-left: 25px;
-}
-
-.icon {
-    margin-top: 14px;
+    margin-left: 10px;
 }
 
 .btn {
-    margin-left: 25px;
+    /* margin-left: 25px; */
     width: 100px;
     font-size: 14px;
     background-color: #38baa2;
@@ -82,32 +78,31 @@ th {
     border: 1px solid whitesmoke;
 }
 
-@media only screen and (max-width: 1650px){
-   
+@media only screen and (max-width: 1650px) {
     .both {
         margin-left: 50px;
     }
 }
-@media only screen and (min-width: 1200px)and (max-width: 1400px){
-   
+
+@media only screen and (min-width: 1200px)and (max-width: 1400px) {
     .both {
         margin-left: 80px;
     }
 }
-@media only screen and (max-width: 1200px){
-   
+
+@media only screen and (max-width: 1200px) {
     .both {
         margin-left: 100px;
     }
 }
-@media only screen and (max-width: 1100px){
-   
+
+@media only screen and (max-width: 1100px) {
     .both {
         margin-left: 120px;
     }
 }
-@media only screen and (max-width: 992px){
-   
+
+@media only screen and (max-width: 992px) {
     .both {
         margin-left: -80px;
     }

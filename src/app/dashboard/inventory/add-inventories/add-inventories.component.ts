@@ -1,35 +1,32 @@
-
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AuthenticationService } from 'src/app/services/Authentication/authentication.service';
-import { ToastrService } from 'ngx-toastr';
-import * as mapboxgl from 'mapbox-gl';
+import { Component, OnInit } from "@angular/core";
+import { FormGroup, FormBuilder } from "@angular/forms";
+import { Router } from "@angular/router";
+import { AuthenticationService } from "src/app/services/Authentication/authentication.service";
+import { ToastrService } from "ngx-toastr";
+import * as mapboxgl from "mapbox-gl";
 // import { MapserviceService } from "../services/mapservice.service";
 
 @Component({
-  selector: 'app-add-inventories',
-  templateUrl: './add-inventories.component.html',
-  styleUrls: ['./add-inventories.component.css'],
+  selector: "app-add-inventories",
+  templateUrl: "./add-inventories.component.html",
+  styleUrls: ["./add-inventories.component.css"],
 })
 export class AddInventoriesComponent implements OnInit {
   cities: any;
-  formSendingStatus = 'Post Ad';
+  formSendingStatus = "Post Ad";
   locations: any;
   subsLocations: any;
   // selectedLocations: any;
   city: any;
   user: any;
-  user1: any;  
+  user1: any;
   access_type = [
-    { access: 'super_admin' },
-    { access: 'agent' },
-    { access: 'city_admin' },
+    { access: "super_admin" },
+    { access: "agent" },
+    { access: "city_admin" },
   ];
-  access_type1 = [
-    { access: "all_agents" }
-  ];
-  greaterThanValue ;
+  access_type1 = [{ access: "all_agents" }];
+  greaterThanValue;
   lessThanValue;
   isInvalid: boolean = false; //Contains the valid status of PRICE ranges
   isInvalid1: boolean = false; //Contains the valid status of AREA ranges
@@ -47,9 +44,9 @@ export class AddInventoriesComponent implements OnInit {
     private authService: AuthenticationService,
     private router: Router,
     private toastr: ToastrService
-  ) { }
+  ) {}
   get Property_typename() {
-    return this.addinventoryForm.get('prop_typename');
+    return this.addinventoryForm.get("prop_typename");
   }
   // convenience getter for easy access to form fields
   get f() {
@@ -59,7 +56,7 @@ export class AddInventoriesComponent implements OnInit {
   // Requirements for Map on the template, below;
   opacity = 1;
   map: mapboxgl.Map;
-  style = 'mapbox://styles/mapbox/streets-v11';
+  style = "mapbox://styles/mapbox/streets-v11";
   lat = 33.628463;
   lng = 73.087581;
   submitted = false;
@@ -72,14 +69,14 @@ export class AddInventoriesComponent implements OnInit {
   addinventoryForm: FormGroup;
   typeCheckValue: any;
   isRent = true;
-  
+
   ngOnInit(): void {
     this.user1 = this.authService.getUser();
-    if (this.user1)
-    console.log('User1: ', this.user1);
-    
-    this.authService.removeUser();
-    // this.initializemapbox();
+    if (this.user1) {
+      console.log("User1: ", this.user1);
+
+      this.authService.removeUser();
+    }
     const token = this.authService.getToken();
     this.user = this.authService.getDecodedToken(token).data;
     const form_title = this.authService.getFormTitle();
@@ -88,18 +85,17 @@ export class AddInventoriesComponent implements OnInit {
 
     this.addinventoryForm.patchValue({ form_title });
     this.getCities();
-    // console.log(this.user1);
     if (this.user1) {
       this.updatefields();
     }
     this.getUserList();
   }
-  // Function to call User data table
+  // Function to call User data table for Assigned_To Field of the add-inventory-form
   getUserList() {
     this.authService.getUsers().subscribe(
       (data) => {
         this.userList = data;
-        console.log('User Get Response', this.userList);
+        console.log("User Get Response", this.userList);
       },
       (err) => {
         console.error(err);
@@ -107,78 +103,78 @@ export class AddInventoriesComponent implements OnInit {
     );
   }
 
-
   //Function that is working on price filter/check
   public onChangePrice(event: any): void {
-    // console.log('\nonchange price\n');
-    
     this.isInvalid = this.greaterThanValue > this.lessThanValue;
   }
   //Function that is working on AREA filter/check
   public onChangeArea(event: any): void {
-    // console.log('\nonchange area\n');
     this.isInvalid1 = this.greaterThanValue1 > this.lessThanValue1;
   }
 
   // Function to patch the value from ng select
-  changeAccess(access){
+  changeAccess(access: any) {
     // console.log(access.access);
-    this.addinventoryForm.patchValue({assigned_to: access.access});
+    this.addinventoryForm.patchValue({ assigned_to: access.access });
     // console.log(this.addinventoryForm.value);
   }
   // Function to patch the value from ng select
-  changeAccess2(access){
+  changeAccess2(access: any) {
     // console.log(access.fullname);
-    this.addinventoryForm.patchValue({assigned_to: access.fullname});
+    this.addinventoryForm.patchValue({ assigned_to: access.fullname });
     // console.log(this.addinventoryForm.value);
   }
-  // Function to patch the value from form radio button 
-  assigned_To(name){
+  // Function to patch the value from form radio button
+  assigned_To(name: any) {
     // console.log(name);
     this.addinventoryForm.patchValue({ assigned_to: name });
   }
-    setFormTitle(name){
-      this.authService.setFormTitle(name);
-      this.router.navigate(['/add-inventories']);
-    }
-    updatefields() {
+  // setFormTitle(name:any) {
+  //   this.authService.setFormTitle(name);
+  //   this.router.navigate(["/add-inventories"]);
+  // }
+  updatefields() {
     // this.addinventoryForm.patchValue({ form_title: 'Inventory' });
-    this.formSendingStatus = 'Save'
+    this.formSendingStatus = "Save";
     this.addinventoryForm.patchValue({ form_title: this.user1.form_title });
     this.addinventoryForm.patchValue({ _id: this.user1._id });
-    // this.addinventoryForm.patchValue({ location: this.user1.location });
-    this.addinventoryForm.patchValue({ assigned_to: this.user1.assigned_to });    
-    this.addinventoryForm.patchValue({ property_type: this.user1.property_type });
+    this.addinventoryForm.patchValue({ location: this.user1.location });
+    this.addinventoryForm.patchValue({ assigned_to: this.user1.assigned_to });
+    this.addinventoryForm.patchValue({
+      property_type: this.user1.property_type,
+    });
     this.addinventoryForm.patchValue({ area: this.user1.area });
     this.addinventoryForm.patchValue({ client_type: this.user1.client_type });
     this.addinventoryForm.patchValue({ demand_price: this.user1.demand_price });
-    this.addinventoryForm.patchValue({ property_purpose: this.user1.property_purpose });
+    this.addinventoryForm.patchValue({
+      property_purpose: this.user1.property_purpose,
+    });
     this.addinventoryForm.patchValue({ beds_number: this.user1.beds_number });
     this.addinventoryForm.patchValue({ client_name: this.user1.client_name });
-    this.addinventoryForm.patchValue({ client_number: this.user1.client_number });
-    // this.addinventoryForm.patchValue({ city: this.user1.city });
-    
-    if(this.user1.location) {
-      for(let i=0; i< this.user1.location.length; i++) {
+    this.addinventoryForm.patchValue({
+      client_number: this.user1.client_number,
+    });
+    this.addinventoryForm.patchValue({ city: this.user1.city });
+
+    if (this.user1.location) {
+      for (let i = 0; i < this.user1.location.length; i++) {
         console.log(this.user1.location[i].location);
         this.selectStringLocations.push(this.user1.location[i].location);
-        this.selectedLocations.push(this.user1.location[i].location);
+        this.selectedLocations.push(this.user1.location[i]);
       }
       console.log(this.selectStringLocations);
     }
-    
-    if(this.user1.city) {
+
+    if (this.user1.city) {
       this.getLocations(this.user1.city[0]._id);
       // this.addinventoryForm.patchValue({ city: this.user1.city.city });
       console.log(this.user1.city[0]._id);
-      
+      this.selectedCity = this.user1.city[0].city;
     }
     console.log(this.addinventoryForm.value);
-    
-    this.selectedCity = this.user1.city[0].city;
+
     console.log(this.selectedLocations);
     console.log(this.selectedCity);
-    
   }
 
   // File Upload Functions below
@@ -190,35 +186,35 @@ export class AddInventoriesComponent implements OnInit {
   formDeclare() {
     this.addinventoryForm = this.formBuilder.group({
       // _id: [''],
-      assigned_to1:[],
+      assigned_to1: [],
       assigned_to: [
         {
-          userId: '',
-          name: '',
+          userId: "",
+          name: "",
         },
       ],
       admin: [
         {
-          userId: '',
-          name: '',
+          userId: "",
+          name: "",
         },
       ],
-      form_title: [''],
-      property_purpose: [''],
-      property_type: [''],
+      form_title: [""],
+      property_purpose: [""],
+      property_type: [""],
       city: [
         {
-          id: '',
+          id: "",
           name: this.city_value,
-          cityId: '',
+          cityId: "",
         },
       ],
       location: [],
       sub_location: [
         {
-          id: '',
-          name: '',
-          sub_locationId: '',
+          id: "",
+          name: "",
+          sub_locationId: "",
         },
       ],
       min_price: [],
@@ -228,61 +224,78 @@ export class AddInventoriesComponent implements OnInit {
       max_area: [],
       beds_number: [],
       area: [],
-      area_unit: [''],
-      client_name: [''],
+      area_unit: [""],
+      client_name: [""],
       client_number: [],
-      client_type: [''],
+      client_type: [""],
     });
   }
 
-  getCity(cityId) {
+  getCity(cityId: any) {
     const city = this.cities.filter((city: any) => {
       return city._id === cityId;
     });
     if (city[0]) {
       return city[0].city;
     } else {
-      return '';
+      return "";
     }
   }
 
-  getLocation(locId) {
+  getLocation(locId: any) {
     const location = this.locations.filter((location: any) => {
       return location._id === locId;
     });
     if (location[0]) {
       return location[0].location;
     } else {
-      return '';
+      return "";
     }
   }
 
-  changeCity(city) {
-    console.log(this.locations);
-    
-    this.locations = '';
-      
+  changeCity(city: any) {
+    this.selectStringLocations = [];
+    this.locations = [];
     if(this.user){
-      console.log(city.city);
-      
-      console.log(this.selectedCity);
-  
-      if (this.selectedCity == city.city)
-      {
-        this.selectStringLocations = this.selectedLocations;
-        console.log(this.selectStringLocations);
-      }
-      else
-      this.selectStringLocations = [];
-    }
-    console.log(this.locations);
-    if(city){
-    this.getLocations(city._id);
-    this.addinventoryForm.patchValue({ city });
-    console.log(this.addinventoryForm.value);
+    console.log(city.city);
+    
+    console.log(this.selectedCity);
+
+    if (this.selectedCity == city.city)
+    {
+      this.selectStringLocations = this.selectedLocations;
+      console.log(this.selectStringLocations);
     }
   }
-  changeLocation(location) {
+
+    if (city) this.getLocations(city._id);
+    this.addinventoryForm.patchValue({ city });
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    if (this.user1) {
+      // console.log(city.city);
+
+      console.log(this.selectedCity);
+
+      console.log(this.selectedLocations);
+      console.log(this.selectStringLocations);
+      // if (city.city)
+        if (city && this.selectedCity == city.city) {
+          for (let i = 0; i < this.user1.location.length; i++) {
+            this.selectStringLocations.push(this.user1.location[i].location);
+          }
+          // this.selectStringLocations = this.selectedLocations.location;
+          console.log(this.selectedLocations);
+          console.log(this.selectStringLocations);
+        } else this.selectStringLocations = [];
+    }
+    console.log(this.locations);
+    if (city) {
+      this.getLocations(city._id);
+      this.addinventoryForm.patchValue({ city });
+      console.log(this.addinventoryForm.value);
+    }
+  }
+  changeLocation(location: any) {
     console.log(location);
     this.selectedLocations = location;
     console.log(this.addinventoryForm.value);
@@ -293,13 +306,13 @@ export class AddInventoriesComponent implements OnInit {
     this.authService.getCities().subscribe(
       (cities) => {
         // console.log('Curr', this.user);
-        if (this.user.access === 'islamabad_admin') {
+        if (this.user.access === "islamabad_admin") {
           this.city.push(cities[2]);
           this.cities = this.city;
-        } else if (this.user.access === 'rawalpindi_admin') {
+        } else if (this.user.access === "rawalpindi_admin") {
           this.city.push(cities[1]);
           this.cities = this.city;
-        } else if (this.user.access === 'peshawar_admin') {
+        } else if (this.user.access === "peshawar_admin") {
           this.city.push(cities[0]);
           this.cities = this.city;
         } else {
@@ -312,7 +325,7 @@ export class AddInventoriesComponent implements OnInit {
     );
   }
 
-  getLocations(selectedCity?) {
+  getLocations(selectedCity?: any) {
     console.log(selectedCity);
     this.authService.getLocations().subscribe(
       (locations) => {
@@ -332,113 +345,78 @@ export class AddInventoriesComponent implements OnInit {
       }
     );
   }
-  // //////////
-
-  //   changeValue(value) {
-  //     this.checked = !value;
-  // }
-
-  // Function to initialize Map; used in template
-  // tslint:disable-next-line: typedef
-  // initializemapbox() {
-  //   this.map = new mapboxgl.Map({
-  //     accessToken:
-  //       'pk.eyJ1IjoibmFiZWVsc2FsZWVtIiwiYSI6ImNrY3p4MWhrZzBiNWwyd3FtOGx3aTZsbjEifQ.z6RLknl-YnJe2eKqMjPElg',
-  //     container: 'map',
-  //     style: 'mapbox://styles/mapbox/streets-v11',
-  //     center: [73.024955, 33.650753],
-  //     zoom: 10,
-  //   });
-  //   this.map.addControl(new mapboxgl.FullscreenControl());
-  //   this.map.addControl(new mapboxgl.NavigationControl());
-  //   this.map.addControl(
-  //     new mapboxgl.GeolocateControl({
-  //       positionOptions: {
-  //         enableHighAccuracy: true,
-  //       },
-  //       trackUserLocation: true,
-  //     })
-  //   );
-  // }
-
-  ///////////////////////////////
   // Check whether user pressed 'buy' or 'rent' button
   setValue(value: string) {
     this.optionValue1 = value;
   }
-  assignFormTitle(e) {
-    console.log(e.target.value);
-    // return this.addinventoryForm.patchValue({form_title: formTitle});
-    // this.addinventoryForm.
-  }
-
   // Submit form to backend service
   submitForm() {
     this.submitted = true; // stop here if form is invalid
-    console.log('\n\n', this.addinventoryForm.value, '\n\n');
+    console.log(this.addinventoryForm.value);
+    console.log(this.selectedLocations);
+
     this.addinventoryForm.patchValue({ location: this.selectedLocations });
+    console.log(this.addinventoryForm.value);
 
     if (this.user1) {
       console.log(this.addinventoryForm.value);
       this.authService
         .updateInventory(this.user1._id, this.addinventoryForm.value)
         .subscribe((data: any) => {
-          console.log('Update inventory response data: ', data);
+          console.log("Update inventory response data: ", data);
           // this.registerresponse = data;
           const email = this.addinventoryForm.value.email;
           const msg = data.message;
           // const status = data.status;
           // this.registerForm.reset();
-          if (msg == 'Inventory updated successfully') {
-            this.toastr.success(msg, 'Success', {
+          if (msg == "Inventory updated successfully") {
+            this.toastr.success(msg, "Success", {
               timeOut: 5000,
             });
-            if ( this.addinventoryForm.get('form_title').value === 'Inventory' ) {
-            this.router.navigate(['/inventory']);
+            if (this.addinventoryForm.get("form_title").value === "Inventory") {
+              this.router.navigate(["/inventory"]);
+            } else if (
+              this.addinventoryForm.get("form_title").value === "Lead"
+            ) {
+              this.router.navigate(["/leads"]);
+            } else if (
+              this.addinventoryForm.get("form_title").value === "Both"
+            ) {
+              this.router.navigate(["/both"]);
             }
-            else if ( this.addinventoryForm.get('form_title').value === 'Lead' ) {
-              this.router.navigate(['/leads']);
-              }
-              else if ( this.addinventoryForm.get('form_title').value === 'Both' ) {
-                this.router.navigate(['/both']);
-                }
           } else {
-            this.toastr.error(msg, 'Error', {
+            this.toastr.error(msg, "Error", {
               timeOut: 5000,
             });
           }
         });
     } else {
-      const user = this.addinventoryForm.get('form_title').value;
+      const user = this.addinventoryForm.get("form_title").value;
       console.log(this.addinventoryForm.value);
       this.authService
         .createInventory(this.addinventoryForm.value)
         .subscribe((data) => {
-          console.log('signup data: ', data);
+          console.log("signup data: ", data);
           // this.registerresponse = data;
           const email = this.addinventoryForm.value.email;
           // const msg = data.message;
           // const status = data.status;
           // this.registerForm.reset();
-          if (user === 'Inventory') {
-            this.toastr.success('Inventory Added', 'Success', {
+          if (user === "Inventory") {
+            this.toastr.success("Inventory Added", "Success", {
               timeOut: 5000,
             });
-            this.router.navigate(['/inventory']);
-          }
-          else if (user === 'Lead'){
-
-            this.toastr.success('Lead Added', 'Success', {
+            this.router.navigate(["/inventory"]);
+          } else if (user === "Lead") {
+            this.toastr.success("Lead Added", "Success", {
               timeOut: 5000,
             });
-            this.router.navigate(['/leads']);
-          }
-          else if (user === 'Both'){
-
-            this.toastr.success('Both Added', 'Success', {
+            this.router.navigate(["/leads"]);
+          } else if (user === "Both") {
+            this.toastr.success("Both Added", "Success", {
               timeOut: 5000,
             });
-            this.router.navigate(['/both']);
+            this.router.navigate(["/both"]);
           }
           // else {
           //   this.toastr.error('msg', 'Error', {

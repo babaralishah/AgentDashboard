@@ -5,7 +5,6 @@ import {
   HttpErrorResponse,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-// import { User } from '../login/User';
 import { Router } from '@angular/router';
 import { throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';

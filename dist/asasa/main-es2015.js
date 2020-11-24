@@ -5048,7 +5048,7 @@ class AddInventoriesComponent {
         this.formSendingStatus = 'Save';
         this.addinventoryForm.patchValue({ form_title: this.user1.form_title });
         this.addinventoryForm.patchValue({ _id: this.user1._id });
-        // this.addinventoryForm.patchValue({ location: this.user1.location });
+        this.addinventoryForm.patchValue({ location: this.user1.location });
         this.addinventoryForm.patchValue({ assigned_to: this.user1.assigned_to });
         this.addinventoryForm.patchValue({ property_type: this.user1.property_type });
         this.addinventoryForm.patchValue({ area: this.user1.area });
@@ -5058,7 +5058,7 @@ class AddInventoriesComponent {
         this.addinventoryForm.patchValue({ beds_number: this.user1.beds_number });
         this.addinventoryForm.patchValue({ client_name: this.user1.client_name });
         this.addinventoryForm.patchValue({ client_number: this.user1.client_number });
-        // this.addinventoryForm.patchValue({ city: this.user1.city });
+        this.addinventoryForm.patchValue({ city: this.user1.city });
         if (this.user1.location) {
             for (let i = 0; i < this.user1.location.length; i++) {
                 console.log(this.user1.location[i].location);
@@ -5159,6 +5159,7 @@ class AddInventoriesComponent {
             console.log(this.selectedCity);
             if (this.selectedCity == city.city) {
                 this.selectStringLocations = this.selectedLocations;
+                console.log(this.selectedLocations);
                 console.log(this.selectStringLocations);
             }
             else
@@ -6111,8 +6112,8 @@ class SignupComponent {
         this.registerForm.patchValue({ fullname: this.user.fullname });
         this.registerForm.patchValue({ email: this.user.email });
         this.registerForm.patchValue({ password: this.user.password });
-        // this.registerForm.patchValue({ location: this.user.location });
-        // this.registerForm.patchValue({ city: this.user.city });
+        this.registerForm.patchValue({ location: this.user.location });
+        this.registerForm.patchValue({ city: this.user.city });
         this.registerForm.patchValue({ contact: this.user.contact });
         this.registerForm.patchValue({ access: this.user.access });
         console.log(this.registerForm);

@@ -16,7 +16,6 @@ export class AddInventoriesComponent implements OnInit {
   formSendingStatus = "Post Ad";
   locations: any;
   subsLocations: any;
-  // selectedLocations: any;
   city: any;
   user: any;
   user1: any;
@@ -160,7 +159,7 @@ export class AddInventoriesComponent implements OnInit {
       for (let i = 0; i < this.user1.location.length; i++) {
         console.log(this.user1.location[i].location);
         this.selectStringLocations.push(this.user1.location[i].location);
-        this.selectedLocations.push(this.user1.location[i]);
+        this.selectedLocations.push(this.user1.location[i].location);
       }
       console.log(this.selectStringLocations);
     }
@@ -256,38 +255,21 @@ export class AddInventoriesComponent implements OnInit {
   changeCity(city: any) {
     this.selectStringLocations = [];
     this.locations = [];
-    if(this.user){
+
+  if (this.user1) {
     console.log(city.city);
-    
+
     console.log(this.selectedCity);
 
-    if (this.selectedCity == city.city)
-    {
+    if (this.selectedCity == city.city) {
       this.selectStringLocations = this.selectedLocations;
       console.log(this.selectStringLocations);
-    }
+    } else this.selectStringLocations = [];
   }
 
     if (city) this.getLocations(city._id);
     this.addinventoryForm.patchValue({ city });
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    if (this.user1) {
-      // console.log(city.city);
-
-      console.log(this.selectedCity);
-
-      console.log(this.selectedLocations);
-      console.log(this.selectStringLocations);
-      // if (city.city)
-        if (city && this.selectedCity == city.city) {
-          for (let i = 0; i < this.user1.location.length; i++) {
-            this.selectStringLocations.push(this.user1.location[i].location);
-          }
-          // this.selectStringLocations = this.selectedLocations.location;
-          console.log(this.selectedLocations);
-          console.log(this.selectStringLocations);
-        } else this.selectStringLocations = [];
-    }
     console.log(this.locations);
     if (city) {
       this.getLocations(city._id);

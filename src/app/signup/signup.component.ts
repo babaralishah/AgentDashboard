@@ -70,7 +70,6 @@ export class SignupComponent implements OnInit {
       console.log(this.user.city.city);
     }
     this.selectedCity = this.user.city.city;
-    // this.selectedLocations = this.user.location;
     console.log(this.selectedLocations);
   }
   initialize() {
@@ -167,17 +166,6 @@ export class SignupComponent implements OnInit {
   changeCity(city) {
     this.selectStringLocations = [];
     this.locations = [];
-    if (this.user) {
-      console.log(city.city);
-
-      console.log(this.selectedCity);
-
-      if (this.selectedCity == city.city) {
-        this.selectStringLocations = this.selectedLocations;
-        console.log(this.selectStringLocations);
-      }
-    }
-
     if (city) this.getLocations(city._id);
     this.registerForm.patchValue({ city });
     this.locations = "";
@@ -191,23 +179,12 @@ export class SignupComponent implements OnInit {
         console.log(this.selectStringLocations);
       } else this.selectStringLocations = [];
     }
-    // if(this.user.city.city === city.city) {
-    //   console.log(this.user.city.city, city.city);
-    //   if (this.user.location) {
-    //     for (let i = 0; i < this.user.location.length; i++) {
-    //       this.selectStringLocations.push(this.user.location[i].location);
-    //     }
-    //   }
-    // }
-
     if (city) this.getLocations(city._id);
     this.registerForm.patchValue({ city });
   }
 
   //Function to change the location of --ng select location--
   changeLocation(location) {
-    // this.selectedLocations = location;
-    // console.log(this.selectedLocations);
     console.log(location);
     this.registerForm.patchValue({ location: location });
   }
@@ -233,6 +210,7 @@ export class SignupComponent implements OnInit {
       return;
     }
 
+    this.registerForm.patchValue({ location: this.selectedLocations });
     if (this.user) {
       // console.log(this.registerForm.value);
       this.authService

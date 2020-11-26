@@ -102,11 +102,9 @@
                     <!-- Location -->
                     <div class="form-group" *ngIf="user">
                         <div class="input-group">
-                            <!-- <b>Select Location</b> -->
                             <i class="fas fa-street-view"></i>
                             <ng-select [(ngModel)]="selectStringLocations" [multiple]="true" [ngModelOptions]="{standalone: true}" class="ng-select inputs2" [items]="locations" bindLabel="location" bindValue="location" placeholder="Select Location" (change)="changeLocation($event)">
                             </ng-select>
-                            <!-- {{user.location[0].location}} -->
                         </div>
                     </div>
 

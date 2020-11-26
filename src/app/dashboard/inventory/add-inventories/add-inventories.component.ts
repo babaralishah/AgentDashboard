@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormBuilder } from "@angular/forms";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { AuthenticationService } from "src/app/services/Authentication/authentication.service";
 import { ToastrService } from "ngx-toastr";
@@ -201,12 +201,16 @@ export class AddInventoriesComponent implements OnInit {
       form_title: [""],
       property_purpose: [""],
       property_type: [""],
+
+      // city: ["", Validators.required],
+
       city: [
         {
           id: "",
           name: this.city_value,
           cityId: "",
         },
+        Validators.required,
       ],
       location: [],
       sub_location: [
@@ -256,16 +260,16 @@ export class AddInventoriesComponent implements OnInit {
     this.selectStringLocations = [];
     this.locations = [];
 
-  if (this.user1) {
-    console.log(city.city);
+    if (this.user1) {
+      console.log(city.city);
 
-    console.log(this.selectedCity);
+      console.log(this.selectedCity);
 
-    if (this.selectedCity == city.city) {
-      this.selectStringLocations = this.selectedLocations;
-      console.log(this.selectStringLocations);
-    } else this.selectStringLocations = [];
-  }
+      if (this.selectedCity == city.city) {
+        this.selectStringLocations = this.selectedLocations;
+        console.log(this.selectStringLocations);
+      } else this.selectStringLocations = [];
+    }
 
     if (city) this.getLocations(city._id);
     this.addinventoryForm.patchValue({ city });
@@ -338,6 +342,14 @@ export class AddInventoriesComponent implements OnInit {
     console.log(this.addinventoryForm.value);
     console.log(this.selectedLocations);
 
+    // stop here if form is invalid
+    if (this.addinventoryForm.invalid) {
+      console.log("Erroneous");
+      this.toastr.error("Can not Registered", "Error", {
+        timeOut: 5000,
+      });
+      return;
+    }
     // this.addinventoryForm.patchValue({ location: this.selectedLocations });
     console.log(this.addinventoryForm.value);
 

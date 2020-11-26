@@ -8868,7 +8868,7 @@
 
       function AddInventoriesComponent_div_49_div_3_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 73);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 72);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, AddInventoriesComponent_div_49_div_3_div_1_Template, 2, 0, "div", 26);
 
@@ -8896,9 +8896,9 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 23);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 70);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 69);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "ng-select", 71);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "ng-select", 70);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("change", function AddInventoriesComponent_div_49_Template_ng_select_change_2_listener($event) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r16);
@@ -8910,7 +8910,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](3, AddInventoriesComponent_div_49_div_3_Template, 2, 1, "div", 72);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](3, AddInventoriesComponent_div_49_div_3_Template, 2, 1, "div", 71);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -8942,7 +8942,7 @@
 
       function AddInventoriesComponent_div_50_div_3_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 73);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 72);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, AddInventoriesComponent_div_50_div_3_div_1_Template, 2, 0, "div", 26);
 
@@ -8970,9 +8970,9 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 23);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 70);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 69);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "ng-select", 74);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "ng-select", 73);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function AddInventoriesComponent_div_50_Template_ng_select_ngModelChange_2_listener($event) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r20);
@@ -8990,7 +8990,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](3, AddInventoriesComponent_div_50_div_3_Template, 2, 1, "div", 72);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](3, AddInventoriesComponent_div_50_div_3_Template, 2, 1, "div", 71);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -9010,31 +9010,61 @@
         }
       }
 
+      function AddInventoriesComponent_div_52_div_3_div_1_Template(rf, ctx) {
+        if (rf & 1) {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div");
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "Location is required");
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        }
+      }
+
+      function AddInventoriesComponent_div_52_div_3_Template(rf, ctx) {
+        if (rf & 1) {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 72);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, AddInventoriesComponent_div_52_div_3_div_1_Template, 2, 0, "div", 26);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        }
+
+        if (rf & 2) {
+          var ctx_r22 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx_r22.f.location.errors.required);
+        }
+      }
+
       function AddInventoriesComponent_div_52_Template(rf, ctx) {
         if (rf & 1) {
-          var _r23 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+          var _r25 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 23);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 70);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 69);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "ng-select", 75);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "ng-select", 74);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function AddInventoriesComponent_div_52_Template_ng_select_ngModelChange_2_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r23);
-
-            var ctx_r22 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
-
-            return ctx_r22.selectStringLocations = $event;
-          })("change", function AddInventoriesComponent_div_52_Template_ng_select_change_2_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r23);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r25);
 
             var ctx_r24 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-            return ctx_r24.changeLocation($event);
+            return ctx_r24.selectStringLocations = $event;
+          })("change", function AddInventoriesComponent_div_52_Template_ng_select_change_2_listener($event) {
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r25);
+
+            var ctx_r26 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+
+            return ctx_r26.changeLocation($event);
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](3, AddInventoriesComponent_div_52_div_3_Template, 2, 1, "div", 71);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -9046,35 +9076,69 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", ctx_r2.selectStringLocations)("multiple", true)("ngModelOptions", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](4, _c1))("items", ctx_r2.locations);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", ctx_r2.selectStringLocations)("multiple", true)("ngModelOptions", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](6, _c1))("items", ctx_r2.locations)("ngClass", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction1"](7, _c0, ctx_r2.submitted && ctx_r2.f.location.errors));
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx_r2.submitted && ctx_r2.f.location.errors);
+        }
+      }
+
+      function AddInventoriesComponent_div_53_div_3_div_1_Template(rf, ctx) {
+        if (rf & 1) {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div");
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "Location is required");
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        }
+      }
+
+      function AddInventoriesComponent_div_53_div_3_Template(rf, ctx) {
+        if (rf & 1) {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 72);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, AddInventoriesComponent_div_53_div_3_div_1_Template, 2, 0, "div", 26);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        }
+
+        if (rf & 2) {
+          var ctx_r27 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx_r27.f.location.errors.required);
         }
       }
 
       function AddInventoriesComponent_div_53_Template(rf, ctx) {
         if (rf & 1) {
-          var _r26 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+          var _r30 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 23);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 70);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 69);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "ng-select", 76);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "ng-select", 75);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function AddInventoriesComponent_div_53_Template_ng_select_ngModelChange_2_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r26);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r30);
 
-            var ctx_r25 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+            var ctx_r29 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-            return ctx_r25.selectStringLocations = $event;
+            return ctx_r29.selectStringLocations = $event;
           })("change", function AddInventoriesComponent_div_53_Template_ng_select_change_2_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r26);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r30);
 
-            var ctx_r27 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+            var ctx_r31 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-            return ctx_r27.changeLocation($event);
+            return ctx_r31.changeLocation($event);
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](3, AddInventoriesComponent_div_53_div_3_Template, 2, 1, "div", 71);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -9086,7 +9150,11 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", ctx_r3.selectStringLocations)("multiple", true)("ngModelOptions", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](4, _c1))("items", ctx_r3.locations);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", ctx_r3.selectStringLocations)("multiple", true)("ngModelOptions", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](6, _c1))("items", ctx_r3.locations)("ngClass", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction1"](7, _c0, ctx_r3.submitted && ctx_r3.f.location.errors));
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx_r3.submitted && ctx_r3.f.location.errors);
         }
       }
 
@@ -9120,7 +9188,7 @@
 
       function AddInventoriesComponent_div_130_div_1_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 82);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 81);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "Please check your PRICE ranges");
 
@@ -9130,11 +9198,11 @@
 
       function AddInventoriesComponent_div_130_Template(rf, ctx) {
         if (rf & 1) {
-          var _r30 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+          var _r34 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, AddInventoriesComponent_div_130_div_1_Template, 2, 0, "div", 77);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, AddInventoriesComponent_div_130_div_1_Template, 2, 0, "div", 76);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "div", 6);
 
@@ -9142,7 +9210,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](4, "br");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "b", 78);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "b", 77);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](6, "Price Range");
 
@@ -9158,20 +9226,20 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](10, "div", 62);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](11, "input", 79);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](11, "input", 78);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function AddInventoriesComponent_div_130_Template_input_ngModelChange_11_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r30);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r34);
 
-            var ctx_r29 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+            var ctx_r33 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-            return ctx_r29.greaterThanValue = $event;
+            return ctx_r33.greaterThanValue = $event;
           })("ngModelChange", function AddInventoriesComponent_div_130_Template_input_ngModelChange_11_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r30);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r34);
 
-            var ctx_r31 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+            var ctx_r35 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-            return ctx_r31.onChangePrice($event);
+            return ctx_r35.onChangePrice($event);
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -9188,25 +9256,25 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](14, "div", 62);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](15, "input", 80);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](15, "input", 79);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function AddInventoriesComponent_div_130_Template_input_ngModelChange_15_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r30);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r34);
 
-            var ctx_r32 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+            var ctx_r36 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-            return ctx_r32.lessThanValue = $event;
+            return ctx_r36.lessThanValue = $event;
           })("ngModelChange", function AddInventoriesComponent_div_130_Template_input_ngModelChange_15_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r30);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r34);
 
-            var ctx_r33 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+            var ctx_r37 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-            return ctx_r33.onChangePrice($event);
+            return ctx_r37.onChangePrice($event);
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](16, "input", 81);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](16, "input", 80);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -9256,7 +9324,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](8, "input", 83);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](8, "input", 82);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -9272,7 +9340,7 @@
 
       function AddInventoriesComponent_div_132_div_1_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 82);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 81);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "Please check your AREA ranges");
 
@@ -9282,17 +9350,17 @@
 
       function AddInventoriesComponent_div_132_Template(rf, ctx) {
         if (rf & 1) {
-          var _r36 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+          var _r40 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, AddInventoriesComponent_div_132_div_1_Template, 2, 0, "div", 77);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, AddInventoriesComponent_div_132_div_1_Template, 2, 0, "div", 76);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "div", 6);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](3, "br");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "b", 78);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "b", 77);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](5, "Area Range");
 
@@ -9308,20 +9376,20 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](9, "div", 62);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](10, "input", 84);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](10, "input", 83);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function AddInventoriesComponent_div_132_Template_input_ngModelChange_10_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r36);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r40);
 
-            var ctx_r35 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+            var ctx_r39 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-            return ctx_r35.greaterThanValue1 = $event;
+            return ctx_r39.greaterThanValue1 = $event;
           })("ngModelChange", function AddInventoriesComponent_div_132_Template_input_ngModelChange_10_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r36);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r40);
 
-            var ctx_r37 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+            var ctx_r41 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-            return ctx_r37.onChangeArea($event);
+            return ctx_r41.onChangeArea($event);
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -9338,20 +9406,20 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](13, "div", 62);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](14, "input", 85);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](14, "input", 84);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function AddInventoriesComponent_div_132_Template_input_ngModelChange_14_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r36);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r40);
 
-            var ctx_r38 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+            var ctx_r42 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-            return ctx_r38.lessThanValue1 = $event;
+            return ctx_r42.lessThanValue1 = $event;
           })("ngModelChange", function AddInventoriesComponent_div_132_Template_input_ngModelChange_14_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r36);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r40);
 
-            var ctx_r39 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+            var ctx_r43 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-            return ctx_r39.onChangeArea($event);
+            return ctx_r43.onChangeArea($event);
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -9362,7 +9430,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](15, "div", 86);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](15, "div", 85);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](16, "div", 8);
 
@@ -9370,7 +9438,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](18, "label", 16);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](19, "input", 87);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](19, "input", 86);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](20, " Sq. Feet ");
 
@@ -9378,7 +9446,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](21, "label", 16);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](22, "input", 88);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](22, "input", 87);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](23, " Sq. Yard ");
 
@@ -9386,7 +9454,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](24, "label", 16);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](25, "input", 89);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](25, "input", 88);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](26, " Marla ");
 
@@ -9394,7 +9462,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](27, "label", 16);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](28, "input", 90);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](28, "input", 89);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](29, " Kanal ");
 
@@ -9462,7 +9530,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](7, "input", 91);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](7, "input", 90);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -9470,15 +9538,15 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](8, "div", 92);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](8, "div", 91);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](9, "div", 93);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](9, "div", 92);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](10, "div", 9);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](11, "label", 16);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](12, "input", 87);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](12, "input", 86);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](13, " Sq. Feet ");
 
@@ -9486,7 +9554,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](14, "label", 16);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](15, "input", 88);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](15, "input", 87);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](16, " Sq. Yard ");
 
@@ -9494,7 +9562,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](17, "label", 16);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](18, "input", 89);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](18, "input", 88);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](19, " Marla ");
 
@@ -9502,7 +9570,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](20, "label", 16);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](21, "input", 90);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](21, "input", 89);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](22, " Kanal ");
 
@@ -9542,7 +9610,7 @@
 
       function AddInventoriesComponent_div_167_Template(rf, ctx) {
         if (rf & 1) {
-          var _r41 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+          var _r45 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 6);
 
@@ -9554,14 +9622,14 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "label", 10);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "input", 94);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "input", 93);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function AddInventoriesComponent_div_167_Template_input_click_5_listener() {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r41);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r45);
 
-            var ctx_r40 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+            var ctx_r44 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-            return ctx_r40.assigned_To("Self");
+            return ctx_r44.assigned_To("Self");
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -9572,7 +9640,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "label", 10);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](8, "input", 95);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](8, "input", 94);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](9, " Admins ");
 
@@ -9580,7 +9648,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](10, "label", 10);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](11, "input", 96);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](11, "input", 95);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](12, " Agents ");
 
@@ -9614,18 +9682,18 @@
 
       function AddInventoriesComponent_div_170_Template(rf, ctx) {
         if (rf & 1) {
-          var _r43 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+          var _r47 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 6);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "ng-select", 97);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "ng-select", 96);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("change", function AddInventoriesComponent_div_170_Template_ng_select_change_1_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r43);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r47);
 
-            var ctx_r42 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+            var ctx_r46 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-            return ctx_r42.changeAccess($event);
+            return ctx_r46.changeAccess($event);
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -9644,18 +9712,18 @@
 
       function AddInventoriesComponent_div_171_Template(rf, ctx) {
         if (rf & 1) {
-          var _r45 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+          var _r49 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 6);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "ng-select", 98);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "ng-select", 97);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("change", function AddInventoriesComponent_div_171_Template_ng_select_change_1_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r45);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r49);
 
-            var ctx_r44 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+            var ctx_r48 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-            return ctx_r44.changeAccess2($event);
+            return ctx_r48.changeAccess2($event);
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -9882,11 +9950,12 @@
               form_title: [""],
               property_purpose: [""],
               property_type: [""],
+              // city: ["", Validators.required],
               city: [{
                 id: "",
                 name: this.city_value,
                 cityId: ""
-              }],
+              }, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
               location: [],
               sub_location: [{
                 id: "",
@@ -10035,7 +10104,16 @@
             this.submitted = true; // stop here if form is invalid
 
             console.log(this.addinventoryForm.value);
-            console.log(this.selectedLocations); // this.addinventoryForm.patchValue({ location: this.selectedLocations });
+            console.log(this.selectedLocations); // stop here if form is invalid
+
+            if (this.addinventoryForm.invalid) {
+              console.log("Erroneous");
+              this.toastr.error("Can not Registered", "Error", {
+                timeOut: 5000
+              });
+              return;
+            } // this.addinventoryForm.patchValue({ location: this.selectedLocations });
+
 
             console.log(this.addinventoryForm.value);
 
@@ -10126,9 +10204,9 @@
       AddInventoriesComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
         type: AddInventoriesComponent,
         selectors: [["app-add-inventories"]],
-        decls: 182,
+        decls: 180,
         vars: 58,
-        consts: [[1, "row"], [1, "col-12"], [1, "col-2"], [1, "col-9"], [1, "", 3, "formGroup"], [1, "register-heading"], [1, "row", "offset-1"], [1, "col-md-5", "col-sm-5", "radio-mid"], [1, "radio"], [1, "btn-group", "btn-group-toggle"], [1, "btn", "btn-primary"], ["type", "radio", "formControlName", "form_title", "value", "Lead"], ["type", "radio", "formControlName", "form_title", "value", "Inventory"], ["type", "radio", "formControlName", "form_title", "value", "Both"], [1, "steps"], [1, "col-md-5", "col-sm-5"], [1, "btn", "btn-secondary"], ["type", "radio", "formControlName", "property_purpose", "value", "Buy", "autocomplete", "off", "checked", ""], ["type", "radio", "formControlName", "property_purpose", "value", "Sell", "autocomplete", "off"], ["type", "radio", "formControlName", "property_purpose", "value", "Rent", "autocomplete", "off"], ["type", "radio", "formControlName", "property_purpose", "value", "Rent-Out", "autocomplete", "off"], ["class", "form-group", 4, "ngIf"], [1, "col-md-4", "col-sm-4"], [1, "form-group"], [1, "dropdown", "ml-2", "mr-2", "dropdown"], ["data-toggle", "modal", "data-target", "#exampleModal2", "type", "button", 1, "btn", "btn-outline-secondary", 2, "width", "160px"], [4, "ngIf"], ["id", "exampleModal2", "tabindex", "-1", "role", "dialog", "aria-labelledby", "exampleModalLabel", "aria-hidden", "true", 1, "modal", "fade"], ["role", "document", 1, "modal-dialog"], [1, "modal-content"], [1, "modal-header"], [1, "nav", "nav-tabs"], [2, "margin-left", "21px"], ["href", "#home", "data-toggle", "tab", 1, "active"], ["href", "#plot", "data-toggle", "tab"], ["href", "#commercial", "data-toggle", "tab"], ["type", "button", "data-dismiss", "modal", "aria-label", "Close", 1, "close"], ["aria-hidden", "true"], [1, "modal-body"], [1, "tab-content"], ["id", "home", 1, "tab-pane", "active"], [1, "btn-group", "btn-group-toggle", 2, "padding", "4px 45px"], [1, "btn", "btn3", "btn-primary"], ["type", "radio", "formControlName", "property_type", "value", "House"], ["type", "radio", "formControlName", "property_type", "value", "Apartment"], ["type", "radio", "formControlName", "property_type", "value", "Upper Portion"], ["type", "radio", "formControlName", "property_type", "value", "Lower Portion"], ["type", "radio", "formControlName", "property_type", "value", "Farm House"], ["type", "radio", "formControlName", "property_type", "value", "Penthouse"], ["id", "plot", 1, "tab-pane"], ["type", "radio", "formControlName", "property_type", "value", "Residential Plot"], ["type", "radio", "formControlName", "property_type", "value", "Commercial Plot"], ["type", "radio", "formControlName", "property_type", "value", "Farm House Plot"], ["id", "commercial", 1, "tab-pane"], ["type", "radio", "formControlName", "property_type", "value", "Office"], ["type", "radio", "formControlName", "property_type", "value", "Shop"], ["type", "radio", "formControlName", "property_type", "value", "Plaza"], ["type", "radio", "formControlName", "property_type", "value", "Floor"], [1, "modal-footer"], ["type", "button", "data-dismiss", "modal", 1, "btn", "btn-secondary"], ["formControlName", "beds_number", "type", "number", 1, "form-control"], [1, "col-md-4", "col-sm-4", "form-group"], [1, ""], ["formControlName", "client_name", "type", "text", 1, "form-control"], ["formControlName", "client_number", "type", "number", 1, "form-control"], ["formControlName", "client_type", "type", "text", 1, "form-control"], ["class", "row offset-1", 4, "ngIf"], [1, "col-md-12", "col-sm-12"], [1, "pull-right"], [1, "btn", "btn1", "btn-primary", 3, "click"], [1, "input-group"], ["bindLabel", "city", "bindValue", "_id", "placeholder", "Select City", 1, "ng-select", 3, "items", "ngClass", "change"], ["class", "invalid-feedback", 4, "ngIf"], [1, "invalid-feedback"], ["bindLabel", "city", "bindValue", "city", "placeholder", "Select City", 1, "ng-select", 3, "ngModel", "ngModelOptions", "items", "ngClass", "ngModelChange", "change"], ["bindLabel", "location", "bindValue", "location", "placeholder", "Select Location", 1, "ng-select", 3, "ngModel", "multiple", "ngModelOptions", "items", "ngModelChange", "change"], ["bindLabel", "location", "bindValue", "location", "placeholder", "Select Location", 1, "ng-select", "inputs2", 3, "ngModel", "multiple", "ngModelOptions", "items", "ngModelChange", "change"], ["class", "offset-1", "style", "color: red", 4, "ngIf"], [1, "price"], ["type", "number", "placeholder", "Min", "formControlName", "min_price", "name", "greaterThanValue", "required", "", "autocomplete", "off", 1, "form-control", 3, "ngModel", "ngModelChange"], ["type", "number", "placeholder", "Max", "formControlName", "max_price", "name", "lessThanValue", 1, "form-control", 3, "ngModel", "ngModelChange"], ["type", "submit", "required", "", "autocomplete", "off"], [1, "offset-1", 2, "color", "red"], ["type", "number", "placeholder", "", "formControlName", "demand_price", "required", "", "autocomplete", "off", 1, "form-control"], ["type", "number", "placeholder", "Min", "formControlName", "min_area", "name", "greaterThanValue1", "required", "", "autocomplete", "off", 1, "form-control", 3, "ngModel", "ngModelChange"], ["type", "number", "placeholder", "Max", "formControlName", "max_area", "required", "", "autocomplete", "off", "name", "lessThanValue1", 1, "form-control", 3, "ngModel", "ngModelChange"], [1, "col-md-8", "col-sm-4"], ["type", "radio", "formControlName", "area_unit", "value", "Sq. Feet", "autocomplete", "off", "checked", ""], ["type", "radio", "formControlName", "area_unit", "value", "Sq. Yard", "autocomplete", "off"], ["type", "radio", "formControlName", "area_unit", "value", "Marla", "autocomplete", "off"], ["type", "radio", "formControlName", "area_unit", "value", "Kanal", "autocomplete", "off"], ["type", "number", "formControlName", "area", "required", "", "autocomplete", "off", 1, "form-control"], [1, "col-md-5", "col-sm-2"], [1, "radio", "select-btn"], ["type", "radio", "formControlName", "assigned_to1", "value", "Self", 3, "click"], ["type", "radio", "formControlName", "assigned_to1", "value", "Admin"], ["type", "radio", "formControlName", "assigned_to1", "value", "Agents"], ["bindLabel", "access", "bindValue", "access", "placeholder", "Select Admin", 1, "ng-select", "inputs2", 3, "items", "change"], ["bindLabel", "fullname", "bindValue", "fullname", "placeholder", "Select Agent", 1, "ng-select", "inputs2", 3, "items", "change"]],
+        consts: [[1, "row"], [1, "col-12"], [1, "col-2"], [1, "col-9"], [1, "form-register", 3, "formGroup", "ngSubmit"], [1, "register-heading"], [1, "row", "offset-1"], [1, "col-md-5", "col-sm-5", "radio-mid"], [1, "radio"], [1, "btn-group", "btn-group-toggle"], [1, "btn", "btn-primary"], ["type", "radio", "formControlName", "form_title", "value", "Lead"], ["type", "radio", "formControlName", "form_title", "value", "Inventory"], ["type", "radio", "formControlName", "form_title", "value", "Both"], [1, "steps"], [1, "col-md-5", "col-sm-5"], [1, "btn", "btn-secondary"], ["type", "radio", "formControlName", "property_purpose", "value", "Buy", "autocomplete", "off", "checked", ""], ["type", "radio", "formControlName", "property_purpose", "value", "Sell", "autocomplete", "off"], ["type", "radio", "formControlName", "property_purpose", "value", "Rent", "autocomplete", "off"], ["type", "radio", "formControlName", "property_purpose", "value", "Rent-Out", "autocomplete", "off"], ["class", "form-group", 4, "ngIf"], [1, "col-md-4", "col-sm-4"], [1, "form-group"], [1, "dropdown", "ml-2", "mr-2", "dropdown"], ["data-toggle", "modal", "data-target", "#exampleModal2", "type", "button", 1, "btn", "btn-outline-secondary", 2, "width", "160px"], [4, "ngIf"], ["id", "exampleModal2", "tabindex", "-1", "role", "dialog", "aria-labelledby", "exampleModalLabel", "aria-hidden", "true", 1, "modal", "fade"], ["role", "document", 1, "modal-dialog"], [1, "modal-content"], [1, "modal-header"], [1, "nav", "nav-tabs"], [2, "margin-left", "21px"], ["href", "#home", "data-toggle", "tab", 1, "active"], ["href", "#plot", "data-toggle", "tab"], ["href", "#commercial", "data-toggle", "tab"], ["type", "button", "data-dismiss", "modal", "aria-label", "Close", 1, "close"], ["aria-hidden", "true"], [1, "modal-body"], [1, "tab-content"], ["id", "home", 1, "tab-pane", "active"], [1, "btn-group", "btn-group-toggle", 2, "padding", "4px 45px"], [1, "btn", "btn3", "btn-primary"], ["type", "radio", "formControlName", "property_type", "value", "House"], ["type", "radio", "formControlName", "property_type", "value", "Apartment"], ["type", "radio", "formControlName", "property_type", "value", "Upper Portion"], ["type", "radio", "formControlName", "property_type", "value", "Lower Portion"], ["type", "radio", "formControlName", "property_type", "value", "Farm House"], ["type", "radio", "formControlName", "property_type", "value", "Penthouse"], ["id", "plot", 1, "tab-pane"], ["type", "radio", "formControlName", "property_type", "value", "Residential Plot"], ["type", "radio", "formControlName", "property_type", "value", "Commercial Plot"], ["type", "radio", "formControlName", "property_type", "value", "Farm House Plot"], ["id", "commercial", 1, "tab-pane"], ["type", "radio", "formControlName", "property_type", "value", "Office"], ["type", "radio", "formControlName", "property_type", "value", "Shop"], ["type", "radio", "formControlName", "property_type", "value", "Plaza"], ["type", "radio", "formControlName", "property_type", "value", "Floor"], [1, "modal-footer"], ["type", "button", "data-dismiss", "modal", 1, "btn", "btn-secondary"], ["formControlName", "beds_number", "type", "number", 1, "form-control"], [1, "col-md-4", "col-sm-4", "form-group"], [1, ""], ["formControlName", "client_name", "type", "text", 1, "form-control"], ["formControlName", "client_number", "type", "number", 1, "form-control"], ["formControlName", "client_type", "type", "text", 1, "form-control"], ["class", "row offset-1", 4, "ngIf"], [1, "form-group", "pull-right"], ["type", "submit", 1, "btn", "btn1", "btn-primary"], [1, "input-group"], ["bindLabel", "city", "bindValue", "_id", "placeholder", "Select City", 1, "ng-select", 3, "items", "ngClass", "change"], ["class", "invalid-feedback", 4, "ngIf"], [1, "invalid-feedback"], ["bindLabel", "city", "bindValue", "city", "placeholder", "Select City", 1, "ng-select", 3, "ngModel", "ngModelOptions", "items", "ngClass", "ngModelChange", "change"], ["bindLabel", "location", "bindValue", "location", "placeholder", "Select Location", 1, "ng-select", 3, "ngModel", "multiple", "ngModelOptions", "items", "ngClass", "ngModelChange", "change"], ["bindLabel", "location", "bindValue", "location", "placeholder", "Select Location", 1, "ng-select", "inputs2", 3, "ngModel", "multiple", "ngModelOptions", "items", "ngClass", "ngModelChange", "change"], ["class", "offset-1", "style", "color: red", 4, "ngIf"], [1, "price"], ["type", "number", "placeholder", "Min", "formControlName", "min_price", "name", "greaterThanValue", "required", "", "autocomplete", "off", 1, "form-control", 3, "ngModel", "ngModelChange"], ["type", "number", "placeholder", "Max", "formControlName", "max_price", "name", "lessThanValue", 1, "form-control", 3, "ngModel", "ngModelChange"], ["type", "submit", "required", "", "autocomplete", "off"], [1, "offset-1", 2, "color", "red"], ["type", "number", "placeholder", "", "formControlName", "demand_price", "required", "", "autocomplete", "off", 1, "form-control"], ["type", "number", "placeholder", "Min", "formControlName", "min_area", "name", "greaterThanValue1", "required", "", "autocomplete", "off", 1, "form-control", 3, "ngModel", "ngModelChange"], ["type", "number", "placeholder", "Max", "formControlName", "max_area", "required", "", "autocomplete", "off", "name", "lessThanValue1", 1, "form-control", 3, "ngModel", "ngModelChange"], [1, "col-md-8", "col-sm-4"], ["type", "radio", "formControlName", "area_unit", "value", "Sq. Feet", "autocomplete", "off", "checked", ""], ["type", "radio", "formControlName", "area_unit", "value", "Sq. Yard", "autocomplete", "off"], ["type", "radio", "formControlName", "area_unit", "value", "Marla", "autocomplete", "off"], ["type", "radio", "formControlName", "area_unit", "value", "Kanal", "autocomplete", "off"], ["type", "number", "formControlName", "area", "required", "", "autocomplete", "off", 1, "form-control"], [1, "col-md-5", "col-sm-2"], [1, "radio", "select-btn"], ["type", "radio", "formControlName", "assigned_to1", "value", "Self", 3, "click"], ["type", "radio", "formControlName", "assigned_to1", "value", "Admin"], ["type", "radio", "formControlName", "assigned_to1", "value", "Agents"], ["bindLabel", "access", "bindValue", "access", "placeholder", "Select Admin", 1, "ng-select", "inputs2", 3, "items", "change"], ["bindLabel", "fullname", "bindValue", "fullname", "placeholder", "Select Agent", 1, "ng-select", "inputs2", 3, "items", "change"]],
         template: function AddInventoriesComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
@@ -10152,6 +10230,10 @@
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "div", 3);
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "form", 4);
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngSubmit", function AddInventoriesComponent_Template_form_ngSubmit_7_listener() {
+              return ctx.submitForm();
+            });
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](8, "h2", 5);
 
@@ -10277,9 +10359,9 @@
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](51, " \xA0\xA0\xA0\xA0\xA0\xA0 ");
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](52, AddInventoriesComponent_div_52_Template, 3, 5, "div", 21);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](52, AddInventoriesComponent_div_52_Template, 4, 9, "div", 21);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](53, AddInventoriesComponent_div_53_Template, 3, 5, "div", 21);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](53, AddInventoriesComponent_div_53_Template, 4, 9, "div", 21);
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](54, "div", 22);
 
@@ -10645,35 +10727,23 @@
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](171, AddInventoriesComponent_div_171_Template, 2, 1, "div", 66);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](172, "br");
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](172, "div", 0);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](173, "br");
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](173, "div", 67);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](174, "div", 67);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](174, "br");
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](175, "button", 68);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](175, "br");
-
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](176, "div", 68);
-
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](177, "button", 69);
-
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function AddInventoriesComponent_Template_button_click_177_listener() {
-              return ctx.submitForm();
-            });
-
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](178);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](176);
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](177, "br");
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](178, "br");
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](179, "br");
-
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](180, "br");
-
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](181, "br");
-
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -10833,7 +10903,7 @@
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.addinventoryForm.get("assigned_to1").value === "Agents");
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](7);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](5);
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx.formSendingStatus);
           }
@@ -11526,9 +11596,37 @@
         }
       }
 
+      function SignupComponent_div_34_div_4_div_1_Template(rf, ctx) {
+        if (rf & 1) {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div");
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "Location is required");
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        }
+      }
+
+      function SignupComponent_div_34_div_4_Template(rf, ctx) {
+        if (rf & 1) {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 21);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, SignupComponent_div_34_div_4_div_1_Template, 2, 0, "div", 20);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        }
+
+        if (rf & 2) {
+          var ctx_r41 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx_r41.f.location.errors.required);
+        }
+      }
+
       function SignupComponent_div_34_Template(rf, ctx) {
         if (rf & 1) {
-          var _r42 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+          var _r44 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 7);
 
@@ -11536,23 +11634,25 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](2, "i", 30);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "ng-select", 31);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "ng-select", 32);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function SignupComponent_div_34_Template_ng_select_ngModelChange_3_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r42);
-
-            var ctx_r41 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
-
-            return ctx_r41.selectStringLocations = $event;
-          })("change", function SignupComponent_div_34_Template_ng_select_change_3_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r42);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r44);
 
             var ctx_r43 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-            return ctx_r43.changeLocation($event);
+            return ctx_r43.selectStringLocations = $event;
+          })("change", function SignupComponent_div_34_Template_ng_select_change_3_listener($event) {
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r44);
+
+            var ctx_r45 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+
+            return ctx_r45.changeLocation($event);
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](4, SignupComponent_div_34_div_4_Template, 2, 1, "div", 11);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -11564,7 +11664,11 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", ctx_r8.selectStringLocations)("multiple", true)("ngModelOptions", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](4, _c1))("items", ctx_r8.locations);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", ctx_r8.selectStringLocations)("multiple", true)("ngModelOptions", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](6, _c1))("items", ctx_r8.locations)("ngClass", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction1"](7, _c0, ctx_r8.submitted && ctx_r8.f.location.errors));
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx_r8.submitted && ctx_r8.f.location.errors);
         }
       }
 
@@ -11588,32 +11692,32 @@
         }
 
         if (rf & 2) {
-          var ctx_r44 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+          var ctx_r46 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx_r44.f.access.errors.required);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx_r46.f.access.errors.required);
         }
       }
 
       function SignupComponent_div_35_Template(rf, ctx) {
         if (rf & 1) {
-          var _r47 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+          var _r49 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 7);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 8);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](2, "i", 32);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](2, "i", 33);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "ng-select", 33);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "ng-select", 34);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("change", function SignupComponent_div_35_Template_ng_select_change_3_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r47);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r49);
 
-            var ctx_r46 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+            var ctx_r48 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-            return ctx_r46.changeAccess($event);
+            return ctx_r48.changeAccess($event);
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -11640,28 +11744,28 @@
 
       function SignupComponent_div_36_Template(rf, ctx) {
         if (rf & 1) {
-          var _r49 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+          var _r51 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 7);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 8);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](2, "i", 32);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](2, "i", 33);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "ng-select", 34);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "ng-select", 35);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function SignupComponent_div_36_Template_ng_select_ngModelChange_3_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r49);
-
-            var ctx_r48 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
-
-            return ctx_r48.user.access = $event;
-          })("change", function SignupComponent_div_36_Template_ng_select_change_3_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r49);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r51);
 
             var ctx_r50 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-            return ctx_r50.changeAccess($event);
+            return ctx_r50.user.access = $event;
+          })("change", function SignupComponent_div_36_Template_ng_select_change_3_listener($event) {
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r51);
+
+            var ctx_r52 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+
+            return ctx_r52.changeAccess($event);
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -11794,10 +11898,10 @@
               this.registerForm = this.formBuilder.group({
                 fullname: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
                 email: ["", [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].email, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
-                location: [],
+                location: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
                 contact: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
-                access: [],
-                city: [""]
+                access: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
+                city: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required]
               });
             } else {
               this.registerForm = this.formBuilder.group({
@@ -11881,7 +11985,9 @@
 
               if (this.selectedCity == city.city) {
                 this.selectStringLocations = this.selectedLocations;
-                console.log(this.selectStringLocations);
+                this.registerForm.patchValue({
+                  location: this.user.location
+                });
               } else this.selectStringLocations = [];
             }
 
@@ -11898,6 +12004,7 @@
             this.registerForm.patchValue({
               location: location
             });
+            console.log(this.registerForm.value);
           } // Patch the value of access input using this below function
 
         }, {
@@ -11915,6 +12022,7 @@
             var _this22 = this;
 
             console.log(this.registerForm);
+            console.log(this.registerForm.value);
             this.submitted = true; // stop here if form is invalid
 
             if (this.registerForm.invalid) {
@@ -11988,7 +12096,7 @@
         selectors: [["app-signup"]],
         decls: 41,
         vars: 23,
-        consts: [[1, "row"], [1, "col-md-12"], [1, "container"], [1, "col-md-11", "col-lg-9", "col-xl-7", "right"], [1, "register"], [1, "text-center"], [1, "form-register", 3, "formGroup", "ngSubmit"], [1, "form-group"], [1, "input-group"], ["aria-hidden", "true", 1, "fa", "fa-user", "fa"], ["type", "text", "formControlName", "fullname", "placeholder", "Full name", "autocomplete", "off", 1, "form-control", "inputs", 3, "ngClass"], ["class", "invalid-feedback", 4, "ngIf"], ["aria-hidden", "true", 1, "fa", "fa-envelope"], ["type", "text", "formControlName", "email", "id", "email", "autocomplete", "off", "placeholder", "Enter Email", 1, "form-control", "emailInput", 3, "ngClass"], ["class", "form-group", 4, "ngIf"], [1, "fas", "fa-phone"], ["formControlName", "contact", "type", "number", "autocomplete", "off", "placeholder", "Phone Number", 1, "form-control", "inputs", 3, "ngClass"], ["id", "message"], [1, "form-group", "pull-right"], ["type", "submit", 1, "btn", "btn-primary"], [4, "ngIf"], [1, "invalid-feedback"], [1, "fas", "fa-unlock"], ["type", "password", "formControlName", "password", "autocomplete", "off", "placeholder", "Password", 1, "form-control", "inputs", 3, "ngClass", "keyup"], ["type", "password", "formControlName", "confirm_password", "autocomplete", "off", "placeholder", "Confirm Password", 1, "form-control", "inputs", 3, "ngClass", "keyup"], ["class", "texts", 4, "ngIf"], [1, "texts"], [1, "fas", "fa-building"], ["bindLabel", "city", "bindValue", "_id", "placeholder", "Select City", 1, "ng-select", "inputs2", 3, "items", "ngClass", "change"], ["bindLabel", "city", "bindValue", "city", "placeholder", "Select City", 1, "ng-select", "inputs2", 3, "ngModel", "ngModelOptions", "items", "ngClass", "ngModelChange", "change"], [1, "fas", "fa-street-view"], ["bindLabel", "location", "bindValue", "location", "placeholder", "Select Location", 1, "ng-select", "inputs2", 3, "ngModel", "multiple", "ngModelOptions", "items", "ngModelChange", "change"], [1, "fas", "fa-universal-access"], ["bindLabel", "access", "bindValue", "access", "placeholder", "Select Access Type", 1, "ng-select", "inputs2", 3, "items", "ngClass", "change"], ["bindLabel", "access", "bindValue", "access", "placeholder", "Select Access Type", 1, "ng-select", "inputs2", 3, "ngModel", "ngModelOptions", "items", "ngModelChange", "change"]],
+        consts: [[1, "row"], [1, "col-md-12"], [1, "container"], [1, "col-md-11", "col-lg-9", "col-xl-7", "right"], [1, "register"], [1, "text-center"], [1, "form-register", 3, "formGroup", "ngSubmit"], [1, "form-group"], [1, "input-group"], ["aria-hidden", "true", 1, "fa", "fa-user", "fa"], ["type", "text", "formControlName", "fullname", "placeholder", "Full name", "autocomplete", "off", 1, "form-control", "inputs", 3, "ngClass"], ["class", "invalid-feedback", 4, "ngIf"], ["aria-hidden", "true", 1, "fa", "fa-envelope"], ["type", "text", "formControlName", "email", "id", "email", "autocomplete", "off", "placeholder", "Enter Email", 1, "form-control", "emailInput", 3, "ngClass"], ["class", "form-group", 4, "ngIf"], [1, "fas", "fa-phone"], ["formControlName", "contact", "type", "number", "autocomplete", "off", "placeholder", "Phone Number", 1, "form-control", "inputs", 3, "ngClass"], ["id", "message"], [1, "form-group", "pull-right"], ["type", "submit", 1, "btn", "btn-primary"], [4, "ngIf"], [1, "invalid-feedback"], [1, "fas", "fa-unlock"], ["type", "password", "formControlName", "password", "autocomplete", "off", "placeholder", "Password", 1, "form-control", "inputs", 3, "ngClass", "keyup"], ["type", "password", "formControlName", "confirm_password", "autocomplete", "off", "placeholder", "Confirm Password", 1, "form-control", "inputs", 3, "ngClass", "keyup"], ["class", "texts", 4, "ngIf"], [1, "texts"], [1, "fas", "fa-building"], ["bindLabel", "city", "bindValue", "_id", "placeholder", "Select City", 1, "ng-select", "inputs2", 3, "items", "ngClass", "change"], ["bindLabel", "city", "bindValue", "city", "placeholder", "Select City", 1, "ng-select", "inputs2", 3, "ngModel", "ngModelOptions", "items", "ngClass", "ngModelChange", "change"], [1, "fas", "fa-street-view"], ["bindLabel", "location", "bindValue", "location", "placeholder", "Select Location", 1, "ng-select", "inputs2", 3, "ngModel", "multiple", "ngModelOptions", "items", "ngModelChange", "change"], ["bindLabel", "location", "bindValue", "location", "placeholder", "Select Location", 1, "ng-select", "inputs2", 3, "ngModel", "multiple", "ngModelOptions", "items", "ngClass", "ngModelChange", "change"], [1, "fas", "fa-universal-access"], ["bindLabel", "access", "bindValue", "access", "placeholder", "Select Access Type", 1, "ng-select", "inputs2", 3, "items", "ngClass", "change"], ["bindLabel", "access", "bindValue", "access", "placeholder", "Select Access Type", 1, "ng-select", "inputs2", 3, "ngModel", "ngModelOptions", "items", "ngModelChange", "change"]],
         template: function SignupComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
@@ -12085,7 +12193,7 @@
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](33, SignupComponent_div_33_Template, 4, 5, "div", 14);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](34, SignupComponent_div_34_Template, 4, 5, "div", 14);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](34, SignupComponent_div_34_Template, 5, 9, "div", 14);
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](35, SignupComponent_div_35_Template, 5, 5, "div", 14);
 

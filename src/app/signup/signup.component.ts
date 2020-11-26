@@ -84,10 +84,10 @@ export class SignupComponent implements OnInit {
             Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$"),
           ],
         ],
-        location: [],
+        location: ["", Validators.required],
         contact: ["", Validators.required],
-        access: [],
-        city: [""],
+        access: ["", Validators.required],
+        city: ["", Validators.required],
         // created: []
       });
     } else {
@@ -176,7 +176,7 @@ export class SignupComponent implements OnInit {
 
       if (this.selectedCity == city.city) {
         this.selectStringLocations = this.selectedLocations;
-        console.log(this.selectStringLocations);
+        this.registerForm.patchValue({ location: this.user.location });
       } else this.selectStringLocations = [];
     }
     if (city) this.getLocations(city._id);
@@ -187,6 +187,7 @@ export class SignupComponent implements OnInit {
   changeLocation(location) {
     console.log(location);
     this.registerForm.patchValue({ location: location });
+    console.log(this.registerForm.value);
   }
 
   // Patch the value of access input using this below function
@@ -198,6 +199,7 @@ export class SignupComponent implements OnInit {
   // Function to register the user by sending whole form
   registerUser() {
     console.log(this.registerForm);
+    console.log(this.registerForm.value);
 
     this.submitted = true;
 

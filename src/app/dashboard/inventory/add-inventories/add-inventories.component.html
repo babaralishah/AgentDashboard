@@ -12,7 +12,7 @@
 
 
     <div class="col-9">
-        <form class="" [formGroup]="addinventoryForm">
+        <form class="form-register" [formGroup]="addinventoryForm" (ngSubmit)="submitForm()">
 
             <h2 class="register-heading">Add Inventory</h2>
             <!-- Form Title -->
@@ -107,8 +107,12 @@
                     <!-- Location -->
                     <div class="form-group" *ngIf="user1">
                         <div class="input-group">
-                            <ng-select [(ngModel)]="selectStringLocations" [multiple]="true" [ngModelOptions]="{standalone: true}" class="ng-select" [items]="locations" bindLabel="location" bindValue="location" placeholder="Select Location" (change)="changeLocation($event)">
+                            <ng-select [(ngModel)]="selectStringLocations" [multiple]="true" [ngModelOptions]="{standalone: true}" class="ng-select" [items]="locations" bindLabel="location" bindValue="location" placeholder="Select Location" [ngClass]="{ 'is-invalid': submitted && f.location.errors }"
+                                (change)="changeLocation($event)">
                             </ng-select>
+                            <div *ngIf="submitted && f.location.errors" class="invalid-feedback">
+                                <div *ngIf="f.location.errors.required">Location is required</div>
+                            </div>
                         </div>
                     </div>
 
@@ -116,8 +120,12 @@
                         <div class="input-group">
                             <!-- <b>Select Location</b> -->
                             <!-- <i class="fas fa-street-view"></i> -->
-                            <ng-select class="ng-select inputs2" [(ngModel)]="selectStringLocations" [multiple]="true" [ngModelOptions]="{standalone: true}" [items]="locations" bindLabel="location" bindValue="location" placeholder="Select Location" (change)="changeLocation($event)">
+                            <ng-select class="ng-select inputs2" [(ngModel)]="selectStringLocations" [multiple]="true" [ngModelOptions]="{standalone: true}" [items]="locations" bindLabel="location" bindValue="location" placeholder="Select Location" [ngClass]="{ 'is-invalid': submitted && f.location.errors }"
+                                (change)="changeLocation($event)">
                             </ng-select>
+                            <div *ngIf="submitted && f.location.errors" class="invalid-feedback">
+                                <div *ngIf="f.location.errors.required">Location is required</div>
+                            </div>
                         </div>
                     </div>
 
@@ -486,18 +494,18 @@
                 </ng-select>
 
             </div>
+            <!-- Complete form submission button -->
+            <!-- <div class="row"> -->
+            <!-- <div class="col-md-12 col-sm-12"> -->
+            <br><br>
+            <div class="form-group pull-right">
+                <button type="submit" class="btn btn1 btn-primary">{{formSendingStatus}}</button>
+                <br><br><br>
+            </div>
+            <!-- </div> -->
+            <!-- </div> -->
         </form>
 
-        <!-- Complete form submission button -->
-        <div class="row">
-            <div class="col-md-12 col-sm-12">
-                <br><br>
-                <div class="form-group" class="pull-right">
-                    <button (click)="submitForm()" class="btn btn1 btn-primary">{{formSendingStatus}}</button>
-                    <br><br><br>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 

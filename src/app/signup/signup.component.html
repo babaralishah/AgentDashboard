@@ -112,8 +112,12 @@
                         <div class="input-group">
                             <!-- <b>Select Location</b> -->
                             <i class="fas fa-street-view"></i>
-                            <ng-select class="ng-select inputs2" [(ngModel)]="selectStringLocations" [multiple]="true" [ngModelOptions]="{standalone: true}" [items]="locations" bindLabel="location" bindValue="location" placeholder="Select Location" (change)="changeLocation($event)">
+                            <ng-select class="ng-select inputs2" [(ngModel)]="selectStringLocations" [multiple]="true" [ngModelOptions]="{standalone: true}" [items]="locations" bindLabel="location" bindValue="location" placeholder="Select Location" [ngClass]="{ 'is-invalid': submitted && f.location.errors }"
+                                (change)="changeLocation($event)">
                             </ng-select>
+                            <div *ngIf="submitted && f.location.errors" class="invalid-feedback">
+                                <div *ngIf="f.location.errors.required">Location is required</div>
+                            </div>
                         </div>
                     </div>
                     <!-- Access Type -->

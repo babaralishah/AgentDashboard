@@ -280,6 +280,7 @@ export class AddInventoriesComponent implements OnInit {
   changeLocation(location: any) {
     console.log(location);
     this.selectedLocations = location;
+    this.addinventoryForm.patchValue({ location: location });
     console.log(this.addinventoryForm.value);
   }
 
@@ -337,7 +338,7 @@ export class AddInventoriesComponent implements OnInit {
     console.log(this.addinventoryForm.value);
     console.log(this.selectedLocations);
 
-    this.addinventoryForm.patchValue({ location: this.selectedLocations });
+    // this.addinventoryForm.patchValue({ location: this.selectedLocations });
     console.log(this.addinventoryForm.value);
 
     if (this.user1) {

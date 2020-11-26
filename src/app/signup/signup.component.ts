@@ -210,7 +210,7 @@ export class SignupComponent implements OnInit {
       return;
     }
 
-    this.registerForm.patchValue({ location: this.selectedLocations });
+    // this.registerForm.patchValue({ location: this.selectedLocations });
     if (this.user) {
       // console.log(this.registerForm.value);
       this.authService

@@ -25,12 +25,12 @@ export class AddInventoriesComponent implements OnInit {
     { access: "city_admin" },
   ];
   access_type1 = [{ access: "all_agents" }];
-  greaterThanValue;
-  lessThanValue;
-  isInvalid: boolean = false; //Contains the valid status of PRICE ranges
-  isInvalid1: boolean = false; //Contains the valid status of AREA ranges
-  greaterThanValue1; //Variable stores max area
-  lessThanValue1; //Variable stores min area
+  minimumPriceRange;
+  maximumPriceRange;
+  isInvalidPrice: boolean = false; //Contains the valid status of PRICE ranges
+  isInvalidArea: boolean = false; //Contains the valid status of AREA ranges
+  minimumAreaRange; //Variable stores max area
+  maximumAreaRange; //Variable stores min area
   userList: any;
   selectedLocations: any = [];
   selectedCity: any;
@@ -104,11 +104,13 @@ export class AddInventoriesComponent implements OnInit {
 
   //Function that is working on price filter/check
   public onChangePrice(event: any): void {
-    this.isInvalid = this.greaterThanValue > this.lessThanValue;
+    this.isInvalidPrice = this.minimumPriceRange > this.maximumPriceRange;
   }
   //Function that is working on AREA filter/check
   public onChangeArea(event: any): void {
-    this.isInvalid1 = this.greaterThanValue1 > this.lessThanValue1;
+    console.log(this.minimumAreaRange);
+
+    this.isInvalidArea = this.minimumAreaRange > this.maximumAreaRange;
   }
 
   // Function to patch the value from ng select
@@ -199,20 +201,20 @@ export class AddInventoriesComponent implements OnInit {
         },
       ],
       form_title: [""],
-      property_purpose: [""],
+      property_purpose: [],
       property_type: [""],
 
-      // city: ["", Validators.required],
+      city: ["", Validators.required],
 
-      city: [
-        {
-          id: "",
-          name: this.city_value,
-          cityId: "",
-        },
-        Validators.required,
-      ],
-      location: [],
+      // city: [
+      //   {
+      //     id: "",
+      //     name: this.city_value,
+      //     cityId: "",
+      //   },
+      //   Validators.required,
+      // ],
+      location: [, Validators.required],
       sub_location: [
         {
           id: "",
@@ -225,10 +227,10 @@ export class AddInventoriesComponent implements OnInit {
       demand_price: [],
       min_area: [],
       max_area: [],
-      beds_number: [],
+      beds_number: [, Validators.required],
       area: [],
       area_unit: [""],
-      client_name: [""],
+      client_name: ["", Validators.required],
       client_number: [],
       client_type: [""],
     });
@@ -338,9 +340,8 @@ export class AddInventoriesComponent implements OnInit {
   }
   // Submit form to backend service
   submitForm() {
-    this.submitted = true; // stop here if form is invalid
+    this.submitted = true;
     console.log(this.addinventoryForm.value);
-    console.log(this.selectedLocations);
 
     // stop here if form is invalid
     if (this.addinventoryForm.invalid) {
@@ -394,9 +395,6 @@ export class AddInventoriesComponent implements OnInit {
           console.log("signup data: ", data);
           // this.registerresponse = data;
           const email = this.addinventoryForm.value.email;
-          // const msg = data.message;
-          // const status = data.status;
-          // this.registerForm.reset();
           if (user === "Inventory") {
             this.toastr.success("Inventory Added", "Success", {
               timeOut: 5000,

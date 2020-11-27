@@ -1,7 +1,4 @@
-.custom-select.is-invalid,
-.form-control.is-invalid,
-.was-validated .custom-select:invalid,
-.was-validated .form-control:invalid {
+.errors {
     border-color: #e8051b;
 }
 

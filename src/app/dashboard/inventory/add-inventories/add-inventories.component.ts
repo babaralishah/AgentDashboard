@@ -36,24 +36,10 @@ export class AddInventoriesComponent implements OnInit {
   selectedLocations: any = [];
   selectedCity: any;
   selectStringLocations: any = [];
+  selectedUserCity: any;
+  selectedUserLocation: any;
+  userLocationMatched: boolean;
 
-  //////////////////////////////////
-
-  constructor(
-    private formBuilder: FormBuilder,
-    private authService: AuthenticationService,
-    private router: Router,
-    private toastr: ToastrService
-  ) {}
-  get Property_typename() {
-    return this.addinventoryForm.get("prop_typename");
-  }
-  // convenience getter for easy access to form fields
-  get f() {
-    return this.addinventoryForm.controls;
-  }
-
-  // Requirements for Map on the template, below;
   opacity = 1;
   map: mapboxgl.Map;
   style = "mapbox://styles/mapbox/streets-v11";
@@ -69,6 +55,21 @@ export class AddInventoriesComponent implements OnInit {
   addinventoryForm: FormGroup;
   typeCheckValue: any;
   isRent = true;
+  //////////////////////////////////
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthenticationService,
+    private router: Router,
+    private toastr: ToastrService
+  ) {}
+  get Property_typename() {
+    return this.addinventoryForm.get("prop_typename");
+  }
+  // convenience getter for easy access to form fields
+  get f() {
+    return this.addinventoryForm.controls;
+  }
 
   ngOnInit(): void {
     this.user1 = this.authService.getUser();
@@ -115,16 +116,58 @@ export class AddInventoriesComponent implements OnInit {
   }
 
   // Function to patch the value from ng select
-  changeAccess(access: any) {
+  changeAssignedTo1(access: any) {
     // console.log(access.access);
-    this.addinventoryForm.patchValue({ assigned_to: access.access });
+    this.addinventoryForm.patchValue({ assigned_to: access?.access });
     // console.log(this.addinventoryForm.value);
   }
   // Function to patch the value from ng select
-  changeAccess2(access: any) {
-    // console.log(access.fullname);
-    this.addinventoryForm.patchValue({ assigned_to: access.fullname });
-    // console.log(this.addinventoryForm.value);
+  changeAssignedTo2(access: any) {
+    this.selectedUserCity = access?.city.city;
+    this.selectedUserLocation = access?.location;
+    this.addinventoryForm.patchValue({ assigned_to: access?.fullname });
+    console.log(this.selectedUserLocation);
+    console.log(this.selectedUserCity);
+    const location = this.addinventoryForm.controls["location"].value?.location;
+    const city = this.addinventoryForm.controls["city"].value?.city;
+    console.log(city);
+    console.log(location);
+    if (this.selectedUserCity == null && this.selectedUserLocation == null) {
+      console.log(this.selectedUserCity);
+    } else {
+      if (
+        this.selectedUserCity !==
+        this.addinventoryForm.controls["city"].value.city
+      ) {
+        console.log("city not matching");
+
+        this.toastr.error("Agent is not assigned with this City", "Error", {
+          timeOut: 5000,
+        });
+      } else {
+        console.log("city matched");
+        for (let i = 0; i < this.selectedUserLocation.length; i++) {
+          if (location === this.selectedUserLocation[i].location) {
+            this.userLocationMatched = true;
+            console.log("location matched");
+            break;
+          } else {
+            this.userLocationMatched = false;
+            console.log("location not matching");
+          }
+        }
+        if (this.userLocationMatched) {
+        } else {
+          this.toastr.error(
+            "Agent is not assigned with this Location",
+            "Error",
+            {
+              timeOut: 5000,
+            }
+          );
+        }
+      }
+    }
   }
   // Function to patch the value from form radio button
   assigned_To(name: any) {
@@ -287,7 +330,7 @@ export class AddInventoriesComponent implements OnInit {
   changeLocation(location: any) {
     console.log(location);
     this.selectedLocations = location;
-    this.addinventoryForm.patchValue({ location: location });
+    this.addinventoryForm.patchValue({ location });
     console.log(this.addinventoryForm.value);
   }
 
@@ -296,13 +339,13 @@ export class AddInventoriesComponent implements OnInit {
     this.authService.getCities().subscribe(
       (cities) => {
         // console.log('Curr', this.user);
-        if (this.user.access === "islamabad_admin") {
+        if (this.user?.access === "islamabad_admin") {
           this.city.push(cities[2]);
           this.cities = this.city;
-        } else if (this.user.access === "rawalpindi_admin") {
+        } else if (this.user?.access === "rawalpindi_admin") {
           this.city.push(cities[1]);
           this.cities = this.city;
-        } else if (this.user.access === "peshawar_admin") {
+        } else if (this.user?.access === "peshawar_admin") {
           this.city.push(cities[0]);
           this.cities = this.city;
         } else {

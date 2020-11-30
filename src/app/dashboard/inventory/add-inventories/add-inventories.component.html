@@ -95,7 +95,7 @@
                     <!-- Location -->
                     <div class="form-group" *ngIf="user1">
                         <div>
-                            <ng-select [(ngModel)]="selectStringLocations" [multiple]="true" [ngModelOptions]="{standalone: true}" class="ng-select" [items]="locations" bindLabel="location" bindValue="location" placeholder="Select Location" [ngClass]="{ 'is-invalid': submitted && f.location.errors }"
+                            <ng-select [(ngModel)]="selectStringLocations" [ngModelOptions]="{standalone: true}" class="ng-select" [items]="locations" bindLabel="location" bindValue="location" placeholder="Select Location" [ngClass]="{ 'is-invalid': submitted && f.location.errors }"
                                 (change)="changeLocation($event)">
                             </ng-select>
                             <div *ngIf="submitted && f.location.errors" class="invalid-feedback">
@@ -460,10 +460,10 @@
             </div>
             <!-- Select Admins  -->
             <br><br>
-            <div class="row" *ngIf=" addinventoryForm.get('assigned_to1').value == 'Admin'">
+            <div class="row" *ngIf=" addinventoryForm.get('assigned_to1').value === 'Admin'">
 
                 <!-- <br><br> -->
-                <ng-select class="ng-select inputs2" [items]="access_type" bindLabel="access" bindValue="access" placeholder="Select Admin" (change)="changeAccess($event)">
+                <ng-select class="ng-select inputs2" [items]="access_type" bindLabel="access" bindValue="access" placeholder="Select Admin" (change)="changeAssignedTo1($event)">
                 </ng-select>
 
             </div>
@@ -471,18 +471,10 @@
             <!-- Select Agents -->
             <div class="row" *ngIf=" addinventoryForm.get('assigned_to1').value === 'Agents' ">
 
-
-
-                <!-- <ng-select class="ng-select" #city [items]="cities" bindLabel="city" bindValue="_id" placeholder="Select City" (change)="changeCity($event)">
-                    </ng-select> -->
-
-                <ng-select class="ng-select inputs2" [items]="userList" bindLabel="fullname" bindValue="fullname" placeholder="Select Agent" (change)="changeAccess2($event)">
+                <ng-select class="ng-select inputs2" [items]="userList" bindLabel="fullname" bindValue="fullname" placeholder="Select Agent" (change)="changeAssignedTo2($event)">
                 </ng-select>
 
             </div>
-            <!-- Complete form submission button -->
-            <!-- <div class="row"> -->
-            <!-- <div class="col-md-12 col-sm-12"> -->
             <br><br>
             <div class="form-group pull-right">
                 <button type="submit" class="btn btn1 btn-primary">{{formSendingStatus}}</button>

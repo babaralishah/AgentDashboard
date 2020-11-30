@@ -214,21 +214,24 @@ export class SignupComponent implements OnInit {
 
     // this.registerForm.patchValue({ location: this.selectedLocations });
     if (this.user) {
-      // console.log(this.registerForm.value);
+      console.log(this.registerForm.value);
       this.authService
         .updateUser(this.user._id, this.registerForm.value)
         .subscribe((data: any) => {
           console.log("signup data: ", data);
+          console.log(data.code);
+          
           // this.registerresponse = data;
           const email = this.registerForm.value.email;
           const msg = data.message;
+          const code = data.code;
           // const status = data.status;
           // this.registerForm.reset();
-          if (msg !== "This email has been registered already") {
+          if (code === 200) {
             this.toastr.success(msg, "Success", {
               timeOut: 5000,
             });
-            this.router.navigate(["users"]);
+            this.router.navigate(["/register"]);
           } else {
             this.toastr.error(msg, "Error", {
               timeOut: 5000,
@@ -241,12 +244,18 @@ export class SignupComponent implements OnInit {
         (data) => {
           console.log("signup data: ", data);
           const msg = data.message;
-          // if (msg !== "This email has been registered already") {
-          this.toastr.success(msg, "Success", {
-            timeOut: 5000,
-          });
-          this.router.navigate(["users"]);
-          // }
+          const code = data.code;
+
+          if (data.userData._id) {
+            this.toastr.success(msg, "Success", {
+              timeOut: 5000,
+            });
+            this.router.navigate(["/register"]);
+          } else {
+            this.toastr.error(msg, "Error", {
+              timeOut: 5000,
+            });
+          }
         },
         (error) => {
           console.log(error.error.message);

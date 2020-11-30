@@ -1,171 +1,129 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<!-- <link
+  href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+  rel="stylesheet"
+  id="bootstrap-css"
+/>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
+
 
 <head>
-
-
-    <meta name="description" content="Responsive sidebar template with sliding effect and dropdown menu based on bootstrap 3">
-    <title>Sidebar template</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
-
-
-</head>
-<!-- <div class="row">
-    <div class="col-md-12">
-        <app-header></app-header>
-    </div>
-</div> -->
-
-<!-- <nav class="navbar justify-content-between">
-
-    <a class="navbar-brand"> My Asasa</a>
-    <form class="form-inline" style="    margin-right: 56px;">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-
-        <ul>
-            <li>
-
-                <a class="nav-link" *ngIf="isLogin()" (click)="logout()">Logout</a>
-            </li>
-            <li>
-                <a routerLink="/inventory">
-                    <i class="fas fa-file-alt"></i>
-                    <span></span>
-                </a>
-            </li>
-            <li>
-                <a routerLink="/inventory">
-                    <i class="fas fa-users"></i>
-                    <span></span>
-                </a>
-            </li>
-        </ul>
-    </form>
-
-</nav> -->
-
-
+  <meta
+    name="description"
+    content="Responsive sidebar template with sliding effect and dropdown menu based on bootstrap 3"
+  />
+  <title>Sidebar template</title>
+  <link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous"
+  />
+  <link
+    href="https://use.fontawesome.com/releases/v5.0.6/css/all.css"
+    rel="stylesheet"
+  />
+</head> -->
 
 <div class="page-wrapper chiller-theme toggled">
-    <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
-        <i class="fas fa-bars"></i>
-    </a>
-    <nav id="sidebar" class="sidebar-wrapper" style="padding-top: 100px;">
-        <div class="sidebar-content">
-            <div class="sidebar-brand">
-                <a routerLink="/">AGENT DASHBOARD</a>
-            </div>
-            <div class="sidebar-header">
-                <div class="user-pic">
-                    <img class="img-responsive img-rounded" src="https://bootdey.com/img/Content/avatar/avatar6.png">
-                </div>
-                <div class="user-info">
-                    <span class="user-name">{{tokendata?.fullname}}
-          </span>
-                    <span class="user-role">{{tokendata?.access}}</span>
-                    <span class="user-status">
+  <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+    <i class="fas fa-bars"></i>
+  </a>
+  <nav id="sidebar" class="sidebar-wrapper">
+    <div class="sidebar-content">
+      <!-- <div class="sidebar-brand">
+        <a routerLink="/">AGENT DASHBOARD</a>
+      </div> -->
+      <div class="sidebar-header">
+        <div class="user-pic">
+          <img
+            class="img-responsive img-rounded"
+            src="https://bootdey.com/img/Content/avatar/avatar6.png"
+          />
+        </div>
+        <div class="user-info">
+          <span class="user-name">{{ tokendata?.fullname }} </span>
+          <span class="user-role">{{ tokendata?.access }}</span>
+          <span class="user-status">
             <i class="fa fa-circle"></i>
             <span>Online</span>
-                    </span>
-                </div>
-            </div>
-            <div class="sidebar-search">
-                <div>
-                    <div class="input-group">
-                        <input type="text" class="form-control search-menu" placeholder="Search...">
-                        <div class="input-group-append">
-                            <span class="input-group-text">
-                <i class="fa fa-search" aria-hidden="true"></i>
-              </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+          </span>
+        </div>
+      </div>
 
-            <div class="sidebar-menu">
-                <ul>
-                    <li class="header-menu">
-                        <span>Dashboard</span>
-                    </li>
-                    <li class="sidebar">
-                        <a routerLink="/profile">
-                            <i class="fa fa-user"></i>
-                            <span>User Profile</span>
-                        </a>
+      <div class="sidebar-menu">
+        <ul>
+          <li class="sidebar">
+            <a routerLink="/profile">
+              <i class="fa fa-user"></i>
+              <span>User Profile</span>
+            </a>
+          </li>
 
-                    </li>
+          <li class="sidebar">
+            <a routerLink="/agents">
+              <i class="fa fa-users"></i>
+              <span>Agents</span>
+            </a>
+          </li>
+          <li class="sidebar">
+            <a routerLink="/inventory">
+              <i class="fas fa-file-alt"></i>
+              <span>Inventory</span>
+            </a>
+          </li>
+          <li>
+            <a routerLink="/leads">
+              <i class="fas fa-phone-volume"></i>
+              <span>Lead</span>
+            </a>
+          </li>
 
-                    <li class="sidebar">
-                        <a routerLink="/users">
-                            <i class="fa fa-users"></i>
-                            <span> Agent</span>
-                        </a>
+          <li>
+            <a routerLink="/both">
+              <i class="fas fa-phone-volume"></i>
+              <span>Both</span>
+            </a>
+          </li>
 
-                    </li>
-                    <li class="sidebar">
-                        <a routerLink="/inventory">
-                            <i class="fas fa-file-alt"></i>
-                            <span>Inventory</span>
-                        </a>
+          <li class="sidebar">
+            <a routerLink="/register">
+              <i class="fa fa-tachometer-alt"></i>
+              <span>Register</span>
+            </a>
+          </li>
+          <li class="sidebar">
+            <a routerLink="/map">
+              <i class="fas fa-map"></i>
+              <span>Maps</span>
+              <span class="badge badge-pill badge-info">New</span>
+            </a>
+          </li>
 
-                    </li>
-                    <li>
-                        <a routerLink="/leads">
-                            <i class="fas fa-phone-volume"></i>
-                            <span>Lead</span>
-                        </a>
-
-                    </li>
-
-                    <li>
-                        <a routerLink="/both">
-                            <i class="fas fa-phone-volume"></i>
-                            <span>Both</span>
-                        </a>
-
-                    </li>
-
-                    <li class="sidebar">
-                        <a routerLink="/register">
-                            <i class="fa fa-tachometer-alt"></i>
-                            <span>Register</span>
-                        </a>
-
-                    </li>
-                    <li class="sidebar">
-                        <a routerLink="/map">
-                            <i class="fas fa-map"></i>
-                            <span>Maps</span>
-                            <span class="badge badge-pill badge-info">New</span>
-                        </a>
-
-                    </li>
-
-                    <!-- <li class="sidebar">
+          <!-- <li class="sidebar">
                         <a routerLink="/both">
                             <i class="fas fa-phone-volume"></i>
                             <span>Both</span>
                         </a>
                     </li> -->
-                </ul>
-            </div>
-            <div class="sidebar-footer">
-                <a routerLink="/" *ngIf="isLogin()" (click)="logout()">
-                    <i class="fa fa-lock"></i>
-                    <span class="badge badge-pill badge-warning notification">Log out</span>
-                </a>
-                <a routerLink="/profile">
-                    <i class="fa fa-bell"></i>
-                    <span class="badge badge-pill badge-success notification">3</span>
-                </a>
-                <a href="#">
-                    <i class="fa fa-cog"></i>
-                    <span class="badge-sonar"></span>
-                </a>
-            </div>
-        </div>
-    </nav>
+        </ul>
+      </div>
+      <div class="sidebar-footer">
+        <a routerLink="/" *ngIf="isLogin()" (click)="logout()">
+          <i class="fa fa-lock"></i>
+          <span class="badge badge-pill badge-warning notification"
+            >Log out</span
+          >
+        </a>
+        <a routerLink="/profile">
+          <i class="fa fa-bell"></i>
+          <span class="badge badge-pill badge-success notification">3</span>
+        </a>
+        <a href="#">
+          <i class="fa fa-cog"></i>
+          <span class="badge-sonar"></span>
+        </a>
+      </div>
+    </div>
+  </nav>
 </div>

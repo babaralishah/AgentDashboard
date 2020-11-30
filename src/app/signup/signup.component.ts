@@ -69,7 +69,7 @@ export class SignupComponent implements OnInit {
       // this.registerForm.patchValue({ city: this.user.city });
       console.log(this.user.city.city);
     }
-    this.selectedCity = this.user.city.city;
+    this.selectedCity = this.user.city?.city;
     console.log(this.selectedLocations);
   }
   initialize() {

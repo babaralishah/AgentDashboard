@@ -11,12 +11,12 @@
     </div>
 
 
-    <div class="col-9">
+    <div class="col-9 inventoryForm">
         <form class="form-register" [formGroup]="addinventoryForm" (ngSubmit)="submitForm()">
 
-            <h2 class="register-heading">Add Inventory</h2>
+            <h2 class="register-heading">Add {{form_title}}</h2>
             <!-- Form Title -->
-            <div class="row  offset-1">
+            <div class="row">
                 <!-- <div class="form-group"> -->
 
                 <div class="col-md-5 col-sm-5 radio-mid">
@@ -48,7 +48,7 @@
             <!--  *ngIf="addinventoryForm.get('form_title').value === 'Lead' || addinventoryForm.get('form_title').value === 'Inventory' " -->
             <div>
                 <!-- Property Purpose -->
-                <div class="row offset-1">
+                <div class="row">
                     <div class="col-md-5 col-sm-5"><br><br>
                         <div class="radio">
                             <div class="btn-group btn-group-toggle">
@@ -71,10 +71,10 @@
                     <!-- <p>step-2: select the button</p> -->
                 </div>
                 <br><br>
-                <div class="row  offset-1">
+                <div class="row">
                     <!-- City -->
                     <div class="form-group" *ngIf="!user1">
-                        <div class="input-group">
+                        <div>
                             <ng-select class="ng-select" [items]="cities" bindLabel="city" bindValue="_id" placeholder="Select City" [ngClass]="{ 'is-invalid': submitted && f.city.errors }" (change)="changeCity($event)">
                             </ng-select>
                             <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
@@ -83,7 +83,7 @@
                         </div>
                     </div>
                     <div class="form-group" *ngIf="user1">
-                        <div class="input-group">
+                        <div>
                             <ng-select [(ngModel)]="this.user1.city[0].city" [ngModelOptions]="{standalone: true}" class="ng-select" [items]="cities" bindLabel="city" bindValue="city" placeholder="Select City" [ngClass]="{ 'is-invalid': submitted && f.city.errors }" (change)="changeCity($event)">
                             </ng-select>
                             <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
@@ -94,7 +94,7 @@
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <!-- Location -->
                     <div class="form-group" *ngIf="user1">
-                        <div class="input-group">
+                        <div>
                             <ng-select [(ngModel)]="selectStringLocations" [multiple]="true" [ngModelOptions]="{standalone: true}" class="ng-select" [items]="locations" bindLabel="location" bindValue="location" placeholder="Select Location" [ngClass]="{ 'is-invalid': submitted && f.location.errors }"
                                 (change)="changeLocation($event)">
                             </ng-select>
@@ -105,7 +105,7 @@
                     </div>
 
                     <div class="form-group" *ngIf="!user1">
-                        <div class="input-group">
+                        <div>
                             <ng-select class="ng-select inputs2" [(ngModel)]="selectStringLocations" [ngModelOptions]="{standalone: true}" [items]="locations" bindLabel="location" bindValue="location" placeholder="Select Location" [ngClass]="{ 'is-invalid': submitted && f.location.errors }"
                                 (change)="changeLocation($event)">
                             </ng-select>
@@ -261,12 +261,12 @@
             <!-- Price Range -->
             <div *ngIf="addinventoryForm.get('property_purpose').value === 'Buy' || addinventoryForm.get('property_purpose').value === 'Rent' ">
 
-                <div class="offset-1" style="color: red" *ngIf="isInvalidPrice">Please check your PRICE ranges</div>
-                <div class="row offset-1">
+                <div style="color: red" *ngIf="isInvalidPrice">Please check your PRICE ranges</div>
+                <div class="row">
                     <br>
                     <br> <b class="price">Price Range</b>
                 </div>
-                <div class="row offset-1">
+                <div class="row">
                     <div class="col-md-4 col-sm-4">
                         <div class="form-group">
                             <div class="">
@@ -292,7 +292,7 @@
             </div>
             <!-- Demand -->
             <div *ngIf="addinventoryForm.get('property_purpose').value === 'Sell' || addinventoryForm.get('property_purpose').value === 'Rent-Out' ">
-                <div class="row offset-1">
+                <div class="row">
                     <div class="col-md-4 col-sm-4">
                         <div class="form-group">
                             <div class="">
@@ -306,11 +306,11 @@
             </div>
             <!-- Area Range -->
             <div *ngIf="addinventoryForm.get('property_purpose').value === 'Buy' || addinventoryForm.get('property_purpose').value === 'Rent' ">
-                <div class="offset-1" style="color: red" *ngIf="isInvalidArea">Please check your AREA ranges</div>
-                <div class="row offset-1">
+                <div style="color: red" *ngIf="isInvalidArea">Please check your AREA ranges</div>
+                <div class="row">
                     <br> <b class="price">Area Range</b>
                 </div>
-                <div class="row offset-1">
+                <div class="row">
                     <div class="col-md-4 col-sm-4">
                         <div class="form-group">
                             <div class="">
@@ -329,7 +329,7 @@
             </div>
             <!-- Area Unit -->
             <div *ngIf="addinventoryForm.get('property_purpose').value === 'Buy' || addinventoryForm.get('property_purpose').value === 'Rent' ">
-                <div class="row offset-1">
+                <div class="row">
                     <div class="col-md-8 col-sm-4">
 
                         <!-- <div class="col-md-5 col-sm-5"><br><br> -->
@@ -354,7 +354,7 @@
             </div>
             <!-- Beds -->
 
-            <div class="row offset-1">
+            <div class="row">
                 <div class="col-md-4 col-sm-4">
                     <div class="form-group">
                         <div> <b>Beds Number</b>
@@ -370,7 +370,7 @@
             </div>
             <!-- Simple Area -->
             <div *ngIf="addinventoryForm.get('property_purpose').value === 'Sell' ">
-                <div class="row offset-1">
+                <div class="row">
                     <div class="col-md-4 col-sm-4">
                         <div class="form-group">
                             <div>
@@ -405,7 +405,7 @@
                 </div>
             </div>
             <!-- Client Details -->
-            <div class="row offset-1">
+            <div class="row">
 
 
                 <div class="col-md-4 col-sm-4 form-group">
@@ -423,7 +423,7 @@
                     </div><b class="steps">Step 9: Select Client Number</b>
                 </div>
             </div>
-            <div class="row offset-1">
+            <div class="row">
                 <div class="col-md-4 col-sm-4 form-group">
                     <div class=""> <b>Client Type</b>
                         <input formControlName="client_type" class="form-control" type="text" />
@@ -434,7 +434,7 @@
 
             <!-- Access Type -->
             <br>
-            <div class="row offset-1" *ngIf=" addinventoryForm.get('form_title').value === 'Inventory' || addinventoryForm.get('form_title').value === 'Both'">
+            <div class="row" *ngIf=" addinventoryForm.get('form_title').value === 'Inventory' || addinventoryForm.get('form_title').value === 'Both'">
                 <div class="col-md-5 col-sm-5">
 
                     <div class="radio">
@@ -460,7 +460,7 @@
             </div>
             <!-- Select Admins  -->
             <br><br>
-            <div class="row offset-1" *ngIf=" addinventoryForm.get('assigned_to1').value == 'Admin'">
+            <div class="row" *ngIf=" addinventoryForm.get('assigned_to1').value == 'Admin'">
 
                 <!-- <br><br> -->
                 <ng-select class="ng-select inputs2" [items]="access_type" bindLabel="access" bindValue="access" placeholder="Select Admin" (change)="changeAccess($event)">
@@ -469,7 +469,7 @@
             </div>
 
             <!-- Select Agents -->
-            <div class="row offset-1" *ngIf=" addinventoryForm.get('assigned_to1').value === 'Agents' ">
+            <div class="row" *ngIf=" addinventoryForm.get('assigned_to1').value === 'Agents' ">
 
 
 

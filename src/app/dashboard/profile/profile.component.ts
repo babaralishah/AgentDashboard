@@ -31,7 +31,7 @@ export class ProfileComponent implements OnInit {
     const token = await this.authService.getToken();
     const decodedToken = await this.authService.getDecodedToken(token);
     this.tokendata = decodedToken.data;
-    // console.log(this.tokendata);
+    console.log(this.tokendata);
   }
 
   onSelectFile(event) {

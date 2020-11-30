@@ -12,6 +12,7 @@ import * as mapboxgl from "mapbox-gl";
   styleUrls: ["./add-inventories.component.css"],
 })
 export class AddInventoriesComponent implements OnInit {
+  form_title: any;
   cities: any;
   formSendingStatus = "Post Ad";
   locations: any;
@@ -78,11 +79,11 @@ export class AddInventoriesComponent implements OnInit {
     }
     const token = this.authService.getToken();
     this.user = this.authService.getDecodedToken(token).data;
-    const form_title = this.authService.getFormTitle();
+    this.form_title = this.authService.getFormTitle();
     this.authService.removeFormTitle();
     this.formDeclare();
 
-    this.addinventoryForm.patchValue({ form_title });
+    this.addinventoryForm.patchValue({ form_title: this.form_title });
     this.getCities();
     if (this.user1) {
       this.updatefields();

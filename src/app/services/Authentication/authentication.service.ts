@@ -86,7 +86,6 @@ export class AuthenticationService {
   }
   getDecodedToken(token: string): any {
     try {
-      // console.log(token);
       return jwt_decode(token);
     } catch (Error) {
       console.log(Error);
@@ -95,8 +94,6 @@ export class AuthenticationService {
   }
   getToken() {
     return localStorage.getItem('token');
-    // console.log('token:\t', token);
-    // return token;
   }
 
   // Function to delete the single inventory

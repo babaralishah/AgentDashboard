@@ -1,75 +1,61 @@
 <!-- <div class=""> -->
 <div class="row">
-  <div class="col-12">
-    <app-header></app-header>
-  </div>
+
+    <div class="col-12">
+        <app-header></app-header>
+    </div>
 </div>
 <div class="row">
-  <div class="col-2">
-    <!-- <app-header></app-header> -->
-    <app-dashboard></app-dashboard>
-  </div>
+    <div class="col-2">
+        <!-- <app-header></app-header> -->
+        <app-dashboard></app-dashboard>
+    </div>
 
-  <div class="col-9">
-    <div class="inventory">
-      <br />
-      <h1><b>Inventory Management</b></h1>
-      <br />
-      <div>
-        <button class="btn btn-primary" (click)="setFormTitle('Inventory')">
+    <div class="col-9">
+        <div class="inventory">
+            <br />
+            <h1><b>Inventory Management</b></h1>
+            <br />
+            <div>
+                <button class="btn btn-primary" (click)="setFormTitle('Inventory')">
           Add New
         </button>
-        <!-- <button class="btn btn-primary">Filters</button> -->
-        <!-- <div class="dropdown">
-                        <button class="dropbtn" class="btn btn-primary rounded-pill">Select Agent</button>
-                        <div class="dropdown-content">
-                            <a href="#">Agent 1</a>
-                            <a href="#">Agent 2</a>
-                            <a href="#">Agent 3</a>
-                        </div>
-                    </div> -->
-      </div>
+            </div>
 
-      <div class="pull-right">
-        <div class="card-body row">
-          <!--end of col-->
-          <div class="col">
-            <input
-              class="form-control"
-              id="myInput"
-              type="text"
-              [(ngModel)]="general_search"
-              placeholder="Search topic or keyword"
-            />
-          </div>
+            <div class="pull-right">
+                <div class="card-body row">
+                    <!--end of col-->
+                    <div class="col">
+                        <input class="form-control" id="myInput" type="text" [(ngModel)]="general_search" placeholder="Search topic or keyword" />
+                    </div>
 
-          <button onclick="window.print()" class="btn btn-primary">
+                    <button onclick="window.print()" class="btn btn-primary">
             Print
-          </button>
-          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<button class="btn btn-primary">
+          </button> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<button class="btn btn-primary">
             Excel
           </button>
-        </div>
-      </div>
-      <br /><br /><br />
-      <!-- Inventory management table is below -->
+                </div>
+            </div>
+            <br /><br /><br />
+            <!-- Inventory management table is below -->
 
-      <table class="table table-hover">
-        <thead>
-          <th scope="col">ID</th>
-          <th scope="col">Location</th>
-          <th scope="col">Area</th>
-          <th scope="col">Type</th>
-          <th scope="col">Demand</th>
-          <th scope="col">Purpose</th>
-          <th scope="col">Beds</th>
-          <th scope="col">Client Details</th>
-          <th scope="col">Agent Assigned</th>
-          <th scope="col">Operations</th>
-        </thead>
+            <table class="table table-hover">
+                <thead>
+                    <th scope="col">ID</th>
+                    <th scope="col">Purpose</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Land Area</th>
+                    <th scope="col">Client Type</th>
+                    <th scope="col">Demand</th>
 
-        <tbody>
-          <!-- <td>
+                    <th scope="col">Beds</th>
+                    <th scope="col">Client Details</th>
+                    <th scope="col">Agent Assigned</th>
+                    <th scope="col">Operations</th>
+                </thead>
+
+                <tbody>
+                    <!-- <td>
                     <input class="form-control" type="text" [(ngModel)]="search_id" placeholder="Search ID">
                 </td>
                 <td>
@@ -99,32 +85,36 @@
                 <td>
                     <i class="fa fa-search icon"></i>
                 </td> -->
-          <tr *ngFor="let user of user | filter: general_search">
-            <!-- | tableFilter05: search_demand | tableFilter04: search_type | tableFilter03: search_area | tableFilter02: search_location | tableFilter: search_id | filter: general_search"> -->
-            <td>{{ user.referenceId }}</td>
-            <!-- <td>
+                    <tr *ngFor="let user of user | filter: general_search">
+                        <!-- | tableFilter05: search_demand | tableFilter04: search_type | tableFilter03: search_area | tableFilter02: search_location | tableFilter: search_id | filter: general_search"> -->
+                        <td>{{ user.referenceId }}</td>
+                        <td>{{ user.property_purpose }}</td>
+                        <!-- <td>
                                 <span *ngFor="let loc of user.location">{{ loc.location }}<br></span>
                             </td> -->
 
-            <td>
-              {{ user.city[0]?.city }}<span></span><br /><span
-                class="badge badge-light"
-                *ngFor="let loc of user.location"
-                >{{ loc.location }},
+                        <td>
+                            {{ user.city[0]?.city }}<span></span><br /><span class="badge badge-light" *ngFor="let loc of user.location">{{ loc.location }},
               </span>
-            </td>
-            <td>{{ user.area }}</td>
-            <td>{{ user.client_type }}</td>
-            <td>{{ user.demand_price }}</td>
-            <td>{{ user.property_purpose }}</td>
-            <td>{{ user.beds_number }}</td>
-            <td>
-              <b>Name : </b>{{ user.client_name }} <br />
-              <b>Number : </b>{{ user.client_number }}
-            </td>
-            <td>{{ user.assigned_to }}</td>
-            <td>
-              <i class="fa fa-edit icon" (click)="setUser(user)"></i
+                        </td>
+                        <td *ngIf="user.area == null else elseBlockArea"><b>Max:</b> {{ user.max_area + " - " + user.area_unit}}<br><b>Min:</b> {{ user.min_area + " - " + user.area_unit}}</td>
+                        <ng-template #elseBlockArea>
+                            <td>{{ user.area + " - " + user.area_unit}}</td>
+                        </ng-template>
+                        <td>{{ user.client_type | titlecase }}</td>
+                        <td *ngIf="user.demand_price == null else elseBlockDemand"><b>Max:</b> {{ user.max_price }}<br><b>Min:</b> {{ user.min_price }}</td>
+                        <ng-template #elseBlockDemand>
+                            <td>{{ user.demand_price }}</td>
+                        </ng-template>
+
+                        <td>{{ user.beds_number }}</td>
+                        <td>
+                            <b>Name : </b>{{ user.client_name |titlecase }} <br />
+                            <b>Phone : </b>{{ user.client_number }}
+                        </td>
+                        <td>{{ user.assigned_to | titlecase}}</td>
+                        <td>
+                            <i class="fa fa-edit icon" (click)="setUser(user)"></i
               ><a (click)="setUser(user)" role="button">Edit</a>
 
               <i
@@ -133,56 +123,35 @@
                 data-toggle="modal"
                 data-target="#exampleModal1"
               ></i>
-            </td>
-            <div
-              class="modal fade"
-              id="exampleModal1"
-              tabindex="-1"
-              role="dialog"
-              aria-labelledby="exampleModalLabel"
-              aria-hidden="true"
-            >
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">
-                      Delete Confirmation
-                    </h5>
-                    <button
-                      type="button"
-                      class="close"
-                      data-dismiss="modal"
-                      aria-label="Close"
-                    >
+                        </td>
+                        <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">
+                                            Delete Confirmation
+                                        </h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
-                  </div>
-                  <div class="modal-body">
-                    Are you sure you want to delete it?
-                  </div>
-                  <div class="modal-footer">
-                    <button
-                      type="button"
-                      class="btn btn-secondary"
-                      data-dismiss="modal"
-                    >
+                                    </div>
+                                    <div class="modal-body">
+                                        Are you sure you want to delete it?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
                       Close
                     </button>
-                    <button
-                      type="button"
-                      class="btn btn-danger"
-                      data-dismiss="modal"
-                      (click)="deleteInventory()"
-                    >
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteInventory()">
                       Delete
                     </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </tr>
-        </tbody>
-      </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-  </div>
 </div>

@@ -33,12 +33,13 @@ export class AddInventoriesComponent implements OnInit {
   minimumAreaRange; //Variable stores max area
   maximumAreaRange; //Variable stores min area
   userList: any;
-  selectedLocations: any = [];
+  selectedLocations: any;
   selectedCity: any;
-  selectStringLocations: any = [];
+  selectStringLocations: any;
+  selectAgentValue: any;
   selectedUserCity: any;
   selectedUserLocation: any;
-  userLocationMatched: boolean;
+  userLocationMatched: boolean = true;
 
   opacity = 1;
   map: mapboxgl.Map;
@@ -110,8 +111,6 @@ export class AddInventoriesComponent implements OnInit {
   }
   //Function that is working on AREA filter/check
   public onChangeArea(event: any): void {
-    console.log(this.minimumAreaRange);
-
     this.isInvalidArea = this.minimumAreaRange > this.maximumAreaRange;
   }
 
@@ -123,68 +122,115 @@ export class AddInventoriesComponent implements OnInit {
   }
   // Function to patch the value from ng select
   changeAssignedTo2(access: any) {
-    this.selectedUserCity = access?.city.city;
-    this.selectedUserLocation = access?.location;
-    this.addinventoryForm.patchValue({ assigned_to: access?.fullname });
-    console.log(this.selectedUserLocation);
-    console.log(this.selectedUserCity);
-    const location = this.addinventoryForm.controls["location"].value?.location;
-    const city = this.addinventoryForm.controls["city"].value?.city;
-    console.log(city);
-    console.log(location);
-    if (this.selectedUserCity == null && this.selectedUserLocation == null) {
-      console.log(this.selectedUserCity);
-    } else {
-      if (
-        this.selectedUserCity !==
-        this.addinventoryForm.controls["city"].value.city
-      ) {
-        console.log("city not matching");
+    if (this.user1) {
+      console.log(this.addinventoryForm.value);
 
-        this.toastr.error("Agent is not assigned with this City", "Error", {
-          timeOut: 5000,
-        });
+      console.log("user 1 is here");
+
+      let city = this.user1.city[0].city;
+      let location = this.selectStringLocations;
+      this.selectedUserCity = access?.city.city;
+      this.selectedUserLocation = access?.location;
+
+      if (this.selectedUserCity == null && this.selectedUserLocation == null) {
+        this.userLocationMatched = false;
       } else {
-        console.log("city matched");
-        for (let i = 0; i < this.selectedUserLocation.length; i++) {
-          if (location === this.selectedUserLocation[i].location) {
-            this.userLocationMatched = true;
-            console.log("location matched");
-            break;
+        if (this.selectedUserCity !== city) {
+          this.userLocationMatched = false;
+          console.log("city not matching");
+
+          this.toastr.error("Agent is not assigned with this City", "Error", {
+            timeOut: 5000,
+          });
+        } else {
+          console.log("city matched");
+          for (let i = 0; i < this.selectedUserLocation.length; i++) {
+            if (location === this.selectedUserLocation[i].location) {
+              this.userLocationMatched = true;
+              console.log("location matched");
+              break;
+            } else {
+              this.userLocationMatched = false;
+              console.log("location not matching");
+            }
+          }
+          if (this.userLocationMatched) {
           } else {
-            this.userLocationMatched = false;
-            console.log("location not matching");
+            this.toastr.error(
+              "Agent is not assigned with this Location",
+              "Error",
+              {
+                timeOut: 5000,
+              }
+            );
           }
         }
-        if (this.userLocationMatched) {
+      }
+    } else {
+      this.selectedUserCity = access?.city.city;
+      this.selectedUserLocation = access?.location;
+      this.addinventoryForm.patchValue({ assigned_to: access?.fullname });
+      console.log(this.selectedUserLocation);
+      console.log(this.selectedUserCity);
+      let locationSelect = this.addinventoryForm.controls["location"].value
+        ?.location;
+      let citySelect = this.addinventoryForm.controls["city"].value?.city;
+      console.log(citySelect);
+      console.log(locationSelect);
+      if (this.selectedUserCity == null && this.selectedUserLocation == null) {
+        console.log(this.selectedUserCity);
+      } else {
+        if (this.selectedUserCity != citySelect) {
+          this.userLocationMatched = false;
+          console.log("city not matching");
+
+          this.toastr.error("Agent is not assigned with this City", "Error", {
+            timeOut: 5000,
+          });
         } else {
-          this.toastr.error(
-            "Agent is not assigned with this Location",
-            "Error",
-            {
-              timeOut: 5000,
+          console.log("city matched");
+          for (let i = 0; i < this.selectedUserLocation.length; i++) {
+            if (locationSelect === this.selectedUserLocation[i].location) {
+              this.userLocationMatched = true;
+              console.log("location matched");
+              break;
+            } else {
+              this.userLocationMatched = false;
+              console.log("location not matching");
             }
-          );
+          }
+          if (this.userLocationMatched) {
+          } else {
+            this.toastr.error(
+              "Agent is not assigned with this Location",
+              "Error",
+              {
+                timeOut: 5000,
+              }
+            );
+          }
         }
       }
     }
+    console.log(this.userLocationMatched);
   }
   // Function to patch the value from form radio button
   assigned_To(name: any) {
     // console.log(name);
     this.addinventoryForm.patchValue({ assigned_to: name });
   }
-  // setFormTitle(name:any) {
-  //   this.authService.setFormTitle(name);
-  //   this.router.navigate(["/add-inventories"]);
-  // }
   updatefields() {
-    // this.addinventoryForm.patchValue({ form_title: 'Inventory' });
     this.formSendingStatus = "Save";
     this.addinventoryForm.patchValue({ form_title: this.user1.form_title });
+    this.addinventoryForm.patchValue({ area_unit: this.user1.area_unit });
     this.addinventoryForm.patchValue({ _id: this.user1._id });
     this.addinventoryForm.patchValue({ location: this.user1.location });
+    console.log(this.user1.location);
+
+    this.addinventoryForm.patchValue({ assigned_type: this.user1.assigned_type });
     this.addinventoryForm.patchValue({ assigned_to: this.user1.assigned_to });
+    this.selectAgentValue =  this.user1.assigned_to
+    
     this.addinventoryForm.patchValue({
       property_type: this.user1.property_type,
     });
@@ -202,24 +248,16 @@ export class AddInventoriesComponent implements OnInit {
     this.addinventoryForm.patchValue({ city: this.user1.city });
 
     if (this.user1.location) {
-      for (let i = 0; i < this.user1.location.length; i++) {
-        console.log(this.user1.location[i].location);
-        this.selectStringLocations.push(this.user1.location[i].location);
-        this.selectedLocations.push(this.user1.location[i].location);
-      }
+      this.selectStringLocations = this.user1.location[0].location;
+      this.selectedLocations = this.user1.location[0].location;
       console.log(this.selectStringLocations);
     }
 
     if (this.user1.city) {
       this.getLocations(this.user1.city[0]._id);
-      // this.addinventoryForm.patchValue({ city: this.user1.city.city });
       console.log(this.user1.city[0]._id);
       this.selectedCity = this.user1.city[0].city;
     }
-    console.log(this.addinventoryForm.value);
-
-    console.log(this.selectedLocations);
-    console.log(this.selectedCity);
   }
 
   // File Upload Functions below
@@ -231,13 +269,14 @@ export class AddInventoriesComponent implements OnInit {
   formDeclare() {
     this.addinventoryForm = this.formBuilder.group({
       // _id: [''],
-      assigned_to1: [],
-      assigned_to: [
-        {
-          userId: "",
-          name: "",
-        },
-      ],
+      assigned_type: [],
+      assigned_to:[],
+      // assigned_to: [
+      //   {
+      //     userId: "",
+      //     name: "",
+      //   },
+      // ],
       admin: [
         {
           userId: "",
@@ -271,7 +310,7 @@ export class AddInventoriesComponent implements OnInit {
       demand_price: [],
       min_area: [],
       max_area: [],
-      beds_number: [, Validators.required],
+      beds_number: ["",Validators.required],
       area: [],
       area_unit: [""],
       client_name: ["", Validators.required],
@@ -303,33 +342,34 @@ export class AddInventoriesComponent implements OnInit {
   }
 
   changeCity(city: any) {
-    this.selectStringLocations = [];
+    // console.log(this.addinventoryForm.get("assigned_to").value);
+
+    // this.addinventoryForm.get("assigned_to").setValue = null;
+    // this.addinventoryForm.controls['location'].setValue(null);
+    // this.addinventoryForm.controls['assigned_to'].setValue(null);
+    // console.log(this.addinventoryForm.get("assigned_to").value);
+    // console.log(this.addinventoryForm.get("location").value);
+    this.selectStringLocations = null;
+    this.selectAgentValue = null;
     this.locations = [];
-
-    if (this.user1) {
-      console.log(city.city);
-
-      console.log(this.selectedCity);
-
-      if (this.selectedCity == city.city) {
-        this.selectStringLocations = this.selectedLocations;
-        console.log(this.selectStringLocations);
-      } else this.selectStringLocations = [];
-    }
 
     if (city) this.getLocations(city._id);
     this.addinventoryForm.patchValue({ city });
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    console.log(this.locations);
-    if (city) {
-      this.getLocations(city._id);
-      this.addinventoryForm.patchValue({ city });
-      console.log(this.addinventoryForm.value);
+    this.locations = "";
+    if (this.user1) {
+      if (this.selectedCity == city?.city) {
+        console.log("inside");
+
+        console.log(this.selectStringLocations);
+        console.log(this.selectedLocations);
+        this.selectStringLocations = this.selectedLocations;
+        this.addinventoryForm.patchValue({ location: this.user1?.location });
+      } else this.selectStringLocations = "";
     }
   }
   changeLocation(location: any) {
-    console.log(location);
-    this.selectedLocations = location;
+    this.selectAgentValue = null;
+    this.selectedLocations = location?.location;
     this.addinventoryForm.patchValue({ location });
     console.log(this.addinventoryForm.value);
   }
@@ -339,13 +379,13 @@ export class AddInventoriesComponent implements OnInit {
     this.authService.getCities().subscribe(
       (cities) => {
         // console.log('Curr', this.user);
-        if (this.user?.access === "islamabad_admin") {
+        if (this.user?.access == "islamabad_admin") {
           this.city.push(cities[2]);
           this.cities = this.city;
-        } else if (this.user?.access === "rawalpindi_admin") {
+        } else if (this.user?.access == "rawalpindi_admin") {
           this.city.push(cities[1]);
           this.cities = this.city;
-        } else if (this.user?.access === "peshawar_admin") {
+        } else if (this.user?.access == "peshawar_admin") {
           this.city.push(cities[0]);
           this.cities = this.city;
         } else {
@@ -362,11 +402,7 @@ export class AddInventoriesComponent implements OnInit {
     console.log(selectedCity);
     this.authService.getLocations().subscribe(
       (locations) => {
-        console.log(locations, selectedCity);
-
         this.locations = locations;
-        // this.subsLocations = locations.subLocations;
-        // console.log(" this.locations", this.locations);
         if (selectedCity) {
           this.locations = locations.filter((loc) => {
             return loc.cityId == selectedCity;
@@ -395,7 +431,6 @@ export class AddInventoriesComponent implements OnInit {
       });
       return;
     }
-    // this.addinventoryForm.patchValue({ location: this.selectedLocations });
     console.log(this.addinventoryForm.value);
 
     if (this.user1) {
@@ -407,8 +442,6 @@ export class AddInventoriesComponent implements OnInit {
           // this.registerresponse = data;
           const email = this.addinventoryForm.value.email;
           const msg = data.message;
-          // const status = data.status;
-          // this.registerForm.reset();
           if (msg == "Inventory updated successfully") {
             this.toastr.success(msg, "Success", {
               timeOut: 5000,
@@ -465,52 +498,3 @@ export class AddInventoriesComponent implements OnInit {
     }
   }
 }
-
-//   console.log('\n\n', this.addinventoryForm.value, '\n\n');
-//   this.authService.createInventory(this.addinventoryForm.value).subscribe((data) => {
-//     const user = this.addinventoryForm.get('form_title').value;
-//     if (user === 'Lead'){
-//     this.addinventoryForm.reset();
-//     this.toastr.success('User Added', 'Success', {
-//       timeOut: 9000
-//     });
-//     console.log('Subscribed data: ', data);
-//     this.router.navigate(['/leads']);
-//   }
-//   else if (user === 'Inventory'){
-//     this.addinventoryForm.reset();
-//     this.toastr.success('User Added', 'Success', {
-//       timeOut: 9000
-//     });
-//     console.log('Subscribed data: ', data);
-//     this.router.navigate(['/inventory']);
-//   }
-// },
-//     (error: HttpErrorResponse) => {
-//       console.log(error);
-//       this.toastr.error('Fields Empty', 'Error', {
-//         timeOut: 5000
-//       });
-//     });
-
-// Form upload function
-
-// onSelectFile(event) {
-//   if (event.target.files && event.target.files[0]) {
-//     const filesAmount = event.target.files.length;
-//     for (let i = 0; i < filesAmount; i++) {
-//       const reader = new FileReader();
-
-//       // tslint:disable-next-line: no-shadowed-variable
-//       reader.onload = (event: any) => {
-//         // console.log(event.target.result);
-//         this.urls.push(event.target.result);
-//       };
-
-//       reader.readAsDataURL(event.target.files[i]);
-//     }
-//   }
-// }
-// removeMultipleSelectedFile(index) {
-//   this.urls.splice(index, 1);
-// }

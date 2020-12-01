@@ -48,11 +48,11 @@ const routes: Routes = [
     canActivate: [IsLoginGuard],
     component: SignupotpComponent,
   },
-  {
-    path: "dashboard",
-    canActivate: [IsLoginGuard],
-    component: DashboardComponent,
-  },
+  // {
+  //   path: "dashboard",
+  //   canActivate: [IsLoginGuard],
+  //   component: DashboardComponent,
+  // },
   {
     path: "navbar",
     canActivate: [IsLoginGuard],

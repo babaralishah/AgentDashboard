@@ -253,11 +253,10 @@ body {
 .sidebar-footer {
     position: absolute;
     padding: 10px;
-    bottom: 0;
     width: 100%;
-    bottom: 0;
+    bottom: 13px;
     display: flex;
-    margin-top: 10px;
+    margin-top: 1px;
 }
 
 .sidebar-footer>a {

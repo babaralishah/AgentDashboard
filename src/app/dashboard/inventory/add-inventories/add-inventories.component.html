@@ -84,23 +84,18 @@
                     </div>
                     <div class="form-group" *ngIf="user1">
                         <div>
-                            <ng-select [(ngModel)]="this.user1.city[0].city" [ngModelOptions]="{standalone: true}" class="ng-select" [items]="cities" bindLabel="city" bindValue="city" placeholder="Select City" [ngClass]="{ 'is-invalid': submitted && f.city.errors }" (change)="changeCity($event)">
+                            <ng-select [(ngModel)]="user1.city[0].city" [ngModelOptions]="{standalone: true}" class="ng-select" [items]="cities" bindLabel="city" bindValue="city" placeholder="Select City" [ngClass]="{ 'is-invalid': submitted && f.city.errors }" (change)="changeCity($event)">
                             </ng-select>
                             <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
                                 <div *ngIf="f.city.errors.required">City is required</div>
                             </div>
                         </div>
                     </div>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <!-- Location -->
                     <div class="form-group" *ngIf="user1">
-                        <div>
-                            <ng-select [(ngModel)]="selectStringLocations" [ngModelOptions]="{standalone: true}" class="ng-select" [items]="locations" bindLabel="location" bindValue="location" placeholder="Select Location" [ngClass]="{ 'is-invalid': submitted && f.location.errors }"
-                                (change)="changeLocation($event)">
+                        <div class="input-group">
+                            <ng-select [(ngModel)]="selectStringLocations" [ngModelOptions]="{standalone: true}" class="ng-select inputs2" [items]="locations" bindLabel="location" bindValue="location" placeholder="Select Location" (change)="changeLocation($event)">
                             </ng-select>
-                            <div *ngIf="submitted && f.location.errors" class="invalid-feedback">
-                                <div *ngIf="f.location.errors.required">Location is required</div>
-                            </div>
                         </div>
                     </div>
 
@@ -353,10 +348,19 @@
                 </div>
             </div>
             <!-- Beds -->
-
             <div class="row">
                 <div class="col-md-4 col-sm-4">
                     <div class="form-group">
+                        <b>Beds Number</b>
+                        <input type="number" class="form-control" formControlName="beds_number" placeholder="Beds Number" autocomplete="off" [ngClass]="{ 'is-invalid': submitted && f.beds_number.errors }" />
+                        <b class="steps">Step 7: Select Number of Beds</b>
+                        <div *ngIf="submitted && f.beds_number.errors" class="invalid-feedback">
+                            <div *ngIf="f.beds_number.errors.required">Bed is required</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="form-group">
                         <div> <b>Beds Number</b>
                             <input type="number" class="form-control" formControlName="beds_number" [ngClass]="{ 'is-invalid': submitted && f.beds_number.errors }" />
                         </div>
@@ -365,9 +369,9 @@
                             dasd
                             <div *ngIf="f.beds_number.errors.required">Beds number is required</div>
                         </div>
-                    </div>
-                </div>
-            </div>
+
+                        hjftyry
+                    </div> -->
             <!-- Simple Area -->
             <div *ngIf="addinventoryForm.get('property_purpose').value === 'Sell' ">
                 <div class="row">
@@ -375,10 +379,10 @@
                         <div class="form-group">
                             <div>
                                 <b>Simple Area</b>
-                                <input type="number" class="form-control" formControlName="area" autocomplete="off" />
-                                <!-- <div *ngIf="submitted && f.land_area.errors" class="invalid-feedback">
-                                <div *ngIf="f.land_area.errors.required">Land Area is required</div>
-                            </div> -->
+                                <input type="number" class="form-control" formControlName="area" autocomplete="off" [ngClass]="{ 'is-invalid': submitted && f.area.errors }" />
+                                <div *ngIf="submitted && f.area.errors" class="invalid-feedback">
+                                    <div *ngIf="f.area.errors.required">Land Area is required</div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -439,18 +443,18 @@
 
                     <div class="radio">
                         <div class="btn-group btn-group-toggle">
-                            <label class="btn btn-primary" [class.active]="addinventoryForm.get('assigned_to1').value === 'Self'"> 
-                                    <input (click)="assigned_To('Self')" type="radio" formControlName="assigned_to1" value="Self" > 
+                            <label class="btn btn-primary" [class.active]="addinventoryForm.get('assigned_type').value === 'Self'"> 
+                                    <input (click)="assigned_To('Self')" type="radio" formControlName="assigned_type" value="Self" > 
                                         Self 
                                 </label>
 
-                            <label class="btn btn-primary" [class.active]="addinventoryForm.get('assigned_to1').value === 'Admin'"> 
-                                    <input  type="radio"  formControlName="assigned_to1" value="Admin">  
+                            <label class="btn btn-primary" [class.active]="addinventoryForm.get('assigned_type').value === 'Admin'"> 
+                                    <input  type="radio"  formControlName="assigned_type" value="Admin">  
                                         Admins
                                 </label>
 
-                            <label class="btn btn-primary" [class.active]="addinventoryForm.get('assigned_to1').value === 'Agents'"> 
-                                    <input  type="radio"  formControlName="assigned_to1" value="Agents">  
+                            <label class="btn btn-primary" [class.active]="addinventoryForm.get('assigned_type').value === 'Agents'"> 
+                                    <input  type="radio"  formControlName="assigned_type" value="Agents">  
                                         Agents
                                 </label>
 
@@ -460,7 +464,7 @@
             </div>
             <!-- Select Admins  -->
             <br><br>
-            <div class="row" *ngIf=" addinventoryForm.get('assigned_to1').value === 'Admin'">
+            <div class="row" *ngIf=" addinventoryForm.get('assigned_type').value === 'Admin'">
 
                 <!-- <br><br> -->
                 <ng-select class="ng-select inputs2" [items]="access_type" bindLabel="access" bindValue="access" placeholder="Select Admin" (change)="changeAssignedTo1($event)">
@@ -469,36 +473,18 @@
             </div>
 
             <!-- Select Agents -->
-            <div class="row" *ngIf=" addinventoryForm.get('assigned_to1').value === 'Agents' ">
+            <div class="row" *ngIf=" addinventoryForm.get('assigned_type').value === 'Agents' ">
 
-                <ng-select class="ng-select inputs2" [items]="userList" bindLabel="fullname" bindValue="fullname" placeholder="Select Agent" (change)="changeAssignedTo2($event)">
+                <ng-select class="ng-select inputs2" formControlName="assigned_to" [(ngModel)]="selectAgentValue" [items]="userList" bindLabel="fullname" bindValue="fullname" placeholder="Select Agent" (change)="changeAssignedTo2($event)">
                 </ng-select>
 
             </div>
             <br><br>
             <div class="form-group pull-right">
-                <button type="submit" class="btn btn1 btn-primary">{{formSendingStatus}}</button>
+                <button type="submit" [disabled]="!userLocationMatched" class="btn btn1 btn-primary">{{formSendingStatus}}</button>
                 <br><br><br>
             </div>
         </form>
 
     </div>
 </div>
-
-<!-- <div class="container-fluid">
-    <div class=" register">
-        <div class="row">
-            <div class="col-md-12">
-                <app-header></app-header>
-            </div>
-        </div>
-        <div class="row inventory">
-            <div class="col-md-3">
-                <app-dashboard></app-dashboard>
-            </div>
-            <div class="col-md-9 col-sm-10 register-right">
-
-            </div>
-        </div>
-    </div>
-</div> -->

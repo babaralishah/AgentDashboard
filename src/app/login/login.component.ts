@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
   username: string;
   email: string;
   errorMessage: any;
+  tokendata: any;
   constructor(
     public formBuilder: FormBuilder, // Creating an instance of Formbuilder
     public authService: AuthenticationService, // Instance of Authentication services created in front end
@@ -30,6 +31,14 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.initialize();
+    this.tokenization();
+  }
+  async tokenization()
+  {
+    const token = await this.authService.getToken();
+    const decodedToken = await this.authService.getDecodedToken(token);
+    this.tokendata = decodedToken.data;
+    console.log(this.tokendata);
   }
   initialize() {
     this.loginForm = this.formBuilder.group({

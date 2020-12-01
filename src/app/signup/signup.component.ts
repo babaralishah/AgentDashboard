@@ -50,6 +50,7 @@ export class SignupComponent implements OnInit {
     this.registerForm.patchValue({ email: this.user.email });
     this.registerForm.patchValue({ password: this.user.password });
     this.registerForm.patchValue({ location: this.user.location });
+    console.log(this.user.location);
     this.registerForm.patchValue({ city: this.user.city });
     this.registerForm.patchValue({ contact: this.user.contact });
     this.registerForm.patchValue({ access: this.user.access });
@@ -70,7 +71,6 @@ export class SignupComponent implements OnInit {
       console.log(this.user.city.city);
     }
     this.selectedCity = this.user.city?.city;
-    console.log(this.selectedLocations);
   }
   initialize() {
     if (this.user) {
@@ -163,37 +163,33 @@ export class SignupComponent implements OnInit {
   }
 
   //Function to change the city of --ng select city--
-  changeCity(city) {
+  changeCity(city:any) {
     this.selectStringLocations = [];
     this.locations = [];
     if (city) this.getLocations(city._id);
     this.registerForm.patchValue({ city });
     this.locations = "";
     if (this.user) {
-      console.log(city.city);
-
-      console.log(this.selectedCity);
-
-      if (this.selectedCity == city.city) {
+      if (this.selectedCity == city?.city) {
+        console.log(this.selectStringLocations);
+        console.log(this.selectedLocations);
         this.selectStringLocations = this.selectedLocations;
-        this.registerForm.patchValue({ location: this.user.location });
+        this.registerForm.patchValue({ location: this.user?.location });
       } else this.selectStringLocations = [];
     }
-    if (city) this.getLocations(city._id);
-    this.registerForm.patchValue({ city });
   }
 
   //Function to change the location of --ng select location--
-  changeLocation(location) {
+  changeLocation(location:any) {
     console.log(location);
     this.registerForm.patchValue({ location: location });
     console.log(this.registerForm.value);
   }
 
   // Patch the value of access input using this below function
-  changeAccess(access) {
+  changeAccess(access:any) {
     // console.log(access.access);
-    if (access) this.registerForm.patchValue({ access: access.access });
+    if (access) this.registerForm.patchValue({ access: access?.access });
   }
 
   // Function to register the user by sending whole form
@@ -220,7 +216,7 @@ export class SignupComponent implements OnInit {
         .subscribe((data: any) => {
           console.log("signup data: ", data);
           console.log(data.code);
-          
+
           // this.registerresponse = data;
           const email = this.registerForm.value.email;
           const msg = data.message;

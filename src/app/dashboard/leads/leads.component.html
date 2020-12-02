@@ -27,7 +27,7 @@
 
                     <!-- <button class="btn btn-primary rounded-pill" type="submit">Search</button> -->
 
-                    <button onclick="window.print()" class="btn btn-primary">Print</button> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<button class="btn btn-primary">Excel</button>
+                    <button onclick="window.print()" class="btn btn-primary">Print</button> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<button (click)="exportTOExcel()" class="btn btn-primary">Excel</button>
                 </div>
             </div>
             <br><br><br>
@@ -36,11 +36,11 @@
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
-                        <th scope="col">Client</th>
-                        <th scope="col">Type</th>
                         <th scope="col">Purpose</th>
-                        <th scope="col">Prop. Type</th>
-                        <th scope="col">Prop. #</th>
+                        <th scope="col">Client</th>
+                        <th scope="col">Client Type</th>
+                        <th scope="col">Property Type</th>
+                        <!-- <th scope="col">Property #</th> -->
                         <th scope="col">Area</th>
                         <th scope="col">Location</th>
                         <th scope="col">Demand</th>
@@ -50,6 +50,7 @@
                         <th scope="col">Admin Status</th>
                         <th scope="col">Agent Status</th> -->
                         <th scope="col">Added On</th>
+                        <th scope="col">Agent Assigned</th>
                         <th scope="col">Operations</th>
                     </tr>
                 </thead>
@@ -107,13 +108,13 @@
                     <tr *ngFor="let user of user | filter: general_search">
                         <!-- | tableFilter06: search_client | tableFilter05: search_demand | tableFilter04: search_type | tableFilter03: search_area | tableFilter02: search_location | tableFilter: search_id -->
                         <td>{{ user.referenceId }}</td>
-
-                        <td><b>Name : </b>{{ user.client_name }} <br> <b>Number : </b>{{ user.client_number}}</td>
+                        <td>{{ user.property_purpose }}</td>
+                        <td><b>Name : </b>{{ user.client_name | titlecase }} <br> <b>Number : </b>{{ user.client_number}}</td>
                         <!-- <td>{{ user.client_name }}</td> -->
                         <td>{{ user.client_type }}</td>
-                        <td>{{ user.property_purpose }}</td>
+
                         <td>{{ user.property_type }}</td>
-                        <td>{{ user.Prop_num }}</td>
+                        <!-- <td>{{ user.Prop_num }}</td> -->
                         <td>{{ user.area}}</td>
                         <!-- <td>{{ user.location.location }}</td> -->
 
@@ -131,11 +132,17 @@
                         <td>{{ user.assigned_to.name}}</td>
                         <td>{{ user.Admin_status }}</td>
                         <td>{{ user.Agent_status }}</td> -->
+
                         <td>{{ user.created | date: "dd/MM/yyyy"}}</td>
-                        <td><i class="fa fa-edit icon" (click)="setUser(user)"></i><a (click)="setUser(user)" role="button">Edit</a>
+                        <td>
+                            <span><b>Assigned To: </b> {{user.assigned_to | titlecase}}</span><br>
+                            <span><b>Assigned By: </b> {{token?.fullname | titlecase}}</span></td>
+                        <td><i class="fa fa-edit icon" (click)="setUser(user)"></i>
+                            <a (click)="setUser(user)" role="button"></a>
 
-                            <i class="fa fa-trash icon" (click)="confirmID(user._id)" data-toggle="modal" data-target="#exampleModal1"></i>
-
+                            <i class="fa fa-trash icon" (click)="confirmID(user._id)" data-toggle="modal" data-target="#exampleModal1"></i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span><i class="fas fa-exchange-alt"   data-toggle="modal"
+                                data-target="#myModal"></i></span>
                         </td>
                         <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
@@ -163,6 +170,85 @@
                     </tr>
                 </tbody>
             </table>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal" id="myModal">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Agent Assignment</h4>
+                <button type="button" class="close" data-dismiss="modal">
+            &times;
+          </button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form [formGroup]="agentAssignedForm">
+                    <!-- Access Type -->
+                    <br>
+                    <div class="row">
+                        <div class="col-md-5 col-sm-5">
+
+                            <div class="radio">
+                                <div class="btn-group btn-group-toggle">
+                                    <label class="btn btn-primary" [class.active]="agentAssignedForm.get('assigned_type').value === 'city_admin'"> 
+                                    <input type="radio" formControlName="assigned_type" value="city_admin" > 
+                                    City Admin 
+                                </label>
+
+                                    <label class="btn btn-primary" [class.active]="agentAssignedForm.get('assigned_type').value === 'Admin'"> 
+                                    <input  type="radio"  formControlName="assigned_type" value="Admin">  
+                                        Admins
+                                </label>
+
+                                    <label class="btn btn-primary" [class.active]="agentAssignedForm.get('assigned_type').value === 'Agents'"> 
+                                    <input  type="radio"  formControlName="assigned_type" value="Agents">  
+                                        Agents
+                                </label>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Select City Admin  -->
+                    <br><br>
+                    <div class="row text-center" *ngIf=" agentAssignedForm.get('assigned_type').value === 'city_admin'">
+
+                        <!-- <br><br> -->
+                        <ng-select class="ng-select inputs2" [items]="cityAdminList" bindLabel="city" bindValue="city" placeholder="Select city admin" (change)="changeAssignedToCityAdmin($event)">
+                        </ng-select>
+
+                    </div>
+
+                    <!-- Select Admins -->
+                    <div class="row" *ngIf=" agentAssignedForm.get('assigned_type').value === 'Admin'">
+
+                        <ng-select class="ng-select inputs2" [items]="access_type" bindLabel="access" bindValue="access" placeholder="Select Admin" (change)="changeAssignedAdmin($event)">
+                        </ng-select>
+
+                    </div>
+
+                    <!-- Select Agents -->
+                    <div class="row" *ngIf=" agentAssignedForm.get('assigned_type').value === 'Agents' ">
+
+                        <ng-select class="ng-select inputs2" [items]="agentList" bindLabel="fullname" bindValue="fullname" placeholder="Select Agent" (change)="changeAssignedAgent($event)">
+                        </ng-select>
+
+                    </div>
+                </form>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">
+            Close
+          </button>
+            </div>
         </div>
     </div>
 </div>

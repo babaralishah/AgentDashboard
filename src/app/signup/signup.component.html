@@ -68,7 +68,8 @@
                     <div class="form-group">
                         <div class="input-group">
                             <i class="fas fa-phone"></i>
-                            <input formControlName="contact" type="number" class="form-control inputs" autocomplete="off" placeholder="Phone Number" [ngClass]="{ 'is-invalid': submitted && f.contact.errors }" />
+                            <input formControlName="contact" type="text" class="form-control inputs" autocomplete="off" placeholder="Phone Number" [ngClass]="{ 'is-invalid': submitted && f.contact.errors }" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                            />
                             <div *ngIf="submitted && f.contact.errors" class="invalid-feedback">
                                 <div *ngIf="f.contact.errors.required">Contact is required</div>
                             </div>

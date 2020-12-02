@@ -19,11 +19,8 @@ export class AddInventoriesComponent implements OnInit {
   subsLocations: any;
   city: any;
   user: any;
-  user1: any;
   access_type = [
-    { access: "super_admin" },
-    { access: "agent" },
-    { access: "city_admin" },
+    { access: "super_admin" }
   ];
   access_type1 = [{ access: "all_agents" }];
   minimumPriceRange;
@@ -40,6 +37,8 @@ export class AddInventoriesComponent implements OnInit {
   selectedUserCity: any;
   selectedUserLocation: any;
   userLocationMatched: boolean = true;
+  cityAdminList = [];
+  agentList = [];
 
   opacity = 1;
   map: mapboxgl.Map;
@@ -56,6 +55,7 @@ export class AddInventoriesComponent implements OnInit {
   addinventoryForm: FormGroup;
   typeCheckValue: any;
   isRent = true;
+  token: string;
   //////////////////////////////////
 
   constructor(
@@ -73,25 +73,60 @@ export class AddInventoriesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.user1 = this.authService.getUser();
-    if (this.user1) {
-      console.log("User1: ", this.user1);
+    this.getUserDetails();
+    this.user = this.authService.getUser();
+    if (this.user) {
+      console.log("User1: ", this.user);
 
       this.authService.removeUser();
     }
-    const token = this.authService.getToken();
-    this.user = this.authService.getDecodedToken(token).data;
+    
     this.form_title = this.authService.getFormTitle();
     this.authService.removeFormTitle();
     this.formDeclare();
 
     this.addinventoryForm.patchValue({ form_title: this.form_title });
     this.getCities();
-    if (this.user1) {
+    if (this.user) {
       this.updatefields();
     }
     this.getUserList();
+    this.getCityAdminList();
   }
+
+  getUserDetails(){
+    
+    this.token = this.authService.getToken();
+    this.token = this.authService.getDecodedToken(this.token).data;
+    console.log(this.token);
+    // this.token = this.authService.getToken();
+    // this.token = this.authService.getDecodedToken(this.token);
+    // console.log(this.token);
+    
+  }
+  
+  // Function to call User data table for Assigned_To Field of the add-inventory-form
+  getCityAdminList() {
+    this.authService.getUsers().subscribe(
+      (data) => {
+        for (var i = 0; i < data.length; i++) {
+          console.log(data[i].access);
+          if (data[i].access == "city_admin") {
+            this.cityAdminList.push(data[i].city);
+          } else if (data[i].access == "agent") {
+            this.agentList.push(data[i].fullname);
+          }
+        }
+
+        // this.cityAdminList = data;
+        console.log("User Get Response", this.cityAdminList);
+      },
+      (err) => {
+        console.error(err);
+      }
+    );
+  }
+
   // Function to call User data table for Assigned_To Field of the add-inventory-form
   getUserList() {
     this.authService.getUsers().subscribe(
@@ -115,105 +150,120 @@ export class AddInventoriesComponent implements OnInit {
   }
 
   // Function to patch the value from ng select
-  changeAssignedTo1(access: any) {
-    // console.log(access.access);
-    this.addinventoryForm.patchValue({ assigned_to: access?.access });
-    // console.log(this.addinventoryForm.value);
+  changeAssignedToCityAdmin(access: any) {
+    this.addinventoryForm.patchValue({ assigned_to: access?.city });
+    console.log(this.addinventoryForm.get("assigned_to").value);
   }
+
+  
   // Function to patch the value from ng select
-  changeAssignedTo2(access: any) {
-    if (this.user1) {
-      console.log(this.addinventoryForm.value);
-
-      console.log("user 1 is here");
-
-      let city = this.user1.city[0].city;
-      let location = this.selectStringLocations;
-      this.selectedUserCity = access?.city.city;
-      this.selectedUserLocation = access?.location;
-
-      if (this.selectedUserCity == null && this.selectedUserLocation == null) {
-        this.userLocationMatched = false;
-      } else {
-        if (this.selectedUserCity !== city) {
-          this.userLocationMatched = false;
-          console.log("city not matching");
-
-          this.toastr.error("Agent is not assigned with this City", "Error", {
-            timeOut: 5000,
-          });
-        } else {
-          console.log("city matched");
-          for (let i = 0; i < this.selectedUserLocation.length; i++) {
-            if (location === this.selectedUserLocation[i].location) {
-              this.userLocationMatched = true;
-              console.log("location matched");
-              break;
-            } else {
-              this.userLocationMatched = false;
-              console.log("location not matching");
-            }
-          }
-          if (this.userLocationMatched) {
-          } else {
-            this.toastr.error(
-              "Agent is not assigned with this Location",
-              "Error",
-              {
-                timeOut: 5000,
-              }
-            );
-          }
-        }
-      }
-    } else {
-      this.selectedUserCity = access?.city.city;
-      this.selectedUserLocation = access?.location;
-      this.addinventoryForm.patchValue({ assigned_to: access?.fullname });
-      console.log(this.selectedUserLocation);
-      console.log(this.selectedUserCity);
-      let locationSelect = this.addinventoryForm.controls["location"].value
-        ?.location;
-      let citySelect = this.addinventoryForm.controls["city"].value?.city;
-      console.log(citySelect);
-      console.log(locationSelect);
-      if (this.selectedUserCity == null && this.selectedUserLocation == null) {
-        console.log(this.selectedUserCity);
-      } else {
-        if (this.selectedUserCity != citySelect) {
-          this.userLocationMatched = false;
-          console.log("city not matching");
-
-          this.toastr.error("Agent is not assigned with this City", "Error", {
-            timeOut: 5000,
-          });
-        } else {
-          console.log("city matched");
-          for (let i = 0; i < this.selectedUserLocation.length; i++) {
-            if (locationSelect === this.selectedUserLocation[i].location) {
-              this.userLocationMatched = true;
-              console.log("location matched");
-              break;
-            } else {
-              this.userLocationMatched = false;
-              console.log("location not matching");
-            }
-          }
-          if (this.userLocationMatched) {
-          } else {
-            this.toastr.error(
-              "Agent is not assigned with this Location",
-              "Error",
-              {
-                timeOut: 5000,
-              }
-            );
-          }
-        }
-      }
-    }
-    console.log(this.userLocationMatched);
+  changeAssignedAdmin(access: any) {
+    this.addinventoryForm.patchValue({ assigned_to: access?.access });
+    console.log(this.addinventoryForm.get("assigned_to").value);
   }
+  changeAssignedAgent(fullname: any) {
+    this.addinventoryForm.patchValue({ assigned_to: fullname });
+    // console.log(fullname?.fullname);
+    // console.log(fullname);
+    
+    console.log(this.addinventoryForm.get("assigned_to").value);}
+
+
+
+  // Function to patch the value from ng select
+  // changeAssignedTo2(access: any) {
+  //   if (this.user1) {
+  //     console.log(this.addinventoryForm.value);
+
+  //     console.log("user 1 is here");
+
+  //     let city = this.user1.city[0].city;
+  //     let location = this.selectStringLocations;
+  //     this.selectedUserCity = access?.city.city;
+  //     this.selectedUserLocation = access?.location;
+
+  //     if (this.selectedUserCity == null && this.selectedUserLocation == null) {
+  //       this.userLocationMatched = false;
+  //     } else {
+  //       if (this.selectedUserCity !== city) {
+  //         this.userLocationMatched = false;
+  //         console.log("city not matching");
+
+  //         this.toastr.error("Agent is not assigned with this City", "Error", {
+  //           timeOut: 5000,
+  //         });
+  //       } else {
+  //         console.log("city matched");
+  //         for (let i = 0; i < this.selectedUserLocation.length; i++) {
+  //           if (location === this.selectedUserLocation[i].location) {
+  //             this.userLocationMatched = true;
+  //             console.log("location matched");
+  //             break;
+  //           } else {
+  //             this.userLocationMatched = false;
+  //             console.log("location not matching");
+  //           }
+  //         }
+  //         if (this.userLocationMatched) {
+  //         } else {
+  //           this.toastr.error(
+  //             "Agent is not assigned with this Location",
+  //             "Error",
+  //             {
+  //               timeOut: 5000,
+  //             }
+  //           );
+  //         }
+  //       }
+  //     }
+  //   } else {
+  //     this.selectedUserCity = access?.city.city;
+  //     this.selectedUserLocation = access?.location;
+  //     this.addinventoryForm.patchValue({ assigned_to: access?.fullname });
+  //     console.log(this.selectedUserLocation);
+  //     console.log(this.selectedUserCity);
+  //     let locationSelect = this.addinventoryForm.controls["location"].value
+  //       ?.location;
+  //     let citySelect = this.addinventoryForm.controls["city"].value?.city;
+  //     console.log(citySelect);
+  //     console.log(locationSelect);
+  //     if (this.selectedUserCity == null && this.selectedUserLocation == null) {
+  //       console.log(this.selectedUserCity);
+  //     } else {
+  //       if (this.selectedUserCity != citySelect) {
+  //         this.userLocationMatched = false;
+  //         console.log("city not matching");
+
+  //         this.toastr.error("Agent is not assigned with this City", "Error", {
+  //           timeOut: 5000,
+  //         });
+  //       } else {
+  //         console.log("city matched");
+  //         for (let i = 0; i < this.selectedUserLocation.length; i++) {
+  //           if (locationSelect === this.selectedUserLocation[i].location) {
+  //             this.userLocationMatched = true;
+  //             console.log("location matched");
+  //             break;
+  //           } else {
+  //             this.userLocationMatched = false;
+  //             console.log("location not matching");
+  //           }
+  //         }
+  //         if (this.userLocationMatched) {
+  //         } else {
+  //           this.toastr.error(
+  //             "Agent is not assigned with this Location",
+  //             "Error",
+  //             {
+  //               timeOut: 5000,
+  //             }
+  //           );
+  //         }
+  //       }
+  //     }
+  //   }
+  //   console.log(this.userLocationMatched);
+  // }
   // Function to patch the value from form radio button
   assigned_To(name: any) {
     // console.log(name);
@@ -221,42 +271,57 @@ export class AddInventoriesComponent implements OnInit {
   }
   updatefields() {
     this.formSendingStatus = "Save";
-    this.addinventoryForm.patchValue({ form_title: this.user1.form_title });
-    this.addinventoryForm.patchValue({ area_unit: this.user1.area_unit });
-    this.addinventoryForm.patchValue({ _id: this.user1._id });
-    this.addinventoryForm.patchValue({ location: this.user1.location });
-    console.log(this.user1.location);
-
-    this.addinventoryForm.patchValue({ assigned_type: this.user1.assigned_type });
-    this.addinventoryForm.patchValue({ assigned_to: this.user1.assigned_to });
-    this.selectAgentValue =  this.user1.assigned_to
+    this.addinventoryForm.patchValue({ form_title: this.user.form_title });
+    this.addinventoryForm.patchValue({ area: this.user.area });
+    this.addinventoryForm.patchValue({ area_unit: this.user.area_unit });
+    this.addinventoryForm.patchValue({ max_area: this.user.max_area });
+    this.addinventoryForm.patchValue({ max_price: this.user.max_price });
+    this.addinventoryForm.patchValue({ _id: this.user._id });
+    this.addinventoryForm.patchValue({ location: this.user.location });
+    console.log(this.user.location);
     
-    this.addinventoryForm.patchValue({
-      property_type: this.user1.property_type,
-    });
-    this.addinventoryForm.patchValue({ area: this.user1.area });
-    this.addinventoryForm.patchValue({ client_type: this.user1.client_type });
-    this.addinventoryForm.patchValue({ demand_price: this.user1.demand_price });
-    this.addinventoryForm.patchValue({
-      property_purpose: this.user1.property_purpose,
-    });
-    this.addinventoryForm.patchValue({ beds_number: this.user1.beds_number });
-    this.addinventoryForm.patchValue({ client_name: this.user1.client_name });
-    this.addinventoryForm.patchValue({
-      client_number: this.user1.client_number,
-    });
-    this.addinventoryForm.patchValue({ city: this.user1.city });
+    this.addinventoryForm.patchValue({ min_area: this.user.min_area });
+    this.addinventoryForm.patchValue({ min_price: this.user.min_price });
+    this.minimumPriceRange = this.user.min_price;
+    this.maximumPriceRange = this.user.max_price;
+    this.minimumAreaRange = this.user.min_area;
+    this.maximumAreaRange = this.user.max_area;
+    // console.log(this.addinventoryForm.get("min_price").value);
+    
+    this.addinventoryForm.patchValue({ max_price: this.user.max_price });
 
-    if (this.user1.location) {
-      this.selectStringLocations = this.user1.location[0].location;
-      this.selectedLocations = this.user1.location[0].location;
+    this.addinventoryForm.patchValue({
+      assigned_type: this.user.assigned_type,
+    });
+    this.addinventoryForm.patchValue({ assigned_to: this.user.assigned_to });
+    this.selectAgentValue = this.user.assigned_to;
+
+    this.addinventoryForm.patchValue({
+      property_type: this.user.property_type,
+    });
+    this.addinventoryForm.patchValue({ area: this.user.area });
+    this.addinventoryForm.patchValue({ client_type: this.user.client_type });
+    this.addinventoryForm.patchValue({ demand_price: this.user.demand_price });
+    this.addinventoryForm.patchValue({
+      property_purpose: this.user.property_purpose,
+    });
+    this.addinventoryForm.patchValue({ beds_number: this.user.beds_number });
+    this.addinventoryForm.patchValue({ client_name: this.user.client_name });
+    this.addinventoryForm.patchValue({
+      client_number: this.user.client_number,
+    });
+    this.addinventoryForm.patchValue({ city: this.user.city });
+
+    if (this.user.location) {
+      this.selectStringLocations = this.user.location[0].location;
+      this.selectedLocations = this.user.location[0].location;
       console.log(this.selectStringLocations);
     }
 
-    if (this.user1.city) {
-      this.getLocations(this.user1.city[0]._id);
-      console.log(this.user1.city[0]._id);
-      this.selectedCity = this.user1.city[0].city;
+    if (this.user.city) {
+      this.getLocations(this.user.city[0]._id);
+      console.log(this.user.city[0]._id);
+      this.selectedCity = this.user.city[0].city;
     }
   }
 
@@ -269,8 +334,8 @@ export class AddInventoriesComponent implements OnInit {
   formDeclare() {
     this.addinventoryForm = this.formBuilder.group({
       // _id: [''],
-      assigned_type: [],
-      assigned_to:[],
+      assigned_type: [""],
+      assigned_to: [],
       // assigned_to: [
       //   {
       //     userId: "",
@@ -284,7 +349,7 @@ export class AddInventoriesComponent implements OnInit {
         },
       ],
       form_title: [""],
-      property_purpose: [],
+      property_purpose: ["Buy"],
       property_type: [""],
 
       city: ["", Validators.required],
@@ -310,7 +375,7 @@ export class AddInventoriesComponent implements OnInit {
       demand_price: [],
       min_area: [],
       max_area: [],
-      beds_number: ["",Validators.required],
+      beds_number: ["", Validators.required],
       area: [],
       area_unit: [""],
       client_name: ["", Validators.required],
@@ -342,13 +407,7 @@ export class AddInventoriesComponent implements OnInit {
   }
 
   changeCity(city: any) {
-    // console.log(this.addinventoryForm.get("assigned_to").value);
-
-    // this.addinventoryForm.get("assigned_to").setValue = null;
-    // this.addinventoryForm.controls['location'].setValue(null);
-    // this.addinventoryForm.controls['assigned_to'].setValue(null);
-    // console.log(this.addinventoryForm.get("assigned_to").value);
-    // console.log(this.addinventoryForm.get("location").value);
+    this.userLocationMatched = false;
     this.selectStringLocations = null;
     this.selectAgentValue = null;
     this.locations = [];
@@ -356,18 +415,19 @@ export class AddInventoriesComponent implements OnInit {
     if (city) this.getLocations(city._id);
     this.addinventoryForm.patchValue({ city });
     this.locations = "";
-    if (this.user1) {
+    if (this.user) {
       if (this.selectedCity == city?.city) {
         console.log("inside");
 
         console.log(this.selectStringLocations);
         console.log(this.selectedLocations);
         this.selectStringLocations = this.selectedLocations;
-        this.addinventoryForm.patchValue({ location: this.user1?.location });
+        this.addinventoryForm.patchValue({ location: this.user?.location });
       } else this.selectStringLocations = "";
     }
   }
   changeLocation(location: any) {
+    this.userLocationMatched = false;
     this.selectAgentValue = null;
     this.selectedLocations = location?.location;
     this.addinventoryForm.patchValue({ location });
@@ -433,10 +493,10 @@ export class AddInventoriesComponent implements OnInit {
     }
     console.log(this.addinventoryForm.value);
 
-    if (this.user1) {
+    if (this.user) {
       console.log(this.addinventoryForm.value);
       this.authService
-        .updateInventory(this.user1._id, this.addinventoryForm.value)
+        .updateInventory(this.user._id, this.addinventoryForm.value)
         .subscribe((data: any) => {
           console.log("Update inventory response data: ", data);
           // this.registerresponse = data;

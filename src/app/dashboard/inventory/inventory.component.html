@@ -1,6 +1,5 @@
 <!-- <div class=""> -->
 <div class="row">
-
     <div class="col-12">
         <app-header></app-header>
     </div>
@@ -31,7 +30,7 @@
 
                     <button onclick="window.print()" class="btn btn-primary">
             Print
-          </button> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<button class="btn btn-primary">
+          </button> &nbsp; &nbsp; &nbsp;<button (click)="exportTOExcel()" class="btn btn-primary">
             Excel
           </button>
                 </div>
@@ -43,14 +42,14 @@
                 <thead>
                     <th scope="col">ID</th>
                     <th scope="col">Purpose</th>
+                    <th scope="col">Client Details</th>
                     <th scope="col">Location</th>
                     <th scope="col">Land Area</th>
                     <th scope="col">Client Type</th>
                     <th scope="col">Demand</th>
 
                     <th scope="col">Beds</th>
-                    <th scope="col">Client Details</th>
-                    <th scope="col">Agent Assigned</th>
+                    <!-- <th scope="col">Agent Assigned</th> -->
                     <th scope="col">Operations</th>
                 </thead>
 
@@ -89,10 +88,10 @@
                         <!-- | tableFilter05: search_demand | tableFilter04: search_type | tableFilter03: search_area | tableFilter02: search_location | tableFilter: search_id | filter: general_search"> -->
                         <td>{{ user.referenceId }}</td>
                         <td>{{ user.property_purpose }}</td>
-                        <!-- <td>
-                                <span *ngFor="let loc of user.location">{{ loc.location }}<br></span>
-                            </td> -->
-
+                        <td>
+                            <b>Name : </b>{{ user.client_name |titlecase }} <br />
+                            <b>Phone : </b>{{ user.client_number }}
+                        </td>
                         <td>
                             {{ user.city[0]?.city }}<span></span><br /><span class="badge badge-light" *ngFor="let loc of user.location">{{ loc.location }},
               </span>
@@ -108,14 +107,10 @@
                         </ng-template>
 
                         <td>{{ user.beds_number }}</td>
-                        <td>
-                            <b>Name : </b>{{ user.client_name |titlecase }} <br />
-                            <b>Phone : </b>{{ user.client_number }}
-                        </td>
-                        <td>{{ user.assigned_to | titlecase}}</td>
+                        <!-- <td>{{ user.assigned_to | titlecase}}</td> -->
                         <td>
                             <i class="fa fa-edit icon" (click)="setUser(user)"></i
-              ><a (click)="setUser(user)" role="button">Edit</a>
+              ><a (click)="setUser(user)" role="button"></a>
 
               <i
                 class="fa fa-trash icon"

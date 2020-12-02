@@ -10,6 +10,10 @@
     width: 300px;
 }
 
+.modal-content {
+    width: 570px;
+}
+
 .select-btn {
     margin-top: 33px;
 }
@@ -20,6 +24,7 @@
 
 .steps {
     color: #1f6e97;
+    font-size: 12px;
 }
 
 b {
@@ -48,11 +53,15 @@ b {
     color: #fff;
     background-color: #1f6e97;
     border-color: #1f6e97;
+    margin-left: 10px;
+    border-radius: 7px;
 }
 
 .btn:not(:disabled):not(.disabled) {
     cursor: pointer;
     color: white;
+    margin-left: 7px;
+    border-radius: 4px;
 }
 
 a:not([href]):not([tabindex]) {
@@ -66,10 +75,13 @@ a:not([href]):not([tabindex]) {
     border-radius: 20px;
 }
 
-.btn[_ngcontent-serverApp-c4] {
+
+/* .btn {
     background: #1f6e97;
     opacity: 0.85;
-}
+    margin-left: 8px;
+    border-radius: 19px
+} */
 
 .dropdown-toggle1[_ngcontent-serverApp-c4] {
     background: #dcdcdc;
@@ -422,12 +434,12 @@ textarea.question:invalid~input[type="submit"] {
 
 .form-control {
     margin-top: 10px;
-    border: 1PX solid gray;
+    border: 1PX solid #cccccc;
     /* border-bottom: 1px solid; */
     border-radius: px;
-    width: 100%;
+    width: 91%;
     /* color:#38baa2; */
-    height: 40px;
+    height: 37px;
 }
 
 

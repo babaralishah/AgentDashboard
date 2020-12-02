@@ -1,3 +1,5 @@
+import * as XLSX from "xlsx";
+import { JSON2SheetOpts } from "xlsx";
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/Authentication/authentication.service';
 import { Router } from '@angular/router';
@@ -87,4 +89,20 @@ export class BothComponent implements OnInit {
     this.deleteId = id;
   }
 
+  exportTOExcel() {
+  
+    let options:JSON2SheetOpts = {header: []};
+const ws: XLSX.WorkSheet=XLSX.utils.json_to_sheet(this.user, options);
+
+
+var wscols = [ { wch: 30 }, { wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 },
+  { wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 },
+  { wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 }];
+
+  ws["!cols"] = wscols;
+  
+const wb: XLSX.WorkBook = XLSX.utils.book_new();
+XLSX.utils.book_append_sheet(wb, ws, 'All Data Export');
+XLSX.writeFile(wb, "Both.xlsx");
+  }
 }

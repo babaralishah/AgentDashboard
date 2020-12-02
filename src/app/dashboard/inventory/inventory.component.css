@@ -92,6 +92,7 @@ th {
 @media only screen and (max-width: 1200px) {
     .inventory {
         margin-left: 100px;
+        overflow-x: auto;
     }
 }
 

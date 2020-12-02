@@ -72,22 +72,23 @@
 
                         <tr *ngFor="let user of data | filter: general_search">
                             <!-- | tableFilter06: data.fullname | tableFilter04: data.contact | tableFilter02: data.location | tableFilter: data.userId | filter: general_search"> -->
-                            <td>{{ user?._id }}</td>
+                            <td>{{ user?.userId }}</td>
                             <td>
-                                <span *ngIf="user.fullname">{{ user.fullname | titlecase }}</span>
-                                <span *ngIf="!user.fullname">{{ user.name | titlecase }}</span>
+                                <span *ngIf="user?.fullname">{{ user?.fullname | titlecase }}</span>
+                                <span *ngIf="!user?.fullname">{{ user?.name | titlecase }}</span>
                             </td>
-                            <td>0{{ user.contact }}</td>
+                            <td>0{{ user?.contact }}</td>
                             <!-- <td>{{ user.location}}</td> -->
 
                             <td>
-                                {{user.city?.city}}<span>&nbsp;&nbsp;</span><br><span class="badge badge-light" *ngFor="let loc of user.location">{{ loc.location }},  </span>
+                                {{user?.city?.city}}<span>&nbsp;&nbsp;</span><br><span class="badge badge-light" *ngFor="let loc of user.location">{{ loc.location }},  </span>
                             </td>
-                            <td>{{ user.email }}</td>
+                            <td>{{ user?.email }}</td>
                             <td>{{user?.access}}</td>
                             <td>{{user?.created | date: "dd/MM/yyyy"}}</td>
 
-                            <td><i class="fa fa-edit icon" (click)="setUser(user)"></i><a (click)="setUser(user)" role="button">Edit</a>
+                            <td><i class="fa fa-edit icon" (click)="setUser(user)"></i>
+                                <a (click)="setUser(user)" role="button"></a>
 
                                 <i class="fa fa-trash icon" (click)="confirmID(user._id)" data-toggle="modal" data-target="#exampleModal1"></i>
 

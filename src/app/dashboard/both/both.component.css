@@ -89,13 +89,14 @@ th {
     }
 }
 
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1260px) {
     .both {
         margin-left: 100px;
+        overflow-x: auto;
     }
 }
 
-@media only screen and (max-width: 1100px) {
+@media only screen and (max-width: 1150px) {
     .both {
         margin-left: 120px;
     }

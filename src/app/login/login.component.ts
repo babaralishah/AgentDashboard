@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
   {
     const token = await this.authService.getToken();
     const decodedToken = await this.authService.getDecodedToken(token);
-    this.tokendata = decodedToken.data;
+    this.tokendata = decodedToken?.data;
     console.log(this.tokendata);
   }
   initialize() {

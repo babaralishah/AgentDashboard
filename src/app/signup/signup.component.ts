@@ -227,7 +227,8 @@ export class SignupComponent implements OnInit {
             this.toastr.success(msg, "Success", {
               timeOut: 5000,
             });
-            this.router.navigate(["/register"]);
+            this.router.navigateByUrl('/agents');
+          
           } else {
             this.toastr.error(msg, "Error", {
               timeOut: 5000,
@@ -246,7 +247,8 @@ export class SignupComponent implements OnInit {
             this.toastr.success(msg, "Success", {
               timeOut: 5000,
             });
-            this.router.navigate(["/register"]);
+
+            this.router.navigateByUrl('/agents');
           } else {
             this.toastr.error(msg, "Error", {
               timeOut: 5000,

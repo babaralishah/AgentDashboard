@@ -29,8 +29,8 @@ export class AssignedLeadsComponent implements OnInit {
         this.user = data.inventories;
         console.log("Server response: ", data);
       },
-      (err) => {
-        console.error(err);
+      (error) => {
+        console.error(error);
       }
     );
   }
@@ -47,7 +47,7 @@ export class AssignedLeadsComponent implements OnInit {
       }
     });
   }
-// Function to Get Excel File of the Data Table
+  // Function to Get Excel File of the Data Table
   exportTOExcel() {
     let options: JSON2SheetOpts = { header: [] };
     const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.user, options);

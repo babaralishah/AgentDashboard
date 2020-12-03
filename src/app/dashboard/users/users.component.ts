@@ -35,8 +35,8 @@ export class UsersComponent implements OnInit {
         this.data = data;
         console.log('User Get Response', this.data);
       },
-      (err) => {
-        console.error(err);
+      (error) => {
+        console.error(error);
       }
     );
   }

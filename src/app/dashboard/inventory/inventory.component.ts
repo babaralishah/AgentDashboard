@@ -36,8 +36,8 @@ export class InventoryComponent implements OnInit {
 
         console.log("Server response: ", this.user);
       },
-      (err) => {
-        console.error(err);
+      (error) => {
+        console.error(error);
       }
     );
   }

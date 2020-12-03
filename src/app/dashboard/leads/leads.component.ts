@@ -109,8 +109,8 @@ export class LeadsComponent implements OnInit {
         this.user = data.leads;
         console.log("Server response: ", this.user);
       },
-      (err) => {
-        console.error(err);
+      (error) => {
+        console.error(error);
       }
     );
   }
@@ -185,9 +185,7 @@ export class LeadsComponent implements OnInit {
       { wch: 30 },
       { wch: 30 },
     ];
-
     ws["!cols"] = wscols;
-
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "All Data Export");
     XLSX.writeFile(wb, "Leads.xlsx");

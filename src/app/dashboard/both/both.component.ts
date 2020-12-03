@@ -23,13 +23,7 @@ export class BothComponent implements OnInit {
     private authService: AuthenticationService,
     private toastr: ToastrService
   ) {}
-  // search_id: string;
-  // search_client: string;
   general_search: any;
-  // search_location: string;
-  // search_type: string;
-  // search_demand: string;
-  // search_area: string;
 
   ngOnInit(): void {
     this.getAllList();
@@ -38,13 +32,11 @@ export class BothComponent implements OnInit {
   setUserToEdit(user: any) {
     this.authService.setUser(user);
     this.authService.setFormTitle("Both");
-    // this.router.navigateByUrl('/add-inventories');
     this.router.navigate(["/add", user.form_title]);
   }
 
   setFormTitle(name: any) {
     this.authService.setFormTitle(name);
-    // this.router.navigate(['/add-inventories']);
     this.router.navigate(["/add", name]);
   }
 
@@ -54,8 +46,8 @@ export class BothComponent implements OnInit {
         this.user = data.inventories;
         console.log("Server response: ", data);
       },
-      (err) => {
-        console.error(err);
+      (error) => {
+        console.error(error);
       }
     );
   }

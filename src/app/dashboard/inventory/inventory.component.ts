@@ -23,6 +23,7 @@ export class InventoryComponent implements OnInit {
   search_location: string;
   search_type: string;
   search_demand: string;
+  // form_title:any;
 
   ngOnInit(): void {
     this.getInventoryList();
@@ -32,7 +33,7 @@ export class InventoryComponent implements OnInit {
     this.authService.getInventory().subscribe(
       (data) => {
         this.user = data.inventories;
-        
+
         console.log("Server response: ", this.user);
       },
       (err) => {
@@ -40,9 +41,11 @@ export class InventoryComponent implements OnInit {
       }
     );
   }
-  setFormTitle(name) {
+  setFormTitle(name:any) {
+    // let form_title = name;
     this.authService.setFormTitle(name);
-    this.router.navigate(["/add-inventories"]);
+    // this.router.navigate(["/add-inventories"]);
+    this.router.navigate(["/add", name]);
   }
   // agentChange(e) {
   //   // console.log("e", this.dataToFilter);
@@ -99,12 +102,13 @@ export class InventoryComponent implements OnInit {
     });
   }
   // Function to set user in the service in order to perform delete or edit operations later on
-  setUser(user: any) {
+  setUserToEdit(user: any) {
     this.authService.setUser(user);
-    console.log(user);
-    
+    // console.log(user.form_title);
+
     this.authService.setFormTitle("Inventory");
-    this.router.navigateByUrl("/add-inventories");
+    // this.router.navigateByUrl("/add-inventories");
+    this.router.navigate(["/add", user.form_title]);
   }
 
   // myFunction() {
@@ -126,21 +130,46 @@ export class InventoryComponent implements OnInit {
   //   }
   // }
   exportTOExcel() {
-  
-    let options:JSON2SheetOpts = {header: []};
-const ws: XLSX.WorkSheet=XLSX.utils.json_to_sheet(this.user, options);
+    let options: JSON2SheetOpts = { header: [] };
+    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.user, options);
 
+    var wscols = [
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+    ];
 
-var wscols = [ { wch: 30 }, { wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 },
-  { wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 },
-  { wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 }];
+    ws["!cols"] = wscols;
 
-  ws["!cols"] = wscols;
-  
-const wb: XLSX.WorkBook = XLSX.utils.book_new();
-XLSX.utils.book_append_sheet(wb, ws, 'All Data Export');
-XLSX.writeFile(wb, "Inventory.xlsx");
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "All Data Export");
+    XLSX.writeFile(wb, "Inventory.xlsx");
   }
 }
-
-

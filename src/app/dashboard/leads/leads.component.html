@@ -137,8 +137,8 @@
                         <td>
                             <span><b>Assigned To: </b> {{user.assigned_to | titlecase}}</span><br>
                             <span><b>Assigned By: </b> {{token?.fullname | titlecase}}</span></td>
-                        <td><i class="fa fa-edit icon" (click)="setUser(user)"></i>
-                            <a (click)="setUser(user)" role="button"></a>
+                        <td><i class="fa fa-edit icon" (click)="setUserToEdit(user)"></i>
+                            <a (click)="setUserToEdit(user)" role="button"></a>
 
                             <i class="fa fa-trash icon" (click)="confirmID(user._id)" data-toggle="modal" data-target="#exampleModal1"></i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <span><i class="fas fa-exchange-alt"   data-toggle="modal"
@@ -180,7 +180,7 @@
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header">
-                <h4 class="modal-title">Agent Assignment</h4>
+                <h4 class="text-center">Agent Assignment</h4>
                 <button type="button" class="close" data-dismiss="modal">
             &times;
           </button>
@@ -191,7 +191,7 @@
                 <form [formGroup]="agentAssignedForm">
                     <!-- Access Type -->
                     <br>
-                    <div class="row">
+                    <div class="row ">
                         <div class="col-md-5 col-sm-5">
 
                             <div class="radio">
@@ -215,30 +215,34 @@
                             </div>
                         </div>
                     </div>
+
                     <!-- Select City Admin  -->
-                    <br><br>
-                    <div class="row text-center" *ngIf=" agentAssignedForm.get('assigned_type').value === 'city_admin'">
+                    <br>
+                    <div class="row">
+                        <br><br>
+                        <div *ngIf=" agentAssignedForm.get('assigned_type').value === 'city_admin'">
 
-                        <!-- <br><br> -->
-                        <ng-select class="ng-select inputs2" [items]="cityAdminList" bindLabel="city" bindValue="city" placeholder="Select city admin" (change)="changeAssignedToCityAdmin($event)">
-                        </ng-select>
+                            <!-- <br><br> -->
+                            <ng-select class="ng-select inputs2" [items]="cityAdminList" bindLabel="city" bindValue="city" placeholder="Select city admin" (change)="changeAssignedToCityAdmin($event)">
+                            </ng-select>
 
-                    </div>
+                        </div>
 
-                    <!-- Select Admins -->
-                    <div class="row" *ngIf=" agentAssignedForm.get('assigned_type').value === 'Admin'">
+                        <!-- Select Admins -->
+                        <div *ngIf=" agentAssignedForm.get('assigned_type').value === 'Admin'">
 
-                        <ng-select class="ng-select inputs2" [items]="access_type" bindLabel="access" bindValue="access" placeholder="Select Admin" (change)="changeAssignedAdmin($event)">
-                        </ng-select>
+                            <ng-select class="ng-select inputs2" [items]="access_type" bindLabel="access" bindValue="access" placeholder="Select Admin" (change)="changeAssignedAdmin($event)">
+                            </ng-select>
 
-                    </div>
+                        </div>
 
-                    <!-- Select Agents -->
-                    <div class="row" *ngIf=" agentAssignedForm.get('assigned_type').value === 'Agents' ">
+                        <!-- Select Agents -->
+                        <div *ngIf=" agentAssignedForm.get('assigned_type').value === 'Agents' ">
 
-                        <ng-select class="ng-select inputs2" [items]="agentList" bindLabel="fullname" bindValue="fullname" placeholder="Select Agent" (change)="changeAssignedAgent($event)">
-                        </ng-select>
+                            <ng-select class="ng-select inputs2" [items]="agentList" bindLabel="fullname" bindValue="fullname" placeholder="Select Agent" (change)="changeAssignedAgent($event)">
+                            </ng-select>
 
+                        </div>
                     </div>
                 </form>
             </div>

@@ -109,11 +109,12 @@
                             </div>
                         </div>
                     </div>
-
+                </div>
+                <div class="row">
                     <!-- Sub Property Type  -->
                     <div class="col-md-4 col-sm-4">
                         <div class="form-group">
-                            <div class="dropdown ml-2 mr-2 dropdown">
+                            <div class="dropdown">
                                 <button data-toggle="modal" data-target="#exampleModal2" style="width: 160px;" class="btn btn-outline-secondary " type="button">
                                     <span *ngIf="!addinventoryForm.get('property_type').value">Select Property Type </span>
                                     <span *ngIf="addinventoryForm.get('property_type').value">{{addinventoryForm.get('property_type').value}} </span>

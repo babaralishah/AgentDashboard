@@ -78,8 +78,8 @@
                         <!-- <td>{{ user?.Admin_status }}</td>
                         <td>{{ user?.Agent_status }}</td> -->
                         <td>{{ user?.created | date: "dd/MM/yyyy"}}</td>
-                        <td><i class="fa fa-edit icon" (click)="setUser(user)"></i>
-                            <a (click)="setUser(user)" role="button"></a>
+                        <td><i class="fa fa-edit icon" (click)="setUserToEdit(user)"></i>
+                            <a (click)="setUserToEdit(user)" role="button"></a>
 
                             <i class="fa fa-trash icon" (click)="confirmID(user._id)" data-toggle="modal" data-target="#exampleModal1"></i>
 

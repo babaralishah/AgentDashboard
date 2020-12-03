@@ -20,6 +20,7 @@ import { AddLeadsComponent } from "./dashboard/leads/add-leads/add-leads.compone
 import { AddInventoriesComponent } from "./dashboard/inventory/add-inventories/add-inventories.component";
 import { RedirectLoginGuard } from "./services/guards/redirectlogin.guard";
 import { IsLoginGuard } from "./services/guards/islogin.guard";
+import { AssignedLeadsComponent } from './dashboard/assigned-leads/assigned-leads.component';
 
 const routes: Routes = [
   {
@@ -79,6 +80,11 @@ const routes: Routes = [
     component: UsersComponent,
   },
   {
+    path: "assigned-leads",
+    canActivate: [IsLoginGuard],
+    component: AssignedLeadsComponent,
+  },
+  {
     path: "both",
     canActivate: [IsLoginGuard],
     component: BothComponent,
@@ -107,6 +113,11 @@ const routes: Routes = [
     path: "add-leads",
     canActivate: [IsLoginGuard],
     component: AddLeadsComponent,
+  },
+  {
+    path: "add/:formName",
+    canActivate: [IsLoginGuard],
+    component: AddInventoriesComponent,
   },
   {
     path: "add-inventories",

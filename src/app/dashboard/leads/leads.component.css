@@ -16,6 +16,40 @@ th {
     margin-left: 8px;
 }
 
+.modal-header {
+    background-color: #38baa2;
+    color: white;
+    height: 61px
+}
+
+.btn:not(:disabled):not(.disabled):hover {
+    color: #fff;
+    background-color: #1f6e97;
+    border-color: #1f6e97;
+    margin-left: 10px;
+    border-radius: 7px;
+}
+
+.modal-dialog {
+    margin-top: 105px;
+}
+
+.btn:not(:disabled):not(.disabled) {
+    cursor: pointer;
+    color: white;
+    margin-left: 7px;
+    border-radius: 4px;
+}
+
+.modal-content {
+    height: 338px;
+    border-radius: 17px;
+}
+
+ng-select {
+    margin-left: 15px;
+}
+
 .icon {
     margin-top: 14px;
 }

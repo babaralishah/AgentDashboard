@@ -1,0 +1,109 @@
+.table {
+    border: 1px solid #dee2e6;
+}
+
+.abc {
+    overflow-x: hidden;
+}
+
+.dropbtn {
+    background-color: #38baa2;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+}
+
+th {
+    background-color: white;
+    color: black;
+    /* border: 2px solid #dee2e6; */
+}
+
+.both {
+    margin-left: 47px;
+    margin-top: 120px;
+    width: 100%;
+}
+
+.fa {
+    margin-left: 10px;
+}
+
+.btn {
+    /* margin-left: 25px; */
+    width: 100px;
+    font-size: 14px;
+    background-color: #38baa2;
+    color: white;
+    border: 1px solid transparent;
+}
+
+.form-control-borderless {
+    border: none;
+    border: 1px solid whitesmoke;
+}
+
+@media only screen and (max-width: 1650px) {
+    .both {
+        margin-left: 50px;
+    }
+}
+
+@media only screen and (min-width: 1200px)and (max-width: 1400px) {
+    .both {
+        margin-left: 80px;
+    }
+}
+
+@media only screen and (max-width: 1260px) {
+    .both {
+        margin-left: 100px;
+        overflow-x: auto;
+    }
+}
+
+@media only screen and (max-width: 1150px) {
+    .both {
+        margin-left: 120px;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    .both {
+        margin-left: -80px;
+    }
+}

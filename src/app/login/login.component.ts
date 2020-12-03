@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit {
         timeOut: 5000
       });
       this.authService.setToken(token);
-      this.router.navigate(['profile', email]);
+      this.router.navigate(['/profile', email]);
 
     },
       (error) => {

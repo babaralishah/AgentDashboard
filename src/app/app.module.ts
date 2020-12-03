@@ -55,6 +55,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 // import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { NavigationComponent } from './header-navigation/navigation.component';
 import { BothComponent } from './dashboard/both/both.component';
+import { AssignedLeadsComponent } from './dashboard/assigned-leads/assigned-leads.component';
 
 // const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 //   suppressScrollX: true,
@@ -101,7 +102,8 @@ registerLocaleData(en);
     HeaderComponent,
     SidebarComponent,
     NavigationComponent,
-    BothComponent
+    BothComponent,
+    AssignedLeadsComponent
   ],
   imports: [
     HttpClientModule,

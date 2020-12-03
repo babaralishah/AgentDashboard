@@ -26,7 +26,7 @@ export class LeadsComponent implements OnInit {
   cityAdminList = [];
   access_type = [{ access: "super_admin" }];
   agentList = [];
-  token:any;
+  token: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -51,11 +51,10 @@ export class LeadsComponent implements OnInit {
     this.getCityAdminList();
   }
 
-  getUserDetails(){
+  getUserDetails() {
     this.token = this.authService.getToken();
     this.token = this.authService.getDecodedToken(this.token).data;
     console.log(this.token);
-    
   }
   // Form Declaration, and Validation Function
   AgentAssignForm() {
@@ -91,15 +90,16 @@ export class LeadsComponent implements OnInit {
       }
     );
   }
-  setUser(user: any) {
+  setUserToEdit(user: any) {
     this.authService.setUser(user);
     this.authService.setFormTitle("Lead");
-    this.router.navigateByUrl("/add-inventories");
+    this.router.navigate(["/add", user.form_title]);
   }
 
   setFormTitle(name) {
     this.authService.setFormTitle(name);
-    this.router.navigate(["/add-inventories"]);
+    // this.router.navigate(["/add-inventories"]);
+    this.router.navigate(["/add", name]);
   }
 
   getLeadsList() {
@@ -149,22 +149,47 @@ export class LeadsComponent implements OnInit {
     this.deleteId = id;
   }
 
-  
   exportTOExcel() {
-  
-    let options:JSON2SheetOpts = {header: []};
-const ws: XLSX.WorkSheet=XLSX.utils.json_to_sheet(this.user, options);
+    let options: JSON2SheetOpts = { header: [] };
+    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.user, options);
 
+    var wscols = [
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+    ];
 
-var wscols = [ { wch: 30 }, { wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 },
-  { wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 },
-  { wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 },{ wch: 30 }];
+    ws["!cols"] = wscols;
 
-  ws["!cols"] = wscols;
-  
-const wb: XLSX.WorkBook = XLSX.utils.book_new();
-XLSX.utils.book_append_sheet(wb, ws, 'All Data Export');
-XLSX.writeFile(wb, "Leads.xlsx");
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "All Data Export");
+    XLSX.writeFile(wb, "Leads.xlsx");
   }
-
 }

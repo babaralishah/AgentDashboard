@@ -22,6 +22,26 @@ export class AuthenticationService {
   constructor(private httpClient: HttpClient, public router: Router) {
   }
 
+  // Assign lead to the Agent
+  assignLeadToAgent(user:any){
+    return this.httpClient
+    .post(`${this.url}/assign/add`,user);
+  }
+
+  // API to delete the assigned leads
+  deleteAssignedLeads(id:any){
+    return this.httpClient.delete<any>(
+      `https://my-asasa.herokuapp.com/assign/${id}`
+    );
+
+  }
+
+  // API to get all assigned leads data
+  getAllAssignedLeads()
+  {
+    return this.httpClient.get<any>(`${this.url}/assign`);
+  }
+
   //////////// Send data to inventory using inventory form /////////////
   createInventory(user: any) {
     console.log('Create user func');
@@ -53,12 +73,12 @@ export class AuthenticationService {
     return this.httpClient.get<any>(`${this.url}/leads`);
   }
 
-  // Function to get all data from Leads, Inventory i.e; both
+  // API to get all data from Leads, Inventory i.e; both
   getAll(){
     
     return this.httpClient.get<any>(`${this.url}/inventory/all`);
   }
-  // Function to call delete api for the user data table
+  // API to call delete api for the user data table
   deleteUser(id) {
     console.log('Calling deleteUser', id);
     return this.httpClient.delete<any>(
@@ -96,7 +116,7 @@ export class AuthenticationService {
     return localStorage.getItem('token');
   }
 
-  // Function to delete the single inventory
+  // API to delete the single inventory
   deleteInventory(id) {
     console.log('Calling deleteInventory', id);
     return this.httpClient.delete<any>(
@@ -114,11 +134,11 @@ export class AuthenticationService {
     return this.httpClient.get<any>(`https://asasa.com/api/get_locations`);
   }
 
-  // Function to set user from user/inventory table to update
+  // API to set user from user/inventory table to update
   setUser(user: any) {
     this.user = user;
   }
-  // Function to get user from user/inventory table to update
+  // API to get user from user/inventory table to update
   getUser() {
     return this.user;
   }
@@ -141,7 +161,7 @@ export class AuthenticationService {
       data
     );
   }
-  ///////// Function to Register the new user /////////////
+  ///////// API to Register the new user /////////////
   register(user: any): Observable<any> {
     return this.httpClient
       .post(`${this.url}/users/register`, user);
@@ -166,7 +186,7 @@ export class AuthenticationService {
       .pipe(catchError(this.handleError));
   }
 
-  /////////// Function to Login the already existed user /////////////
+  /////////// API to Login the already existed user /////////////
   public login(user: any): Observable<any> {
     return this.httpClient.post(`${this.url}/users/login`, user);
   }
@@ -185,7 +205,7 @@ export class AuthenticationService {
     const authToken = localStorage.getItem('access_token');
     return authToken !== null ? true : false;
   }
-  ////////// Logout Function ////////////////
+  ////////// Logout API ////////////////
   logout() {
     if (localStorage.removeItem('access_token') == null) {
       this.router.navigate(['users/login']);
@@ -193,7 +213,7 @@ export class AuthenticationService {
   }
   ///////////////////////////////////////////
 
-  ///////// Get Profile Function ////////////
+  ///////// Get Profile API ////////////
   getUserProfile(id): Observable<any> {
     return this.httpClient
       .get(`${this.url}/user/profile/${id}`, { headers: this.headers })

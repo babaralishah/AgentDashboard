@@ -50,7 +50,7 @@
                         <th scope="col">Admin Status</th>
                         <th scope="col">Agent Status</th> -->
                         <th scope="col">Added On</th>
-                        <th scope="col">Agent Assigned</th>
+                        <th scope="col">Assigned To</th>
                         <th scope="col">Operations</th>
                     </tr>
                 </thead>
@@ -115,7 +115,10 @@
 
                         <td>{{ user.property_type }}</td>
                         <!-- <td>{{ user.Prop_num }}</td> -->
-                        <td>{{ user.area}}</td>
+                        <td *ngIf="user.area == null else elseBlockArea"><b>Max:</b> {{ user.max_area + " - " + user.area_unit}}<br><b>Min:</b> {{ user.min_area + " - " + user.area_unit}}</td>
+                        <ng-template #elseBlockArea>
+                            <td>{{ user.area + " - " + user.area_unit}}</td>
+                        </ng-template>
                         <!-- <td>{{ user.location.location }}</td> -->
 
 
@@ -126,7 +129,10 @@
                         <!-- <td>
                             <span *ngFor="let loc of user.location">{{ loc.location }}<br></span>
                         </td> -->
-                        <td>{{ user.demand_price }}</td>
+                        <td *ngIf="user.demand_price == null else elseBlockDemand"><b>Max:</b> {{ user.max_price }}<br><b>Min:</b> {{ user.min_price }}</td>
+                        <ng-template #elseBlockDemand>
+                            <td>{{ user.demand_price }}</td>
+                        </ng-template>
                         <!-- <td>{{ user.Phone_num }}</td>
                         <td>{{ user.Comment }}</td>
                         <td>{{ user.assigned_to.name}}</td>
@@ -136,13 +142,14 @@
                         <td>{{ user.created | date: "dd/MM/yyyy"}}</td>
                         <td>
                             <span><b>Assigned To: </b> {{user.assigned_to | titlecase}}</span><br>
-                            <span><b>Assigned By: </b> {{token?.fullname | titlecase}}</span></td>
+                            <!-- <span><b>Assigned By: </b> {{token?.fullname | titlecase}}</span> -->
+                        </td>
                         <td><i class="fa fa-edit icon" (click)="setUserToEdit(user)"></i>
                             <a (click)="setUserToEdit(user)" role="button"></a>
 
                             <i class="fa fa-trash icon" (click)="confirmID(user._id)" data-toggle="modal" data-target="#exampleModal1"></i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <span><i class="fas fa-exchange-alt"   data-toggle="modal"
-                                data-target="#myModal"></i></span>
+                                data-target="#myModal" (click)="setCurrentUser(user)"></i></span>
                         </td>
                         <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
@@ -188,70 +195,73 @@
 
             <!-- Modal body -->
             <div class="modal-body">
-                <form [formGroup]="agentAssignedForm">
-                    <!-- Access Type -->
-                    <br>
-                    <div class="row ">
-                        <div class="col-md-5 col-sm-5">
+                <!-- <form [formGroup]="agentAssignedForm"> -->
+                <!-- Access Type -->
+                <br>
+                <div class="row ">
+                    <div class="col-md-5 col-sm-5">
 
-                            <div class="radio">
-                                <div class="btn-group btn-group-toggle">
-                                    <label class="btn btn-primary" [class.active]="agentAssignedForm.get('assigned_type').value === 'city_admin'"> 
-                                    <input type="radio" formControlName="assigned_type" value="city_admin" > 
+                        <div class="radio">
+                            <div class="btn-group btn-group-toggle">
+                                <label class="btn btn-primary" style="width: 139px;" [class.active]="assigned_type === 'city_admin'"> 
+                                    <input type="radio" [(ngModel)] = "assigned_type"  value="city_admin" > 
                                     City Admin 
                                 </label>
 
-                                    <label class="btn btn-primary" [class.active]="agentAssignedForm.get('assigned_type').value === 'Admin'"> 
-                                    <input  type="radio"  formControlName="assigned_type" value="Admin">  
+                                <label class="btn btn-primary" style=" width: 139px;" [class.active]="assigned_type === 'Admin'"> 
+                                    <input  type="radio"  [(ngModel)] = "assigned_type"   value="Admin">  
                                         Admins
                                 </label>
 
-                                    <label class="btn btn-primary" [class.active]="agentAssignedForm.get('assigned_type').value === 'Agents'"> 
-                                    <input  type="radio"  formControlName="assigned_type" value="Agents">  
+                                <label class="btn btn-primary" style=" width: 139px;" [class.active]="assigned_type === 'Agents'"> 
+                                    <input  type="radio"  [(ngModel)] = "assigned_type"   value="Agents">  
                                         Agents
                                 </label>
 
-                                </div>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <!-- Select City Admin  -->
-                    <br>
-                    <div class="row">
-                        <br><br>
-                        <div *ngIf=" agentAssignedForm.get('assigned_type').value === 'city_admin'">
+                <!-- Select City Admin  -->
+                <br>
+                <div class="row">
+                    <br><br>
+                    <div *ngIf="assigned_type === 'city_admin'">
 
-                            <!-- <br><br> -->
-                            <ng-select class="ng-select inputs2" [items]="cityAdminList" bindLabel="city" bindValue="city" placeholder="Select city admin" (change)="changeAssignedToCityAdmin($event)">
-                            </ng-select>
+                        <!-- <br><br> -->
+                        <ng-select class="ng-select inputs2" [items]="cityAdminList" bindLabel="city" bindValue="city" placeholder="Select city admin" (change)="changeAssignedToCityAdmin($event)">
+                        </ng-select>
 
-                        </div>
-
-                        <!-- Select Admins -->
-                        <div *ngIf=" agentAssignedForm.get('assigned_type').value === 'Admin'">
-
-                            <ng-select class="ng-select inputs2" [items]="access_type" bindLabel="access" bindValue="access" placeholder="Select Admin" (change)="changeAssignedAdmin($event)">
-                            </ng-select>
-
-                        </div>
-
-                        <!-- Select Agents -->
-                        <div *ngIf=" agentAssignedForm.get('assigned_type').value === 'Agents' ">
-
-                            <ng-select class="ng-select inputs2" [items]="agentList" bindLabel="fullname" bindValue="fullname" placeholder="Select Agent" (change)="changeAssignedAgent($event)">
-                            </ng-select>
-
-                        </div>
                     </div>
-                </form>
+
+                    <!-- Select Admins -->
+                    <div *ngIf="assigned_type === 'Admin'">
+
+                        <ng-select class="ng-select inputs2" [items]="superAdminList" bindLabel="access" bindValue="access" placeholder="Select Admin" (change)="changeAssignedAdmin($event)">
+                        </ng-select>
+
+                    </div>
+
+                    <!-- Select Agents -->
+                    <div *ngIf="assigned_type === 'Agents'">
+
+                        <ng-select class="ng-select inputs2" [items]="agentList" bindLabel="fullname" bindValue="fullname" placeholder="Select Agent" (change)="changeAssignedAgent($event)">
+                        </ng-select>
+
+                    </div>
+                </div>
+                <!-- </form> -->
             </div>
 
             <!-- Modal footer -->
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">
-            Close
-          </button>
+      Close
+    </button>
+                <button (click)="assignLeadToAgent()" type="button" class="btn" data-dismiss="modal">
+Assign
+</button>
             </div>
         </div>
     </div>

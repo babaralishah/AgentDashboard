@@ -20,9 +20,11 @@ import { AddLeadsComponent } from "./dashboard/leads/add-leads/add-leads.compone
 import { AddInventoriesComponent } from "./dashboard/inventory/add-inventories/add-inventories.component";
 import { RedirectLoginGuard } from "./services/guards/redirectlogin.guard";
 import { IsLoginGuard } from "./services/guards/islogin.guard";
-import { AssignedLeadsComponent } from './dashboard/assigned-leads/assigned-leads.component';
+import { AssignedLeadsComponent } from "./dashboard/assigned-leads/assigned-leads.component";
+import { PageNotFoundComponent } from "./dashboard/page-not-found/page-not-found.component";
 
 const routes: Routes = [
+  
   {
     path: "map",
     canActivate: [IsLoginGuard],
@@ -124,6 +126,11 @@ const routes: Routes = [
     canActivate: [IsLoginGuard],
     component: AddInventoriesComponent,
   },
+  {
+    path: "**",
+    canActivate: [IsLoginGuard],
+    component: PageNotFoundComponent,
+  }
 ];
 
 @NgModule({

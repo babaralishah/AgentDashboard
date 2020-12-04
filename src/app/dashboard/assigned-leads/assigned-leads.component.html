@@ -34,7 +34,8 @@
                     <th scope="col">Client Type</th>
                     <th scope="col">Demand</th>
 
-                    <th scope="col">Beds</th>
+                    <th scope="col">Assigned History</th>
+                    <th scope="col">Assigned To</th>
                     <!-- <th scope="col">Agent Assigned</th> -->
                     <th scope="col">Operations</th>
                 </thead>
@@ -92,14 +93,15 @@
                             <td>{{ user.demand_price }}</td>
                         </ng-template>
 
-                        <td>{{ user.beds_number }}</td>
-                        <!-- <td>{{ user.assigned_to | titlecase}}</td> -->
+                        <!-- <td>{{ user.beds_number }}</td> -->
+                        <td>{{ user.assigned_history}}</td>
+                        <td>{{ user.assigned_to}}</td>
                         <td>
                             <i class="fa fa-edit icon"></i
               ><a  role="button"></a>
 
               <i
-                class="fa fa-trash icon"
+                class="fa fa-trash icon" (click)="confirmID(user._id)" 
                 data-toggle="modal"
                 data-target="#exampleModal1"
               ></i>
@@ -122,7 +124,7 @@
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">
                       Close
                     </button>
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteAssignedLead()">
                       Delete
                     </button>
                                     </div>

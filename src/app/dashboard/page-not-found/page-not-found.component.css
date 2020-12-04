@@ -1,0 +1,13 @@
+img {
+    height: 750px;
+}
+
+.btn {
+    background: #008da2;
+    border-color: #008da2;
+    width: 102px;
+}
+
+.back-button {
+    text-align: center;
+}

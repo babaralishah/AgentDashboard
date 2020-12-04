@@ -19,9 +19,7 @@ export class AddInventoriesComponent implements OnInit {
   subsLocations: any;
   city: any;
   user: any;
-  access_type = [
-    { access: "super_admin" }
-  ];
+  access_type = [{ access: "super_admin" }];
   access_type1 = [{ access: "all_agents" }];
   minimumPriceRange;
   maximumPriceRange;
@@ -80,7 +78,7 @@ export class AddInventoriesComponent implements OnInit {
 
       this.authService.removeUser();
     }
-    
+
     this.form_title = this.authService.getFormTitle();
     this.authService.removeFormTitle();
     this.formDeclare();
@@ -94,17 +92,15 @@ export class AddInventoriesComponent implements OnInit {
     this.getCityAdminList();
   }
 
-  getUserDetails(){
-    
+  getUserDetails() {
     this.token = this.authService.getToken();
     this.token = this.authService.getDecodedToken(this.token).data;
     console.log(this.token);
     // this.token = this.authService.getToken();
     // this.token = this.authService.getDecodedToken(this.token);
     // console.log(this.token);
-    
   }
-  
+
   // Function to call User data table for Assigned_To Field of the add-inventory-form
   getCityAdminList() {
     this.authService.getUsers().subscribe(
@@ -155,7 +151,6 @@ export class AddInventoriesComponent implements OnInit {
     console.log(this.addinventoryForm.get("assigned_to").value);
   }
 
-  
   // Function to patch the value from ng select
   changeAssignedAdmin(access: any) {
     this.addinventoryForm.patchValue({ assigned_to: access?.access });
@@ -165,10 +160,9 @@ export class AddInventoriesComponent implements OnInit {
     this.addinventoryForm.patchValue({ assigned_to: fullname });
     // console.log(fullname?.fullname);
     // console.log(fullname);
-    
-    console.log(this.addinventoryForm.get("assigned_to").value);}
 
-
+    console.log(this.addinventoryForm.get("assigned_to").value);
+  }
 
   // Function to patch the value from ng select
   // changeAssignedTo2(access: any) {
@@ -264,9 +258,9 @@ export class AddInventoriesComponent implements OnInit {
   //   }
   //   console.log(this.userLocationMatched);
   // }
+
   // Function to patch the value from form radio button
   assigned_To(name: any) {
-    // console.log(name);
     this.addinventoryForm.patchValue({ assigned_to: name });
   }
   updatefields() {
@@ -279,7 +273,7 @@ export class AddInventoriesComponent implements OnInit {
     this.addinventoryForm.patchValue({ _id: this.user._id });
     this.addinventoryForm.patchValue({ location: this.user.location });
     console.log(this.user.location);
-    
+
     this.addinventoryForm.patchValue({ min_area: this.user.min_area });
     this.addinventoryForm.patchValue({ min_price: this.user.min_price });
     this.minimumPriceRange = this.user.min_price;
@@ -287,7 +281,7 @@ export class AddInventoriesComponent implements OnInit {
     this.minimumAreaRange = this.user.min_area;
     this.maximumAreaRange = this.user.max_area;
     // console.log(this.addinventoryForm.get("min_price").value);
-    
+
     this.addinventoryForm.patchValue({ max_price: this.user.max_price });
 
     this.addinventoryForm.patchValue({
@@ -486,7 +480,7 @@ export class AddInventoriesComponent implements OnInit {
     // stop here if form is invalid
     if (this.addinventoryForm.invalid) {
       console.log("Erroneous");
-      this.toastr.error("Can not Registered", "Error", {
+      this.toastr.error("Fill all the Required Fields", "Error", {
         timeOut: 5000,
       });
       return;
@@ -526,9 +520,8 @@ export class AddInventoriesComponent implements OnInit {
     } else {
       const user = this.addinventoryForm.get("form_title").value;
       console.log(this.addinventoryForm.value);
-      this.authService
-        .createInventory(this.addinventoryForm.value)
-        .subscribe((data) => {
+      this.authService.createInventory(this.addinventoryForm.value).subscribe(
+        (data) => {
           console.log("signup data: ", data);
           // this.registerresponse = data;
           const email = this.addinventoryForm.value.email;
@@ -548,13 +541,14 @@ export class AddInventoriesComponent implements OnInit {
             });
             this.router.navigate(["/both"]);
           }
-          // else {
-          //   this.toastr.error('msg', 'Error', {
-          //     timeOut: 5000,
-          //   });
-
-          // }
-        });
+        },
+        (error) => {
+          console.error(error);
+          this.toastr.error(error.message, "Error", {
+            timeOut: 5000,
+          });
+        }
+      );
     }
   }
 }

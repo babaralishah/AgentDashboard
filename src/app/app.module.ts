@@ -56,6 +56,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { NavigationComponent } from './header-navigation/navigation.component';
 import { BothComponent } from './dashboard/both/both.component';
 import { AssignedLeadsComponent } from './dashboard/assigned-leads/assigned-leads.component';
+import { PageNotFoundComponent } from './dashboard/page-not-found/page-not-found.component';
 
 // const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 //   suppressScrollX: true,
@@ -103,7 +104,8 @@ registerLocaleData(en);
     SidebarComponent,
     NavigationComponent,
     BothComponent,
-    AssignedLeadsComponent
+    AssignedLeadsComponent,
+    PageNotFoundComponent
   ],
   imports: [
     HttpClientModule,

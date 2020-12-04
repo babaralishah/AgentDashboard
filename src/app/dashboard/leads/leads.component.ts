@@ -14,19 +14,16 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 })
 export class LeadsComponent implements OnInit {
   user: any;
-  savedId: any;
-
+  currentUser: any;
   withAutofocus = `<button type="button" ngbAutofocus class="btn btn-danger"
       (click)="modal.close('Ok click')">Ok</button>`;
   deleteId: any;
   agentAssignedForm: FormGroup;
-  selectedUserCity: any;
-  selectStringLocations: any;
-  userLocationMatched: boolean = true;
   cityAdminList = [];
-  access_type = [{ access: "super_admin" }];
   agentList = [];
+  superAdminList = [];
   token: any;
+  assigned_type: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -34,21 +31,83 @@ export class LeadsComponent implements OnInit {
     private router: Router,
     private toastr: ToastrService
   ) {}
-  search_id: string;
-  search_client: string;
   general_search: string;
-  search_location: string;
-  search_type: string;
-  search_demand: string;
-  search_area: string;
   assigned_to: any;
   selectedUserLocation: any;
 
   ngOnInit(): void {
     this.getUserDetails();
-    this.AgentAssignForm();
     this.getLeadsList();
     this.getCityAdminList();
+    // this.assignLeadFormDeclaration();
+  }
+
+  setCurrentUser(user: any) {
+    this.currentUser = user;
+    console.log(this.currentUser);
+  }
+
+  // Form Declaration, and Validation Function
+  // assignLeadFormDeclaration() {
+  //   this.agentAssignedForm = this.formBuilder.group({
+  //     assigned_type: [""],
+  //     assigned_to: [],
+  //     admin: [
+  //       {
+  //         userId: "",
+  //         name: "",
+  //       },
+  //     ],
+  //     form_title: [""],
+  //     property_purpose: ["Buy"],
+  //     property_type: [""],
+
+  //     city: [""],
+  //     location: [],
+  //     sub_location: [
+  //       {
+  //         id: "",
+  //         name: "",
+  //         sub_locationId: "",
+  //       },
+  //     ],
+  //     min_price: [],
+  //     max_price: [],
+  //     demand_price: [],
+  //     min_area: [],
+  //     max_area: [],
+  //     beds_number: [""],
+  //     area: [],
+  //     area_unit: [""],
+  //     client_name: [""],
+  //     client_number: [],
+  //     client_type: [""],
+  //   });
+  // }
+  assignLeadToAgent() {
+    console.log(this.currentUser);
+    this.authService.assignLeadToAgent(this.currentUser).subscribe(
+      (data: any) => {
+        console.log(data);
+        if (data.code == 200) {
+          this.toastr.success(data.message, "Success", {
+            timeOut: 5000,
+          });
+        }
+      },
+      (error) => {
+        console.log(error);
+
+        if (error.error.code == 11000)
+          this.toastr.error(
+            "This Lead is Already Assigned to Another Agent",
+            "Error",
+            {
+              timeOut: 5000,
+            }
+          );
+      }
+    );
   }
 
   getUserDetails() {
@@ -56,37 +115,22 @@ export class LeadsComponent implements OnInit {
     this.token = this.authService.getDecodedToken(this.token).data;
     console.log(this.token);
   }
-  // Form Declaration, and Validation Function
-  AgentAssignForm() {
-    this.agentAssignedForm = this.formBuilder.group({
-      assigned_to: [],
-      form_title: [""],
-      assigned_type: [""],
-
-      city: ["", Validators.required],
-
-      location: [, Validators.required],
-    });
-  }
-
   // Function to call User data table for Assigned_To Field of the add-inventory-form
   getCityAdminList() {
     this.authService.getUsers().subscribe(
       (data) => {
         for (var i = 0; i < data.length; i++) {
-          console.log(data[i].access);
           if (data[i].access == "city_admin") {
             this.cityAdminList.push(data[i].city);
           } else if (data[i].access == "agent") {
             this.agentList.push(data[i].fullname);
+          } else if (data[i].access == "super_admin") {
+            this.superAdminList.push(data[i].access);
           }
         }
-
-        // this.cityAdminList = data;
-        console.log("User Get Response", this.cityAdminList);
       },
-      (err) => {
-        console.error(err);
+      (error) => {
+        console.error(error);
       }
     );
   }
@@ -96,9 +140,8 @@ export class LeadsComponent implements OnInit {
     this.router.navigate(["/add", user.form_title]);
   }
 
-  setFormTitle(name) {
+  setFormTitle(name: any) {
     this.authService.setFormTitle(name);
-    // this.router.navigate(["/add-inventories"]);
     this.router.navigate(["/add", name]);
   }
 
@@ -119,33 +162,39 @@ export class LeadsComponent implements OnInit {
   deleteLead() {
     console.log(this.deleteId);
 
-    this.authService.deleteInventory(this.deleteId).subscribe((data) => {
-      console.log(data);
-      if (data.code === 200) {
-        this.toastr.success(data.message, "Success", {
+    this.authService.deleteInventory(this.deleteId).subscribe(
+      (data) => {
+        console.log(data);
+        if (data.code === 200) {
+          this.toastr.success(data.message, "Success", {
+            timeOut: 5000,
+          });
+          this.getLeadsList();
+        }
+      },
+      (error) => {
+        console.error(error);
+        this.toastr.error(error.message, "Error", {
           timeOut: 5000,
         });
-        this.getLeadsList();
-        //   for ( let i = 0; i < this.user.length; i++){
-        //      if ( this.user[i]._id === this.saveID) { this.user.splice(i, 1); i--; }}
       }
-    });
+    );
   }
 
   // Function to patch the value from ng select
   changeAssignedToCityAdmin(access: any) {
-    this.agentAssignedForm.patchValue({ assigned_to: access?.city });
-    console.log(this.agentAssignedForm.get("assigned_to").value);
+    this.currentUser["assigned_to"] = access?.city;
+    // this.agentAssignedForm.patchValue({ assigned_to: access?.city });
   }
   // Function to patch the value from ng select
   changeAssignedAdmin(access: any) {
-    this.agentAssignedForm.patchValue({ assigned_to: access?.access });
-    console.log(this.agentAssignedForm.get("assigned_to").value);
+    this.currentUser["assigned_to"] = access;
+    // this.agentAssignedForm.patchValue({ assigned_to: access });
   }
-  changeAssignedAgent(access: any) {}
-  confirmID(id) {
-    console.log(id);
-
+  changeAssignedAgent(access: any) {
+    this.currentUser["assigned_to"] = access;
+  }
+  confirmID(id: any) {
     this.deleteId = id;
   }
 

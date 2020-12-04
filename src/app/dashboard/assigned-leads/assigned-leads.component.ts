@@ -11,6 +11,7 @@ import { ToastrService } from "ngx-toastr";
 })
 export class AssignedLeadsComponent implements OnInit {
   user: any;
+  deleteId: any;
 
   constructor(
     private router: Router,
@@ -24,28 +25,43 @@ export class AssignedLeadsComponent implements OnInit {
   }
   // Function to Get table Data
   getAllList() {
-    this.authService.getAll().subscribe(
+    this.authService.getAllAssignedLeads().subscribe(
       (data) => {
-        this.user = data.inventories;
-        console.log("Server response: ", data);
+        this.user = data;
+        console.log("Server response: ", this.user);
+        console.log(this.user[0]?.assigned_history);
+        console.log(this.user[0]?.assigned_history[1]);
       },
       (error) => {
         console.error(error);
       }
     );
   }
-
-  // Function to delete the single inventory
-  deleteLead() {
-    this.authService.deleteInventory("dasd").subscribe((data) => {
-      console.log(data);
-      if (data.code === 200) {
-        this.toastr.success(data.message, "Success", {
+  deleteAssignedLead() {
+    console.log(this.deleteId);
+    this.authService.deleteAssignedLeads(this.deleteId).subscribe(
+      (data) => {
+        console.log(data);
+        if (data.code === 200) {
+          this.toastr.success(data.message, "Success", {
+            timeOut: 5000,
+          });
+          this.getAllList();
+        }
+      },
+      (error) => {
+        console.error(error);
+        this.toastr.error(error.message, "Error", {
           timeOut: 5000,
         });
-        this.getAllList();
       }
-    });
+    );
+  }
+  
+  confirmID(id: any) {
+    console.log(id);
+
+    this.deleteId = id;
   }
   // Function to Get Excel File of the Data Table
   exportTOExcel() {

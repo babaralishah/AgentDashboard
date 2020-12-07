@@ -1,3 +1,13 @@
+.updatePassword {
+    margin-left: 15px;
+    margin-bottom: 14px;
+}
+
+.form-check-input {
+    margin-left: 13px;
+    margin-top: 2px;
+}
+
 .errors {
     border-color: #e8051b;
 }
@@ -153,7 +163,7 @@ i:before {
     }
 }
 
-@media only screen and (min-width: 1200px)and (max-width: 1400px) {
+@media only screen and (min-width: 1200px) and (max-width: 1400px) {
     .register {
         margin-left: 250px;
     }

@@ -41,6 +41,24 @@
                         </div>
                     </div>
                     <!-- Password -->
+                    <div *ngIf="user" class="form-group">
+                        <div class="form-check updatePassword">
+                            <label class="form-check-label" for="exampleCheck1">Do you want to change your Password?</label>
+                            <input (click)="changePassword()" type="checkbox" class="form-check-input" id="exampleCheck1">
+                        </div>
+                        <div class="form-group" *ngIf="checked">
+                            <div class="input-group">
+                                <i class="fas fa-unlock"></i>
+                                <input type="password" (keyup)="password($event.target.value, 'Pass')" class="form-control inputs" formControlName="password" autocomplete="off" placeholder="Password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                                    <div *ngIf="f.password.errors.required">Password is required</div>
+                                    <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
                     <div class="form-group" *ngIf="!user">
                         <div class="input-group">
                             <i class="fas fa-unlock"></i>
@@ -51,6 +69,7 @@
                             </div>
                         </div>
                     </div>
+
                     <!-- Confirm Password -->
                     <div class="form-group" *ngIf="!user">
                         <div class="input-group">
@@ -64,6 +83,18 @@
                         <div *ngIf="!submitted" class="texts">{{abc}}</div>
                         <div *ngIf="submitted && !f.confirm_password.errors" class="texts">{{abc}}</div>
                     </div>
+                    <!-- <div class="form-group" *ngIf="checked">
+                        <div class="input-group">
+                            <i class="fas fa-unlock"></i>
+                            <input type="password" (keyup)="password($event.target.value, 'Conf')" class="form-control inputs" formControlName="confirm_password" autocomplete="off" placeholder="Confirm Password" [ngClass]="{ 'is-invalid': submitted && f.confirm_password.errors }"
+                            />
+                            <div *ngIf="submitted && f.confirm_password.errors" class="invalid-feedback">
+                                <div *ngIf="f.confirm_password.errors.required">Confirm Password is required</div>
+                            </div>
+                        </div>
+                        <div *ngIf="!submitted" class="texts">{{abc}}</div>
+                        <div *ngIf="submitted && !f.confirm_password.errors" class="texts">{{abc}}</div>
+                    </div> -->
                     <!-- Contact -->
                     <div class="form-group">
                         <div class="input-group">

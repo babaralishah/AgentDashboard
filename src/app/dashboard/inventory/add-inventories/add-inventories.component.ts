@@ -53,7 +53,7 @@ export class AddInventoriesComponent implements OnInit {
   addinventoryForm: FormGroup;
   typeCheckValue: any;
   isRent = true;
-  token: string;
+  token: any;
   //////////////////////////////////
 
   constructor(
@@ -96,9 +96,6 @@ export class AddInventoriesComponent implements OnInit {
     this.token = this.authService.getToken();
     this.token = this.authService.getDecodedToken(this.token).data;
     console.log(this.token);
-    // this.token = this.authService.getToken();
-    // this.token = this.authService.getDecodedToken(this.token);
-    // console.log(this.token);
   }
 
   // Function to call User data table for Assigned_To Field of the add-inventory-form
@@ -330,12 +327,6 @@ export class AddInventoriesComponent implements OnInit {
       // _id: [''],
       assigned_type: [""],
       assigned_to: [],
-      // assigned_to: [
-      //   {
-      //     userId: "",
-      //     name: "",
-      //   },
-      // ],
       admin: [
         {
           userId: "",
@@ -347,15 +338,6 @@ export class AddInventoriesComponent implements OnInit {
       property_type: [""],
 
       city: ["", Validators.required],
-
-      // city: [
-      //   {
-      //     id: "",
-      //     name: this.city_value,
-      //     cityId: "",
-      //   },
-      //   Validators.required,
-      // ],
       location: [, Validators.required],
       sub_location: [
         {
@@ -518,24 +500,26 @@ export class AddInventoriesComponent implements OnInit {
           }
         });
     } else {
-      const user = this.addinventoryForm.get("form_title").value;
+      const form_title = this.addinventoryForm.get("form_title").value;
       console.log(this.addinventoryForm.value);
+      if (form_title === "Lead") {
+        this.addinventoryForm.patchValue({ assigned_to: this.token?.fullname });
+      }
       this.authService.createInventory(this.addinventoryForm.value).subscribe(
         (data) => {
           console.log("signup data: ", data);
-          // this.registerresponse = data;
           const email = this.addinventoryForm.value.email;
-          if (user === "Inventory") {
+          if (form_title === "Inventory") {
             this.toastr.success("Inventory Added", "Success", {
               timeOut: 5000,
             });
             this.router.navigate(["/inventory"]);
-          } else if (user === "Lead") {
+          } else if (form_title === "Lead") {
             this.toastr.success("Lead Added", "Success", {
               timeOut: 5000,
             });
             this.router.navigate(["/leads"]);
-          } else if (user === "Both") {
+          } else if (form_title === "Both") {
             this.toastr.success("Both Added", "Success", {
               timeOut: 5000,
             });

@@ -21,6 +21,7 @@ export class SignupComponent implements OnInit {
   selectedLocations: any = [];
   selectedCity: any;
   selectStringLocations: any = [];
+  checked: boolean;
 
   constructor(
     public formBuilder: FormBuilder,
@@ -36,6 +37,11 @@ export class SignupComponent implements OnInit {
       this.updatefields();
     }
   }
+
+  changePassword() {
+    this.checked = !this.checked;
+  }
+
   removeUser() {
     this.authService.removeUser();
   }
@@ -50,7 +56,7 @@ export class SignupComponent implements OnInit {
     this.registerForm.patchValue({ email: this.user.email });
     this.registerForm.patchValue({ password: this.user.password });
     this.registerForm.patchValue({ location: this.user.location });
-    console.log(this.user.location);
+    console.log(this.user.password);
     this.registerForm.patchValue({ city: this.user.city });
     this.registerForm.patchValue({ contact: this.user.contact });
     this.registerForm.patchValue({ access: this.user.access });
@@ -88,6 +94,11 @@ export class SignupComponent implements OnInit {
         contact: ["", Validators.required],
         access: ["", Validators.required],
         city: ["", Validators.required],
+        confirm_password: [
+          "",
+          [Validators.minLength(6)],
+        ],
+        password: ["", [Validators.minLength(6)]],
         // created: []
       });
     } else {
@@ -111,11 +122,7 @@ export class SignupComponent implements OnInit {
             "",
             [Validators.required, Validators.minLength(6)],
           ],
-          // validators: this.password.bind(this)
         }
-        // {
-        //   validators: this.password.bind(this),
-        // }
       );
     }
     this.getCities();
@@ -123,9 +130,9 @@ export class SignupComponent implements OnInit {
   password(event, value) {
     const password = this.registerForm.get("password");
     const confirm_password = this.registerForm.get("confirm_password");
-    if (value === "Pass" && event === confirm_password.value) {
+    if (value === "Pass" && event === confirm_password?.value) {
       this.abc = "";
-    } else if (value === "Conf" && event === password.value) {
+    } else if (value === "Conf" && event === password?.value) {
       this.abc = "";
     } else {
       this.abc = "Password not matched";
@@ -163,7 +170,7 @@ export class SignupComponent implements OnInit {
   }
 
   //Function to change the city of --ng select city--
-  changeCity(city:any) {
+  changeCity(city: any) {
     this.selectStringLocations = [];
     this.locations = [];
     if (city) this.getLocations(city._id);
@@ -180,14 +187,14 @@ export class SignupComponent implements OnInit {
   }
 
   //Function to change the location of --ng select location--
-  changeLocation(location:any) {
+  changeLocation(location: any) {
     console.log(location);
     this.registerForm.patchValue({ location: location });
     console.log(this.registerForm.value);
   }
 
   // Patch the value of access input using this below function
-  changeAccess(access:any) {
+  changeAccess(access: any) {
     // console.log(access.access);
     if (access) this.registerForm.patchValue({ access: access?.access });
   }
@@ -221,14 +228,11 @@ export class SignupComponent implements OnInit {
           const email = this.registerForm.value.email;
           const msg = data.message;
           const code = data.code;
-          // const status = data.status;
-          // this.registerForm.reset();
           if (code === 200) {
             this.toastr.success(msg, "Success", {
               timeOut: 5000,
             });
-            this.router.navigateByUrl('/agents');
-          
+            this.router.navigateByUrl("/agents");
           } else {
             this.toastr.error(msg, "Error", {
               timeOut: 5000,
@@ -248,7 +252,7 @@ export class SignupComponent implements OnInit {
               timeOut: 5000,
             });
 
-            this.router.navigateByUrl('/agents');
+            this.router.navigateByUrl("/agents");
           } else {
             this.toastr.error(msg, "Error", {
               timeOut: 5000,

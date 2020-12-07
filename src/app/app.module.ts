@@ -1,3 +1,5 @@
+import {Ng2OrderModule} from 'ng2-order-pipe';
+import {NgxPaginationModule} from 'ngx-pagination';
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { NgSelectModule } from '@ng-select/ng-select';
@@ -123,7 +125,9 @@ registerLocaleData(en);
     // PerfectScrollbarModule,
     Ng2SearchPipeModule,
     NgSelectModule,
-    NgbModule
+    NgbModule,
+    Ng2OrderModule,
+    NgxPaginationModule
     // MaterialModule
   ],
   providers: [

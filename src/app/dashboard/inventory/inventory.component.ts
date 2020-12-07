@@ -12,6 +12,10 @@ import { Router } from "@angular/router";
 export class InventoryComponent implements OnInit {
   user: any;
   deleteId: any;
+  key: any;
+  reverse: boolean = true;
+  p:number = 1;
+
   constructor(
     private router: Router,
     private authService: AuthenticationService,
@@ -29,6 +33,11 @@ export class InventoryComponent implements OnInit {
     this.getInventoryList();
   }
 
+  
+  sort(key:any) {
+    this.key = key;
+    this.reverse =!this.reverse;
+  }
   getInventoryList() {
     this.authService.getInventory().subscribe(
       (data) => {

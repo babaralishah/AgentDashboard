@@ -17,6 +17,9 @@ export class BothComponent implements OnInit {
   withAutofocus = `<button type="button" ngbAutofocus class="btn btn-danger"
       (click)="modal.close('Ok click')">Ok</button>`;
   deleteId: any;
+  key: any;
+  reverse: boolean = true;
+  p:number = 1;
 
   constructor(
     private router: Router,
@@ -52,6 +55,11 @@ export class BothComponent implements OnInit {
     );
   }
 
+
+  sort(key:any) {
+    this.key = key;
+    this.reverse =!this.reverse;
+  }
   // Function to delete the single inventory
   deleteLead() {
     console.log(this.deleteId);

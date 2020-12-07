@@ -24,6 +24,9 @@ export class LeadsComponent implements OnInit {
   superAdminList = [];
   token: any;
   assigned_type: any;
+  key: any;
+  reverse: boolean = true;
+  p:number = 1;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -45,6 +48,11 @@ export class LeadsComponent implements OnInit {
   setCurrentUser(user: any) {
     this.currentUser = user;
     console.log(this.currentUser);
+  }
+
+  sort(key:any) {
+    this.key = key;
+    this.reverse =!this.reverse;
   }
 
   // Form Declaration, and Validation Function
@@ -85,6 +93,9 @@ export class LeadsComponent implements OnInit {
   //   });
   // }
   assignLeadToAgent() {
+    console.log(this.currentUser);
+    // delete this.currentUser.referenceId;
+    delete this.currentUser._id;
     console.log(this.currentUser);
     this.authService.assignLeadToAgent(this.currentUser).subscribe(
       (data: any) => {

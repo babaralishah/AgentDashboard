@@ -29,8 +29,8 @@ export class AssignedLeadsComponent implements OnInit {
       (data) => {
         this.user = data;
         console.log("Server response: ", this.user);
-        console.log(this.user[0]?.assigned_history);
-        console.log(this.user[0]?.assigned_history[1]);
+        // console.log(this.user[0]?.assigned_history);
+        // console.log(this.user[0]?.assigned_history[1]);
       },
       (error) => {
         console.error(error);

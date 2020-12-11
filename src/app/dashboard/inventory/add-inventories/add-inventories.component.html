@@ -48,7 +48,7 @@
             <!--  *ngIf="addinventoryForm.get('form_title').value === 'Lead' || addinventoryForm.get('form_title').value === 'Inventory' " -->
             <div>
                 <!-- Property Purpose -->
-                <div class="row">
+                <div class="row" *ngIf="addinventoryForm.get('form_title').value !== 'Inventory'">
                     <div class="col-md-5 col-sm-5"><br><br>
                         <div class="radio">
                             <div class="btn-group btn-group-toggle">
@@ -68,7 +68,22 @@
                         </div>
                         <b class="steps">Step 2: Select Purpose</b>
                     </div>
-                    <!-- <p>step-2: select the button</p> -->
+                </div>
+
+                <div class="row" *ngIf="addinventoryForm.get('form_title').value == 'Inventory'">
+                    <div class="col-md-5 col-sm-5"><br><br>
+                        <div class="radio">
+                            <div class="btn-group btn-group-toggle">
+                                <label class="btn btn-primary" [class.active]="addinventoryForm.get('property_purpose').value === 'Sell'">
+                          <input type="radio"    formControlName="property_purpose"  value="Sell"> Sell
+                        </label>
+                                <label class="btn btn-primary" [class.active]="addinventoryForm.get('property_purpose').value === 'Rent-Out'">
+                      <input type="radio"    formControlName="property_purpose"  value="Rent-Out"> Rent-Out
+                    </label>
+                            </div>
+                        </div>
+                        <b class="steps">Step 2: Select Purpose</b>
+                    </div>
                 </div>
                 <br><br>
                 <div class="row">
@@ -110,15 +125,152 @@
                         </div>
                     </div>
                 </div>
+                <div class="row btn-group-toggle">
+
+                    <label style="
+                    width: 150px;" class="btn btn-primary" [class.active]="addinventoryForm.get('selectPropertyType').value === 'selectPropertyType'"> 
+                        <input type="radio" formControlName="selectPropertyType"
+                            value="selectPropertyType" > 
+                            <span *ngIf="!addinventoryForm.get('property_type').value">Select Property Type </span>
+                            <span *ngIf="addinventoryForm.get('property_type').value">{{addinventoryForm.get('property_type').value}} </span>
+                    </label>
+                    <!-- <button style="width: 160px;" class="btn btn-outline-secondary" formControlName="selectPropertyType" value='selectPropertyType' type="button">
+                        <span *ngIf="!addinventoryForm.get('property_type').value">Select Property Type </span>
+                        <span *ngIf="addinventoryForm.get('property_type').value">{{addinventoryForm.get('property_type').value}} </span>
+                        </button> -->
+                </div><br>
+                <div class="row btn-group-toggle" *ngIf="addinventoryForm.get('selectPropertyType').value == 'selectPropertyType'">
+
+                    <label class="btn btn-primary" [class.active]="addinventoryForm.get('selectPropertyType').value === 'home'"> 
+                        <input type="radio" formControlName="property_type"
+                            value="home" > Home 
+                    </label>
+                    <label class="btn btn-primary" [class.active]="addinventoryForm.get('selectPropertyType').value === 'plot'"> 
+                        <input type="radio" formControlName="property_type"
+                            value="plot" > Plot 
+                    </label>
+                    <label class="btn btn-primary" [class.active]="addinventoryForm.get('selectPropertyType').value === 'commercial'"> 
+                        <input type="radio" formControlName="property_type"
+                            value="commercial" > Commercial 
+                    </label>
+                    <!-- <ul class="nav nav-tabs">
+                        <li style="margin-left: 21px;">
+                            <a href="#home" data-toggle="tab" class="active"> Home </a>
+                        </li>
+                        <li style="margin-left: 21px;">
+                            <a href="#plot" data-toggle="tab"> Plot </a>
+                        </li>
+                        <li style="margin-left: 21px;">
+                            <a href="#commercial" data-toggle="tab"> Commercial </a>
+                        </li>
+                    </ul> -->
+                </div>
+                <br>
+                <div class="row">
+                    <div class="tab-pane" id="home" *ngIf="addinventoryForm.get('property_type').value === 'home'">
+
+                        <div class="btn-group btn-group-toggle">
+                            <label class="btn btn3  btn-primary"> 
+                                            <input type="radio" formControlName="property_type"
+                                                value="House" > House 
+                                        </label>
+
+                            <label class="btn btn3  btn-primary"> 
+                                            <input type="radio"  formControlName="property_type"
+                                                value="Apartment">  
+                                                Apartment
+                                        </label>
+
+                            <label class="btn  btn3 btn-primary"> 
+                                            <input type="radio"  formControlName="property_type"
+                                                value="Upper Portion">  
+                                                Upper Portion
+                                        </label>
+                        </div>
+                        <br><br>
+                        <div class="btn-group btn-group-toggle">
+                            <label class="btn btn3 btn-primary"> 
+                                            <input type="radio" formControlName="property_type"
+                                                value="Lower Portion" > Lower Portion 
+                                        </label>
+
+                            <label class="btn btn3  btn-primary"> 
+                                            <input type="radio"  formControlName="property_type"
+                                                value="Farm House">  
+                                                Farm House
+                                        </label>
+
+                            <label class="btn btn3  btn-primary"> 
+                                            <input type="radio"  formControlName="property_type"
+                                                value="Penthouse">  
+                                                Penthouse
+                                        </label>
+
+                        </div>
+
+                    </div>
+                    <div class="tab-pane" id="plot" *ngIf="addinventoryForm.get('property_type').value === 'plot'">
+                        <div class="btn-group btn-group-toggle">
+                            <label class="btn btn3 btn-primary" style="
+                            width: 150px;"> 
+                                            <input type="radio" formControlName="property_type"
+                                                value="Residential Plot" > Residential Plot 
+                                        </label>
+
+                            <label class="btn  btn3 btn-primary" style="
+                            width: 150px;"> 
+                                            <input type="radio"  formControlName="property_type"
+                                                value="Commercial Plot">  
+                                                Commercial Plot
+                                        </label>
+
+                            <label class="btn  btn3 btn-primary" style="
+                            width: 150px;"> 
+<input type="radio"  formControlName="property_type"
+                                                value="Farm House Plot">  
+                                                Farm House Plot
+                                        </label>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="commercial" *ngIf="addinventoryForm.get('property_type').value === 'commercial'">
+
+                        <div class="btn-group btn-group-toggle">
+                            <label class="btn btn3  btn-primary"> 
+                                            <input type="radio" formControlName="property_type"
+                                                value="Office" > Office 
+                                        </label>
+
+                            <label class="btn  btn3 btn-primary"> 
+                                            <input type="radio"  formControlName="property_type"
+                                                value="Shop">  
+                                                Shop
+                                        </label>
+
+                            <label class="btn  btn3 btn-primary"> 
+                                            <input type="radio"  formControlName="property_type"
+                                                value="Plaza">  
+                                                Plaza
+                                        </label>
+
+                            <label class="btn  btn3 btn-primary"> 
+                                            <input type="radio" formControlName="property_type"
+                                                value="Floor" > Floor 
+                                        </label>
+                        </div>
+
+
+                    </div>
+                </div>
                 <div class="row">
                     <!-- Sub Property Type  -->
                     <div class="col-md-4 col-sm-4">
                         <div class="form-group">
                             <div class="dropdown">
-                                <button data-toggle="modal" data-target="#exampleModal2" style="width: 160px;" class="btn btn-outline-secondary " type="button">
+                                <!-- <button data-toggle="modal" data-target="#exampleModal2" style="width: 160px;" class="btn btn-outline-secondary " type="button">
                                     <span *ngIf="!addinventoryForm.get('property_type').value">Select Property Type </span>
                                     <span *ngIf="addinventoryForm.get('property_type').value">{{addinventoryForm.get('property_type').value}} </span>
-                                    </button>
+                                    </button> -->
+
                                 <!-- Modal -->
                                 <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
@@ -266,22 +418,14 @@
                     <div class="col-md-3 col-sm-3">
                         <div class="form-group">
                             <div class="">
-                                <input type="text" placeholder="Min" class="form-control" formControlName="min_price" name="minimumPriceRange" [(ngModel)]="minimumPriceRange" (ngModelChange)="onChangePrice($event)" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                />
-                                <!-- <input type="number" placeholder="Max" class="form-control" formControlName="max_price" required autocomplete="off" /> -->
-                                <!-- <div *ngIf="submitted && f.demand.errors" class="invalid-feedback">
-                                    <div *ngIf="f.demand.errors.required">Demand is required</div>
-                                </div> -->
+                                <input type="number" placeholder="Min" class="form-control" formControlName="min_price" name="minimumPriceRange" [(ngModel)]="minimumPriceRange" (ngModelChange)="onChangePrice($event)" />
                             </div>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-3">
                         <div class="form-group">
                             <div class="">
-                                <!-- <input type="number" placeholder="Min" class="form-control" formControlName="min_price" required autocomplete="off" /> -->
-                                <input type="text" placeholder="Max" class="form-control" formControlName="max_price" name="maximumPriceRange" [(ngModel)]="maximumPriceRange" (ngModelChange)="onChangePrice($event)" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-                                <!-- <input type="submit" required autocomplete="off" /> -->
-
+                                <input type="number" placeholder="Max" class="form-control" formControlName="max_price" name="maximumPriceRange" [(ngModel)]="maximumPriceRange" (ngModelChange)="onChangePrice($event)" />
                             </div>
                         </div>
                     </div>
@@ -294,7 +438,7 @@
                         <div class="form-group">
                             <div class="">
                                 <br> <b>Demand </b>
-                                <input type="text" placeholder="" class="form-control" formControlName="demand_price" autocomplete="off" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+                                <input type="number" placeholder="" class="form-control" formControlName="demand_price" autocomplete="off" />
 
                             </div>
                         </div>
@@ -311,16 +455,14 @@
                     <div class="col-md-3 col-sm-3">
                         <div class="form-group">
                             <div class="">
-                                <input type="text" placeholder="Min" class="form-control" formControlName="min_area" name="minimumAreaRange" [(ngModel)]="minimumAreaRange" (ngModelChange)="onChangeArea($event)" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                />
+                                <input type="number" placeholder="Min" class="form-control" formControlName="min_area" name="minimumAreaRange" [(ngModel)]="minimumAreaRange" (ngModelChange)="onChangeArea($event)" />
                             </div>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-3">
                         <div class="form-group">
                             <div class="">
-                                <input type="text" placeholder="Max" class="form-control" formControlName="max_area" name="maximumAreaRange" [(ngModel)]="maximumAreaRange" (ngModelChange)="onChangeArea($event)" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                />
+                                <input type="number" placeholder="Max" class="form-control" formControlName="max_area" name="maximumAreaRange" [(ngModel)]="maximumAreaRange" (ngModelChange)="onChangeArea($event)" />
                             </div>
                         </div>
                     </div>
@@ -385,9 +527,6 @@
                             <div>
                                 <b>Simple Area</b>
                                 <input type="text" class="form-control" formControlName="area" autocomplete="off" [ngClass]="{ 'is-invalid': submitted && f.area.errors }" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
-                                <div *ngIf="submitted && f.area.errors" class="invalid-feedback">
-                                    <div *ngIf="f.area.errors.required">Land Area is required</div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -419,7 +558,7 @@
 
                 <div class="col-md-3 col-sm-3 form-group">
                     <div class=""> <b>Client Name</b>
-                        <input formControlName="client_name" class="form-control" type="text" [ngClass]="{ 'is-invalid': submitted && f.client_name.errors }" />
+                        <input formControlName="client_name" class="form-control" type="text" placeholder="Client Name " [ngClass]="{ 'is-invalid': submitted && f.client_name.errors }" />
                     </div><b class="steps">Step 8: Select Client Name</b>
 
                     <div *ngIf="submitted && f.client_name.errors" class="invalid-feedback">
@@ -428,14 +567,17 @@
                 </div>
                 <div class="col-md-3 col-sm-3 form-group">
                     <div class=""> <b>Client Number</b>
-                        <input formControlName="client_number" class="form-control" type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+                        <input formControlName="client_number" class="form-control" type="text" placeholder="Client Number" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
                     </div><b class="steps">Step 9: Select Client Number</b>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-3 col-sm-3 form-group">
                     <div class=""> <b>Client Type</b>
-                        <input formControlName="client_type" class="form-control" type="text" />
+
+                        <ng-select class="ng-select inputs2" [(ngModel)]="clientType" [ngModelOptions]="{standalone: true}" style="margin-left: 0px;" [items]="client_type" bindLabel="access" bindValue="access" placeholder="Select Client Type" (change)="changeClientType($event)">
+                        </ng-select>
+                        <!-- <input formControlName="client_type" class="form-control" type="text" /> -->
                     </div><b class="steps">Step 10: Select Client Type</b>
                 </div>
 

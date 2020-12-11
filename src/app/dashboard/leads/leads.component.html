@@ -51,6 +51,7 @@
                         <th scope="col">Agent Status</th> -->
                         <th scope="col">Added On</th>
                         <th scope="col">Assigned To</th>
+                        <th scope="col">Media</th>
                         <th scope="col">Operations</th>
                     </tr>
                 </thead>
@@ -141,8 +142,10 @@
 
                         <td>{{ user.created | date: "dd/MM/yyyy"}}</td>
                         <td>
-                            <span><b>Assigned To: </b> {{user.assigned_to | titlecase}}</span><br>
-                            <!-- <span><b>Assigned By: </b> {{token?.fullname | titlecase}}</span> -->
+                            <span><b>Assigned To: </b> {{user?.assigned_to}}</span><br>
+                        </td>
+                        <td>
+                            <span><b>Media: </b> {{user?.media}}</span><br>
                         </td>
                         <td><i class="fa fa-edit icon" (click)="setUserToEdit(user)"></i>
                             <a (click)="setUserToEdit(user)" role="button"></a>
@@ -247,7 +250,7 @@
                     <!-- Select Agents -->
                     <div *ngIf="assigned_type === 'Agents'">
 
-                        <ng-select class="ng-select inputs2" [items]="agentList" bindLabel="fullname" bindValue="fullname" placeholder="Select Agent" (change)="changeAssignedAgent($event)">
+                        <ng-select class="ng-select inputs2" [items]="agentList" [multiple]="true" bindLabel="fullname" bindValue="fullname" placeholder="Select Agent" (change)="changeAssignedAgent($event)">
                         </ng-select>
 
                     </div>

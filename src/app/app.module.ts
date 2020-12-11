@@ -1,3 +1,4 @@
+
 import {Ng2OrderModule} from 'ng2-order-pipe';
 import {NgxPaginationModule} from 'ngx-pagination';
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -59,6 +60,7 @@ import { NavigationComponent } from './header-navigation/navigation.component';
 import { BothComponent } from './dashboard/both/both.component';
 import { AssignedLeadsComponent } from './dashboard/assigned-leads/assigned-leads.component';
 import { PageNotFoundComponent } from './dashboard/page-not-found/page-not-found.component';
+import { FilterPipe } from './Pipes/filter.pipe';
 
 // const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 //   suppressScrollX: true,
@@ -75,6 +77,7 @@ registerLocaleData(en);
 
 @NgModule({
   declarations: [
+
     AppComponent,
     MapComponent,
     LoginComponent,
@@ -107,7 +110,8 @@ registerLocaleData(en);
     NavigationComponent,
     BothComponent,
     AssignedLeadsComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    FilterPipe
   ],
   imports: [
     HttpClientModule,

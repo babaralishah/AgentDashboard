@@ -25,7 +25,12 @@
                 <div class="card-body row">
                     <!--end of col-->
                     <div class="col">
-                        <input class="form-control" id="myInput" type="text" [(ngModel)]="general_search" placeholder="Search topic or keyword" />
+                        <ng-select [items]="options" bindLabel="name" bindValue="value" class="mr-2 ml-2" placeholder="Filter By" [(ngModel)]="selectedOption" (change)="optionChange($event)" [clearable]="false">
+                        </ng-select>
+                    </div>
+                    <div class="col">
+                        <input type="text" class="form-control ml-2" placeholder="Search {{ placeholder }}" [(ngModel)]="refId" />
+                        <!-- <input class="form-control" id="myInput" type="text" [(ngModel)]="general_search" placeholder="Search topic or keyword" /> -->
                     </div>
 
                     <button onclick="window.print()" class="btn btn-primary">
@@ -37,7 +42,6 @@
             </div>
             <br /><br /><br />
             <!-- Inventory management table is below -->
-
             <table class="table table-hover">
                 <thead>
                     <th (click)="sort('id')" scope="col">ID <i class="fa fa-sort"></i></th>
@@ -55,37 +59,37 @@
                 </thead>
 
                 <tbody>
+                    <td>
+                        <input class="form-control" type="text" [(ngModel)]="search_id" placeholder="Search ID">
+                    </td>
+                    <td>
+                        <input class="form-control" type="text" [(ngModel)]="search_location" placeholder="Search">
+                    </td>
+                    <td>
+                        <input class="form-control" type="text" [(ngModel)]="search_area" placeholder="Search">
+                    </td>
+                    <td>
+                        <input class="form-control" type="text" [(ngModel)]="search_type" placeholder="Search">
+                    </td>
+                    <td>
+                        <input class="form-control" type="text" [(ngModel)]="search_demand" placeholder="Search">
+                    </td>
                     <!-- <td>
-                    <input class="form-control" type="text" [(ngModel)]="search_id" placeholder="Search ID">
-                </td>
-                <td>
-                    <input class="form-control" type="text" [(ngModel)]="search_location" placeholder="Search">
-                </td>
-                <td>
-                    <input class="form-control" type="text" [(ngModel)]="search_area" placeholder="Search">
-                </td>
-                <td>
-                    <input class="form-control" type="text" [(ngModel)]="search_type" placeholder="Search">
-                </td>
-                <td>
-                    <input class="form-control" type="text" [(ngModel)]="search_demand" placeholder="Search">
-                </td>
-                <td>
-                    <input class="form-control" type="text" placeholder="">
-                </td>
-                <td>
-                    <input class="form-control" type="text" placeholder="">
-                </td>
-                <td>
-                    <input class="form-control" type="text" placeholder="">
-                </td>
-                <td>
-                    <input class="form-control" type="text" placeholder="">
-                </td>
-                <td>
-                    <i class="fa fa-search icon"></i>
-                </td> -->
-                    <tr *ngFor="let user of user | filter: general_search | orderBy: key: reverse | paginate:{itemsPerPage:10,currentPage:p}; ">
+                        <input class="form-control" type="text" placeholder="">
+                    </td>
+                    <td>
+                        <input class="form-control" type="text" placeholder="">
+                    </td>
+                    <td>
+                        <input class="form-control" type="text" placeholder="">
+                    </td>
+                    <td>
+                        <input class="form-control" type="text" placeholder="">
+                    </td>
+                    <td>
+                        <i class="fa fa-search icon"></i>
+                    </td> -->
+                    <tr *ngFor="let user of user | filterlist: selectedOption:refId | orderBy: key: reverse | paginate:{itemsPerPage:10,currentPage:p}; ">
                         <!-- | tableFilter05: search_demand | tableFilter04: search_type | tableFilter03: search_area | tableFilter02: search_location | tableFilter: search_id | filter: general_search"> -->
                         <td>{{ user.referenceId }}</td>
                         <td>{{ user.property_purpose }}</td>

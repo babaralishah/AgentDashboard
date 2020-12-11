@@ -23,6 +23,11 @@ export class AuthenticationService {
   }
 
   // Assign lead to the Agent
+  editLeadToAgent(id:any, user:any){
+    return this.httpClient
+    .put(this.url+`/assign/${id}`, user);
+  }
+  // Assign lead to the Agent
   assignLeadToAgent(user:any){
     return this.httpClient
     .post(`${this.url}/assign/add`,user);

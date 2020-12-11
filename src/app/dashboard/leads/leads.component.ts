@@ -26,7 +26,7 @@ export class LeadsComponent implements OnInit {
   assigned_type: any;
   key: any;
   reverse: boolean = true;
-  p:number = 1;
+  p: number = 1;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -50,9 +50,9 @@ export class LeadsComponent implements OnInit {
     console.log(this.currentUser);
   }
 
-  sort(key:any) {
+  sort(key: any) {
     this.key = key;
-    this.reverse =!this.reverse;
+    this.reverse = !this.reverse;
   }
 
   // Form Declaration, and Validation Function
@@ -94,7 +94,6 @@ export class LeadsComponent implements OnInit {
   // }
   assignLeadToAgent() {
     console.log(this.currentUser);
-    // delete this.currentUser.referenceId;
     delete this.currentUser._id;
     console.log(this.currentUser);
     this.authService.assignLeadToAgent(this.currentUser).subscribe(
@@ -119,6 +118,32 @@ export class LeadsComponent implements OnInit {
           );
       }
     );
+  }
+  editLeadToAgent() {
+    this.authService
+      .editLeadToAgent(this.currentUser.referenceId, this.currentUser)
+      .subscribe(
+        (data: any) => {
+          console.log(data);
+          if (data.code == 200) {
+            this.toastr.success(data.message, "Success", {
+              timeOut: 5000,
+            });
+          }
+        },
+        (error) => {
+          console.log(error);
+
+          if (error.error.code == 11000)
+            this.toastr.error(
+              "This Lead is Already Assigned to Another Agent",
+              "Error",
+              {
+                timeOut: 5000,
+              }
+            );
+        }
+      );
   }
 
   getUserDetails() {
@@ -161,7 +186,11 @@ export class LeadsComponent implements OnInit {
       (data) => {
         this.assigned_to = data.assigned_to;
         this.user = data.leads;
-        console.log("Server response: ", this.user);
+        // console.log("Added date: ",  this.user.created);
+        for(let i=0; i < this.user.length; i++){
+          console.log(this.user[i].created);
+          
+        }
       },
       (error) => {
         console.error(error);

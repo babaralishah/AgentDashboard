@@ -14,7 +14,7 @@ export class InventoryComponent implements OnInit {
   deleteId: any;
   key: any;
   reverse: boolean = true;
-  p:number = 1;
+  p: number = 1;
 
   constructor(
     private router: Router,
@@ -29,14 +29,52 @@ export class InventoryComponent implements OnInit {
   search_demand: string;
   // form_title:any;
 
+  options = [
+    { value: "referenceId", name: "Filter By Ref ID", placeholder: "Ref Id" },
+    {
+      value: "property_purpose",
+      name: "Filter By Purpose",
+      placeholder: "Purpose",
+    },
+    {
+      value: "area_unit",
+      name: "Filter By area_unit",
+      placeholder: "area_unit",
+    },
+    {
+      value: "beds_number",
+      name: "Filter By beds_number",
+      placeholder: "beds_number",
+    },
+    {
+      value: "city",
+      name: "Filter By city",
+      placeholder: "City",
+    },
+    { value: "demand_price", name: "Filter By Demand", placeholder: "Demand" },
+    {
+      value: "property_type",
+      name: "Filter By Type",
+      placeholder: "Type",
+    },
+  ];
+  selectedOption = this.options[0].value;
+  placeholder = this.options[0].placeholder;
+  refId: any;
+
   ngOnInit(): void {
     this.getInventoryList();
   }
 
-  
-  sort(key:any) {
+  optionChange(e: any) {
+    this.placeholder = e.placeholder;
+    this.refId = "";
+    console.log(this.selectedOption);
+  }
+
+  sort(key: any) {
     this.key = key;
-    this.reverse =!this.reverse;
+    this.reverse = !this.reverse;
   }
   getInventoryList() {
     this.authService.getInventory().subscribe(
@@ -50,7 +88,7 @@ export class InventoryComponent implements OnInit {
       }
     );
   }
-  setFormTitle(name:any) {
+  setFormTitle(name: any) {
     // let form_title = name;
     this.authService.setFormTitle(name);
     // this.router.navigate(["/add-inventories"]);

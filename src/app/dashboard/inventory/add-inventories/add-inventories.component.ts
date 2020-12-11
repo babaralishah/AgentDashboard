@@ -19,14 +19,18 @@ export class AddInventoriesComponent implements OnInit {
   subsLocations: any;
   city: any;
   user: any;
-  access_type = [{ access: "super_admin" }];
+  client_type = [
+    { access: "Direct Seller" },
+    { access: "Direct Landlord" },
+    { access: "Dealer" },
+  ];
   access_type1 = [{ access: "all_agents" }];
-  minimumPriceRange;
-  maximumPriceRange;
+  minimumPriceRange: any;
+  maximumPriceRange: any;
   isInvalidPrice: boolean = false; //Contains the valid status of PRICE ranges
   isInvalidArea: boolean = false; //Contains the valid status of AREA ranges
-  minimumAreaRange; //Variable stores max area
-  maximumAreaRange; //Variable stores min area
+  minimumAreaRange: any; //Variable stores max area
+  maximumAreaRange: any; //Variable stores min area
   userList: any;
   selectedLocations: any;
   selectedCity: any;
@@ -47,13 +51,14 @@ export class AddInventoriesComponent implements OnInit {
   location_value: any;
   city_value: any;
   urls = [];
-  optionValue;
-  optionValue1;
+  optionValue: any;
+  optionValue1: any;
   fileToUpload: File = null;
   addinventoryForm: FormGroup;
   typeCheckValue: any;
   isRent = true;
   token: any;
+  clientType: any;
   //////////////////////////////////
 
   constructor(
@@ -103,7 +108,7 @@ export class AddInventoriesComponent implements OnInit {
     this.authService.getUsers().subscribe(
       (data) => {
         for (var i = 0; i < data.length; i++) {
-          console.log(data[i].access);
+          // console.log(data[i].access);
           if (data[i].access == "city_admin") {
             this.cityAdminList.push(data[i].city);
           } else if (data[i].access == "agent") {
@@ -112,7 +117,7 @@ export class AddInventoriesComponent implements OnInit {
         }
 
         // this.cityAdminList = data;
-        console.log("User Get Response", this.cityAdminList);
+        // console.log("User Get Response", this.cityAdminList);
       },
       (err) => {
         console.error(err);
@@ -125,7 +130,7 @@ export class AddInventoriesComponent implements OnInit {
     this.authService.getUsers().subscribe(
       (data) => {
         this.userList = data;
-        console.log("User Get Response", this.userList);
+        // console.log("User Get Response", this.userList);
       },
       (err) => {
         console.error(err);
@@ -326,6 +331,7 @@ export class AddInventoriesComponent implements OnInit {
     this.addinventoryForm = this.formBuilder.group({
       // _id: [''],
       assigned_type: [""],
+      selectPropertyType: [""],
       assigned_to: [],
       admin: [
         {
@@ -408,6 +414,12 @@ export class AddInventoriesComponent implements OnInit {
     this.selectedLocations = location?.location;
     this.addinventoryForm.patchValue({ location });
     console.log(this.addinventoryForm.value);
+  }
+
+  changeClientType(clientType: any) {
+    this.clientType = clientType?.access;
+    this.addinventoryForm.patchValue({ client_type: this.clientType });
+    console.log(this.addinventoryForm?.value);
   }
 
   // Getting cities from backend Api's

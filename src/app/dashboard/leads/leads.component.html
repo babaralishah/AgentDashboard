@@ -22,7 +22,11 @@
                 <div class="card-body row">
                     <!--end of col-->
                     <div class="col">
-                        <input class="form-control" id="myInput" type="text" [(ngModel)]="general_search" placeholder="Search topic or keyword">
+                        <ng-select [items]="options" bindLabel="name" bindValue="value" class="mr-2 ml-2" placeholder="Filter By" [(ngModel)]="selectedOption" (change)="optionChange($event)" [clearable]="false">
+                        </ng-select>
+                    </div>
+                    <div class="col">
+                        <input class="form-control" id="myInput" type="text" placeholder="Search {{ placeholder }}" [(ngModel)]="refId">
                     </div>
 
                     <!-- <button class="btn btn-primary rounded-pill" type="submit">Search</button> -->
@@ -106,7 +110,7 @@
                     <i class="fa fa-search icon"></i>
                 </td>
             </tr> -->
-                    <tr *ngFor="let user of user | filter: general_search | orderBy: key: reverse | paginate:{itemsPerPage:10,currentPage:p};">
+                    <tr *ngFor="let user of user| filterlist: selectedOption:refId | orderBy: key: reverse | paginate:{itemsPerPage:10,currentPage:p};">
                         <!-- | tableFilter06: search_client | tableFilter05: search_demand | tableFilter04: search_type | tableFilter03: search_area | tableFilter02: search_location | tableFilter: search_id -->
                         <td>{{ user.referenceId }}</td>
                         <td>{{ user.property_purpose }}</td>

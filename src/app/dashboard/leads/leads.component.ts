@@ -38,11 +38,46 @@ export class LeadsComponent implements OnInit {
   assigned_to: any;
   selectedUserLocation: any;
 
+
+  options = [
+    { value: "referenceId", name: "Filter By Ref ID", placeholder: "Ref Id" },
+    {
+      value: "property_purpose",
+      name: "Filter By Purpose",
+      placeholder: "Purpose",
+    },
+    {
+      value: "cityName",
+      name: "Filter By cityName",
+      placeholder: "cityName",
+    },
+    {
+      value: "locationName",
+      name: "Filter By locationName",
+      placeholder: "locationName",
+    },
+    { value: "demand_price", name: "Filter By Demand", placeholder: "Demand" },
+    {
+      value: "property_type",
+      name: "Filter By Type",
+      placeholder: "Type",
+    },
+  ];
+  selectedOption = this.options[0].value;
+  placeholder = this.options[0].placeholder;
+  refId: any;
+
   ngOnInit(): void {
     this.getUserDetails();
     this.getLeadsList();
     this.getCityAdminList();
     // this.assignLeadFormDeclaration();
+  }
+  
+  optionChange(e: any) {
+    this.placeholder = e.placeholder;
+    this.refId = "";
+    console.log(this.selectedOption);
   }
 
   setCurrentUser(user: any) {
@@ -149,7 +184,7 @@ export class LeadsComponent implements OnInit {
   getUserDetails() {
     this.token = this.authService.getToken();
     this.token = this.authService.getDecodedToken(this.token).data;
-    console.log(this.token);
+    // console.log(this.token);
   }
   // Function to call User data table for Assigned_To Field of the add-inventory-form
   getCityAdminList() {
@@ -186,11 +221,13 @@ export class LeadsComponent implements OnInit {
       (data) => {
         this.assigned_to = data.assigned_to;
         this.user = data.leads;
+        console.log(this.user);
+        
         // console.log("Added date: ",  this.user.created);
-        for(let i=0; i < this.user.length; i++){
-          console.log(this.user[i].created);
+        // for(let i=0; i < this.user.length; i++){
+          // console.log(this.user[i].created);
           
-        }
+        // }
       },
       (error) => {
         console.error(error);
@@ -275,6 +312,12 @@ export class LeadsComponent implements OnInit {
       { wch: 30 },
     ];
     ws["!cols"] = wscols;
+    ws["!cols"][0] = { hidden: true };
+    ws["!cols"][1] = { hidden: true };
+    ws["!cols"][2] = { hidden: true };
+    ws["!cols"][3] = { hidden: true };
+    ws["!cols"][4] = { hidden: true };
+    ws["!cols"][24] = { hidden: true };
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "All Data Export");
     XLSX.writeFile(wb, "Leads.xlsx");

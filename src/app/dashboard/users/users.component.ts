@@ -14,7 +14,7 @@ export class UsersComponent implements OnInit {
   deleteId: any;
   key: any;
   reverse: boolean = true;
-  p:number = 1;
+  p: number = 1;
 
   constructor(
     // private formBuilder: FormBuilder,
@@ -23,8 +23,38 @@ export class UsersComponent implements OnInit {
     private toastr: ToastrService
   ) {}
   user: any;
+
+  options = [
+    { value: "userId", name: "Filter By userId", placeholder: "userId" },
+    {
+      value: "fullname",
+      name: "Filter By Full Name",
+      placeholder: "Full Name",
+    },
+    {
+      value: "contact",
+      name: "Filter By contact",
+      placeholder: "contact",
+    },
+    {
+      value: "email",
+      name: "Filter By email",
+      placeholder: "email",
+    },
+    { value: "access", name: "Filter By access", placeholder: "access" },
+  ];
+  selectedOption = this.options[0].value;
+  placeholder = this.options[0].placeholder;
+  refId: any;
+
   ngOnInit(): void {
     this.getUserList();
+  }
+
+  optionChange(e: any) {
+    this.placeholder = e.placeholder;
+    this.refId = "";
+    console.log(this.selectedOption);
   }
   setUser(user: any) {
     this.authService.setUser(user);
@@ -66,9 +96,9 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  sort(key:any) {
+  sort(key: any) {
     this.key = key;
-    this.reverse =!this.reverse;
+    this.reverse = !this.reverse;
   }
 
   // deleteUser(id) {

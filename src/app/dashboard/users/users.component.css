@@ -1,3 +1,35 @@
+.form-control {
+    display: block;
+    width: 110%;
+    height: calc(1.5em + 0.75rem + 2px);
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.col {
+    flex-basis: 0;
+    flex-grow: 1;
+    max-width: 15%;
+}
+
+
+/* .ng-select .ng-select-container {
+    cursor: default;
+    display: flex;
+    outline: none;
+    overflow: hidden;
+    position: relative;
+    width: 120%;
+} */
+
 .table {
     border: 1px solid #8080804f;
 }

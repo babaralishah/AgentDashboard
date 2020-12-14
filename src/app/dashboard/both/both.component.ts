@@ -28,8 +28,42 @@ export class BothComponent implements OnInit {
   ) {}
   general_search: any;
 
+  options = [
+    { value: "referenceId", name: "Filter By Ref ID", placeholder: "Ref Id" },
+    {
+      value: "property_purpose",
+      name: "Filter By Purpose",
+      placeholder: "Purpose",
+    },
+    {
+      value: "cityName",
+      name: "Filter By cityName",
+      placeholder: "cityName",
+    },
+    {
+      value: "locationName",
+      name: "Filter By locationName",
+      placeholder: "locationName",
+    },
+    { value: "demand_price", name: "Filter By Demand", placeholder: "Demand" },
+    {
+      value: "property_type",
+      name: "Filter By Type",
+      placeholder: "Type",
+    },
+  ];
+  selectedOption = this.options[0].value;
+  placeholder = this.options[0].placeholder;
+  refId: any;
+
   ngOnInit(): void {
     this.getAllList();
+  }
+
+  optionChange(e: any) {
+    this.placeholder = e.placeholder;
+    this.refId = "";
+    console.log(this.selectedOption);
   }
 
   setUserToEdit(user: any) {
@@ -121,6 +155,12 @@ export class BothComponent implements OnInit {
     ];
 
     ws["!cols"] = wscols;
+    ws["!cols"][0] = { hidden: true };
+    ws["!cols"][1] = { hidden: true };
+    ws["!cols"][2] = { hidden: true };
+    ws["!cols"][3] = { hidden: true };
+    ws["!cols"][4] = { hidden: true };
+    ws["!cols"][24] = { hidden: true };
 
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "All Data Export");

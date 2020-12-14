@@ -19,12 +19,13 @@
                     <div class="col-2">
                         <button class="btn btn-primary" routerLink="/register">Add New</button>
                     </div>
-                    <div class="col-4">
-                        <div class="card-body ">
-
-                            <input class="form-control" type="search" [(ngModel)]="general_search" placeholder="Search topics or keywords">
-
-                        </div>
+                    <div class="col">
+                        <ng-select [items]="options" bindLabel="name" bindValue="value" class="mr-2 ml-2" placeholder="Filter By" [(ngModel)]="selectedOption" (change)="optionChange($event)" [clearable]="false">
+                        </ng-select>
+                    </div>
+                    <div class="col">
+                        <input type="text" class="form-control ml-2" placeholder="Search {{ placeholder }}" [(ngModel)]="refId" />
+                        <!-- <input class="form-control" id="myInput" type="text" [(ngModel)]="general_search" placeholder="Search topic or keyword" /> -->
                     </div>
                 </div>
                 <br><br><br>
@@ -70,7 +71,7 @@
                     <i class="fa fa-search icon"></i>
                 </td> -->
 
-                        <tr *ngFor="let user of data | filter: general_search | orderBy: key: reverse | paginate:{itemsPerPage:10,currentPage:p};">
+                        <tr *ngFor="let user of data | filterlist: selectedOption:refId | orderBy: key: reverse | paginate:{itemsPerPage:10,currentPage:p};">
                             <!-- | tableFilter06: data.fullname | tableFilter04: data.contact | tableFilter02: data.location | tableFilter: data.userId | filter: general_search"> -->
                             <td>{{ user?.userId }}</td>
                             <td>

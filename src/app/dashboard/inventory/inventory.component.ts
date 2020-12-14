@@ -37,26 +37,25 @@ export class InventoryComponent implements OnInit {
       placeholder: "Purpose",
     },
     {
-      value: "area_unit",
-      name: "Filter By area_unit",
-      placeholder: "area_unit",
+      value: "cityName",
+      name: "Filter By cityName",
+      placeholder: "cityName",
     },
     {
-      value: "beds_number",
-      name: "Filter By beds_number",
-      placeholder: "beds_number",
+      value: "locationName",
+      name: "Filter By locationName",
+      placeholder: "locationName",
     },
-    {
-      value: "city",
-      name: "Filter By city",
-      placeholder: "City",
-    },
-    { value: "demand_price", name: "Filter By Demand", placeholder: "Demand" },
     {
       value: "property_type",
       name: "Filter By Type",
       placeholder: "Type",
     },
+    {
+      value: "created",
+      name: "Filter By created",
+      placeholder: "created date",
+    }
   ];
   selectedOption = this.options[0].value;
   placeholder = this.options[0].placeholder;
@@ -214,7 +213,14 @@ export class InventoryComponent implements OnInit {
     ];
 
     ws["!cols"] = wscols;
-
+    ws["!cols"][0] = { hidden: true };
+    ws["!cols"][1] = { hidden: true };
+    ws["!cols"][2] = { hidden: true };
+    ws["!cols"][3] = { hidden: true };
+    ws["!cols"][4] = { hidden: true };
+    ws["!cols"][6] = { hidden: true };
+    ws["!cols"][7] = { hidden: true };
+    ws["!cols"][24] = { hidden: true };
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "All Data Export");
     XLSX.writeFile(wb, "Inventory.xlsx");

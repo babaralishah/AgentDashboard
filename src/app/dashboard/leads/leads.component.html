@@ -120,10 +120,31 @@
 
                         <td>{{ user.property_type }}</td>
                         <!-- <td>{{ user.Prop_num }}</td> -->
-                        <td *ngIf="user.area == null else elseBlockArea"><b>Max:</b> {{ user.max_area + " - " + user.area_unit}}<br><b>Min:</b> {{ user.min_area + " - " + user.area_unit}}</td>
+                        <td *ngIf="user?.area != null else elseBlockArea">
+                            <span>{{ user?.area + " - " + user?.area_unit}}</span>
+                        </td>
                         <ng-template #elseBlockArea>
-                            <td>{{ user.area + " - " + user.area_unit}}</td>
+                            <td>
+                                <span *ngIf=" user?.max_area == null ||  user?.min_area == null else elseBlockArea2">
+                                    <span>None</span>
+                                </span>
+                                <ng-template #elseBlockArea2>
+                                    <span><b>Max:</b> {{ user?.max_area + " - " + user?.area_unit}}<br><b>Min:</b> {{ user?.min_area + " - " + user?.area_unit}}</span>
+                                </ng-template>
+                            </td>
                         </ng-template>
+                        <!-- <ng-template #elseBlockArea2>
+                                <span>Helllo</span>
+                            </ng-template> -->
+                        <!--                         
+                        <td *ngIf="user.area == null  
+                            else elseBlockArea">
+                            <span><b>Max:</b> {{ user?.max_area + " - " + user?.area_unit}}<br><b>Min:</b> {{ user?.min_area + " - " + user?.area_unit}}</span>
+                        </td>
+                        <ng-template #elseBlockArea>
+                            <td>{{ user?.area + " - " + user?.area_unit}}</td>
+                        </ng-template>
+                         -->
                         <!-- <td>{{ user.location.location }}</td> -->
 
 

@@ -38,7 +38,6 @@ export class LeadsComponent implements OnInit {
   assigned_to: any;
   selectedUserLocation: any;
 
-
   options = [
     { value: "referenceId", name: "Filter By Ref ID", placeholder: "Ref Id" },
     {
@@ -73,7 +72,7 @@ export class LeadsComponent implements OnInit {
     this.getCityAdminList();
     // this.assignLeadFormDeclaration();
   }
-  
+
   optionChange(e: any) {
     this.placeholder = e.placeholder;
     this.refId = "";
@@ -82,7 +81,11 @@ export class LeadsComponent implements OnInit {
 
   setCurrentUser(user: any) {
     this.currentUser = user;
-    console.log(this.currentUser);
+    let date = new Date(this.currentUser.created);
+    console.log(
+      date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear()
+    );
+    console.log(this.currentUser.created);
   }
 
   sort(key: any) {
@@ -222,11 +225,11 @@ export class LeadsComponent implements OnInit {
         this.assigned_to = data.assigned_to;
         this.user = data.leads;
         console.log(this.user);
-        
+
         // console.log("Added date: ",  this.user.created);
         // for(let i=0; i < this.user.length; i++){
-          // console.log(this.user[i].created);
-          
+        // console.log(this.user[i].created);
+
         // }
       },
       (error) => {

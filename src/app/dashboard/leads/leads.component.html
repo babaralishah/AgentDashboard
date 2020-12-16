@@ -259,7 +259,7 @@
                     <div *ngIf="assigned_type === 'city_admin'">
 
                         <!-- <br><br> -->
-                        <ng-select class="ng-select inputs2" [items]="cityAdminList" bindLabel="city" bindValue="city" placeholder="Select city admin" (change)="changeAssignedToCityAdmin($event)">
+                        <ng-select class="ng-select inputs2" [items]="cityAdminList" bindLabel="city.city" bindValue="city.city" placeholder="Select city admin" (change)="changeAssignedToCityAdmin($event)">
                         </ng-select>
 
                     </div>
@@ -275,7 +275,7 @@
                     <!-- Select Agents -->
                     <div *ngIf="assigned_type === 'Agents'">
 
-                        <ng-select class="ng-select inputs2" [items]="agentList" [multiple]="true" bindLabel="fullname" bindValue="fullname" placeholder="Select Agent" (change)="changeAssignedAgent($event)">
+                        <ng-select #agentSelect class="ng-select inputs2" [items]="agentList" [multiple]="true" bindLabel="fullname" bindValue="fullname" placeholder="Select Agent" (change)="changeAssignedAgent($event)">
                         </ng-select>
 
                     </div>

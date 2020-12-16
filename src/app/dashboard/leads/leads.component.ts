@@ -27,6 +27,8 @@ export class LeadsComponent implements OnInit {
   key: any;
   reverse: boolean = true;
   p: number = 1;
+  tokendata: any;
+  assignLeadData: any = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -70,10 +72,18 @@ export class LeadsComponent implements OnInit {
     this.getUserDetails();
     this.getLeadsList();
     this.getCityAdminList();
+    this.tokenization();
     // this.assignLeadFormDeclaration();
   }
 
+  async tokenization() {
+    const token = await this.authService.getToken();
+    const decodedToken = await this.authService.getDecodedToken(token);
+    this.tokendata = decodedToken.data;
+    console.log(this.tokendata);
+  }
   optionChange(e: any) {
+    console.log(e);
     this.placeholder = e.placeholder;
     this.refId = "";
     console.log(this.selectedOption);
@@ -133,7 +143,21 @@ export class LeadsComponent implements OnInit {
   assignLeadToAgent() {
     console.log(this.currentUser);
     delete this.currentUser._id;
-    console.log(this.currentUser);
+    console.log(this.currentUser["assigned_history"]);
+    // let history = this.currentUser["assigned_history"];
+    // history.push({
+    //   userId: this.tokendata.userId,
+    //   fullname: this.tokendata.fullname,
+    //   created: new Date(),
+    // });
+
+    // console.log(history);
+
+    this.currentUser["assigned_history"].push( ...this.assignLeadData);
+    this.assignLeadData = [];
+    this.currentUser[""]
+    console.log(this.currentUser["assigned_history"]);
+
     this.authService.assignLeadToAgent(this.currentUser).subscribe(
       (data: any) => {
         console.log(data);
@@ -195,11 +219,11 @@ export class LeadsComponent implements OnInit {
       (data) => {
         for (var i = 0; i < data.length; i++) {
           if (data[i].access == "city_admin") {
-            this.cityAdminList.push(data[i].city);
+            this.cityAdminList.push(data[i]);
           } else if (data[i].access == "agent") {
-            this.agentList.push(data[i].fullname);
+            this.agentList.push(data[i]);
           } else if (data[i].access == "super_admin") {
-            this.superAdminList.push(data[i].access);
+            this.superAdminList.push(data[i]);
           }
         }
       },
@@ -263,16 +287,47 @@ export class LeadsComponent implements OnInit {
 
   // Function to patch the value from ng select
   changeAssignedToCityAdmin(access: any) {
-    this.currentUser["assigned_to"] = access?.city;
-    // this.agentAssignedForm.patchValue({ assigned_to: access?.city });
+    this.assignLeadData = [];
+    this.assignLeadData.push({
+      userId: access.userId,
+      fullname: access.fullname,
+      date: new Date()
+    });
+    console.log(this.assignLeadData);
+    this.currentUser["assigned_to"] = access.fullname;
   }
   // Function to patch the value from ng select
   changeAssignedAdmin(access: any) {
-    this.currentUser["assigned_to"] = access;
-    // this.agentAssignedForm.patchValue({ assigned_to: access });
+    this.assignLeadData = [];
+    this.assignLeadData.push({
+      userId: access?.userId,
+      fullname: access?.fullname,
+      date: new Date()
+    });
+    this.currentUser["assigned_to"] = access.fullname;
+    console.log(this.assignLeadData);
+    
   }
   changeAssignedAgent(access: any) {
-    this.currentUser["assigned_to"] = access;
+    
+    // let history = this.currentUser["assigned_history"];
+    // history.push({
+    //   userId: this.tokendata.userId,
+    //   fullname: this.tokendata.fullname,
+    //   created: new Date(),
+    // });
+
+    this.assignLeadData = [];
+    access.forEach(element => {
+      this.assignLeadData.push({
+        userId: element.userId,
+        fullname: element.fullname,
+        date: new Date()
+      });      
+      this.currentUser["assigned_to"] = element.fullname;
+    });
+    console.log(this.assignLeadData);
+
   }
   confirmID(id: any) {
     this.deleteId = id;

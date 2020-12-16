@@ -12,6 +12,7 @@ import { ToastrService } from "ngx-toastr";
 export class AssignedLeadsComponent implements OnInit {
   user: any;
   deleteId: any;
+  row: any = [];
 
   constructor(
     private router: Router,
@@ -37,6 +38,17 @@ export class AssignedLeadsComponent implements OnInit {
       }
     );
   }
+
+  
+  setCurrentRow(user: any) {
+    this.row = user;
+    let date = new Date(this.row.created);
+    console.log(
+      date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear()
+    );
+    console.log(this.row.created);
+  }
+
   deleteAssignedLead() {
     console.log(this.deleteId);
     this.authService.deleteAssignedLeads(this.deleteId).subscribe(

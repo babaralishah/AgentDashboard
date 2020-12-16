@@ -1,55 +1,50 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 import {
   HttpClient,
   HttpHeaders,
   HttpErrorResponse,
-} from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Router } from '@angular/router';
-import { throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
-import jwt_decode from 'jwt-decode';
+} from "@angular/common/http";
+import { Observable } from "rxjs";
+import { Router } from "@angular/router";
+import { throwError } from "rxjs";
+import { catchError, map } from "rxjs/operators";
+import jwt_decode from "jwt-decode";
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class AuthenticationService {
-  headers = new HttpHeaders().set('Content-Type', 'application/json');
-  private readonly url = 'https://my-asasa.herokuapp.com';
+  headers = new HttpHeaders().set("Content-Type", "application/json");
+  private readonly url = "https://my-asasa.herokuapp.com";
   user: any;
   form_title: any;
   genericId: any;
 
-  constructor(private httpClient: HttpClient, public router: Router) {
-  }
+  constructor(private httpClient: HttpClient, public router: Router) {}
 
   // Assign lead to the Agent
-  editLeadToAgent(id:any, user:any){
-    return this.httpClient
-    .put(this.url+`/assign/${id}`, user);
+  editLeadToAgent(id: any, user: any) {
+    return this.httpClient.put(this.url + `/assign/${id}`, user);
   }
   // Assign lead to the Agent
-  assignLeadToAgent(user:any){
-    return this.httpClient
-    .post(`${this.url}/assign/add`,user);
+  assignLeadToAgent(user: any) {
+    return this.httpClient.post(`${this.url}/assign/add`, user);
   }
 
   // API to delete the assigned leads
-  deleteAssignedLeads(id:any){
+  deleteAssignedLeads(id: any) {
     return this.httpClient.delete<any>(
       `https://my-asasa.herokuapp.com/assign/${id}`
     );
-
   }
 
   // API to get all assigned leads data
-  getAllAssignedLeads()
-  {
+  getAllAssignedLeads() {
     return this.httpClient.get<any>(`${this.url}/assign`);
   }
 
   //////////// Send data to inventory using inventory form /////////////
   createInventory(user: any) {
-    console.log('Create user func');
+    console.log("Create user func");
     return this.httpClient
       .post(`${this.url}/inventory/add`, user)
       .pipe(catchError(this.handleError));
@@ -62,7 +57,7 @@ export class AuthenticationService {
   getFormTitle() {
     return this.form_title;
   }
-  removeFormTitle(){
+  removeFormTitle() {
     this.form_title = null;
   }
   /////////////// Get data from inventory to the inventory table ////////////
@@ -79,35 +74,33 @@ export class AuthenticationService {
   }
 
   // API to get all data from Leads, Inventory i.e; both
-  getAll(){
-    
+  getAll() {
     return this.httpClient.get<any>(`${this.url}/inventory/all`);
   }
   // API to call delete api for the user data table
   deleteUser(id) {
-    console.log('Calling deleteUser', id);
+    console.log("Calling deleteUser", id);
     return this.httpClient.delete<any>(
       `https://my-asasa.herokuapp.com/users/${id}`
     );
   }
   ////////////// Send new row table data /////////////
   createUsers(user: any) {
-    console.log('Create user func', user);
-    if(user instanceof File) {
+    console.log("Create user func", user);
+    if (user instanceof File) {
       const formData = new FormData();
-      formData.append('images', user);
-      return this.httpClient
-      .post(`${this.url}/users/save`, formData);
+      formData.append("images", user);
+      return this.httpClient.post(`${this.url}/users/save`, formData);
     } else {
       return this.httpClient
-      .post(`${this.url}/users/save`, user)
-      .pipe(catchError(this.handleError));
+        .post(`${this.url}/users/save`, user)
+        .pipe(catchError(this.handleError));
     }
   }
   // create service to get and set the token to local storage
 
   setToken(token) {
-    localStorage.setItem('token', token);
+    localStorage.setItem("token", token);
   }
   getDecodedToken(token: string): any {
     try {
@@ -118,12 +111,12 @@ export class AuthenticationService {
     }
   }
   getToken() {
-    return localStorage.getItem('token');
+    return localStorage.getItem("token");
   }
 
   // API to delete the single inventory
   deleteInventory(id) {
-    console.log('Calling deleteInventory', id);
+    console.log("Calling deleteInventory", id);
     return this.httpClient.delete<any>(
       `https://my-asasa.herokuapp.com/inventory/${id}`
     );
@@ -160,7 +153,7 @@ export class AuthenticationService {
   }
   // Update a single Inventory
   updateInventory(id, data) {
-    console.log('Calling updateInventory', id);
+    console.log("Calling updateInventory", id);
     return this.httpClient.put(
       `https://my-asasa.herokuapp.com/inventory/${id}`,
       data
@@ -168,8 +161,7 @@ export class AuthenticationService {
   }
   ///////// API to Register the new user /////////////
   register(user: any): Observable<any> {
-    return this.httpClient
-      .post(`${this.url}/users/register`, user);
+    return this.httpClient.post(`${this.url}/users/register`, user);
   }
   /* API Call to verify otp code */
   ////// Verifying the email address while signing the user up ///////////////////
@@ -203,17 +195,17 @@ export class AuthenticationService {
 
   /////////////// Get Users Token //////////////////////////
   getAccessToken() {
-    return localStorage.getItem('access_token');
+    return localStorage.getItem("access_token");
   }
 
   get isLoggedIn(): boolean {
-    const authToken = localStorage.getItem('access_token');
+    const authToken = localStorage.getItem("access_token");
     return authToken !== null ? true : false;
   }
   ////////// Logout API ////////////////
   logout() {
-    if (localStorage.removeItem('access_token') == null) {
-      this.router.navigate(['users/login']);
+    if (localStorage.removeItem("access_token") == null) {
+      this.router.navigate(["users/login"]);
     }
   }
   ///////////////////////////////////////////
@@ -233,7 +225,7 @@ export class AuthenticationService {
 
   ///////// Error Handling /////////////////
   handleError(error: HttpErrorResponse) {
-    let msg = '';
+    let msg = "";
     if (error.error instanceof ErrorEvent) {
       // client-side error
       msg = error.error.message;

@@ -27,7 +27,6 @@ export class InventoryComponent implements OnInit {
   search_location: string;
   search_type: string;
   search_demand: string;
-  // form_title:any;
 
   options = [
     { value: "referenceId", name: "Filter By Ref ID", placeholder: "Ref Id" },
@@ -55,7 +54,7 @@ export class InventoryComponent implements OnInit {
       value: "created",
       name: "Filter By created",
       placeholder: "created date",
-    }
+    },
   ];
   selectedOption = this.options[0].value;
   placeholder = this.options[0].placeholder;
@@ -88,7 +87,6 @@ export class InventoryComponent implements OnInit {
     );
   }
   setFormTitle(name: any) {
-    // let form_title = name;
     this.authService.setFormTitle(name);
     // this.router.navigate(["/add-inventories"]);
     this.router.navigate(["/add", name]);
@@ -125,9 +123,7 @@ export class InventoryComponent implements OnInit {
 
   //   });
   // }
-  confirmID(id) {
-    console.log(id);
-
+  confirmID(id: any) {
     this.deleteId = id;
   }
 
@@ -150,7 +146,6 @@ export class InventoryComponent implements OnInit {
   // Function to set user in the service in order to perform delete or edit operations later on
   setUserToEdit(user: any) {
     this.authService.setUser(user);
-    // console.log(user.form_title);
 
     this.authService.setFormTitle("Inventory");
     // this.router.navigateByUrl("/add-inventories");

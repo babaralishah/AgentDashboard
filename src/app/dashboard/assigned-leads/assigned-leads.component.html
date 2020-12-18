@@ -11,16 +11,17 @@
         <div class="both">
             <h1><b>Assigned Leads Table</b></h1>
             <br>
-            <!-- <div>
-                <button class="btn btn-primary">Add New</button>
-            </div> -->
             <div class="pull-right">
                 <div class="card-body row">
                     <div class="col">
-                        <input class="form-control" id="myInput" type="text" placeholder="Search topic or keyword">
+                        <ng-select [items]="options" bindLabel="name" bindValue="value" class="mr-2 ml-2" placeholder="Filter By" [(ngModel)]="selectedOption" (change)="optionChange($event)" [clearable]="false">
+                        </ng-select>
+                    </div>
+                    <div class="col">
+                        <input class="form-control" id="myInput" type="text" placeholder="Search {{ placeholder }}" [(ngModel)]="refId">
                     </div>
                     <button onclick="window.print()" class="btn btn-primary">Print</button> &nbsp; &nbsp;
-                    <button class="btn btn-primary">Excel</button>
+                    <!-- <button class="btn btn-primary">Excel</button> -->
                 </div>
             </div>
 
@@ -37,38 +38,7 @@
                 </thead>
 
                 <tbody>
-                    <!-- <td>
-                    <input class="form-control" type="text" [(ngModel)]="search_id" placeholder="Search ID">
-                </td>
-                <td>
-                    <input class="form-control" type="text" [(ngModel)]="search_location" placeholder="Search">
-                </td>
-                <td>
-                    <input class="form-control" type="text" [(ngModel)]="search_area" placeholder="Search">
-                </td>
-                <td>
-                    <input class="form-control" type="text" [(ngModel)]="search_type" placeholder="Search">
-                </td>
-                <td>
-                    <input class="form-control" type="text" [(ngModel)]="search_demand" placeholder="Search">
-                </td>
-                <td>
-                    <input class="form-control" type="text" placeholder="">
-                </td>
-                <td>
-                    <input class="form-control" type="text" placeholder="">
-                </td>
-                <td>
-                    <input class="form-control" type="text" placeholder="">
-                </td>
-                <td>
-                    <input class="form-control" type="text" placeholder="">
-                </td>
-                <td>
-                    <i class="fa fa-search icon"></i>
-                </td> -->
-                    <tr *ngFor="let user of user | filter: general_search">
-                        <!-- | tableFilter05: search_demand | tableFilter04: search_type | tableFilter03: search_area | tableFilter02: search_location | tableFilter: search_id | filter: general_search"> -->
+                    <tr *ngFor="let user of user | filterlist: selectedOption:refId ">
                         <td>{{ user.referenceId }}</td>
                         <td>{{ user.property_purpose }}</td>
                         <td>
@@ -142,13 +112,15 @@
             <div class="modal-body">
                 <table class="table table-hover">
                     <thead>
-                        <th scope="col">ID</th>
-                        <th scope="col">Full Name</th>
-                        <th scope="col">Date</th>
+                        <tr>
+                            <th>ID </th>
+                            <th scope="col">Full Name</th>
+                            <th (click)="sort('id')" scope="col">Date <i class="fa fa-sort"></i></th>
+                        </tr>
                     </thead>
 
                     <tbody>
-                        <tr *ngFor="let history of row.assigned_history">
+                        <tr *ngFor="let history of row.assigned_history | orderBy: key: reverse">
                             <td>{{ history.userId }}</td>
                             <td>{{ history.fullname }}</td>
                             <td>{{history.date | date}}

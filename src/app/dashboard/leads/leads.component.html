@@ -12,9 +12,11 @@
     <div class="col-md-9">
         <div class="leads">
             <h1><b>Leads Management</b></h1>
-            <br>
+            <br />
             <div>
-                <button class="btn btn-primary" (click)="setFormTitle('Lead')">Add New</button>
+                <button class="btn btn-primary" (click)="setFormTitle('Lead')">
+          Add New
+        </button>
             </div>
             <div class="pull-right">
                 <!-- <input type="text" placeholder="Search.." name="search">
@@ -26,20 +28,26 @@
                         </ng-select>
                     </div>
                     <div class="col">
-                        <input class="form-control" id="myInput" type="text" placeholder="Search {{ placeholder }}" [(ngModel)]="refId">
+                        <input class="form-control" id="myInput" type="text" placeholder="Search {{ placeholder }}" [(ngModel)]="refId" />
                     </div>
 
                     <!-- <button class="btn btn-primary rounded-pill" type="submit">Search</button> -->
 
-                    <button onclick="window.print()" class="btn btn-primary">Print</button> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<button (click)="exportTOExcel()" class="btn btn-primary">Excel</button>
+                    <button onclick="window.print()" class="btn btn-primary">
+            Print
+          </button> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<button (click)="exportTOExcel()" class="btn btn-primary">
+            Excel
+          </button>
                 </div>
             </div>
-            <br><br><br>
+            <br /><br /><br />
             <!-- Inventory management table is below -->
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th (click)="sort('id')" scope="col">ID <i class="fa fa-sort"></i></th>
+                        <th (click)="sort('id')" scope="col">
+                            ID <i class="fa fa-sort"></i>
+                        </th>
                         <th scope="col">Purpose</th>
                         <th scope="col">Client</th>
                         <th scope="col">Client Type</th>
@@ -110,33 +118,47 @@
                     <i class="fa fa-search icon"></i>
                 </td>
             </tr> -->
-                    <tr *ngFor="let user of user| filterlist: selectedOption:refId | orderBy: key: reverse | paginate:{itemsPerPage:10,currentPage:p};">
+                    <tr *ngFor="
+              let user of user
+                | filterlist: selectedOption:refId
+                | orderBy: key:reverse
+                | paginate: { itemsPerPage: 10, currentPage: p }
+            ">
                         <!-- | tableFilter06: search_client | tableFilter05: search_demand | tableFilter04: search_type | tableFilter03: search_area | tableFilter02: search_location | tableFilter: search_id -->
                         <td>{{ user.referenceId }}</td>
                         <td>{{ user.property_purpose }}</td>
-                        <td><b>Name : </b>{{ user.client_name | titlecase }} <br> <b>Number : </b>{{ user.client_number}}</td>
+                        <td>
+                            <b>Name : </b>{{ user.client_name | titlecase }} <br />
+                            <b>Number : </b>{{ user.client_number }}
+                        </td>
                         <!-- <td>{{ user.client_name }}</td> -->
                         <td>{{ user.client_type }}</td>
 
                         <td>{{ user.property_type }}</td>
                         <!-- <td>{{ user.Prop_num }}</td> -->
-                        <td *ngIf="user?.area != null else elseBlockArea">
-                            <span>{{ user?.area + " - " + user?.area_unit}}</span>
+                        <td *ngIf="user?.area != null; else elseBlockArea">
+                            <span>{{ user?.area + " - " + user?.area_unit }}</span>
                         </td>
                         <ng-template #elseBlockArea>
                             <td>
-                                <span *ngIf=" user?.max_area == null ||  user?.min_area == null else elseBlockArea2">
-                                    <span>None</span>
+                                <span *ngIf="
+                    user?.max_area == null || user?.min_area == null;
+                    else elseBlockArea2
+                  ">
+                  <span>None</span>
                                 </span>
                                 <ng-template #elseBlockArea2>
-                                    <span><b>Max:</b> {{ user?.max_area + " - " + user?.area_unit}}<br><b>Min:</b> {{ user?.min_area + " - " + user?.area_unit}}</span>
-                                </ng-template>
-                            </td>
-                        </ng-template>
-                        <!-- <ng-template #elseBlockArea2>
+                                    <span><b>Max:</b> {{ user?.max_area + " - " + user?.area_unit
+                    }}<br /><b>Min:</b>
+                    {{ user?.min_area + " - " + user?.area_unit }}</span
+                  >
+                </ng-template>
+              </td>
+            </ng-template>
+            <!-- <ng-template #elseBlockArea2>
                                 <span>Helllo</span>
-                            </ng-template> -->
-                        <!--                         
+                                </ng-template> -->
+                                <!--                         
                         <td *ngIf="user.area == null  
                             else elseBlockArea">
                             <span><b>Max:</b> {{ user?.max_area + " - " + user?.area_unit}}<br><b>Min:</b> {{ user?.min_area + " - " + user?.area_unit}}</span>
@@ -145,63 +167,82 @@
                             <td>{{ user?.area + " - " + user?.area_unit}}</td>
                         </ng-template>
                          -->
-                        <!-- <td>{{ user.location.location }}</td> -->
+                                <!-- <td>{{ user.location.location }}</td> -->
 
+                                <td>
+                                    {{ user.city[0]?.city }}<span>&nbsp;&nbsp;</span><br /><span class="badge badge-light" *ngFor="let loc of user.location">{{ loc.location }},
+              </span>
+                                </td>
 
-                        <td>
-                            {{user.city[0]?.city}}<span>&nbsp;&nbsp;</span><br><span class="badge badge-light" *ngFor="let loc of user.location">{{ loc.location }},  </span>
-                        </td>
-
-                        <!-- <td>
+                                <!-- <td>
                             <span *ngFor="let loc of user.location">{{ loc.location }}<br></span>
                         </td> -->
-                        <td *ngIf="user.demand_price == null else elseBlockDemand"><b>Max:</b> {{ user.max_price }}<br><b>Min:</b> {{ user.min_price }}</td>
-                        <ng-template #elseBlockDemand>
-                            <td>{{ user.demand_price }}</td>
-                        </ng-template>
-                        <!-- <td>{{ user.Phone_num }}</td>
+                                <td *ngIf="user.demand_price == null; else elseBlockDemand">
+                                    <b>Max:</b> {{ user.max_price }}<br /><b>Min:</b> {{ user.min_price }}
+                                </td>
+                                <ng-template #elseBlockDemand>
+                                    <td>{{ user.demand_price }}</td>
+                                </ng-template>
+                                <!-- <td>{{ user.Phone_num }}</td>
                         <td>{{ user.Comment }}</td>
                         <td>{{ user.assigned_to.name}}</td>
                         <td>{{ user.Admin_status }}</td>
                         <td>{{ user.Agent_status }}</td> -->
 
-                        <td>{{ user.created | date: "dd/MM/yyyy"}}</td>
-                        <td>
-                            <span><b>Assigned To: </b> {{user?.assigned_to}}</span><br>
-                        </td>
-                        <td>
-                            <span><b>Media: </b> {{user?.media}}</span><br>
-                        </td>
-                        <td><i class="fa fa-edit icon" (click)="setUserToEdit(user)"></i>
-                            <a (click)="setUserToEdit(user)" role="button"></a>
+                                <td>{{ user.created | date: "dd/MM/yyyy" }}</td>
+                                <td>
+                                    <span><b>Assigned To: </b> {{ user?.assigned_to }}</span
+              ><br />
+            </td>
+            <td>
+              <span><b>Media: </b> {{ user?.media }}</span
+              ><br />
+            </td>
+            <td>
+              <i class="fa fa-edit icon" (click)="setUserToEdit(user)"></i>
+              <a (click)="setUserToEdit(user)" role="button"></a>
 
-                            <i class="fa fa-trash icon" (click)="confirmID(user._id)" data-toggle="modal" data-target="#exampleModal1"></i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <span><i class="fas fa-exchange-alt"   data-toggle="modal"
-                                data-target="#myModal" (click)="setCurrentUser(user)"></i></span>
-                        </td>
-                        <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Delete Confirmation</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        Are you sure you want to delete it?
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
-          Close
-        </button>
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteLead()">
-          Delete
-        </button>
+              <i
+                class="fa fa-trash icon"
+                (click)="confirmID(user._id)"
+                data-toggle="modal"
+                data-target="#exampleModal1"
+              ></i>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <span
+                ><i
+                  class="fas fa-exchange-alt"
+                  data-toggle="modal"
+                  data-target="#myModal"
+                  (click)="setCurrentUser(user)"
+                ></i
+              ></span>
+                                </td>
+                                <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">
+                                                    Delete Confirmation
+                                                </h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Are you sure you want to delete it?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                      Close
+                    </button>
+                                                <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteLead()">
+                      Delete
+                    </button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
                     </tr>
                 </tbody>
             </table>
@@ -210,7 +251,6 @@
     </div>
 </div>
 
-
 <div class="modal" id="myModal">
     <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content">
@@ -218,66 +258,70 @@
             <div class="modal-header">
                 <h4 class="text-center">Agent Assignment</h4>
                 <button type="button" class="close" data-dismiss="modal">
-            &times;
-          </button>
+          &times;
+        </button>
             </div>
 
             <!-- Modal body -->
             <div class="modal-body">
                 <!-- <form [formGroup]="agentAssignedForm"> -->
                 <!-- Access Type -->
-                <br>
-                <div class="row ">
+                <br />
+                <div class="row">
                     <div class="col-md-5 col-sm-5">
-
                         <div class="radio">
                             <div class="btn-group btn-group-toggle">
-                                <label class="btn btn-primary" style="width: 139px;" [class.active]="assigned_type === 'city_admin'"> 
-                                    <input type="radio" [(ngModel)] = "assigned_type"  value="city_admin" > 
-                                    City Admin 
-                                </label>
+                                <label class="btn btn-primary" style="width: 139px" [class.active]="assigned_type === 'city_admin'">
+                  <input
+                    type="radio"
+                    [(ngModel)]="assigned_type"
+                    value="city_admin"
+                  />
+                  City Admin
+                </label>
 
-                                <label class="btn btn-primary" style=" width: 139px;" [class.active]="assigned_type === 'Admin'"> 
-                                    <input  type="radio"  [(ngModel)] = "assigned_type"   value="Admin">  
-                                        Admins
-                                </label>
+                                <label class="btn btn-primary" style="width: 139px" [class.active]="assigned_type === 'Admin'">
+                  <input
+                    type="radio"
+                    [(ngModel)]="assigned_type"
+                    value="Admin"
+                  />
+                  Admins
+                </label>
 
-                                <label class="btn btn-primary" style=" width: 139px;" [class.active]="assigned_type === 'Agents'"> 
-                                    <input  type="radio"  [(ngModel)] = "assigned_type"   value="Agents">  
-                                        Agents
-                                </label>
-
+                                <label class="btn btn-primary" style="width: 139px" [class.active]="assigned_type === 'Agents'">
+                  <input
+                    type="radio"
+                    [(ngModel)]="assigned_type"
+                    value="Agents"
+                  />
+                  Agents
+                </label>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Select City Admin  -->
-                <br>
+                <br />
                 <div class="row">
-                    <br><br>
+                    <br /><br />
                     <div *ngIf="assigned_type === 'city_admin'">
-
                         <!-- <br><br> -->
                         <ng-select class="ng-select inputs2" [items]="cityAdminList" bindLabel="city.city" bindValue="city.city" placeholder="Select city admin" (change)="changeAssignedToCityAdmin($event)">
                         </ng-select>
-
                     </div>
 
                     <!-- Select Admins -->
                     <div *ngIf="assigned_type === 'Admin'">
-
                         <ng-select class="ng-select inputs2" [items]="superAdminList" bindLabel="access" bindValue="access" placeholder="Select Admin" (change)="changeAssignedAdmin($event)">
                         </ng-select>
-
                     </div>
 
                     <!-- Select Agents -->
                     <div *ngIf="assigned_type === 'Agents'">
-
                         <ng-select #agentSelect class="ng-select inputs2" [items]="agentList" [multiple]="true" bindLabel="fullname" bindValue="fullname" placeholder="Select Agent" (change)="changeAssignedAgent($event)">
                         </ng-select>
-
                     </div>
                 </div>
                 <!-- </form> -->
@@ -286,11 +330,14 @@
             <!-- Modal footer -->
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">
-      Close
-    </button>
-                <button (click)="assignLeadToAgent()" type="button" class="btn" data-dismiss="modal">
-Assign
-</button>
+          Close
+        </button>
+
+                <!-- <button type="submit" [disabled]="!assignLeadData">Add</button> -->
+
+                <button (click)="assignLeadToAgent()" [class.no-click]="assignLeadData.length === 0" type="button" class="btn" data-dismiss="modal">
+          Assign
+        </button>
             </div>
         </div>
     </div>

@@ -345,7 +345,7 @@ export class AddInventoriesComponent implements OnInit {
 
       city: ["", Validators.required],
       cityName: [],
-      locationName:[],
+      locationName: [],
       location: [, Validators.required],
       sub_location: [
         {
@@ -392,9 +392,9 @@ export class AddInventoriesComponent implements OnInit {
 
   changeCity(city: any) {
     console.log(city.city);
-    
+
     this.addinventoryForm.patchValue({ cityName: city.city });
-    
+
     this.userLocationMatched = false;
     this.selectStringLocations = null;
     this.selectAgentValue = null;
@@ -432,7 +432,6 @@ export class AddInventoriesComponent implements OnInit {
   getCities() {
     this.authService.getCities().subscribe(
       (cities) => {
-        // console.log('Curr', this.user);
         if (this.user?.access == "islamabad_admin") {
           this.city.push(cities[2]);
           this.cities = this.city;
@@ -488,17 +487,16 @@ export class AddInventoriesComponent implements OnInit {
     console.log(this.addinventoryForm.value);
 
     if (this.user) {
-      // console.log(this.user.city[0].city);
-       
-      this.addinventoryForm.patchValue({ locationName: this.selectStringLocations });
+      this.addinventoryForm.patchValue({
+        locationName: this.selectStringLocations,
+      });
       this.addinventoryForm.patchValue({ cityName: this.user.city[0].city });
-      console.log(this.addinventoryForm.get('cityName').value);
-      console.log(this.addinventoryForm.get('locationName').value);
+      console.log(this.addinventoryForm.get("cityName").value);
+      console.log(this.addinventoryForm.get("locationName").value);
       this.authService
         .updateInventory(this.user._id, this.addinventoryForm.value)
         .subscribe((data: any) => {
           console.log("Update inventory response data: ", data);
-          // this.registerresponse = data;
           const email = this.addinventoryForm.value.email;
           const msg = data.message;
           if (msg == "Inventory updated successfully") {
@@ -523,12 +521,12 @@ export class AddInventoriesComponent implements OnInit {
           }
         });
     } else {
-      this.addinventoryForm.patchValue({ locationName: this.selectStringLocations });
-      // this.addinventoryForm.patchValue({ locationName: this.user?.city[0].city });
-      console.log(this.addinventoryForm.get('cityName').value);
-      console.log(this.addinventoryForm.get('locationName').value);
-      // console.log(this.addinventoryForm['locationName'].value);
-      
+      this.addinventoryForm.patchValue({
+        locationName: this.selectStringLocations,
+      });
+      console.log(this.addinventoryForm.get("cityName").value);
+      console.log(this.addinventoryForm.get("locationName").value);
+
       const form_title = this.addinventoryForm.get("form_title").value;
       console.log(this.addinventoryForm.value);
       if (form_title === "Lead") {

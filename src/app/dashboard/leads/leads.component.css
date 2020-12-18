@@ -1,3 +1,7 @@
+.no-click {
+    pointer-events: none;
+}
+
 .table {
     border: 1px solid #8080804f;
 }

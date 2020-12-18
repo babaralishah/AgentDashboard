@@ -5,7 +5,7 @@ import { Component, OnInit } from "@angular/core";
 import { AuthenticationService } from "src/app/services/Authentication/authentication.service";
 import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormGroup } from "@angular/forms";
 
 @Component({
   selector: "app-leads",
@@ -31,7 +31,6 @@ export class LeadsComponent implements OnInit {
   assignLeadData: any = [];
 
   constructor(
-    private formBuilder: FormBuilder,
     private authService: AuthenticationService,
     private router: Router,
     private toastr: ToastrService
@@ -73,7 +72,6 @@ export class LeadsComponent implements OnInit {
     this.getLeadsList();
     this.getCityAdminList();
     this.tokenization();
-    // this.assignLeadFormDeclaration();
   }
 
   async tokenization() {
@@ -102,82 +100,27 @@ export class LeadsComponent implements OnInit {
     this.key = key;
     this.reverse = !this.reverse;
   }
-
-  // Form Declaration, and Validation Function
-  // assignLeadFormDeclaration() {
-  //   this.agentAssignedForm = this.formBuilder.group({
-  //     assigned_type: [""],
-  //     assigned_to: [],
-  //     admin: [
-  //       {
-  //         userId: "",
-  //         name: "",
-  //       },
-  //     ],
-  //     form_title: [""],
-  //     property_purpose: ["Buy"],
-  //     property_type: [""],
-
-  //     city: [""],
-  //     location: [],
-  //     sub_location: [
-  //       {
-  //         id: "",
-  //         name: "",
-  //         sub_locationId: "",
-  //       },
-  //     ],
-  //     min_price: [],
-  //     max_price: [],
-  //     demand_price: [],
-  //     min_area: [],
-  //     max_area: [],
-  //     beds_number: [""],
-  //     area: [],
-  //     area_unit: [""],
-  //     client_name: [""],
-  //     client_number: [],
-  //     client_type: [""],
-  //   });
-  // }
   assignLeadToAgent() {
     console.log(this.currentUser);
     delete this.currentUser._id;
-    console.log(this.currentUser["assigned_history"]);
-    // let history = this.currentUser["assigned_history"];
-    // history.push({
-    //   userId: this.tokendata.userId,
-    //   fullname: this.tokendata.fullname,
-    //   created: new Date(),
-    // });
-
-    // console.log(history);
-
-    this.currentUser["assigned_history"].push( ...this.assignLeadData);
+    this.currentUser["assigned_history"].push(...this.assignLeadData);
     this.assignLeadData = [];
-    this.currentUser[""]
-    console.log(this.currentUser["assigned_history"]);
+    this.currentUser[""];
 
     this.authService.assignLeadToAgent(this.currentUser).subscribe(
       (data: any) => {
-        console.log(data);
-        if (data.code == 200) {
-          this.toastr.success(data.message, "Success", {
-            timeOut: 5000,
-          });
-        }
+        this.toastr.success(data.message, "Success", {
+          timeOut: 5000,
+        });
+        this.router.navigateByUrl("/assigned-leads");
       },
       (error) => {
         console.log(error);
 
         if (error.error.code == 11000)
-          this.toastr.error(
-            "This Lead is Already Assigned to Another Agent",
-            "Error",
-            {
-              timeOut: 5000,
-            }
-          );
+          this.toastr.error(error.error.message, "Error", {
+            timeOut: 5000,
+          });
       }
     );
   }
@@ -211,7 +154,6 @@ export class LeadsComponent implements OnInit {
   getUserDetails() {
     this.token = this.authService.getToken();
     this.token = this.authService.getDecodedToken(this.token).data;
-    // console.log(this.token);
   }
   // Function to call User data table for Assigned_To Field of the add-inventory-form
   getCityAdminList() {
@@ -249,12 +191,6 @@ export class LeadsComponent implements OnInit {
         this.assigned_to = data.assigned_to;
         this.user = data.leads;
         console.log(this.user);
-
-        // console.log("Added date: ",  this.user.created);
-        // for(let i=0; i < this.user.length; i++){
-        // console.log(this.user[i].created);
-
-        // }
       },
       (error) => {
         console.error(error);
@@ -291,7 +227,7 @@ export class LeadsComponent implements OnInit {
     this.assignLeadData.push({
       userId: access.userId,
       fullname: access.fullname,
-      date: new Date()
+      date: new Date(),
     });
     console.log(this.assignLeadData);
     this.currentUser["assigned_to"] = access.fullname;
@@ -302,32 +238,22 @@ export class LeadsComponent implements OnInit {
     this.assignLeadData.push({
       userId: access?.userId,
       fullname: access?.fullname,
-      date: new Date()
+      date: new Date(),
     });
     this.currentUser["assigned_to"] = access.fullname;
     console.log(this.assignLeadData);
-    
   }
   changeAssignedAgent(access: any) {
-    
-    // let history = this.currentUser["assigned_history"];
-    // history.push({
-    //   userId: this.tokendata.userId,
-    //   fullname: this.tokendata.fullname,
-    //   created: new Date(),
-    // });
-
     this.assignLeadData = [];
-    access.forEach(element => {
+    access.forEach((element) => {
       this.assignLeadData.push({
         userId: element.userId,
         fullname: element.fullname,
-        date: new Date()
-      });      
+        date: new Date(),
+      });
       this.currentUser["assigned_to"] = element.fullname;
     });
     console.log(this.assignLeadData);
-
   }
   confirmID(id: any) {
     this.deleteId = id;

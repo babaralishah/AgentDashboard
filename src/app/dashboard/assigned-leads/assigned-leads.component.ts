@@ -13,6 +13,8 @@ export class AssignedLeadsComponent implements OnInit {
   user: any;
   deleteId: any;
   row: any = [];
+  key: any;
+  reverse: boolean = true;
 
   constructor(
     private router: Router,
@@ -21,17 +23,48 @@ export class AssignedLeadsComponent implements OnInit {
   ) {}
 
   general_search: any;
+
+  options = [
+    { value: "referenceId", name: "Filter By Ref ID", placeholder: "Ref Id" },
+    {
+      value: "property_purpose",
+      name: "Filter By Purpose",
+      placeholder: "Purpose",
+    },
+    { value: "demand_price", name: "Filter By Demand", placeholder: "Demand" },
+    {
+      value: "property_type",
+      name: "Filter By Type",
+      placeholder: "Type",
+    },
+  ];
+  selectedOption = this.options[0].value;
+  placeholder = this.options[0].placeholder;
+  refId: any;
+
   ngOnInit(): void {
     this.getAllList();
   }
+
+  
+  sort(key: any) {
+    this.key = key;
+    this.reverse = !this.reverse;
+  }
+
+  optionChange(e: any) {
+    console.log(e);
+    this.placeholder = e.placeholder;
+    this.refId = "";
+    console.log(this.selectedOption);
+  }
+
   // Function to Get table Data
   getAllList() {
     this.authService.getAllAssignedLeads().subscribe(
       (data) => {
         this.user = data;
         console.log("Server response: ", this.user);
-        // console.log(this.user[0]?.assigned_history);
-        // console.log(this.user[0]?.assigned_history[1]);
       },
       (error) => {
         console.error(error);
@@ -39,7 +72,6 @@ export class AssignedLeadsComponent implements OnInit {
     );
   }
 
-  
   setCurrentRow(user: any) {
     this.row = user;
     let date = new Date(this.row.created);
@@ -69,7 +101,7 @@ export class AssignedLeadsComponent implements OnInit {
       }
     );
   }
-  
+
   confirmID(id: any) {
     console.log(id);
 

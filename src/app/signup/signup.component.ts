@@ -14,7 +14,6 @@ export class SignupComponent implements OnInit {
   registerForm: FormGroup;
   cities: any;
   locations: any;
-  // access: ['super_admin', 'agent', 'city_admin'];
   user: any;
   abc: any;
   accessType = [{ access: "agent" }, { access: "city_admin" }];
@@ -49,9 +48,6 @@ export class SignupComponent implements OnInit {
     this.user = this.authService.getUser();
   }
   updatefields() {
-    console.log(this.user);
-    // this.registerForm.value["city"] = this.user.city;
-    // this.registerForm.value["access"] = this.user.access;
     this.registerForm.patchValue({ fullname: this.user.fullname });
     this.registerForm.patchValue({ email: this.user.email });
     this.registerForm.patchValue({ password: this.user.password });
@@ -73,7 +69,6 @@ export class SignupComponent implements OnInit {
 
     if (this.user.city) {
       this.getLocations(this.user.city._id);
-      // this.registerForm.patchValue({ city: this.user.city });
       console.log(this.user.city.city);
     }
     this.selectedCity = this.user.city?.city;
@@ -94,36 +89,27 @@ export class SignupComponent implements OnInit {
         contact: ["", Validators.required],
         access: ["", Validators.required],
         city: ["", Validators.required],
-        confirm_password: [
-          "",
-          [Validators.minLength(6)],
-        ],
+        confirm_password: ["", [Validators.minLength(6)]],
         password: ["", [Validators.minLength(6)]],
-        // created: []
       });
     } else {
-      this.registerForm = this.formBuilder.group(
-        {
-          fullname: ["", Validators.required],
-          email: [
-            "",
-            [
-              Validators.required,
-              Validators.email,
-              Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$"),
-            ],
+      this.registerForm = this.formBuilder.group({
+        fullname: ["", Validators.required],
+        email: [
+          "",
+          [
+            Validators.required,
+            Validators.email,
+            Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$"),
           ],
-          password: ["", [Validators.required, Validators.minLength(6)]],
-          location: [, Validators.required],
-          city: ["", Validators.required],
-          contact: ["", Validators.required],
-          access: ["", Validators.required],
-          confirm_password: [
-            "",
-            [Validators.required, Validators.minLength(6)],
-          ],
-        }
-      );
+        ],
+        password: ["", [Validators.required, Validators.minLength(6)]],
+        location: [, Validators.required],
+        city: ["", Validators.required],
+        contact: ["", Validators.required],
+        access: ["", Validators.required],
+        confirm_password: ["", [Validators.required, Validators.minLength(6)]],
+      });
     }
     this.getCities();
   }
@@ -195,7 +181,6 @@ export class SignupComponent implements OnInit {
 
   // Patch the value of access input using this below function
   changeAccess(access: any) {
-    // console.log(access.access);
     if (access) this.registerForm.patchValue({ access: access?.access });
   }
 
@@ -222,9 +207,6 @@ export class SignupComponent implements OnInit {
         .updateUser(this.user._id, this.registerForm.value)
         .subscribe((data: any) => {
           console.log("signup data: ", data);
-          console.log(data.code);
-
-          // this.registerresponse = data;
           const email = this.registerForm.value.email;
           const msg = data.message;
           const code = data.code;
@@ -245,7 +227,6 @@ export class SignupComponent implements OnInit {
         (data) => {
           console.log("signup data: ", data);
           const msg = data.message;
-          const code = data.code;
 
           if (data.userData._id) {
             this.toastr.success(msg, "Success", {
@@ -253,10 +234,6 @@ export class SignupComponent implements OnInit {
             });
 
             this.router.navigateByUrl("/agents");
-          } else {
-            this.toastr.error(msg, "Error", {
-              timeOut: 5000,
-            });
           }
         },
         (error) => {

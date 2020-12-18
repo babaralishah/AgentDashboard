@@ -19,7 +19,7 @@ export class BothComponent implements OnInit {
   deleteId: any;
   key: any;
   reverse: boolean = true;
-  p:number = 1;
+  p: number = 1;
 
   constructor(
     private router: Router,
@@ -89,10 +89,9 @@ export class BothComponent implements OnInit {
     );
   }
 
-
-  sort(key:any) {
+  sort(key: any) {
     this.key = key;
-    this.reverse =!this.reverse;
+    this.reverse = !this.reverse;
   }
   // Function to delete the single inventory
   deleteLead() {

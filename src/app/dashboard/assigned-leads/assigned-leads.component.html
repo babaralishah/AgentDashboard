@@ -20,8 +20,7 @@
                     <div class="col">
                         <input class="form-control" id="myInput" type="text" placeholder="Search {{ placeholder }}" [(ngModel)]="refId">
                     </div>
-                    <button onclick="window.print()" class="btn btn-primary">Print</button> &nbsp; &nbsp;
-                    <!-- <button class="btn btn-primary">Excel</button> -->
+                    <button onclick="window.print()" class="btn btn-primary">Print</button>
                 </div>
             </div>
 
@@ -124,7 +123,7 @@
                         <tr>
                             <th>ID </th>
                             <th scope="col">Full Name</th>
-                            <th (click)="sort('date')" scope="col">Date <i class="fa fa-sort"></i></th>
+                            <th (click)="sort('id')" scope="col">Date <i class="fa fa-sort"></i></th>
                         </tr>
                     </thead>
 

@@ -38,9 +38,18 @@ export class AssignedLeadsComponent implements OnInit {
       placeholder: "Type",
     },
   ];
-  selectedOption = this.options[0].value;
-  placeholder = this.options[0].placeholder;
+
+  options2 = [
+    { value: "userId", name: "Filter By userId ", placeholder: "userId" },
+    { value: "fullname", name: "Filter By fullname", placeholder: "fullname" }
+  ];
+
+  selectedOption = this.options2[0].value;
+  placeholder = this.options2[0].placeholder;
   refId: any;
+  selectedOption2 = this.options2[0].value;
+  placeholder2 = this.options2[0].placeholder;
+  refId2: any;
 
   ngOnInit(): void {
     this.getAllList();

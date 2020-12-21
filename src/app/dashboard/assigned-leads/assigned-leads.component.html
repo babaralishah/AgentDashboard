@@ -110,17 +110,26 @@
 
             <!-- Modal body -->
             <div class="modal-body">
+                <div class="card-body row">
+                    <div class="col">
+                        <ng-select [items]="options2" bindLabel="name" bindValue="value" class="mr-2 ml-2" placeholder="Filter By" [(ngModel)]="selectedOption2" (change)="optionChange($event)" [clearable]="false">
+                        </ng-select>
+                    </div>
+                    <div class="col">
+                        <input class="form-control" id="myInput" type="text" placeholder="Search {{ placeholder }}" [(ngModel)]="refId2">
+                    </div>
+                </div>
                 <table class="table table-hover">
                     <thead>
                         <tr>
                             <th>ID </th>
                             <th scope="col">Full Name</th>
-                            <th (click)="sort('id')" scope="col">Date <i class="fa fa-sort"></i></th>
+                            <th (click)="sort('date')" scope="col">Date <i class="fa fa-sort"></i></th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        <tr *ngFor="let history of row.assigned_history | orderBy: key: reverse">
+                        <tr *ngFor="let history of row.assigned_history | orderBy: key: reverse | filterlist: selectedOption2:refId2">
                             <td>{{ history.userId }}</td>
                             <td>{{ history.fullname }}</td>
                             <td>{{history.date | date}}

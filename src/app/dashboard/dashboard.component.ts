@@ -28,14 +28,11 @@ export class DashboardComponent implements OnInit {
     // console.log(this.tokendata);
   }
 
-  // tslint:disable-next-line: typedef
   isLogin() {
 
     const token = this.authService.getToken();
-    // console.log(token);
     return token;
   }
-  // tslint:disable-next-line: typedef
   logout() {
     localStorage.removeItem('token');
     this.toastr.success('Logged Out', 'Success', {

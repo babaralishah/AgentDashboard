@@ -64,7 +64,7 @@
                             <i class="fas fa-unlock"></i>
                             <input type="password" (keyup)="password($event.target.value, 'Pass')" class="form-control inputs" formControlName="password" autocomplete="off" placeholder="Password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
                             <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                                <div *ngIf="f.password.errors.required">Password is required</div>
+                                <div *ngIf="f.password.errors.required">Password is required.</div>
                                 <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
                             </div>
                         </div>

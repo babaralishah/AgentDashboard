@@ -167,6 +167,8 @@ export class SignupComponent implements OnInit {
         console.log(this.selectStringLocations);
         console.log(this.selectedLocations);
         this.selectStringLocations = this.selectedLocations;
+        console.log(this.selectStringLocations);
+        
         this.registerForm.patchValue({ location: this.user?.location });
       } else this.selectStringLocations = [];
     }
@@ -181,6 +183,8 @@ export class SignupComponent implements OnInit {
 
   // Patch the value of access input using this below function
   changeAccess(access: any) {
+    console.log(access);
+    
     if (access) this.registerForm.patchValue({ access: access?.access });
   }
 

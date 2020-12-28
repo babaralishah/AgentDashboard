@@ -158,8 +158,6 @@
                             <!-- <b>Select Access</b> -->
                             <i class="fas fa-universal-access"></i>
                             <ng-select class="ng-select inputs2" [items]="accessType" bindLabel="access" bindValue="access" placeholder="Select Access Type" [ngClass]="{ 'is-invalid': submitted && f.access.errors }" (change)="changeAccess($event)">
-                                <!-- <ng-select class="ng-select inputs2" [items]="access" bindLabel="access" bindValue="access" placeholder="Select Access Type" (change)="changeAccess($event)">
-                            <option>dasdas</option> -->
                             </ng-select>
                             <div *ngIf="submitted && f.access.errors" class="invalid-feedback">
                                 <div *ngIf="f.access.errors.required">Access is required</div>

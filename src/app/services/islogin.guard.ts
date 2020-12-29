@@ -9,7 +9,6 @@ import { Injectable } from '@angular/core';
 export class IsLoginGuard implements CanActivate {
   constructor(private router: Router, private authService: AuthenticationService) {}
 
-  // tslint:disable-next-line: typedef
   async canActivate() {
     const token = await this.authService.getToken();
     if (!token) {

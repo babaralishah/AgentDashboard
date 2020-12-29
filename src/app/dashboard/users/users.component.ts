@@ -1,7 +1,9 @@
+import * as XLSX from "xlsx";
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { AuthenticationService } from "src/app/services/Authentication/authentication.service";
 import { ToastrService } from "ngx-toastr";
+import { JSON2SheetOpts } from "xlsx/types";
 
 @Component({
   selector: "app-users",
@@ -25,23 +27,22 @@ export class UsersComponent implements OnInit {
   user: any;
 
   options = [
-    { value: "userId", name: "Filter By userId", placeholder: "userId" },
+  
     {
       value: "fullname",
-      name: "Filter By Full Name",
-      placeholder: "Full Name",
+      name: "Filter By Name",
+      placeholder: "Name",
     },
     {
-      value: "contact",
-      name: "Filter By contact",
-      placeholder: "contact",
+      value: "cityName",
+      name: "Filter By City",
+      placeholder: "City",
     },
     {
-      value: "email",
-      name: "Filter By email",
-      placeholder: "email",
-    },
-    { value: "access", name: "Filter By access", placeholder: "access" },
+      value: "locationName",
+      name: "Filter By Location",
+      placeholder: "location",
+    }
   ];
   selectedOption = this.options[0].value;
   placeholder = this.options[0].placeholder;
@@ -128,10 +129,54 @@ export class UsersComponent implements OnInit {
   //   const token = this.authService.getToken();
   //   return token;
   // }
-  // tslint:disable-next-line: typedef
   // logout() {
   //   localStorage.removeItem('token');
   //   console.log('\nlogout\n');
   //   this.router.navigateByUrl('/');
   // }
+// Function to Get Excel File of the Data Table
+exportTOExcel() {
+  let options: JSON2SheetOpts = { header: [] };
+  const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.user, options);
+
+  var wscols = [
+    { wch: 30 },
+    { wch: 30 },
+    { wch: 30 },
+    { wch: 30 },
+    { wch: 30 },
+    { wch: 30 },
+    { wch: 30 },
+    { wch: 30 },
+    { wch: 30 },
+    { wch: 30 },
+    { wch: 30 },
+    { wch: 30 },
+    { wch: 30 },
+    { wch: 30 },
+    { wch: 30 },
+    { wch: 30 },
+    { wch: 30 },
+    { wch: 30 },
+    { wch: 30 },
+    { wch: 30 },
+    { wch: 30 },
+    { wch: 30 },
+    { wch: 30 },
+    { wch: 30 },
+    { wch: 30 },
+    { wch: 30 },
+    { wch: 30 },
+    { wch: 30 },
+    { wch: 30 },
+    { wch: 30 },
+  ];
+
+  ws["!cols"] = wscols;
+
+  const wb: XLSX.WorkBook = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, "All Data Export");
+  XLSX.writeFile(wb, "Users.xlsx");
+}
+
 }

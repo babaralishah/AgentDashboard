@@ -11,7 +11,6 @@ import * as jwt_decode from 'jwt-decode';
 export class RedirectLoginGuard implements CanActivate {
   constructor(private router: Router, private authService: AuthenticationService) {}
 
-  // tslint:disable-next-line: typedef
   async canActivate() {
     const token = await this.authService.getToken();
     if (token) {

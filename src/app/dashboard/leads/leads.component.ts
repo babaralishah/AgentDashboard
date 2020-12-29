@@ -40,7 +40,7 @@ export class LeadsComponent implements OnInit {
   selectedUserLocation: any;
 
   options = [
-    { value: "referenceId", name: "Filter By Ref ID", placeholder: "Ref Id" },
+    // { value: "referenceId", name: "Filter By Ref ID", placeholder: "Ref Id" },
     {
       value: "property_purpose",
       name: "Filter By Purpose",
@@ -48,20 +48,14 @@ export class LeadsComponent implements OnInit {
     },
     {
       value: "cityName",
-      name: "Filter By cityName",
-      placeholder: "cityName",
+      name: "Filter By City",
+      placeholder: "City",
     },
     {
       value: "locationName",
-      name: "Filter By locationName",
-      placeholder: "locationName",
-    },
-    { value: "demand_price", name: "Filter By Demand", placeholder: "Demand" },
-    {
-      value: "property_type",
-      name: "Filter By Type",
-      placeholder: "Type",
-    },
+      name: "Filter By Location",
+      placeholder: "Location",
+    }
   ];
   selectedOption = this.options[0].value;
   placeholder = this.options[0].placeholder;

@@ -159,7 +159,6 @@ export class MapComponent implements OnInit {
     const slider = document.getElementById("slider");
     const sliderValue = document.getElementById("slider-value");
     this.map.on("load", () => {
-      // tslint:disable-next-line: no-unused-expression
       this.map.addSource("myImageSource", {
         type: "image",
         url: "assets/i-10-islamabad.jpg",
@@ -197,7 +196,6 @@ export class MapComponent implements OnInit {
     });
 
     this.map.on("load", () => {
-      // tslint:disable-next-line: no-unused-expression
       this.map.addSource("f-7", {
         type: "image",
         url: "assets/f-7.png",
@@ -230,7 +228,6 @@ export class MapComponent implements OnInit {
       });
     });
     this.map.on("load", () => {
-      // tslint:disable-next-line: no-unused-expression
       this.map.addSource("phase-2", {
         type: "image",
         url: "assets/phase 2.png",
@@ -264,7 +261,6 @@ export class MapComponent implements OnInit {
     });
 
     // this.map.on('load', () => {
-    //   // tslint:disable-next-line: no-unused-expression
     //   this.map.addSource('phase-3', {
     //     type: 'image',
     //     url: 'assets/phase 3.png',
@@ -297,7 +293,6 @@ export class MapComponent implements OnInit {
     //   });
     // });
     this.map.on("load", () => {
-      // tslint:disable-next-line: no-unused-expression
       this.map.addSource("e-16", {
         type: "image",
         url: "assets/maps_images/E-16-crop.png",
@@ -330,7 +325,6 @@ export class MapComponent implements OnInit {
       });
     });
     this.map.on("load", () => {
-      // tslint:disable-next-line: no-unused-expression
       this.map.addSource("e-18", {
         type: "image",
         url: "assets/maps_images/E-18-crop.png",
@@ -364,7 +358,6 @@ export class MapComponent implements OnInit {
     });
 
     this.map.on("load", () => {
-      // tslint:disable-next-line: no-unused-expression
       this.map.addSource("enclave", {
         type: "image",
         url: "assets/enclave_map-crop.png",

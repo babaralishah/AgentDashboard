@@ -48,6 +48,10 @@ export class SignupComponent implements OnInit {
     this.user = this.authService.getUser();
   }
   updatefields() {
+    this.registerForm.patchValue({
+      locationName: this.selectStringLocations,
+    });
+    this.registerForm.patchValue({ cityName: this.user.city[0].city });
     this.registerForm.patchValue({ fullname: this.user.fullname });
     this.registerForm.patchValue({ email: this.user.email });
     this.registerForm.patchValue({ password: this.user.password });
@@ -76,6 +80,8 @@ export class SignupComponent implements OnInit {
   initialize() {
     if (this.user) {
       this.registerForm = this.formBuilder.group({
+        cityName: [],
+        locationName: [],
         fullname: ["", Validators.required],
         email: [
           "",
@@ -94,6 +100,8 @@ export class SignupComponent implements OnInit {
       });
     } else {
       this.registerForm = this.formBuilder.group({
+        cityName: [],
+        locationName: [],
         fullname: ["", Validators.required],
         email: [
           "",
@@ -157,18 +165,20 @@ export class SignupComponent implements OnInit {
 
   //Function to change the city of --ng select city--
   changeCity(city: any) {
+    this.registerForm.patchValue({ cityName: city?.city });
     this.selectStringLocations = [];
     this.locations = [];
     if (city) this.getLocations(city._id);
     this.registerForm.patchValue({ city });
     this.locations = "";
     if (this.user) {
+      this.registerForm.patchValue({ cityName: this.user?.city[0].city });
       if (this.selectedCity == city?.city) {
         console.log(this.selectStringLocations);
         console.log(this.selectedLocations);
         this.selectStringLocations = this.selectedLocations;
         console.log(this.selectStringLocations);
-        
+
         this.registerForm.patchValue({ location: this.user?.location });
       } else this.selectStringLocations = [];
     }
@@ -184,18 +194,13 @@ export class SignupComponent implements OnInit {
   // Patch the value of access input using this below function
   changeAccess(access: any) {
     console.log(access);
-    
+
     if (access) this.registerForm.patchValue({ access: access?.access });
   }
 
   // Function to register the user by sending whole form
   registerUser() {
-    console.log(this.registerForm);
-    console.log(this.registerForm.value);
-
     this.submitted = true;
-
-    // stop here if form is invalid
     if (this.registerForm.invalid) {
       console.log("Erroneous");
       this.toastr.error("Can not Registered", "Error", {
@@ -203,8 +208,6 @@ export class SignupComponent implements OnInit {
       });
       return;
     }
-
-    // this.registerForm.patchValue({ location: this.selectedLocations });
     if (this.user) {
       console.log(this.registerForm.value);
       this.authService
@@ -226,6 +229,9 @@ export class SignupComponent implements OnInit {
           }
         });
     } else {
+      this.registerForm.patchValue({
+        locationName: this.selectStringLocations,
+      });
       console.log(this.registerForm.value);
       this.authService.register(this.registerForm.value).subscribe(
         (data) => {

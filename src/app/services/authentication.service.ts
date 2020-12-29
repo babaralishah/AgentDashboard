@@ -26,7 +26,6 @@ export class AuthenticationService {
   }
 
   //////////// Send data to inventory using inventory form /////////////
-  // tslint:disable-next-line: typedef
   createInventory(user: any) {
     console.log('Create user func');
     return this.httpClient.post(`${this.url}/inventory/add`, user).pipe(
@@ -35,18 +34,15 @@ export class AuthenticationService {
   }
 
   /////////////// Get data from inventory to the inventory table ////////////
-  // tslint:disable-next-line: typedef
   getInventory() {
     return this.httpClient.get<any>(`${this.url}/inventory`);
   }
   ///////// Getting user table data //////////////
-  // tslint:disable-next-line: typedef
   getUsers() {
     console.log(`${this.url}/users`);
     return this.httpClient.get<any>(`${this.url}/users`);
   }
   ////////////// Send new row table data /////////////
-  // tslint:disable-next-line: typedef
   createUsers(user: any) {
     console.log('Create user func');
     return this.httpClient.post(`${this.url}/users/save`, user).pipe(
@@ -55,7 +51,6 @@ export class AuthenticationService {
   }
   // create service to get and set the token to local storage
 
-  // tslint:disable-next-line: typedef
   setToken(token) {
     localStorage.setItem('token', token);
   }
@@ -69,7 +64,6 @@ export class AuthenticationService {
     }
 
   }
-  // tslint:disable-next-line: typedef
   getToken() {
     return localStorage.getItem('token');
     // console.log('token:\t', token);
@@ -77,13 +71,11 @@ export class AuthenticationService {
   }
 
   // Getting cities names from api
-  // tslint:disable-next-line: typedef
   getCities(){
     return this.httpClient.get<any>(`https://asasa.com/api/get_cities`);
   }
 
   // Getting Locations names
-  // tslint:disable-next-line: typedef
   getLocations(){
     return this.httpClient.get<any>(`https://asasa.com/api/get_locations`);
   }
@@ -141,7 +133,6 @@ export class AuthenticationService {
   }
 
   /////////////// Get Users Token //////////////////////////
-  // tslint:disable-next-line: typedef
   getAccessToken() {
     return localStorage.getItem('access_token');
   }
@@ -151,7 +142,6 @@ export class AuthenticationService {
     return (authToken !== null) ? true : false;
   }
   ////////// Logout Function ////////////////
-  // tslint:disable-next-line: typedef
   logout() {
     if (localStorage.removeItem('access_token') == null) {
       this.router.navigate(['users/login']);
@@ -171,7 +161,6 @@ export class AuthenticationService {
   ///////////////////////////////////////////
 
   ///////// Error Handling /////////////////
-  // tslint:disable-next-line: typedef
   handleError(error: HttpErrorResponse) {
     let msg = '';
     if (error.error instanceof ErrorEvent) {

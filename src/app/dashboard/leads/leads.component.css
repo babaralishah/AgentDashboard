@@ -2,13 +2,38 @@
     pointer-events: none;
 }
 
-.table {
-    border: 1px solid #8080804f;
+.table-container {
+    overflow-x: scroll;
+    box-shadow: 0px 0px 20px 5px rgba(200, 200, 200, 0.69);
 }
 
-th {
-    background-color: white;
-    color: black;
+.table {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    overflow: hidden;
+}
+
+.table td,
+.table th {
+    padding: 10px 20px;
+}
+
+.table tr:nth-child(even) {
+    background-color: #38baa21f;
+}
+
+.table tr:hover {
+    background-color: #e8e8e8;
+}
+
+.table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #38baa2;
+    font-size: 16px;
+    color: white;
 }
 
 .leads {
@@ -23,7 +48,7 @@ th {
 .modal-header {
     background-color: #38baa2;
     color: white;
-    height: 61px
+    height: 61px;
 }
 
 .btn:not(:disabled):not(.disabled):hover {
@@ -78,7 +103,7 @@ ng-select {
     }
 }
 
-@media only screen and (min-width: 1200px)and (max-width: 1400px) {
+@media only screen and (min-width: 1200px) and (max-width: 1400px) {
     .leads {
         margin-left: 100px;
     }

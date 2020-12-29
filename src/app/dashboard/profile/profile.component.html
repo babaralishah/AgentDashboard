@@ -88,9 +88,13 @@
                                     <img *ngIf="selectedFile" [src]="selectedFile.src" />
                                     <div class="profileinfo">
                                         <h1>{{tokendata?.fullname}}</h1>
-                                        <span class=" badge badge-warning">{{tokendata?.access}}</span>
+                                        <span class=" badge badge-warning">{{tokendata?.access | titlecase}}</span>
 
-                                        <p class="bio">Lived all my life on the top of mount Fuji, learning the way to be a Ninja Dev.</p>
+                                        <div class="profile-details">
+                                            <b>Email :</b> &nbsp;&nbsp;&nbsp;&nbsp;{{tokendata?.email}} <br>
+                                            <b>Contact :</b> &nbsp;&nbsp;&nbsp;+92{{tokendata?.contact}}
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -106,36 +110,21 @@
 
                             <div class="upload-btn-wrapper  text-center input-container" style="float: left;">
                                 <button (click)="file.click()" class="btn text-center mr-2" style="width: 100px;">
-                    <i class="fa fa-camera" aria-hidden="true">&nbsp;</i>
-                    <span class="upload"><b>Upload</b></span>
-                  </button>
+                  <i class="fa fa-camera" aria-hidden="true">&nbsp;</i>
+                  <span class="upload"><b>Upload</b></span>
+                </button>
                                 <input #file type='file' class="fileField" (change)="onSelectFile($event)"><br><br>
                             </div>
                             <div class="upload-btn-wrapper  text-center" style=" float: left; margin-top: 15px;">
                                 <button (click)="updateImage()" class="btn text-center mr-2" style="width: 100px;">
-                    <i class="fa fa-save">&nbsp;</i>
-                    <span class="upload"><b>Save</b></span>
-                  </button>
+                  <i class="fa fa-save">&nbsp;</i>
+                  <span class="upload"><b>Save</b></span>
+                </button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-10">
-                        <div class="content">
-                            <div class="card1">
-                                <div class="firstinfo">
-                                    <div class="profileinfo mt-4">
-                                        <h2 class="bio d-flex justify-content-center align-item-center text-dark"><b>Email #:</b> &nbsp;&nbsp;&nbsp;&nbsp;{{tokendata?.email}}</h2>
-                                        <h2 class="bio d-flex justify-content-center align-item-center text-dark"><b>Contact #:</b> &nbsp;&nbsp;&nbsp;+92{{tokendata?.contact}}</h2>
-                                    </div>
-                                </div>
-                            </div>
 
-                        </div>
-                    </div>
-
-                </div>
             </div>
         </div>
     </div>

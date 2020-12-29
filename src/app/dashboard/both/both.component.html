@@ -13,108 +13,107 @@
         <div class="both">
             <h1><b>Both Leads/Inventory Table</b></h1>
             <br>
-            <div>
+            <div class="col-2">
                 <button class="btn btn-primary" (click)="setFormTitle('Both')">Add New</button>
             </div>
-            <div class="pull-right">
-                <!-- <input type="text" placeholder="Search.." name="search">
-    <button type="submit"><i class="fa fa-search"></i></button> -->
+            <div class="">
                 <div class="card-body row">
-                    <!--end of col-->
-                    <div class="col">
+                    <div class="col-3">
                         <ng-select [items]="options" bindLabel="name" bindValue="value" class="mr-2 ml-2" placeholder="Filter By" [(ngModel)]="selectedOption" (change)="optionChange($event)" [clearable]="false">
                         </ng-select>
                     </div>
-                    <div class="col">
+                    <div class="col-3">
                         <input type="text" class="form-control ml-2" placeholder="Search {{ placeholder }}" [(ngModel)]="refId" />
-                        <!-- <input class="form-control" id="myInput" type="text" [(ngModel)]="general_search" placeholder="Search topic or keyword" /> -->
                     </div>
 
-                    <!-- <button class="btn btn-primary rounded-pill" type="submit">Search</button> -->
-
-                    <button onclick="window.print()" class="btn btn-primary">Print</button> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                    <button (click)="exportTOExcel()" class="btn btn-primary">Excel</button>
+                    <div class="col-1"></div>
+                    <div class="col-5">
+                        <button onclick="window.print()" class="btn btn-primary">Print</button> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                        <button (click)="exportTOExcel()" class="btn btn-primary">Excel</button>
+                    </div>
                 </div>
             </div>
             <!-- Inventory management table is below -->
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th (click)="sort('id')" scope="col">ID <i class="fa fa-sort"></i></th>
-                        <th scope="col">Purpose</th>
-                        <th scope="col">Client</th>
-                        <th scope="col">Client Type</th>
-                        <th scope="col">Prop. Type</th>
-                        <!-- <th scope="col">Prop. #</th> -->
-                        <th scope="col">Area</th>
-                        <th scope="col" width="30">Location</th>
-                        <th scope="col">Demand</th>
-                        <th scope="col">Beds</th>
-                        <!-- <th scope="col">Phone #</th> -->
-                        <!-- <th scope="col">Comment</th> -->
-                        <th scope="col">Assigned To</th>
-                        <!-- <th scope="col">Admin Status</th>
+            <div class="table-container mb-5 mt-4">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th (click)="sort('id')" scope="col">ID <i class="fa fa-sort"></i></th>
+                            <th scope="col">Purpose</th>
+                            <th scope="col">Client</th>
+                            <th scope="col">Client Type</th>
+                            <th scope="col">Prop. Type</th>
+                            <!-- <th scope="col">Prop. #</th> -->
+                            <th scope="col">Area</th>
+                            <th scope="col" width="30">Location</th>
+                            <th scope="col">Demand</th>
+                            <th scope="col">Beds</th>
+                            <!-- <th scope="col">Phone #</th> -->
+                            <!-- <th scope="col">Comment</th> -->
+                            <th scope="col">Assigned To</th>
+                            <!-- <th scope="col">Admin Status</th>
                         <th scope="col">Agent Status</th> -->
-                        <th scope="col">Added On</th>
-                        <th scope="col">Operations</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let user of user | filterlist: selectedOption:refId | orderBy: key: reverse | paginate:{itemsPerPage:10,currentPage:p};">
-                        <!-- | tableFilter06: search_client | tableFilter05: search_demand | tableFilter04: search_type | tableFilter03: search_area | tableFilter02: search_location | tableFilter: search_id -->
-                        <td>{{ user?.referenceId }}</td>
-                        <td>{{ user?.property_purpose }}</td>
+                            <th scope="col">Added On</th>
+                            <th scope="col">Operations</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let user of user | filterlist: selectedOption:refId | orderBy: key: reverse | paginate:{itemsPerPage:10,currentPage:p};">
+                            <!-- | tableFilter06: search_client | tableFilter05: search_demand | tableFilter04: search_type | tableFilter03: search_area | tableFilter02: search_location | tableFilter: search_id -->
+                            <td>{{ user?.referenceId }}</td>
+                            <td>{{ user?.property_purpose }}</td>
 
-                        <td><b>Name : </b>{{ user?.client_name | titlecase }} <br> <b>Number : </b>{{ user?.client_number}}</td>
-                        <!-- <td>{{ user.client_name }}</td> -->
-                        <td>{{ user?.client_type }}</td>
-                        <td>{{ user?.property_type }}</td>
-                        <!-- <td>{{ user?.Prop_num }}</td> -->
-                        <td>{{ user?.area}}</td>
-                        <td>
-                            {{user?.city[0]?.city}}<span>&nbsp;&nbsp;</span><br><span class="badge badge-light" *ngFor="let loc of user?.location">{{ loc.location }},  </span>
-                        </td>
+                            <td><b>Name : </b>{{ user?.client_name | titlecase }} <br> <b>Number : </b>{{ user?.client_number}}</td>
+                            <!-- <td>{{ user.client_name }}</td> -->
+                            <td>{{ user?.client_type }}</td>
+                            <td>{{ user?.property_type }}</td>
+                            <!-- <td>{{ user?.Prop_num }}</td> -->
+                            <td>{{ user?.area}}</td>
+                            <td>
+                                {{user?.city[0]?.city}}<span>&nbsp;&nbsp;</span><br><span class="badge badge-light" *ngFor="let loc of user?.location">{{ loc.location }},  </span>
+                            </td>
 
-                        <td>{{ user?.demand_price }}</td>
-                        <td>{{ user?.beds_number }}</td>
-                        <!-- <td>{{ user?.Phone_num }}</td> -->
-                        <!-- <td>{{ user?.Comment }}</td> -->
-                        <td>{{ user?.assigned_to}}</td>
-                        <!-- <td>{{ user?.Admin_status }}</td>
+                            <td>{{ user?.demand_price }}</td>
+                            <td>{{ user?.beds_number }}</td>
+                            <!-- <td>{{ user?.Phone_num }}</td> -->
+                            <!-- <td>{{ user?.Comment }}</td> -->
+                            <td>{{ user?.assigned_to}}</td>
+                            <!-- <td>{{ user?.Admin_status }}</td>
                         <td>{{ user?.Agent_status }}</td> -->
-                        <td>{{ user?.created | date: "dd/MM/yyyy"}}</td>
-                        <td><i class="fa fa-edit icon" (click)="setUserToEdit(user)"></i>
-                            <a (click)="setUserToEdit(user)" role="button"></a>
+                            <td>{{ user?.created | date: "dd/MM/yyyy"}}</td>
+                            <td><i class="fa fa-edit icon" (click)="setUserToEdit(user)"></i>
+                                <a (click)="setUserToEdit(user)" role="button"></a>
 
-                            <i class="fa fa-trash icon" (click)="confirmID(user._id)" data-toggle="modal" data-target="#exampleModal1"></i>
+                                <i class="fa fa-trash icon" (click)="confirmID(user._id)" data-toggle="modal" data-target="#exampleModal1"></i>
 
-                        </td>
-                        <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Delete Confirmation</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            </td>
+                            <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Delete Confirmation</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        Are you sure you want to Delete it?
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                        </div>
+                                        <div class="modal-body">
+                                            Are you sure you want to Delete it?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
           Close
         </button>
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteLead()">
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteLead()">
           Delete
         </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </tr>
-                </tbody>
-            </table>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             <pagination-controls (pageChange)="p = $event"></pagination-controls>
         </div>
     </div>

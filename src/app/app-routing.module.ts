@@ -24,7 +24,6 @@ import { AssignedLeadsComponent } from "./dashboard/assigned-leads/assigned-lead
 import { PageNotFoundComponent } from "./dashboard/page-not-found/page-not-found.component";
 
 const routes: Routes = [
-  
   {
     path: "map",
     canActivate: [IsLoginGuard],
@@ -130,7 +129,7 @@ const routes: Routes = [
     path: "**",
     canActivate: [IsLoginGuard],
     component: PageNotFoundComponent,
-  }
+  },
 ];
 
 @NgModule({

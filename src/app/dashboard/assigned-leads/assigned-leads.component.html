@@ -11,86 +11,98 @@
         <div class="both">
             <h1><b>Assigned Leads Table</b></h1>
             <br>
-            <div class="pull-right">
-                <div class="card-body row">
-                    <div class="col">
+            <div class="">
+                <div class="row">
+                    <div class="col-3">
                         <ng-select [items]="options" bindLabel="name" bindValue="value" class="mr-2 ml-2" placeholder="Filter By" [(ngModel)]="selectedOption" (change)="optionChange($event)" [clearable]="false">
                         </ng-select>
                     </div>
-                    <div class="col">
+                    <div class="col-3">
                         <input class="form-control" type="text" placeholder="Search {{ placeholder }}" [(ngModel)]="refId">
                     </div>
-                    <button onclick="window.print()" class="btn btn-primary">Print</button>
+
+
+                    <div class="col-2 ">
+
+                        <button onclick="window.print()" class="btn btn-primary ss">Print</button>
+
+                    </div>
+                    <div class="col-2">
+                        <button (click)="exportTOExcel()" class="btn btn-primary">Excel</button>
+                    </div>
                 </div>
             </div>
 
-            <table class="table table-hover">
-                <thead>
-                    <th scope="col">ID</th>
-                    <th scope="col">Purpose</th>
-                    <th scope="col">Client Details</th>
-                    <th scope="col">Location</th>
-                    <th scope="col">Land Area</th>
-                    <th scope="col">Client Type</th>
-                    <th scope="col">Demand</th>
-                    <th scope="col">Operations</th>
-                </thead>
+            <div class="table-container mb-5 mt-4">
+                <table class="table table-hover">
+                    <thead>
+                        <th scope="col">ID</th>
+                        <th scope="col">Purpose</th>
+                        <th scope="col">Client Details</th>
+                        <th scope="col">Location</th>
+                        <th scope="col">Land Area</th>
+                        <th scope="col">Client Type</th>
+                        <th scope="col">Demand</th>
+                        <th scope="col">Operations</th>
+                    </thead>
 
-                <tbody>
-                    <tr *ngFor="let user of user | filterlist: selectedOption:refId ">
-                        <td>{{ user.referenceId }}</td>
-                        <td>{{ user.property_purpose }}</td>
-                        <td>
-                            <b>Name : </b>{{ user.client_name |titlecase }} <br />
-                            <b>Phone : </b>{{ user.client_number }}
-                        </td>
-                        <td>
-                            {{ user.city[0]?.city }}<span></span><br /><span class="badge badge-light" *ngFor="let loc of user.location">{{ loc.location }},
+                    <tbody>
+                        <tr *ngFor="let user of user | filterlist: selectedOption:refId | paginate:{itemsPerPage:10,currentPage:p}; ">
+                            <td>{{ user.referenceId }}</td>
+                            <td>{{ user.property_purpose }}</td>
+                            <td>
+                                <b>Name : </b>{{ user.client_name |titlecase }} <br />
+                                <b>Phone : </b>{{ user.client_number }}
+                            </td>
+                            <td>
+                                {{ user.city[0]?.city }}<span></span><br /><span class="badge badge-light" *ngFor="let loc of user.location">{{ loc.location }},
               </span>
-                        </td>
-                        <td *ngIf="user.area == null else elseBlockArea"><b>Max:</b> {{ user.max_area + " - " + user.area_unit}}<br><b>Min:</b> {{ user.min_area + " - " + user.area_unit}}</td>
-                        <ng-template #elseBlockArea>
-                            <td>{{ user.area + " - " + user.area_unit}}</td>
-                        </ng-template>
-                        <td>{{ user.client_type | titlecase }}</td>
-                        <td *ngIf="user.demand_price == null else elseBlockDemand"><b>Max:</b> {{ user.max_price }}<br><b>Min:</b> {{ user.min_price }}</td>
-                        <ng-template #elseBlockDemand>
-                            <td>{{ user.demand_price }}</td>
-                        </ng-template>
-                        <!-- <td>{{ user.assigned_to}}</td> -->
-                        <td>
-                            <i class="fa fa-trash icon" (click)="confirmID(user._id)" data-toggle="modal" data-target="#exampleModal1"></i>
+                            </td>
+                            <td *ngIf="user.area == null else elseBlockArea"><b>Max:</b> {{ user.max_area + " - " + user.area_unit}}<br><b>Min:</b> {{ user.min_area + " - " + user.area_unit}}</td>
+                            <ng-template #elseBlockArea>
+                                <td>{{ user.area + " - " + user.area_unit}}</td>
+                            </ng-template>
+                            <td>{{ user.client_type | titlecase }}</td>
+                            <td *ngIf="user.demand_price == null else elseBlockDemand"><b>Max:</b> {{ user.max_price }}<br><b>Min:</b> {{ user.min_price }}</td>
+                            <ng-template #elseBlockDemand>
+                                <td>{{ user.demand_price }}</td>
+                            </ng-template>
+                            <!-- <td>{{ user.assigned_to}}</td> -->
+                            <td>
+                                <i class="fa fa-trash icon" (click)="confirmID(user._id)" data-toggle="modal" data-target="#exampleModal1"></i>
 
-                            <i class="fas fa-exchange-alt ml-2" (click)="setCurrentRow(user)" data-toggle="modal" data-target="#myModal"></i>
-                        </td>
-                        <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">
-                                            Delete Confirmation
-                                        </h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <i class="fas fa-exchange-alt ml-2" (click)="setCurrentRow(user)" data-toggle="modal" data-target="#myModal"></i>
+                            </td>
+                            <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">
+                                                Delete Confirmation
+                                            </h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        Are you sure you want to delete it?
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                        </div>
+                                        <div class="modal-body">
+                                            Are you sure you want to delete it?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
                       Close
                     </button>
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteAssignedLead()">
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteAssignedLead()">
                       Delete
                     </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </tr>
-                </tbody>
-            </table>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
         </div>
     </div>
 </div>

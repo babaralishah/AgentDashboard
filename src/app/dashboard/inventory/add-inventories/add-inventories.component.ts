@@ -266,6 +266,8 @@ export class AddInventoriesComponent implements OnInit {
     this.addinventoryForm.patchValue({ assigned_to: name });
   }
   updatefields() {
+    console.log(this.user);
+
     this.formSendingStatus = "Save";
     this.addinventoryForm.patchValue({ form_title: this.user.form_title });
     this.addinventoryForm.patchValue({ area: this.user.area });
@@ -274,6 +276,13 @@ export class AddInventoriesComponent implements OnInit {
     this.addinventoryForm.patchValue({ max_price: this.user.max_price });
     this.addinventoryForm.patchValue({ _id: this.user._id });
     this.addinventoryForm.patchValue({ location: this.user.location });
+
+    this.addinventoryForm.patchValue({
+      added_By: {
+        name: this.user.added_By.name,
+        userId: this.user.added_By["userId"],
+      },
+    });
     console.log(this.user.location);
 
     this.addinventoryForm.patchValue({ min_area: this.user.min_area });
@@ -282,7 +291,6 @@ export class AddInventoriesComponent implements OnInit {
     this.maximumPriceRange = this.user.max_price;
     this.minimumAreaRange = this.user.min_area;
     this.maximumAreaRange = this.user.max_area;
-    // console.log(this.addinventoryForm.get("min_price").value);
 
     this.addinventoryForm.patchValue({ max_price: this.user.max_price });
 
@@ -330,6 +338,7 @@ export class AddInventoriesComponent implements OnInit {
   formDeclare() {
     this.addinventoryForm = this.formBuilder.group({
       // _id: [''],
+
       assigned_type: [""],
       selectPropertyType: [""],
       assigned_to: [],
@@ -365,6 +374,10 @@ export class AddInventoriesComponent implements OnInit {
       client_name: ["", Validators.required],
       client_number: [],
       client_type: [""],
+      added_By: this.formBuilder.group({
+        name: [""],
+        userId: [""],
+      }),
     });
   }
 
@@ -474,9 +487,6 @@ export class AddInventoriesComponent implements OnInit {
   // Submit form to backend service
   submitForm() {
     this.submitted = true;
-    console.log(this.addinventoryForm.value);
-
-    // stop here if form is invalid
     if (this.addinventoryForm.invalid) {
       console.log("Erroneous");
       this.toastr.error("Fill all the Required Fields", "Error", {
@@ -484,8 +494,6 @@ export class AddInventoriesComponent implements OnInit {
       });
       return;
     }
-    console.log(this.addinventoryForm.value);
-
     if (this.user) {
       this.addinventoryForm.patchValue({
         locationName: this.selectStringLocations,
@@ -531,7 +539,12 @@ export class AddInventoriesComponent implements OnInit {
       console.log(this.addinventoryForm.value);
       if (form_title === "Lead") {
         this.addinventoryForm.patchValue({ assigned_to: this.token?.fullname });
+        this.addinventoryForm.patchValue({
+          added_By: { name: this.token?.fullname, userId: this.token?._id },
+        });
       }
+
+      console.log(this.addinventoryForm.value);
       this.authService.createInventory(this.addinventoryForm.value).subscribe(
         (data) => {
           console.log("signup data: ", data);

@@ -15,6 +15,7 @@ export class AssignedLeadsComponent implements OnInit {
   row: any = [];
   key: any;
   reverse: boolean = true;
+  p: number = 1;
 
   constructor(
     private router: Router,
@@ -25,13 +26,13 @@ export class AssignedLeadsComponent implements OnInit {
   general_search: any;
 
   options = [
-    { value: "referenceId", name: "Filter By Ref ID", placeholder: "Ref Id" },
-    {
-      value: "property_purpose",
-      name: "Filter By Purpose",
-      placeholder: "Purpose",
-    },
-    { value: "demand_price", name: "Filter By Demand", placeholder: "Demand" },
+    // { value: "referenceId", name: "Filter By Ref ID", placeholder: "Ref Id" },
+    // {
+    //   value: "property_purpose",
+    //   name: "Filter By Purpose",
+    //   placeholder: "Purpose",
+    // },
+    // { value: "demand_price", name: "Filter By Demand", placeholder: "Demand" },
     {
       value: "property_type",
       name: "Filter By Type",
@@ -41,13 +42,13 @@ export class AssignedLeadsComponent implements OnInit {
 
   options2 = [
     { value: "userId", name: "Filter By userId ", placeholder: "userId" },
-    { value: "fullname", name: "Filter By fullname", placeholder: "fullname" }
+    { value: "fullname", name: "Filter By fullname", placeholder: "fullname" },
   ];
 
   selectedOption = this.options[0].value;
   placeholder = this.options[0].placeholder;
   refId: any;
-  
+
   selectedOption2 = this.options2[0].value;
   placeholder2 = this.options2[0].placeholder;
   refId2: any;
@@ -56,7 +57,6 @@ export class AssignedLeadsComponent implements OnInit {
     this.getAllList();
   }
 
-  
   sort(key: any) {
     this.key = key;
     this.reverse = !this.reverse;

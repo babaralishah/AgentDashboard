@@ -29,7 +29,7 @@ export class InventoryComponent implements OnInit {
   search_demand: string;
 
   options = [
-    { value: "referenceId", name: "Filter By Ref ID", placeholder: "Ref Id" },
+    // { value: "referenceId", name: "Filter By Ref ID", placeholder: "Ref Id" },
     {
       value: "property_purpose",
       name: "Filter By Purpose",
@@ -37,24 +37,14 @@ export class InventoryComponent implements OnInit {
     },
     {
       value: "cityName",
-      name: "Filter By cityName",
-      placeholder: "cityName",
+      name: "Filter By City",
+      placeholder: "City",
     },
     {
       value: "locationName",
-      name: "Filter By locationName",
-      placeholder: "locationName",
-    },
-    {
-      value: "property_type",
-      name: "Filter By Type",
-      placeholder: "Type",
-    },
-    {
-      value: "created",
-      name: "Filter By created",
-      placeholder: "created date",
-    },
+      name: "Filter By Location",
+      placeholder: "Location",
+    }
   ];
   selectedOption = this.options[0].value;
   placeholder = this.options[0].placeholder;
@@ -107,7 +97,6 @@ export class InventoryComponent implements OnInit {
 
   //////////
   // Function to delete the single inventory
-  // tslint:disable-next-line: typedef
   // deleteInventory(id){
   //   console.log('Calling deleteInventory');
 

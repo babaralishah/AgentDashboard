@@ -8,6 +8,10 @@
     margin-left: 700px;
 }
 
+.profile-details {
+    margin-top: 20px;
+}
+
 .fileField {
     opacity: 0;
     margin-left: -97px;

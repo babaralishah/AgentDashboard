@@ -9,7 +9,6 @@ export class UserService {
 
   private readonly url = environment.url;
   constructor(private http: HttpClient) { }
-  // tslint:disable-next-line: typedef
   public getAll() {
     return this.http.get<any>(`${this.url}/users`);
 }

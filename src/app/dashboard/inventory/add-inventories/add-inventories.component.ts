@@ -169,6 +169,9 @@ export class AddInventoriesComponent implements OnInit {
 
   // Function to patch the value from ng select
   changeAssignedToCityAdmin(access: any) {
+    this.addinventoryForm.patchValue({
+      assigned_to: "",
+    });
     console.log(access);
     this.assignLeadData = [];
     access.forEach((element) => {
@@ -192,6 +195,9 @@ export class AddInventoriesComponent implements OnInit {
 
   // Function to patch the value from ng select
   changeAssignedAdmin(access: any) {
+    this.addinventoryForm.patchValue({
+      assigned_to: "",
+    });
     console.log(access);
     this.assignLeadData = [];
     access.forEach((element) => {
@@ -213,6 +219,9 @@ export class AddInventoriesComponent implements OnInit {
     console.log(this.addinventoryForm.get("assigned_to").value);
   }
   changeAssignedAgent(access: any) {
+    this.addinventoryForm.patchValue({
+      assigned_to: "",
+    });
     console.log(access);
 
     this.assignLeadData = [];
@@ -334,12 +343,14 @@ export class AddInventoriesComponent implements OnInit {
 
     this.formSendingStatus = "Save";
     this.addinventoryForm.patchValue({ form_title: this.user?.form_title });
+    this.addinventoryForm.patchValue({ assigned_type: this.user?.assigned_type });
     this.addinventoryForm.patchValue({ area: this.user?.area });
     this.addinventoryForm.patchValue({ area_unit: this.user?.area_unit });
     this.addinventoryForm.patchValue({ max_area: this.user?.max_area });
     this.addinventoryForm.patchValue({ max_price: this.user?.max_price });
     this.addinventoryForm.patchValue({ _id: this.user?._id });
     this.addinventoryForm.patchValue({ location: this.user?.location });
+    this.addinventoryForm.patchValue({ priority: this.user?.priority });
 
     this.addinventoryForm.patchValue({
       added_By: {

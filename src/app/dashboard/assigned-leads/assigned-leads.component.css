@@ -91,6 +91,12 @@
     margin-left: 10px;
 }
 
+.btn:not(:disabled):not(.disabled):hover {
+    color: #fff;
+    background-color: #1f6e97;
+    border-color: #1f6e97;
+}
+
 .btn {
     /* margin-left: 25px; */
     width: 100px;

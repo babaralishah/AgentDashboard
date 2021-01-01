@@ -41,8 +41,8 @@ export class AssignedLeadsComponent implements OnInit {
   ];
 
   options2 = [
-    { value: "userId", name: "Filter By userId ", placeholder: "userId" },
-    { value: "fullname", name: "Filter By fullname", placeholder: "fullname" },
+    { value: "userId", name: "Filter By ID ", placeholder: "userId" },
+    { value: "fullname", name: "Filter By Name", placeholder: "Name" },
   ];
 
   selectedOption = this.options[0].value;

@@ -32,6 +32,10 @@
     color: white;
 }
 
+.super-hot {
+    height: 20px;
+}
+
 .abc {
     overflow-x: hidden;
 }
@@ -87,8 +91,14 @@
     margin-left: 10px;
 }
 
+.btn:not(:disabled):not(.disabled):hover {
+    color: #fff;
+    background-color: #1f6e97;
+    border-color: #1f6e97;
+}
+
 .btn {
-    /* margin-left: 25px; */
+    margin-left: 8px;
     width: 100px;
     font-size: 14px;
     background-color: #38baa2;

@@ -31,9 +31,13 @@ export class InventoryComponent implements OnInit {
   options = [
     // { value: "referenceId", name: "Filter By Ref ID", placeholder: "Ref Id" },
     {
-      value: "property_purpose",
-      name: "Filter By Purpose",
-      placeholder: "Purpose",
+      value: "assigned_to",
+      name: "Filter By Name",
+      placeholder: "Name",
+    },{
+      value: "property_type",
+      name: "Filter By Property Type",
+      placeholder: "Property Type",
     },
     {
       value: "cityName",
@@ -196,15 +200,16 @@ export class InventoryComponent implements OnInit {
       { wch: 30 },
     ];
 
-    ws["!cols"] = wscols;
+     ws["!cols"] = wscols;
     ws["!cols"][0] = { hidden: true };
     ws["!cols"][1] = { hidden: true };
     ws["!cols"][2] = { hidden: true };
     ws["!cols"][3] = { hidden: true };
     ws["!cols"][4] = { hidden: true };
-    ws["!cols"][6] = { hidden: true };
+   
     ws["!cols"][7] = { hidden: true };
-    ws["!cols"][24] = { hidden: true };
+    ws["!cols"][21] = { hidden: true };
+    ws["!cols"][22] = { hidden: true };
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "All Data Export");
     XLSX.writeFile(wb, "Inventory.xlsx");

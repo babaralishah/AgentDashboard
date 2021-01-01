@@ -48,7 +48,7 @@
 
                     <tbody>
                         <tr *ngFor="let user of user | filterlist: selectedOption:refId | paginate:{itemsPerPage:10,currentPage:p}; ">
-                            <td>{{ user.referenceId }}</td>
+                            <td>{{ user.refId }}</td>
                             <td>{{ user.property_purpose }}</td>
                             <td>
                                 <b>Name : </b>{{ user.client_name |titlecase }} <br />

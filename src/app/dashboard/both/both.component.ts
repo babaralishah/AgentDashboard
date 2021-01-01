@@ -159,8 +159,12 @@ export class BothComponent implements OnInit {
     ws["!cols"][2] = { hidden: true };
     ws["!cols"][3] = { hidden: true };
     ws["!cols"][4] = { hidden: true };
-    ws["!cols"][24] = { hidden: true };
+   
+    ws["!cols"][8] = { hidden: true };
+ 
+    ws["!cols"][25] = { hidden: true };
 
+    ws["!cols"][26] = { hidden: true };
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "All Data Export");
     XLSX.writeFile(wb, "Both.xlsx");

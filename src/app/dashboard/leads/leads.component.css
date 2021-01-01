@@ -27,6 +27,10 @@
     background-color: #e8e8e8;
 }
 
+.super-hot {
+    height: 20px;
+}
+
 .table th {
     padding-top: 12px;
     padding-bottom: 12px;
@@ -55,8 +59,8 @@
     color: #fff;
     background-color: #1f6e97;
     border-color: #1f6e97;
-    margin-left: 10px;
-    border-radius: 7px;
+    margin-left: 7px;
+    /* border-radius: 7px; */
 }
 
 .modal-dialog {

@@ -19,7 +19,7 @@ export class LeadsComponent implements OnInit {
       (click)="modal.close('Ok click')">Ok</button>`;
   deleteId: any;
   agentAssignedForm: FormGroup;
-  cityAdminList = [];
+  cityAdminList:any = [];
   agentList = [];
   superAdminList = [];
   token: any;
@@ -162,6 +162,9 @@ export class LeadsComponent implements OnInit {
             this.superAdminList.push(data[i]);
           }
         }
+        // console.log(this.cityAdminList);
+        // console.log(this.cityAdminList[0].city);
+        
       },
       (error) => {
         console.error(error);
@@ -240,6 +243,8 @@ export class LeadsComponent implements OnInit {
   changeAssignedAgent(access: any) {
     this.assignLeadData = [];
     access.forEach((element) => {
+      console.log(element);
+      
       this.assignLeadData.push({
         userId: element.userId,
         fullname: element.fullname,
@@ -295,7 +300,12 @@ export class LeadsComponent implements OnInit {
     ws["!cols"][2] = { hidden: true };
     ws["!cols"][3] = { hidden: true };
     ws["!cols"][4] = { hidden: true };
-    ws["!cols"][24] = { hidden: true };
+   
+    ws["!cols"][8] = { hidden: true };
+ 
+    ws["!cols"][25] = { hidden: true };
+
+    ws["!cols"][26] = { hidden: true };
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "All Data Export");
     XLSX.writeFile(wb, "Leads.xlsx");

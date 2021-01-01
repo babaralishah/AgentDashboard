@@ -23,6 +23,10 @@
     background-color: #e8e8e8;
 }
 
+.super-hot {
+    height: 20px;
+}
+
 .table th {
     padding-top: 12px;
     padding-bottom: 12px;
@@ -87,8 +91,14 @@
     margin-left: 10px;
 }
 
+.btn:not(:disabled):not(.disabled):hover {
+    color: #fff;
+    background-color: #1f6e97;
+    border-color: #1f6e97;
+}
+
 .btn {
-    /* margin-left: 25px; */
+    margin-left: 8px;
     width: 100px;
     font-size: 14px;
     background-color: #38baa2;

@@ -12,17 +12,17 @@
 
     <div class="col-9">
         <div class="inventory">
-            <br />
+            <!-- <br /> -->
             <h1><b>Inventory Management</b></h1>
             <br />
-            <div class="col-2">
+            <div class="">
                 <button class="btn btn-primary" (click)="setFormTitle('Inventory')">
           Add New
         </button>
             </div>
-
+            <br>
             <!-- <div class=""> -->
-            <div class="card-body row">
+            <div class="row">
                 <div class="col-3">
                     <ng-select [items]="options" bindLabel="name" bindValue="value" class="mr-2 ml-2" placeholder="Filter By" [(ngModel)]="selectedOption" (change)="optionChange($event)" [clearable]="false">
                     </ng-select>
@@ -46,6 +46,7 @@
             <div class="table-container mb-5 mt-4">
                 <table class="table table-hover">
                     <thead>
+                        <th> </th>
                         <th (click)="sort('id')" scope="col">ID <i class="fa fa-sort"></i></th>
                         <th scope="col">Purpose</th>
                         <th scope="col">Client Details</th>
@@ -55,6 +56,7 @@
 
                         <th scope="col">Demand</th>
                         <th scope="col">Beds</th>
+                        <th scope="col">Assigned To</th>
                         <th scope="col">Added On</th>
                         <!-- <th scope="col">Agent Assigned</th> -->
                         <th scope="col">Operations</th>
@@ -91,9 +93,15 @@
                 <td>
                 <i class="fa fa-search icon"></i>
                 </td> -->
-                        <tr *ngFor="let user of user | filterlist: selectedOption:refId | orderBy: key: reverse | paginate:{itemsPerPage:30,currentPage:p}; ">
+                        <tr *ngFor="let user of user | filterlist: selectedOption:refId | orderBy: key: reverse | paginate:{itemsPerPage:50,currentPage:p}; ">
+                            <td> <span *ngIf="user.priority == 'Super Hot' else hot"><img class="super-hot" src="\assets\icons\red-flag.png"></span>
+                                <ng-template #hot>
+                                    <img class="super-hot" src="\assets\icons\flag_yellow.png">
+                                </ng-template>
+                            </td>
+
                             <!-- | tableFilter05: search_demand | tableFilter04: search_type | tableFilter03: search_area | tableFilter02: search_location | tableFilter: search_id | filter: general_search"> -->
-                            <td>{{ user.referenceId }}</td>
+                            <td>{{ user.refId }}</td>
                             <td>{{ user.property_purpose }}</td>
                             <td>
                                 <b>Name : </b>{{ user.client_name |titlecase }} <br />
@@ -115,8 +123,9 @@
                             <ng-template #elseBlockDemand>
                                 <td>{{ user.demand_price }}</td>
                             </ng-template>
-
                             <td>{{ user.beds_number }}</td>
+                            <td>{{ user.assigned_to }}</td>
+
                             <td>{{ user.created | date }}</td>
                             <!-- <td>{{ user.assigned_to | titlecase}}</td> -->
                             <td>

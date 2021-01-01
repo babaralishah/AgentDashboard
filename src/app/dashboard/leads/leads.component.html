@@ -12,16 +12,17 @@
     <div class="col-md-9">
         <div class="leads">
             <h1><b>Leads Management</b></h1>
-            <!-- <br /> -->
-            <div class="col-1">
+            <br />
+            <div class="">
                 <div>
                     <button class="btn btn-primary" (click)="setFormTitle('Lead')">
               Add New
             </button>
                 </div>
             </div>
+            <br>
             <div class="">
-                <div class="card-body row">
+                <div class="row">
 
                     <div class="col-3">
                         <ng-select [items]="options" bindLabel="name" bindValue="value" class="mr-2 ml-2" placeholder="Filter By" [(ngModel)]="selectedOption" (change)="optionChange($event)" [clearable]="false">
@@ -35,7 +36,7 @@
                     <div class="col-5">
                         <button onclick="window.print()" class="btn btn-primary">
             Print
-          </button> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<button (click)="exportTOExcel()" class="btn btn-primary">
+          </button> &nbsp; &nbsp; &nbsp;<button (click)="exportTOExcel()" class="btn btn-primary">
             Excel
           </button>
                     </div>
@@ -45,6 +46,7 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
+                            <th></th>
                             <th (click)="sort('id')" scope="col">
                                 ID <i class="fa fa-sort"></i>
                             </th>
@@ -66,9 +68,16 @@
                 let user of user
                 | filterlist: selectedOption:refId
                 | orderBy: key:reverse
-                | paginate: { itemsPerPage: 10, currentPage: p }
+                | paginate: { itemsPerPage: 50, currentPage: p }
                 ">
-                            <td>{{ user.referenceId }}</td>
+                            <td> <span *ngIf="user.priority == 'Super Hot' else hot"><img class="super-hot" src="\assets\icons\red-flag.png"></span>
+                                <ng-template #hot>
+                                    <img class="super-hot" src="\assets\icons\flag_yellow.png">
+                                </ng-template>
+                            </td>
+
+
+                            <td>{{ user.refId }}</td>
                             <td>{{ user.property_purpose }}</td>
                             <td>
                                 <b>Name : </b>{{ user.client_name | titlecase }} <br />
@@ -227,7 +236,7 @@
                     <br /><br />
                     <div *ngIf="assigned_type === 'city_admin'">
                         <!-- <br><br> -->
-                        <ng-select class="ng-select inputs2" [items]="cityAdminList" bindLabel="city.city" bindValue="city.city" placeholder="Select city admin" (change)="changeAssignedToCityAdmin($event)">
+                        <ng-select class="ng-select inputs2" [items]="cityAdminList" bindLabel="city.city" bindValue="fullname" placeholder="Select city admin" (change)="changeAssignedToCityAdmin($event)">
                         </ng-select>
                     </div>
 

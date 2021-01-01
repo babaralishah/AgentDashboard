@@ -12,6 +12,9 @@ import * as mapboxgl from "mapbox-gl";
   styleUrls: ["./add-inventories.component.css"],
 })
 export class AddInventoriesComponent implements OnInit {
+  assigned_type: any;
+  superAdminList = [];
+  // assigned_type: any = "city_admin";
   form_title: any;
   cities: any;
   formSendingStatus = "Post Ad";
@@ -39,7 +42,7 @@ export class AddInventoriesComponent implements OnInit {
   selectedUserCity: any;
   selectedUserLocation: any;
   userLocationMatched: boolean = true;
-  cityAdminList = [];
+  cityAdminList: any = [];
   agentList = [];
 
   opacity = 1;
@@ -59,6 +62,17 @@ export class AddInventoriesComponent implements OnInit {
   isRent = true;
   token: any;
   clientType: any;
+  demandValueVariable: any;
+  demandValueVariable1: any;
+  demandValueVariable2: any;
+  agentListFull: any = [];
+  // assignLeadData: any[];
+  assignLeadData = [
+    { fullname: "" },
+    { userId: "" },
+    { contact: "" },
+    { date: new Date() },
+  ];
   //////////////////////////////////
 
   constructor(
@@ -76,6 +90,8 @@ export class AddInventoriesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.cityAdminList.contact);
+
     this.getUserDetails();
     this.user = this.authService.getUser();
     if (this.user) {
@@ -110,11 +126,15 @@ export class AddInventoriesComponent implements OnInit {
         for (var i = 0; i < data.length; i++) {
           // console.log(data[i].access);
           if (data[i].access == "city_admin") {
-            this.cityAdminList.push(data[i].city);
+            this.cityAdminList.push(data[i]);
           } else if (data[i].access == "agent") {
-            this.agentList.push(data[i].fullname);
+            this.agentListFull.push(data[i]);
+            this.agentList.push(data[i]);
+          } else if (data[i].access == "super_admin") {
+            this.superAdminList.push(data[i]);
           }
         }
+        console.log(this.cityAdminList);
 
         // this.cityAdminList = data;
         // console.log("User Get Response", this.cityAdminList);
@@ -149,20 +169,69 @@ export class AddInventoriesComponent implements OnInit {
 
   // Function to patch the value from ng select
   changeAssignedToCityAdmin(access: any) {
-    this.addinventoryForm.patchValue({ assigned_to: access?.city });
+    console.log(access);
+    this.assignLeadData = [];
+    access.forEach((element) => {
+      console.log(element);
+      this.assignLeadData.push({
+        userId: element.userId,
+        fullname: element.fullname,
+        contact: element.contact,
+        date: new Date(),
+      });
+      this.addinventoryForm.patchValue({
+        assigned_history: this.assignLeadData,
+
+        assigned_to: this.assignLeadData,
+      });
+    });
+    console.log(this.assignLeadData);
+    console.log(this.addinventoryForm.get("assigned_history").value);
     console.log(this.addinventoryForm.get("assigned_to").value);
   }
 
   // Function to patch the value from ng select
   changeAssignedAdmin(access: any) {
-    this.addinventoryForm.patchValue({ assigned_to: access?.access });
+    console.log(access);
+    this.assignLeadData = [];
+    access.forEach((element) => {
+      console.log(element);
+      this.assignLeadData.push({
+        userId: element.userId,
+        fullname: element.fullname,
+        contact: element.contact,
+        date: new Date(),
+      });
+      this.addinventoryForm.patchValue({
+        assigned_history: this.assignLeadData,
+
+        assigned_to: this.assignLeadData,
+      });
+    });
+    console.log(this.assignLeadData);
+    console.log(this.addinventoryForm.get("assigned_history").value);
     console.log(this.addinventoryForm.get("assigned_to").value);
   }
-  changeAssignedAgent(fullname: any) {
-    this.addinventoryForm.patchValue({ assigned_to: fullname });
-    // console.log(fullname?.fullname);
-    // console.log(fullname);
+  changeAssignedAgent(access: any) {
+    console.log(access);
 
+    this.assignLeadData = [];
+    access.forEach((element) => {
+      console.log(element);
+      this.assignLeadData.push({
+        userId: element.userId,
+        fullname: element.fullname,
+        contact: element.contact,
+        date: new Date(),
+      });
+      this.addinventoryForm.patchValue({
+        assigned_history: this.assignLeadData,
+
+        assigned_to: this.assignLeadData,
+      });
+    });
+    console.log(this.assignLeadData);
+    console.log(this.addinventoryForm.get("assigned_history").value);
     console.log(this.addinventoryForm.get("assigned_to").value);
   }
 
@@ -260,72 +329,64 @@ export class AddInventoriesComponent implements OnInit {
   //   }
   //   console.log(this.userLocationMatched);
   // }
-
-  // Function to patch the value from form radio button
-  assigned_To(name: any) {
-    this.addinventoryForm.patchValue({ assigned_to: name });
-  }
   updatefields() {
     console.log(this.user);
 
     this.formSendingStatus = "Save";
-    this.addinventoryForm.patchValue({ form_title: this.user.form_title });
-    this.addinventoryForm.patchValue({ area: this.user.area });
-    this.addinventoryForm.patchValue({ area_unit: this.user.area_unit });
-    this.addinventoryForm.patchValue({ max_area: this.user.max_area });
-    this.addinventoryForm.patchValue({ max_price: this.user.max_price });
-    this.addinventoryForm.patchValue({ _id: this.user._id });
-    this.addinventoryForm.patchValue({ location: this.user.location });
+    this.addinventoryForm.patchValue({ form_title: this.user?.form_title });
+    this.addinventoryForm.patchValue({ area: this.user?.area });
+    this.addinventoryForm.patchValue({ area_unit: this.user?.area_unit });
+    this.addinventoryForm.patchValue({ max_area: this.user?.max_area });
+    this.addinventoryForm.patchValue({ max_price: this.user?.max_price });
+    this.addinventoryForm.patchValue({ _id: this.user?._id });
+    this.addinventoryForm.patchValue({ location: this.user?.location });
 
     this.addinventoryForm.patchValue({
       added_By: {
-        name: this.user.added_By.name,
-        userId: this.user.added_By["userId"],
+        fullname: this.user?.added_By?.name,
+        userId: this.user?.added_By?.userId,
+        contact: this.user?.added_By?.contact,
       },
     });
     console.log(this.user.location);
 
-    this.addinventoryForm.patchValue({ min_area: this.user.min_area });
-    this.addinventoryForm.patchValue({ min_price: this.user.min_price });
-    this.minimumPriceRange = this.user.min_price;
-    this.maximumPriceRange = this.user.max_price;
-    this.minimumAreaRange = this.user.min_area;
-    this.maximumAreaRange = this.user.max_area;
+    this.addinventoryForm.patchValue({ min_area: this.user?.min_area });
+    this.addinventoryForm.patchValue({ min_price: this.user?.min_price });
+    this.minimumPriceRange = this.user?.min_price;
+    this.maximumPriceRange = this.user?.max_price;
+    this.minimumAreaRange = this.user?.min_area;
+    this.maximumAreaRange = this.user?.max_area;
 
-    this.addinventoryForm.patchValue({ max_price: this.user.max_price });
-
-    this.addinventoryForm.patchValue({
-      assigned_type: this.user.assigned_type,
-    });
-    this.addinventoryForm.patchValue({ assigned_to: this.user.assigned_to });
-    this.selectAgentValue = this.user.assigned_to;
+    this.addinventoryForm.patchValue({ max_price: this.user?.max_price });
+    this.addinventoryForm.patchValue({ assigned_to: this.user?.assigned_to });
+    this.selectAgentValue = this.user?.assigned_to;
 
     this.addinventoryForm.patchValue({
-      property_type: this.user.property_type,
+      property_type: this.user?.property_type,
     });
-    this.addinventoryForm.patchValue({ area: this.user.area });
-    this.addinventoryForm.patchValue({ client_type: this.user.client_type });
-    this.addinventoryForm.patchValue({ demand_price: this.user.demand_price });
+    this.addinventoryForm.patchValue({ area: this.user?.area });
+    this.addinventoryForm.patchValue({ client_type: this.user?.client_type });
+    this.addinventoryForm.patchValue({ demand_price: this.user?.demand_price });
     this.addinventoryForm.patchValue({
-      property_purpose: this.user.property_purpose,
+      property_purpose: this.user?.property_purpose,
     });
-    this.addinventoryForm.patchValue({ beds_number: this.user.beds_number });
-    this.addinventoryForm.patchValue({ client_name: this.user.client_name });
+    this.addinventoryForm.patchValue({ beds_number: this.user?.beds_number });
+    this.addinventoryForm.patchValue({ client_name: this.user?.client_name });
     this.addinventoryForm.patchValue({
-      client_number: this.user.client_number,
+      client_number: this.user?.client_number,
     });
-    this.addinventoryForm.patchValue({ city: this.user.city });
+    this.addinventoryForm.patchValue({ city: this.user?.city });
 
     if (this.user.location) {
-      this.selectStringLocations = this.user.location[0].location;
-      this.selectedLocations = this.user.location[0].location;
+      this.selectStringLocations = this.user?.location[0].location;
+      this.selectedLocations = this.user?.location[0].location;
       console.log(this.selectStringLocations);
     }
 
     if (this.user.city) {
-      this.getLocations(this.user.city[0]._id);
-      console.log(this.user.city[0]._id);
-      this.selectedCity = this.user.city[0].city;
+      this.getLocations(this.user?.city[0]._id);
+      console.log(this.user?.city[0]._id);
+      this.selectedCity = this.user?.city[0].city;
     }
   }
 
@@ -337,11 +398,21 @@ export class AddInventoriesComponent implements OnInit {
   // Form Declaration, and Validation Function
   formDeclare() {
     this.addinventoryForm = this.formBuilder.group({
-      // _id: [''],
-
-      assigned_type: [""],
+      assigned_history: [
+        {
+          fullname: "",
+          contact: "",
+          userId: "",
+        },
+      ],
+      assigned_type: ["self"],
+      priority: [],
       selectPropertyType: [""],
-      assigned_to: [],
+      assigned_to: [
+        {
+          name: "",
+        },
+      ],
       admin: [
         {
           userId: "",
@@ -351,6 +422,8 @@ export class AddInventoriesComponent implements OnInit {
       form_title: [""],
       property_purpose: ["Buy"],
       property_type: [""],
+      property_type1: [""],
+      property_type2: [""],
 
       city: ["", Validators.required],
       cityName: [],
@@ -368,15 +441,16 @@ export class AddInventoriesComponent implements OnInit {
       demand_price: [],
       min_area: [],
       max_area: [],
-      beds_number: ["", Validators.required],
+      beds_number: [""],
       area: [],
       area_unit: [""],
       client_name: ["", Validators.required],
-      client_number: [],
+      client_number: ["", Validators.required],
       client_type: [""],
       added_By: this.formBuilder.group({
-        name: [""],
+        fullname: [""],
         userId: [""],
+        contact: [],
       }),
     });
   }
@@ -463,7 +537,9 @@ export class AddInventoriesComponent implements OnInit {
       }
     );
   }
-
+  public priceConverter(value) {
+    return this.authService.priceFilter(value);
+  }
   getLocations(selectedCity?: any) {
     console.log(selectedCity);
     this.authService.getLocations().subscribe(
@@ -484,6 +560,18 @@ export class AddInventoriesComponent implements OnInit {
   setValue(value: string) {
     this.optionValue1 = value;
   }
+  demandValue(value) {
+    //console.log("value---->", value.target.value);
+    this.demandValueVariable = value.target.value;
+  }
+  demandValue1(value) {
+    //console.log("value---->", value.target.value);
+    this.demandValueVariable1 = value.target.value;
+  }
+  demandValue2(value) {
+    //console.log("value---->", value.target.value);
+    this.demandValueVariable2 = value.target.value;
+  }
   // Submit form to backend service
   submitForm() {
     this.submitted = true;
@@ -494,6 +582,32 @@ export class AddInventoriesComponent implements OnInit {
       });
       return;
     }
+    if (this.addinventoryForm.get("assigned_type").value === "self") {
+      this.addinventoryForm.patchValue({
+        assigned_history: {
+          fullname: "",
+          contact: "",
+          userId: "",
+        },
+      });
+    }
+
+    // for (let i in this.assignLeadData) {
+    //   console.log(this.assignLeadData[i]);
+
+    // this.addinventoryForm.patchValue({
+    //   assigned_to: this.assignLeadData[i].fullname,
+    // });
+
+    // this.addinventoryForm.patchValue({
+    //   assigned_to: this.assignLeadData,
+    // });
+    // console.log(this.assignLeadData[i].fullname);
+    // }
+    console.log(this.addinventoryForm.get("assigned_to").value);
+
+    this.assignLeadData = [];
+
     if (this.user) {
       this.addinventoryForm.patchValue({
         locationName: this.selectStringLocations,
@@ -538,9 +652,12 @@ export class AddInventoriesComponent implements OnInit {
       const form_title = this.addinventoryForm.get("form_title").value;
       console.log(this.addinventoryForm.value);
       if (form_title === "Lead") {
-        this.addinventoryForm.patchValue({ assigned_to: this.token?.fullname });
         this.addinventoryForm.patchValue({
-          added_By: { name: this.token?.fullname, userId: this.token?._id },
+          added_By: {
+            fullname: this.token?.fullname,
+            userId: this.token?.userId,
+            contact: this.token?.contact,
+          },
         });
       }
 

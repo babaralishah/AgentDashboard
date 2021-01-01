@@ -48,34 +48,35 @@ export class SignupComponent implements OnInit {
     this.user = this.authService.getUser();
   }
   updatefields() {
+    // console.log(this.user?.city.city);
     this.registerForm.patchValue({
       locationName: this.selectStringLocations,
     });
-    this.registerForm.patchValue({ cityName: this.user.city[0].city });
-    this.registerForm.patchValue({ fullname: this.user.fullname });
-    this.registerForm.patchValue({ email: this.user.email });
-    this.registerForm.patchValue({ password: this.user.password });
-    this.registerForm.patchValue({ location: this.user.location });
-    console.log(this.user.password);
-    this.registerForm.patchValue({ city: this.user.city });
-    this.registerForm.patchValue({ contact: this.user.contact });
-    this.registerForm.patchValue({ access: this.user.access });
+
+    this.registerForm.patchValue({ cityName: this.user?.city.city });
+    this.registerForm.patchValue({ fullname: this.user?.fullname });
+    this.registerForm.patchValue({ email: this.user?.email });
+    this.registerForm.patchValue({ password: this.user?.password });
+    this.registerForm.patchValue({ location: this.user?.location });
+    this.registerForm.patchValue({ city: this.user?.city });
+    this.registerForm.patchValue({ contact: this.user?.contact });
+    this.registerForm.patchValue({ access: this.user?.access });
     console.log(this.registerForm);
 
     if (this.user.location) {
       for (let i = 0; i < this.user.location.length; i++) {
         console.log(this.user.location[i].location);
-        this.selectStringLocations.push(this.user.location[i].location);
-        this.selectedLocations.push(this.user.location[i].location);
+        this.selectStringLocations.push(this.user?.location[i].location);
+        this.selectedLocations.push(this.user?.location[i].location);
       }
       console.log(this.selectStringLocations);
     }
 
     if (this.user.city) {
-      this.getLocations(this.user.city._id);
-      console.log(this.user.city.city);
+      this.getLocations(this.user?.city._id);
+      console.log(this.user?.city.city);
     }
-    this.selectedCity = this.user.city?.city;
+    this.selectedCity = this.user?.city?.city;
   }
   initialize() {
     if (this.user) {
@@ -92,7 +93,14 @@ export class SignupComponent implements OnInit {
           ],
         ],
         location: ["", Validators.required],
-        contact: ["", Validators.required],
+        contact: [""
+          ,
+          [
+            Validators.required,
+            Validators.minLength(12),
+            Validators.maxLength(12),
+          ],
+        ],
         access: ["", Validators.required],
         city: ["", Validators.required],
         confirm_password: ["", [Validators.minLength(6)]],
@@ -114,7 +122,14 @@ export class SignupComponent implements OnInit {
         password: ["", [Validators.required, Validators.minLength(6)]],
         location: [, Validators.required],
         city: ["", Validators.required],
-        contact: ["", Validators.required],
+        contact: ["92"
+          ,
+          [
+            Validators.required,
+            Validators.minLength(12),
+            Validators.maxLength(12),
+          ],
+        ],
         access: ["", Validators.required],
         confirm_password: ["", [Validators.required, Validators.minLength(6)]],
       });

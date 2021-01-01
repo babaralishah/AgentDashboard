@@ -27,6 +27,8 @@ export class AuthenticationService {
   }
   // Assign lead to the Agent
   assignLeadToAgent(user: any) {
+    console.log(user);
+    
     return this.httpClient.post(`${this.url}/assign/add`, user);
   }
 
@@ -245,4 +247,16 @@ export class AuthenticationService {
     return this.genericId;
   }
   // ////////////////////////////////////////
+
+  priceFilter(value) {
+    var val: any = Math.abs(value);
+    if (val >= 1000000000) {
+      val = Number((val / 1000000000).toFixed(2)) + "Billion";
+    } else if (val >= 10000000) {
+      val = Number((val / 10000000).toFixed(2)) + " CRORE";
+    } else if (val >= 100000) {
+      val = Number((val / 100000).toFixed(2)) + " Lac";
+    } else if (val >= 1000) val = Number((val / 1000).toFixed(2)) + " K";
+    return val;
+  }
 }

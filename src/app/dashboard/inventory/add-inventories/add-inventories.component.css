@@ -4,9 +4,13 @@ input::-webkit-input-placeholder {
     line-height: 3;
 } */
 
+.priority-radio {
+    /* float: left; */
+    margin-left: 30px;
+}
+
 .btn3 {
     margin-left: 20px;
-    border-radius: 20px;
 }
 
 .ng-select {
@@ -59,15 +63,15 @@ b {
     color: #fff;
     background-color: #1f6e97;
     border-color: #1f6e97;
-    margin-left: 10px;
-    border-radius: 7px;
+    /* margin-left: 10px; */
+    /* border-radius: 7px; */
 }
 
 .btn:not(:disabled):not(.disabled) {
     cursor: pointer;
     color: white;
     margin-left: 7px;
-    border-radius: 4px;
+    /* border-radius: 4px; */
 }
 
 a:not([href]):not([tabindex]) {
@@ -293,7 +297,6 @@ span,
 label,
 textarea {
     font-family: "Ubuntu", sans-serif;
-    display: block;
     /* margin: 10px; */
     /* padding: 12px; */
     border: none;
@@ -303,6 +306,13 @@ textarea {
 textarea:focus,
 input:focus {
     outline: 0;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+    box-sizing: border-box;
+    padding: 0;
+    margin-right: 8px;
 }
 
 
@@ -550,27 +560,27 @@ textarea.question:invalid~input[type="submit"] {
     color: #495057;
 }
 
-@media only screen and (max-width: 1650px) {
+@media only screen and (max-width: 1750px) {
     .inventoryForm {
         margin-left: 50px;
     }
 }
 
-@media only screen and (min-width: 1200px) and (max-width: 1400px) {
-    .inventoryForm {
-        margin-left: 80px;
-    }
-}
-
-@media only screen and (max-width: 1200px) {
+@media only screen and (min-width: 1200px) and (max-width: 1500px) {
     .inventoryForm {
         margin-left: 100px;
     }
 }
 
+@media only screen and (max-width: 1200px) {
+    .inventoryForm {
+        margin-left: 300px;
+    }
+}
+
 @media only screen and (max-width: 1100px) {
     .inventoryForm {
-        margin-left: 120px;
+        margin-left: 350px;
     }
 }
 

@@ -15,7 +15,7 @@
                 <h1><b>Users</b></h1>
                 <br>
 
-                <div class="col-2">
+                <div class="">
                     <button class="btn btn-primary" routerLink="/register">Add New</button>
                 </div>
                 <br>
@@ -33,14 +33,14 @@
                         <div class="col-1">
                         </div>
                         <div class="col-5">
-                            <button onclick="window.print()" class="btn btn-primary">Print</button>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                            <button onclick="window.print()" class="btn btn-primary">Print</button>&nbsp; &nbsp; &nbsp;
                             <button (click)="exportTOExcel()" class="btn btn-primary">Excel</button>
                         </div>
                     </div>
                 </div>
                 <!-- <br><br><br> -->
                 <!-- Inventory management table is below -->
-                <div class="table-container mb-5 mt-5">
+                <div class="table-container mb-5 mt-4">
                     <table class="table table-hover">
                         <thead>
                             <tr>
@@ -89,14 +89,14 @@
                                     <span *ngIf="user?.fullname">{{ user?.fullname | titlecase }}</span>
                                     <span *ngIf="!user?.fullname">{{ user?.name | titlecase }}</span>
                                 </td>
-                                <td>+92{{ user?.contact }}</td>
+                                <td>{{ user?.contact }}</td>
                                 <!-- <td>{{ user.location}}</td> -->
 
                                 <td>
                                     {{user?.city?.city}}<span>&nbsp;&nbsp;</span><br><span class="badge badge-light" *ngFor="let loc of user.location">{{ loc.location }},  </span>
                                 </td>
                                 <td>{{ user?.email }}</td>
-                                <td>{{user?.access}}</td>
+                                <td>{{user?.access | titlecase}}</td>
                                 <td>{{user?.created | date: "dd/MM/yyyy"}}</td>
 
                                 <td><i class="fa fa-edit icon" (click)="setUser(user)"></i>

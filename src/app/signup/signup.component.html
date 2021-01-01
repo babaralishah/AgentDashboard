@@ -99,10 +99,12 @@
                     <div class="form-group">
                         <div class="input-group">
                             <i class="fas fa-phone"></i>
-                            <input formControlName="contact" type="text" class="form-control inputs" autocomplete="off" placeholder="Phone Number" [ngClass]="{ 'is-invalid': submitted && f.contact.errors }" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                            <input formControlName="contact" type="text" class="form-control inputs" autocomplete="off" placeholder="Phone Number - (92**********)" [ngClass]="{ 'is-invalid': submitted && f.contact.errors }" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                             />
                             <div *ngIf="submitted && f.contact.errors" class="invalid-feedback">
                                 <div *ngIf="f.contact.errors.required">Contact is required</div>
+                                <div *ngIf="f.contact.errors.minlength">Contact must not be less 12 characters</div>
+                                <div *ngIf="f.contact.errors.maxlength">Contact must not be more than 12 characters</div>
                             </div>
                         </div>
                         <div id='message'></div>

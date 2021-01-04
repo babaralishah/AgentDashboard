@@ -19,7 +19,7 @@ export class LeadsComponent implements OnInit {
       (click)="modal.close('Ok click')">Ok</button>`;
   deleteId: any;
   agentAssignedForm: FormGroup;
-  cityAdminList:any = [];
+  cityAdminList: any = [];
   agentList = [];
   superAdminList = [];
   token: any;
@@ -55,7 +55,7 @@ export class LeadsComponent implements OnInit {
       value: "locationName",
       name: "Filter By Location",
       placeholder: "Location",
-    }
+    },
   ];
   selectedOption = this.options[0].value;
   placeholder = this.options[0].placeholder;
@@ -83,6 +83,8 @@ export class LeadsComponent implements OnInit {
 
   setCurrentUser(user: any) {
     this.currentUser = user;
+
+    this.currentUser["assigned_to"] = [];
     let date = new Date(this.currentUser.created);
     console.log(
       date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear()
@@ -97,7 +99,9 @@ export class LeadsComponent implements OnInit {
   assignLeadToAgent() {
     console.log(this.currentUser);
     delete this.currentUser._id;
-    this.currentUser["assigned_history"].push(...this.assignLeadData);
+    // this.currentUser["assigned_history"].push(...this.assignLeadData);
+    // this.currentUser["assigned_history"].push(...this.assignLeadData);
+    this.currentUser["assigned_history"] = this.assignLeadData;
     this.assignLeadData = [];
     this.currentUser[""];
 
@@ -164,7 +168,6 @@ export class LeadsComponent implements OnInit {
         }
         // console.log(this.cityAdminList);
         // console.log(this.cityAdminList[0].city);
-        
       },
       (error) => {
         console.error(error);
@@ -220,14 +223,17 @@ export class LeadsComponent implements OnInit {
 
   // Function to patch the value from ng select
   changeAssignedToCityAdmin(access: any) {
+    console.log(access);
+
     this.assignLeadData = [];
     this.assignLeadData.push({
       userId: access.userId,
       fullname: access.fullname,
+      contact: access.contact,
       date: new Date(),
     });
     console.log(this.assignLeadData);
-    this.currentUser["assigned_to"] = access.fullname;
+    this.currentUser["assigned_to"] = this.assignLeadData;
   }
   // Function to patch the value from ng select
   changeAssignedAdmin(access: any) {
@@ -235,24 +241,30 @@ export class LeadsComponent implements OnInit {
     this.assignLeadData.push({
       userId: access?.userId,
       fullname: access?.fullname,
+      contact: access.contact,
       date: new Date(),
     });
-    this.currentUser["assigned_to"] = access.fullname;
     console.log(this.assignLeadData);
+    this.currentUser["assigned_to"] = this.assignLeadData;
   }
   changeAssignedAgent(access: any) {
+    console.log(access);
+    
     this.assignLeadData = [];
     access.forEach((element) => {
       console.log(element);
-      
+
       this.assignLeadData.push({
         userId: element.userId,
         fullname: element.fullname,
+        contact: element.contact,
         date: new Date(),
       });
-      this.currentUser["assigned_to"] = element.fullname;
+
+      this.currentUser["assigned_to"] = this.assignLeadData;
     });
     console.log(this.assignLeadData);
+    console.log(this.currentUser["assigned_to"]);
   }
   confirmID(id: any) {
     this.deleteId = id;
@@ -300,9 +312,9 @@ export class LeadsComponent implements OnInit {
     ws["!cols"][2] = { hidden: true };
     ws["!cols"][3] = { hidden: true };
     ws["!cols"][4] = { hidden: true };
-   
+
     ws["!cols"][8] = { hidden: true };
- 
+
     ws["!cols"][25] = { hidden: true };
 
     ws["!cols"][26] = { hidden: true };

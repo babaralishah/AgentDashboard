@@ -43,7 +43,7 @@
                             <th></th>
                             <th scope="col">Purpose</th>
                             <th scope="col">Client</th>
-                            <th scope="col">Client Type</th>
+
                             <th scope="col">Prop. Type</th>
                             <!-- <th scope="col">Prop. #</th> -->
                             <th scope="col">Area</th>
@@ -72,23 +72,31 @@
                             <td>{{ user?.referenceId }}</td>
                             <td>{{ user?.property_purpose }}</td>
 
-                            <td><b>Name : </b>{{ user?.client_name | titlecase }} <br> <b>Number : </b>{{ user?.client_number}}</td>
+                            <td><b>Name : </b>{{ user?.client_name | titlecase }} <br> <b>Number : </b>{{ user?.client_number}} <br>
+                                <b> Client Type :</b> {{ user?.client_type }} </td>
                             <!-- <td>{{ user.client_name }}</td> -->
-                            <td>{{ user?.client_type }}</td>
+
                             <td>{{ user?.property_type }}</td>
                             <!-- <td>{{ user?.Prop_num }}</td> -->
-                            <td>{{ user?.area}}</td>
+                            <td *ngIf="user.area == null else elseBlockArea"><b>Max:</b> {{ user.max_area + " - " + user.area_unit}}<br><b>Min:</b> {{ user.min_area + " - " + user.area_unit}}</td>
+                            <ng-template #elseBlockArea>
+                                <td>{{ user.area + " - " + user.area_unit}}</td>
+                            </ng-template>
                             <td>
                                 {{user?.city[0]?.city}}<span>&nbsp;&nbsp;</span><br><span class="badge badge-light" *ngFor="let loc of user?.location">{{ loc.location }},  </span>
                             </td>
 
-                            <td>{{ user?.demand_price }}</td>
+                            <td *ngIf="user.demand_price == null else elseBlockDemand"><b>Max:</b> {{ user.max_price }}<br><b>Min:</b> {{ user.min_price }}</td>
+                            <ng-template #elseBlockDemand>
+                                <td>{{ user.demand_price }}</td>
+                            </ng-template>
                             <td>{{ user?.beds_number }}</td>
-                            <!-- <td>{{ user?.Phone_num }}</td> -->
-                            <!-- <td>{{ user?.Comment }}</td> -->
-                            <td>{{ user?.assigned_to}}</td>
-                            <!-- <td>{{ user?.Admin_status }}</td>
-                        <td>{{ user?.Agent_status }}</td> -->
+                            <td>
+                                <span *ngIf="user?.assigned_to.fullname === ''">Self</span>
+                                <span *ngIf="user?.assigned_to.length > 0">
+                                    <span *ngFor="let assign of user?.assigned_to">{{ assign?.fullname }}<br></span>
+                                </span>
+                            </td>
                             <td>{{ user?.created | date: "dd/MM/yyyy"}}</td>
                             <td><i class="fa fa-edit icon" (click)="setUserToEdit(user)"></i>
                                 <a (click)="setUserToEdit(user)" role="button"></a>

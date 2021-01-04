@@ -137,7 +137,7 @@ export class UsersComponent implements OnInit {
 // Function to Get Excel File of the Data Table
 exportTOExcel() {
   let options: JSON2SheetOpts = { header: [] };
-  const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.user, options);
+  const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.data, options);
 
   var wscols = [
     { wch: 30 },
@@ -172,8 +172,17 @@ exportTOExcel() {
     { wch: 30 },
   ];
 
-  ws["!cols"] = wscols;
 
+  ws["!cols"] = wscols;
+    ws["!cols"][0] = { hidden: true };
+  
+
+    ws["!cols"][2] = { hidden: true };
+    ws["!cols"][3] = { hidden: true };
+   
+    ws["!cols"][6] = { hidden: true };
+    ws["!cols"][10] = { hidden: true };
+   
   const wb: XLSX.WorkBook = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, ws, "All Data Export");
   XLSX.writeFile(wb, "Users.xlsx");

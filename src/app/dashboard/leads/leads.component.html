@@ -119,12 +119,15 @@
                                 </ng-template>
 
                                 <td>{{ user.created | date: "dd/MM/yyyy" }}</td>
+
                                 <td>
-                                    <span><b>Assigned To: </b> {{ user?.assigned_to[0].fullname}}</span
-                ><br />
-                </td>
-                <td>
-                <span><b>Media: </b> {{ user?.media }}</span
+                                    <span *ngIf="user?.assigned_to.fullname === ''">Self</span>
+                                    <span *ngIf="user?.assigned_to.length > 0">
+                                        <span *ngFor="let assign of user?.assigned_to">{{ assign?.fullname }}<br></span>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span><b>Media: </b> {{ user?.media }}</span
                 ><br />
                 </td>
                 <td style="width: 12%;">

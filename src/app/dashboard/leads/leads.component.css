@@ -15,9 +15,7 @@
 }
 
 .table td,
-.table th {
-    padding: 10px 20px;
-}
+.table th {}
 
 .table tr:nth-child(even) {
     background-color: #38baa21f;

@@ -36,6 +36,11 @@ export class BothComponent implements OnInit {
     //   placeholder: "Purpose",
     // },
     {
+      value: "fullname",
+      name: "Filter By Name",
+      placeholder: "Name",
+    },
+    {
       value: "cityName",
       name: "Filter By City",
       placeholder: "City",
@@ -45,12 +50,12 @@ export class BothComponent implements OnInit {
       name: "Filter By Location",
       placeholder: "Location",
     },
-    // { value: "demand_price", name: "Filter By Demand", placeholder: "Demand" },
-    // {
-    //   value: "property_type",
-    //   name: "Filter By Type",
-    //   placeholder: "Type",
-    // },
+     { value: "demand_price", name: "Filter By Demand", placeholder: "Demand" },
+     {
+      value: "property_type",
+      name: "Filter By Type",
+       placeholder: "Type",
+   },
   ];
   selectedOption = this.options[0].value;
   placeholder = this.options[0].placeholder;

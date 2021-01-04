@@ -60,7 +60,7 @@
                             <span>Assigned Leads</span>
                         </a>
                     </li>
-                    <li class="sidebar">
+                    <li class="sidebar" *ngIf="tokendata?.access  == 'super_admin'">
                         <a routerLink="/register">
                             <i class="fa fa-tachometer-alt"></i>
                             <span>Register</span>

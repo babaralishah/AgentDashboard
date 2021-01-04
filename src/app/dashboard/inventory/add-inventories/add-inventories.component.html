@@ -486,9 +486,14 @@
             </div>
             <div class="row">
                 <div class="col-md-3 col-sm-3 form-group">
-                    <div class=""> <b>Client Type</b>
+                    <div *ngIf="addinventoryForm.get('property_purpose').value === 'Sell'"> <b>Client Type</b>
 
                         <ng-select class="ng-select inputs2" [(ngModel)]="clientType" [ngModelOptions]="{standalone: true}" style="margin-left: 0px;" [items]="client_type" bindLabel="access" bindValue="access" placeholder="Select Client Type" (change)="changeClientType($event)">
+                        </ng-select>
+                    </div>
+                    <div *ngIf="addinventoryForm.get('property_purpose').value != 'Sell'"> <b>Client Type</b>
+
+                        <ng-select class="ng-select inputs2" [(ngModel)]="clientType" [ngModelOptions]="{standalone: true}" style="margin-left: 0px;" [items]="client_type1" bindLabel="access" bindValue="access" placeholder="Select Client Type" (change)="changeClientType($event)">
                         </ng-select>
                     </div><b class="steps">Step 10: Select Client Type</b>
                 </div>
@@ -527,19 +532,23 @@
             <div class="row">
                 <br /><br />
                 <div *ngIf="addinventoryForm.get('assigned_type').value === 'city_admin'">
-                    <ng-select class="ng-select inputs2" [items]="cityAdminList" bindLabel="city.city" [multiple]="true" bindValue="fullname" placeholder="Select city admin" (change)="changeAssignedToCityAdmin($event)">
+                    <ng-select class="ng-select inputs2" [(ngModel)]="assignedName" [ngModelOptions]="{standalone: true}" [items]="cityAdminList" bindLabel="city.city" [multiple]="true" bindValue="fullname" placeholder="Select city admin" (change)="changeAssignedToCityAdmin($event)">
                     </ng-select>
                 </div>
 
                 <div *ngIf="addinventoryForm.get('assigned_type').value === 'Admin'">
-                    <ng-select class="ng-select inputs2" [items]="superAdminList" bindLabel="access" [multiple]="true" bindValue="access" placeholder="Select Admin" (change)="changeAssignedAdmin($event)">
+                    <ng-select class="ng-select inputs2" [(ngModel)]="assignedName" [ngModelOptions]="{standalone: true}" [items]="superAdminList" bindLabel="access" [multiple]="true" bindValue="access" placeholder="Select Admin" (change)="changeAssignedAdmin($event)">
                     </ng-select>
                 </div>
 
                 <div *ngIf="addinventoryForm.get('assigned_type').value === 'Agents'">
-                    <ng-select #agentSelect class="ng-select inputs2" [items]="agentList" [multiple]="true" bindLabel="fullname" bindValue="fullname" placeholder="Select Agent" (change)="changeAssignedAgent($event)">
+                    <ng-select #agentSelect class="ng-select inputs2" [(ngModel)]="assignedName" [ngModelOptions]="{standalone: true}" [items]="agentList" [multiple]="true" bindLabel="fullname" bindValue="fullname" placeholder="Select Agent" (change)="changeAssignedAgent($event)">
                     </ng-select>
                 </div>
+                <!-- <div *ngIf="addinventoryForm.get('assigned_type').value === 'Agents' && user">
+                    <ng-select #agentSelect class="ng-select inputs2" [items]="assignedName" [multiple]="true" bindLabel="fullname" bindValue="fullname" placeholder="Select Agents" (change)="changeAssignedAgent($event)">
+                    </ng-select>
+                </div> -->
             </div>
             <!--  -->
 

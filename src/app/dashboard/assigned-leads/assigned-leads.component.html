@@ -36,23 +36,30 @@
             <div class="table-container mb-5 mt-4">
                 <table class="table table-hover">
                     <thead>
+                        <th scope="col"> </th>
                         <th scope="col">ID</th>
                         <th scope="col">Purpose</th>
                         <th scope="col">Client Details</th>
                         <th scope="col">Location</th>
                         <th scope="col">Land Area</th>
-                        <th scope="col">Client Type</th>
+
                         <th scope="col">Demand</th>
                         <th scope="col">Operations</th>
                     </thead>
 
                     <tbody>
                         <tr *ngFor="let user of user | filterlist: selectedOption:refId | paginate:{itemsPerPage:10,currentPage:p}; ">
+                            <td> <span *ngIf="user.priority == 'Super Hot' else hot"><img class="super-hot" src="\assets\icons\red-flag.png"></span>
+                                <ng-template #hot>
+                                    <img class="super-hot" src="\assets\icons\flag_yellow.png">
+                                </ng-template>
+                            </td>
                             <td>{{ user.refId }}</td>
                             <td>{{ user.property_purpose }}</td>
                             <td>
                                 <b>Name : </b>{{ user.client_name |titlecase }} <br />
-                                <b>Phone : </b>{{ user.client_number }}
+                                <b>Phone : </b>{{ user.client_number }} <br />
+                                <b>Name : </b>{{ user.client_type |titlecase }}
                             </td>
                             <td>
                                 {{ user.city[0]?.city }}<span></span><br /><span class="badge badge-light" *ngFor="let loc of user.location">{{ loc.location }},
@@ -62,7 +69,7 @@
                             <ng-template #elseBlockArea>
                                 <td>{{ user.area + " - " + user.area_unit}}</td>
                             </ng-template>
-                            <td>{{ user.client_type | titlecase }}</td>
+
                             <td *ngIf="user.demand_price == null else elseBlockDemand"><b>Max:</b> {{ user.max_price }}<br><b>Min:</b> {{ user.min_price }}</td>
                             <ng-template #elseBlockDemand>
                                 <td>{{ user.demand_price }}</td>

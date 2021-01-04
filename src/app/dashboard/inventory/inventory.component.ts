@@ -15,6 +15,7 @@ export class InventoryComponent implements OnInit {
   key: any;
   reverse: boolean = true;
   p: number = 1;
+  data: any;
 
   constructor(
     private router: Router,
@@ -29,26 +30,23 @@ export class InventoryComponent implements OnInit {
   search_demand: string;
 
   options = [
-    // { value: "referenceId", name: "Filter By Ref ID", placeholder: "Ref Id" },
-    {
-      value: "assigned_to",
-      name: "Filter By Name",
-      placeholder: "Name",
-    },{
-      value: "property_type",
-      name: "Filter By Property Type",
-      placeholder: "Property Type",
-    },
+    { value: "_id", name: "Filter By Ref ID", placeholder: "Ref Id" },
     {
       value: "cityName",
       name: "Filter By City",
       placeholder: "City",
     },
     {
-      value: "locationName",
+      value: "SubLocation",
       name: "Filter By Location",
       placeholder: "Location",
-    }
+    },
+    { value: "property_types", name: "Filter By Type", placeholder: "Type" },
+    {
+      value: "inventory_id",
+      name: "Filter By Property Number",
+      placeholder: "Property Number",
+    },
   ];
   selectedOption = this.options[0].value;
   placeholder = this.options[0].placeholder;
@@ -71,6 +69,12 @@ export class InventoryComponent implements OnInit {
   getInventoryList() {
     this.authService.getInventory().subscribe(
       (data) => {
+        this.data = data.inventories;
+        console.log("data---->", this.data);
+        this.data.forEach((element) => {
+          element.cityName = element.city[0].city;
+          element.SubLocation = element.location[0].location;
+        });
         this.user = data.inventories;
 
         console.log("Server response: ", this.user);
@@ -200,13 +204,13 @@ export class InventoryComponent implements OnInit {
       { wch: 30 },
     ];
 
-     ws["!cols"] = wscols;
+    ws["!cols"] = wscols;
     ws["!cols"][0] = { hidden: true };
     ws["!cols"][1] = { hidden: true };
     ws["!cols"][2] = { hidden: true };
     ws["!cols"][3] = { hidden: true };
     ws["!cols"][4] = { hidden: true };
-   
+
     ws["!cols"][7] = { hidden: true };
     ws["!cols"][21] = { hidden: true };
     ws["!cols"][22] = { hidden: true };

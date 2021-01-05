@@ -16,6 +16,7 @@ export class AssignedLeadsComponent implements OnInit {
   key: any;
   reverse: boolean = true;
   p: number = 1;
+  data: any;
 
   constructor(
     private router: Router,
@@ -24,25 +25,44 @@ export class AssignedLeadsComponent implements OnInit {
   ) {}
 
   general_search: any;
-
   options = [
-    // { value: "referenceId", name: "Filter By Ref ID", placeholder: "Ref Id" },
-    // {
-    //   value: "property_purpose",
-    //   name: "Filter By Purpose",
-    //   placeholder: "Purpose",
-    // },
-    // { value: "demand_price", name: "Filter By Demand", placeholder: "Demand" },
+    { value: "_id", name: "Filter By Ref ID", placeholder: "Ref Id" },
     {
-      value: "property_type",
-      name: "Filter By Type",
-      placeholder: "Type",
+      value: "cityName",
+      name: "Filter By City",
+      placeholder: "City",
+    },
+    {
+      value: "SubLocation",
+      name: "Filter By Location",
+      placeholder: "Location",
+    },
+    { value: "property_types", name: "Filter By Type", placeholder: "Type" },
+    {
+      value: "inventory_id",
+      name: "Filter By Property Number",
+      placeholder: "Property Number",
     },
   ];
 
   options2 = [
-    { value: "userId", name: "Filter By ID ", placeholder: "userId" },
-    { value: "fullname", name: "Filter By Name", placeholder: "Name" },
+    { value: "_id", name: "Filter By Ref ID", placeholder: "Ref Id" },
+    {
+      value: "cityName",
+      name: "Filter By City",
+      placeholder: "City",
+    },
+    {
+      value: "SubLocation",
+      name: "Filter By Location",
+      placeholder: "Location",
+    },
+    { value: "property_types", name: "Filter By Type", placeholder: "Type" },
+    {
+      value: "inventory_id",
+      name: "Filter By Property Number",
+      placeholder: "Property Number",
+    },
   ];
 
   selectedOption = this.options[0].value;
@@ -74,6 +94,13 @@ export class AssignedLeadsComponent implements OnInit {
     this.authService.getAllAssignedLeads().subscribe(
       (data) => {
         this.user = data;
+        this.data = data;
+        console.log("data---->", this.data);
+        this.data.forEach((element) => {
+          element.cityName = element.city[0].city;
+          element.SubLocation = element.location[0].location;
+        });
+
         console.log("Server response: ", this.user);
       },
       (error) => {

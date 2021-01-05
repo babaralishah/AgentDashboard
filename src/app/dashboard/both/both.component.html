@@ -92,8 +92,8 @@
                             </ng-template>
                             <td>{{ user?.beds_number }}</td>
                             <td>
-                                <span *ngIf="user?.assigned_to.fullname === ''">Self</span>
-                                <span *ngIf="user?.assigned_to.length > 0">
+                                <span *ngIf="user?.assigned_to?.fullname === ''">Self</span>
+                                <span *ngIf="user?.assigned_to?.length > 0">
                                     <span *ngFor="let assign of user?.assigned_to">{{ assign?.fullname }}<br></span>
                                 </span>
                             </td>

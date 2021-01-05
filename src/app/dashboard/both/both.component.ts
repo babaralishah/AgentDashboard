@@ -20,6 +20,7 @@ export class BothComponent implements OnInit {
   key: any;
   reverse: boolean = true;
   p: number = 1;
+  data: any;
 
   constructor(
     private router: Router,
@@ -29,33 +30,23 @@ export class BothComponent implements OnInit {
   general_search: any;
 
   options = [
-    // { value: "referenceId", name: "Filter By Ref ID", placeholder: "Ref Id" },
-    // {
-    //   value: "property_purpose",
-    //   name: "Filter By Purpose",
-    //   placeholder: "Purpose",
-    // },
-    {
-      value: "fullname",
-      name: "Filter By Name",
-      placeholder: "Name",
-    },
+    { value: "_id", name: "Filter By Ref ID", placeholder: "Ref Id" },
     {
       value: "cityName",
       name: "Filter By City",
       placeholder: "City",
     },
     {
-      value: "locationName",
+      value: "SubLocation",
       name: "Filter By Location",
       placeholder: "Location",
     },
-     { value: "demand_price", name: "Filter By Demand", placeholder: "Demand" },
-     {
-      value: "property_type",
-      name: "Filter By Type",
-       placeholder: "Type",
-   },
+    { value: "property_types", name: "Filter By Type", placeholder: "Type" },
+    {
+      value: "inventory_id",
+      name: "Filter By Property Number",
+      placeholder: "Property Number",
+    },
   ];
   selectedOption = this.options[0].value;
   placeholder = this.options[0].placeholder;
@@ -86,6 +77,13 @@ export class BothComponent implements OnInit {
     this.authService.getAll().subscribe(
       (data) => {
         this.user = data.inventories;
+        this.data = data.inventories;
+        console.log("data---->", this.data);
+        this.data.forEach((element) => {
+          element.cityName = element.city[0].city;
+          element.SubLocation = element.location[0].location;
+        });
+
         console.log("Server response: ", data);
       },
       (error) => {

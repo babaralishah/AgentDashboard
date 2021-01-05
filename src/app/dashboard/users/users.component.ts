@@ -27,22 +27,23 @@ export class UsersComponent implements OnInit {
   user: any;
 
   options = [
-  
-    {
-      value: "fullname",
-      name: "Filter By Name",
-      placeholder: "Name",
-    },
+    { value: "_id", name: "Filter By Ref ID", placeholder: "Ref Id" },
     {
       value: "cityName",
       name: "Filter By City",
       placeholder: "City",
     },
     {
-      value: "locationName",
+      value: "SubLocation",
       name: "Filter By Location",
-      placeholder: "location",
-    }
+      placeholder: "Location",
+    },
+    { value: "property_types", name: "Filter By Type", placeholder: "Type" },
+    {
+      value: "inventory_id",
+      name: "Filter By Property Number",
+      placeholder: "Property Number",
+    },
   ];
   selectedOption = this.options[0].value;
   placeholder = this.options[0].placeholder;
@@ -67,6 +68,12 @@ export class UsersComponent implements OnInit {
     this.authService.getUsers().subscribe(
       (data) => {
         this.data = data;
+        console.log("data---->", this.data);
+        this.data.forEach((element) => {
+          element.cityName = element.city.city;
+          element.SubLocation = element.location[0].location;
+        });
+
         console.log("User Get Response", this.data);
       },
       (error) => {

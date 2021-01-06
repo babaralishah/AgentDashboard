@@ -30,7 +30,6 @@ export class InventoryComponent implements OnInit {
   search_demand: string;
 
   options = [
-    { value: "_id", name: "Filter By Ref ID", placeholder: "Ref Id" },
     {
       value: "cityName",
       name: "Filter By City",
@@ -41,11 +40,15 @@ export class InventoryComponent implements OnInit {
       name: "Filter By Location",
       placeholder: "Location",
     },
-    { value: "property_types", name: "Filter By Type", placeholder: "Type" },
     {
-      value: "inventory_id",
-      name: "Filter By Property Number",
-      placeholder: "Property Number",
+      value: "added_ByName",
+      name: "Filter By Added By",
+      placeholder: "Added By",
+    },
+    {
+      value: "assignedTo",
+      name: "Filter By Assigned To",
+      placeholder: "Assigned To",
     },
   ];
   selectedOption = this.options[0].value;
@@ -72,12 +75,16 @@ export class InventoryComponent implements OnInit {
         this.data = data.inventories;
         console.log("data---->", this.data);
         this.data.forEach((element) => {
-          element.cityName = element.city[0].city;
-          element.SubLocation = element.location[0].location;
+          element.assignedTo = [];
+          element.added_ByName = element.added_By.fullname;
+          element.cityName = element.city[0]?.city;
+          element.SubLocation = element.location[0]?.location;
+          for (let i = 0; i < element.assigned_history.length; i++) {
+            if (element.assigned_history[i].fullname === "") continue;
+            element.assignedTo[i] = element.assigned_history[i]?.fullname;
+          }
         });
-        this.user = data.inventories;
-
-        console.log("Server response: ", this.user);
+        this.user = this.data;
       },
       (error) => {
         console.error(error);
@@ -86,40 +93,8 @@ export class InventoryComponent implements OnInit {
   }
   setFormTitle(name: any) {
     this.authService.setFormTitle(name);
-    // this.router.navigate(["/add-inventories"]);
     this.router.navigate(["/add", name]);
   }
-  // agentChange(e) {
-  //   // console.log("e", this.dataToFilter);
-  //   this.Name = e;
-  //   // console.log("Name", this.Name);
-  //   if (e) {
-  //     this.filteredData = this.dataToFilter.filter((d) => {
-  //       return d.user_id.user_id == e._id;
-  //     });
-  //     this.data = this.filteredData;
-  //   } else if (!e) {
-  //     this.data = this.dataToFilter;
-  //   }
-  // }
-
-  //////////
-  // Function to delete the single inventory
-  // deleteInventory(id){
-  //   console.log('Calling deleteInventory');
-
-  //   this.authService.deleteInventory(id).subscribe(data => {
-  //     console.log(data);
-  //     if (data.code === 200) {
-  //       this.toastr.success(data.message, 'Success', {
-  //           timeOut: 5000
-  //         });
-  //       for ( let i = 0; i < this.user.length; i++){
-  //          if ( this.user[i]._id === id) { this.user.splice(i, 1); i--; }}
-  //     }
-
-  //   });
-  // }
   confirmID(id: any) {
     this.deleteId = id;
   }
@@ -135,8 +110,6 @@ export class InventoryComponent implements OnInit {
           timeOut: 5000,
         });
         this.getInventoryList();
-        //   for ( let i = 0; i < this.user.length; i++){
-        //      if ( this.user[i]._id === this.saveID) { this.user.splice(i, 1); i--; }}
       }
     });
   }
@@ -148,25 +121,6 @@ export class InventoryComponent implements OnInit {
     // this.router.navigateByUrl("/add-inventories");
     this.router.navigate(["/add", user.form_title]);
   }
-
-  // myFunction() {
-  //   let input, filter, table, tr, td, i, txtValue;
-  //   input = document.getElementById("myInput");
-  //   filter = input.value.toUpperCase();
-  //   table = document.getElementById("myTable");
-  //   tr = table.getElementsByTagName("tr");
-  //   for (i = 0; i < tr.length; i++) {
-  //     td = tr[i].getElementsByTagName("td")[0];
-  //     if (td) {
-  //       txtValue = td.textContent || td.innerText;
-  //       if (txtValue.toUpperCase().indexOf(filter) > -1) {
-  //         tr[i].style.display = "";
-  //       } else {
-  //         tr[i].style.display = "none";
-  //       }
-  //     }
-  //   }
-  // }
   exportTOExcel() {
     let options: JSON2SheetOpts = { header: [] };
     const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.user, options);

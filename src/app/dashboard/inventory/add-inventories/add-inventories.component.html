@@ -125,43 +125,21 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div class="row btn-group-toggle">
-
-                    <label style="
-                    width: 150px;" class="btn btn-primary" [class.active]="addinventoryForm.get('selectPropertyType').value === 'selectPropertyType'">
-                        <input type="radio" formControlName="selectPropertyType" value="selectPropertyType">
-                        <span *ngIf="!addinventoryForm.get('property_type').value">Select Property Type </span>
-                        <span
-                            *ngIf="addinventoryForm.get('property_type').value">{{addinventoryForm.get('property_type').value}}
-                        </span>
-                    </label>
-                </div><br> -->
                 <div class="row btn-group-toggle">
 
-                    <label class="btn btn-primary" [class.active]="addinventoryForm.get('property_type1').value === 'home'">
-                        <input type="radio" formControlName="property_type1" value="home"> Home
+                    <label class="btn btn-primary" [class.active]="addinventoryForm.get('property_type').value === 'home'">
+                        <input type="radio" formControlName="property_type" value="home"> Home
                     </label>
-                    <label class="btn btn-primary" [class.active]="addinventoryForm.get('property_type1').value === 'plot'" *ngIf="addinventoryForm.get('property_purpose').value === 'Buy' || addinventoryForm.get('property_purpose').value === 'Sell' ">
-                        <input type="radio" formControlName="property_type1" value="plot"> Plot
+                    <label class="btn btn-primary" [class.active]="addinventoryForm.get('property_type').value === 'plot'" *ngIf="addinventoryForm.get('property_purpose').value === 'Buy' || addinventoryForm.get('property_purpose').value === 'Sell' ">
+                        <input type="radio" formControlName="property_type" value="plot"> Plot
                     </label>
-                    <label class="btn btn-primary" [class.active]="addinventoryForm.get('property_type1').value === 'commercial'">
-                        <input type="radio" formControlName="property_type1" value="commercial"> Commercial
+                    <label class="btn btn-primary" [class.active]="addinventoryForm.get('property_type').value === 'commercial'">
+                        <input type="radio" formControlName="property_type" value="commercial"> Commercial
                     </label>
-                    <!-- <ul class="nav nav-tabs">
-                        <li style="margin-left: 21px;">
-                            <a href="#home" data-toggle="tab" class="active"> Home </a>
-                        </li>
-                        <li style="margin-left: 21px;">
-                            <a href="#plot" data-toggle="tab"> Plot </a>
-                        </li>
-                        <li style="margin-left: 21px;">
-                            <a href="#commercial" data-toggle="tab"> Commercial </a>
-                        </li>
-                    </ul> -->
                 </div>
                 <br>
                 <div class="row">
-                    <div class="tab-pane" id="home" *ngIf="addinventoryForm.get('property_type1').value === 'home'">
+                    <div class="tab-pane" id="home" *ngIf="addinventoryForm.get('property_type').value === 'home'||addinventoryForm.get('property_type').value === 'House' ||addinventoryForm.get('property_type').value === 'Apartment'||addinventoryForm.get('property_type').value === 'Farm House'||addinventoryForm.get('property_type').value === 'Penthouse'">
 
                         <div class="btn-group btn-group-toggle">
                             <label class="btn btn3  btn-primary" [class.active]="addinventoryForm.get('property_type').value === 'House'">
@@ -176,10 +154,7 @@
                                 <input type="radio" formControlName="property_type" value="Farm House">
                                 Farm House
                             </label>
-
-
                         </div>
-                        <br><br>
                         <div class="btn-group btn-group-toggle">
                             <label class="btn btn3  btn-primary" [class.active]="addinventoryForm.get('property_type').value === 'Penthouse'">
                                 <input type="radio" formControlName="property_type" value="Penthouse">
@@ -200,7 +175,7 @@
                         </div>
 
                     </div>
-                    <div class="tab-pane" id="plot" *ngIf="addinventoryForm.get('property_type1').value === 'plot'">
+                    <div class="tab-pane" id="plot" *ngIf="addinventoryForm.get('property_type').value === 'plot'||addinventoryForm.get('property_type').value === 'Residential Plot'||addinventoryForm.get('property_type').value === 'Commercial Plot'||addinventoryForm.get('property_type').value === 'Farm House Plot'">
                         <div class="btn-group btn-group-toggle">
                             <label class="btn btn3 btn-primary" [class.active]="addinventoryForm.get('property_type').value === 'Residential Plot'" style="
                             width: 150px;">
@@ -221,7 +196,7 @@
                             </label>
                         </div>
                     </div>
-                    <div class="tab-pane" id="commercial" *ngIf="addinventoryForm.get('property_type1').value === 'commercial'">
+                    <div class="tab-pane" id="commercial" *ngIf="addinventoryForm.get('property_type').value === 'commercial'||addinventoryForm.get('property_type').value === 'Office'||addinventoryForm.get('property_type').value === 'Shop'||addinventoryForm.get('property_type').value === 'Plaza'||addinventoryForm.get('property_type').value === 'Floor'">
 
                         <div class="btn-group btn-group-toggle">
                             <label class="btn btn3  btn-primary" [class.active]="addinventoryForm.get('property_type').value === 'Office'">
@@ -532,17 +507,17 @@
             <div class="row">
                 <br /><br />
                 <div *ngIf="addinventoryForm.get('assigned_type').value === 'city_admin'">
-                    <ng-select class="ng-select inputs2" [(ngModel)]="assignedName" [ngModelOptions]="{standalone: true}" [items]="cityAdminList" bindLabel="city.city" [multiple]="true" bindValue="fullname" placeholder="Select city admin" (change)="changeAssignedToCityAdmin($event)">
+                    <ng-select class="ng-select inputs2" [(ngModel)]="cityAdminAssignedNames" [ngModelOptions]="{standalone: true}" [items]="cityAdminList" bindLabel="city.city" [multiple]="true" bindValue="fullname" placeholder="Select city admin" (change)="changeAssignedToCityAdmin($event)">
                     </ng-select>
                 </div>
 
                 <div *ngIf="addinventoryForm.get('assigned_type').value === 'Admin'">
-                    <ng-select class="ng-select inputs2" [(ngModel)]="assignedName" [ngModelOptions]="{standalone: true}" [items]="superAdminList" bindLabel="access" [multiple]="true" bindValue="access" placeholder="Select Admin" (change)="changeAssignedAdmin($event)">
+                    <ng-select class="ng-select inputs2" [(ngModel)]="superAdminAssignedNames" [ngModelOptions]="{standalone: true}" [items]="superAdminList" bindLabel="access" [multiple]="true" bindValue="access" placeholder="Select Admin" (change)="changeAssignedAdmin($event)">
                     </ng-select>
                 </div>
 
                 <div *ngIf="addinventoryForm.get('assigned_type').value === 'Agents'">
-                    <ng-select #agentSelect class="ng-select inputs2" [(ngModel)]="assignedName" [ngModelOptions]="{standalone: true}" [items]="agentList" [multiple]="true" bindLabel="fullname" bindValue="fullname" placeholder="Select Agent" (change)="changeAssignedAgent($event)">
+                    <ng-select #agentSelect class="ng-select inputs2" [(ngModel)]="agentAssignedNames" [ngModelOptions]="{standalone: true}" [items]="agentList" [multiple]="true" bindLabel="fullname" bindValue="fullname" placeholder="Select Agent" (change)="changeAssignedAgent($event)">
                     </ng-select>
                 </div>
                 <!-- <div *ngIf="addinventoryForm.get('assigned_type').value === 'Agents' && user">

@@ -27,7 +27,11 @@ export class UsersComponent implements OnInit {
   user: any;
 
   options = [
-    { value: "_id", name: "Filter By Ref ID", placeholder: "Ref Id" },
+    {
+      value: "fullname",
+      name: "Filter By Name",
+      placeholder: "Name",
+    },
     {
       value: "cityName",
       name: "Filter By City",
@@ -37,12 +41,6 @@ export class UsersComponent implements OnInit {
       value: "SubLocation",
       name: "Filter By Location",
       placeholder: "Location",
-    },
-    { value: "property_types", name: "Filter By Type", placeholder: "Type" },
-    {
-      value: "inventory_id",
-      name: "Filter By Property Number",
-      placeholder: "Property Number",
     },
   ];
   selectedOption = this.options[0].value;
@@ -141,58 +139,55 @@ export class UsersComponent implements OnInit {
   //   console.log('\nlogout\n');
   //   this.router.navigateByUrl('/');
   // }
-// Function to Get Excel File of the Data Table
-exportTOExcel() {
-  let options: JSON2SheetOpts = { header: [] };
-  const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.data, options);
+  // Function to Get Excel File of the Data Table
+  exportTOExcel() {
+    let options: JSON2SheetOpts = { header: [] };
+    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.data, options);
 
-  var wscols = [
-    { wch: 30 },
-    { wch: 30 },
-    { wch: 30 },
-    { wch: 30 },
-    { wch: 30 },
-    { wch: 30 },
-    { wch: 30 },
-    { wch: 30 },
-    { wch: 30 },
-    { wch: 30 },
-    { wch: 30 },
-    { wch: 30 },
-    { wch: 30 },
-    { wch: 30 },
-    { wch: 30 },
-    { wch: 30 },
-    { wch: 30 },
-    { wch: 30 },
-    { wch: 30 },
-    { wch: 30 },
-    { wch: 30 },
-    { wch: 30 },
-    { wch: 30 },
-    { wch: 30 },
-    { wch: 30 },
-    { wch: 30 },
-    { wch: 30 },
-    { wch: 30 },
-    { wch: 30 },
-    { wch: 30 },
-  ];
+    var wscols = [
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+      { wch: 30 },
+    ];
 
-
-  ws["!cols"] = wscols;
+    ws["!cols"] = wscols;
     ws["!cols"][0] = { hidden: true };
-  
 
     ws["!cols"][2] = { hidden: true };
     ws["!cols"][3] = { hidden: true };
-   
+
     ws["!cols"][6] = { hidden: true };
     ws["!cols"][10] = { hidden: true };
-   
-  const wb: XLSX.WorkBook = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb, ws, "All Data Export");
-  XLSX.writeFile(wb, "Users.xlsx");
-}
 
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "All Data Export");
+    XLSX.writeFile(wb, "Users.xlsx");
+  }
 }

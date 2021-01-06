@@ -39,8 +39,9 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th (click)="sort('id')" scope="col">ID <i class="fa fa-sort"></i></th>
                             <th></th>
+                            <th (click)="sort('id')" scope="col">ID <i class="fa fa-sort"></i></th>
+                            <th scope="col">Added By</th>
                             <th scope="col">Purpose</th>
                             <th scope="col">Client</th>
 
@@ -69,7 +70,8 @@
                             </td>
 
 
-                            <td>{{ user?.referenceId }}</td>
+                            <td>{{ user?.refId }}</td>
+                            <td>{{user?.added_By?.fullname}}</td>
                             <td>{{ user?.property_purpose }}</td>
 
                             <td><b>Name : </b>{{ user?.client_name | titlecase }} <br> <b>Number : </b>{{ user?.client_number}} <br>
@@ -78,55 +80,77 @@
 
                             <td>{{ user?.property_type }}</td>
                             <!-- <td>{{ user?.Prop_num }}</td> -->
-                            <td *ngIf="user.area == null else elseBlockArea"><b>Max:</b> {{ user.max_area + " - " + user.area_unit}}<br><b>Min:</b> {{ user.min_area + " - " + user.area_unit}}</td>
+
+
+                            <td *ngIf="user?.area != null; else elseBlockArea">
+                                <span>{{ user?.area + " - " + user?.area_unit }}</span>
+                            </td>
+                            <ng-template #elseBlockArea>
+                                <td>
+                                    <span *ngIf="
+                user?.max_area == null || user?.min_area == null;
+                else elseBlockArea2
+                ">
+                <span>None</span>
+                                    </span>
+                                    <ng-template #elseBlockArea2>
+                                        <span><b>Max:</b> {{ user?.max_area + " - " + user?.area_unit
+                }}<br /><b>Min:</b>
+                {{ user?.min_area + " - " + user?.area_unit }}</span
+                >
+                </ng-template>
+                </td>
+                </ng-template>
+
+                            <!-- <td *ngIf="user.area == null else elseBlockArea"><b>Max:</b> {{ user.max_area + " - " + user.area_unit}}<br><b>Min:</b> {{ user.min_area + " - " + user.area_unit}}</td>
                             <ng-template #elseBlockArea>
                                 <td>{{ user.area + " - " + user.area_unit}}</td>
-                            </ng-template>
+                            </ng-template> -->
                             <td>
                                 {{user?.city[0]?.city}}<span>&nbsp;&nbsp;</span><br><span class="badge badge-light" *ngFor="let loc of user?.location">{{ loc.location }},  </span>
-                            </td>
+                                </td>
 
-                            <td *ngIf="user.demand_price == null else elseBlockDemand"><b>Max:</b> {{ user.max_price }}<br><b>Min:</b> {{ user.min_price }}</td>
-                            <ng-template #elseBlockDemand>
-                                <td>{{ user.demand_price }}</td>
-                            </ng-template>
-                            <td>{{ user?.beds_number }}</td>
-                            <td>
-                                <span *ngIf="user?.assigned_to?.fullname === ''">Self</span>
-                                <span *ngIf="user?.assigned_to?.length > 0">
+                                <td *ngIf="user.demand_price == null else elseBlockDemand"><b>Max:</b> {{ user.max_price }}<br><b>Min:</b> {{ user.min_price }}</td>
+                                <ng-template #elseBlockDemand>
+                                    <td>{{ user.demand_price }}</td>
+                                </ng-template>
+                                <td>{{ user?.beds_number }}</td>
+                                <td>
+                                    <span *ngIf="user?.assigned_to?.fullname === ''">Self</span>
+                                    <span *ngIf="user?.assigned_to?.length > 0">
                                     <span *ngFor="let assign of user?.assigned_to">{{ assign?.fullname }}<br></span>
-                                </span>
-                            </td>
-                            <td>{{ user?.created | date: "dd/MM/yyyy"}}</td>
-                            <td><i class="fa fa-edit icon" (click)="setUserToEdit(user)"></i>
-                                <a (click)="setUserToEdit(user)" role="button"></a>
+                                    </span>
+                                </td>
+                                <td>{{ user?.created | date: "dd/MM/yyyy"}}</td>
+                                <td><i class="fa fa-edit icon" (click)="setUserToEdit(user)"></i>
+                                    <a (click)="setUserToEdit(user)" role="button"></a>
 
-                                <i class="fa fa-trash icon" (click)="confirmID(user._id)" data-toggle="modal" data-target="#exampleModal1"></i>
+                                    <i class="fa fa-trash icon" (click)="confirmID(user._id)" data-toggle="modal" data-target="#exampleModal1"></i>
 
-                            </td>
-                            <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Delete Confirmation</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                </td>
+                                <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Delete Confirmation</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            Are you sure you want to Delete it?
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                            </div>
+                                            <div class="modal-body">
+                                                Are you sure you want to Delete it?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
           Close
         </button>
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteLead()">
+                                                <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteLead()">
           Delete
         </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                         </tr>
                     </tbody>
                 </table>

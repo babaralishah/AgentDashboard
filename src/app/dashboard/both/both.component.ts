@@ -30,7 +30,6 @@ export class BothComponent implements OnInit {
   general_search: any;
 
   options = [
-    { value: "_id", name: "Filter By Ref ID", placeholder: "Ref Id" },
     {
       value: "cityName",
       name: "Filter By City",
@@ -41,11 +40,15 @@ export class BothComponent implements OnInit {
       name: "Filter By Location",
       placeholder: "Location",
     },
-    { value: "property_types", name: "Filter By Type", placeholder: "Type" },
     {
-      value: "inventory_id",
-      name: "Filter By Property Number",
-      placeholder: "Property Number",
+      value: "added_ByName",
+      name: "Filter By Added By",
+      placeholder: "Added By",
+    },
+    {
+      value: "assignedTo",
+      name: "Filter By Assigned To",
+      placeholder: "Assigned To",
     },
   ];
   selectedOption = this.options[0].value;
@@ -56,6 +59,28 @@ export class BothComponent implements OnInit {
     this.getAllList();
   }
 
+  getAllList() {
+    this.authService.getAll().subscribe(
+      (data) => {
+        this.user = data.inventories;
+        this.data = data.inventories;
+        // console.log("data---->", this.data);
+        this.data.forEach((element) => {
+          element.assignedTo = [];
+          element.added_ByName = element.added_By?.fullname;
+          element.cityName = element.city[0]?.city;
+          element.SubLocation = element.location[0]?.location;
+          for (let i = 0; i < element.assigned_history.length; i++)
+            element.assignedTo[i] = element.assigned_history[i]?.fullname;
+        });
+
+        console.log("Server response: ", data);
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
   optionChange(e: any) {
     this.placeholder = e.placeholder;
     this.refId = "";
@@ -71,25 +96,6 @@ export class BothComponent implements OnInit {
   setFormTitle(name: any) {
     this.authService.setFormTitle(name);
     this.router.navigate(["/add", name]);
-  }
-
-  getAllList() {
-    this.authService.getAll().subscribe(
-      (data) => {
-        this.user = data.inventories;
-        this.data = data.inventories;
-        console.log("data---->", this.data);
-        this.data.forEach((element) => {
-          element.cityName = element.city[0].city;
-          element.SubLocation = element.location[0].location;
-        });
-
-        console.log("Server response: ", data);
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
   }
 
   sort(key: any) {
@@ -162,9 +168,9 @@ export class BothComponent implements OnInit {
     ws["!cols"][2] = { hidden: true };
     ws["!cols"][3] = { hidden: true };
     ws["!cols"][4] = { hidden: true };
-   
+
     ws["!cols"][8] = { hidden: true };
- 
+
     ws["!cols"][25] = { hidden: true };
 
     ws["!cols"][26] = { hidden: true };

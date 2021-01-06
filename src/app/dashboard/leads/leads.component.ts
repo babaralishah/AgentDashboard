@@ -37,11 +37,10 @@ export class LeadsComponent implements OnInit {
     private toastr: ToastrService
   ) {}
   general_search: string;
-  assigned_to: any;
+  // assigned_to: any;
   selectedUserLocation: any;
 
   options = [
-    { value: "_id", name: "Filter By Ref ID", placeholder: "Ref Id" },
     {
       value: "cityName",
       name: "Filter By City",
@@ -52,11 +51,15 @@ export class LeadsComponent implements OnInit {
       name: "Filter By Location",
       placeholder: "Location",
     },
-    { value: "property_types", name: "Filter By Type", placeholder: "Type" },
     {
-      value: "inventory_id",
-      name: "Filter By Property Number",
-      placeholder: "Property Number",
+      value: "added_ByName",
+      name: "Filter By Added By",
+      placeholder: "Added By",
+    },
+    {
+      value: "assignedTo",
+      name: "Filter By Assigned To",
+      placeholder: "Assigned To",
     },
   ];
   selectedOption = this.options[0].value;
@@ -76,6 +79,27 @@ export class LeadsComponent implements OnInit {
     this.tokendata = decodedToken.data;
     console.log(this.tokendata);
   }
+
+  getLeadsList() {
+    this.authService.getLeads().subscribe(
+      (data) => {
+        this.data = data.leads;
+        this.data.forEach((element) => {
+          element.assignedTo = [];
+          element.added_ByName = element.added_By.fullname;
+          element.cityName = element.city[0]?.city;
+          element.SubLocation = element.location[0]?.location;
+          for (let i = 0; i < element.assigned_history.length; i++)
+            element.assignedTo[i] = element.assigned_history[i]?.fullname;
+        });
+
+        this.user = this.data;
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
   optionChange(e: any) {
     console.log(e);
     this.placeholder = e.placeholder;
@@ -86,7 +110,7 @@ export class LeadsComponent implements OnInit {
   setCurrentUser(user: any) {
     this.currentUser = user;
 
-    this.currentUser["assigned_to"] = [];
+    // this.currentUser["assigned_to"] = [];
     let date = new Date(this.currentUser.created);
     console.log(
       date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear()
@@ -101,8 +125,11 @@ export class LeadsComponent implements OnInit {
   assignLeadToAgent() {
     console.log(this.currentUser);
     delete this.currentUser._id;
-    // this.currentUser["assigned_history"].push(...this.assignLeadData);
-    // this.currentUser["assigned_history"].push(...this.assignLeadData);
+    delete this.currentUser.SubLocation;
+    delete this.currentUser.cityName;
+    delete this.currentUser.locationName;
+    console.log(this.currentUser);
+
     this.currentUser["assigned_history"] = this.assignLeadData;
     this.assignLeadData = [];
     this.currentUser[""];
@@ -168,8 +195,6 @@ export class LeadsComponent implements OnInit {
             this.superAdminList.push(data[i]);
           }
         }
-        // console.log(this.cityAdminList);
-        // console.log(this.cityAdminList[0].city);
       },
       (error) => {
         console.error(error);
@@ -185,28 +210,6 @@ export class LeadsComponent implements OnInit {
   setFormTitle(name: any) {
     this.authService.setFormTitle(name);
     this.router.navigate(["/add", name]);
-  }
-
-  getLeadsList() {
-    this.authService.getLeads().subscribe(
-      (data) => {
-
-        this.data = data.leads;
-        console.log("data---->", this.data);
-        this.data.forEach((element) => {
-          element.cityName = element.city[0].city;
-          element.SubLocation = element.location[0].location;
-        });
-
-
-        this.assigned_to = data.assigned_to;
-        this.user = data.leads;
-        console.log(this.user);
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
   }
 
   // Function to delete the single inventory
@@ -244,7 +247,7 @@ export class LeadsComponent implements OnInit {
       date: new Date(),
     });
     console.log(this.assignLeadData);
-    this.currentUser["assigned_to"] = this.assignLeadData;
+    // this.currentUser["assigned_to"] = this.assignLeadData;
   }
   // Function to patch the value from ng select
   changeAssignedAdmin(access: any) {
@@ -256,11 +259,11 @@ export class LeadsComponent implements OnInit {
       date: new Date(),
     });
     console.log(this.assignLeadData);
-    this.currentUser["assigned_to"] = this.assignLeadData;
+    // this.currentUser["assigned_to"] = this.assignLeadData;
   }
   changeAssignedAgent(access: any) {
     console.log(access);
-    
+
     this.assignLeadData = [];
     access.forEach((element) => {
       console.log(element);
@@ -272,10 +275,10 @@ export class LeadsComponent implements OnInit {
         date: new Date(),
       });
 
-      this.currentUser["assigned_to"] = this.assignLeadData;
+      // this.currentUser["assigned_to"] = this.assignLeadData;
     });
     console.log(this.assignLeadData);
-    console.log(this.currentUser["assigned_to"]);
+    // console.log(this.currentUser["assigned_to"]);
   }
   confirmID(id: any) {
     this.deleteId = id;

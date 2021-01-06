@@ -25,8 +25,8 @@ export class AssignedLeadsComponent implements OnInit {
   ) {}
 
   general_search: any;
+
   options = [
-    { value: "_id", name: "Filter By Ref ID", placeholder: "Ref Id" },
     {
       value: "cityName",
       name: "Filter By City",
@@ -37,31 +37,18 @@ export class AssignedLeadsComponent implements OnInit {
       name: "Filter By Location",
       placeholder: "Location",
     },
-    { value: "property_types", name: "Filter By Type", placeholder: "Type" },
     {
-      value: "inventory_id",
-      name: "Filter By Property Number",
-      placeholder: "Property Number",
+      value: "added_ByName",
+      name: "Filter By Added By",
+      placeholder: "Added By",
     },
   ];
 
   options2 = [
-    { value: "_id", name: "Filter By Ref ID", placeholder: "Ref Id" },
     {
-      value: "cityName",
-      name: "Filter By City",
-      placeholder: "City",
-    },
-    {
-      value: "SubLocation",
-      name: "Filter By Location",
-      placeholder: "Location",
-    },
-    { value: "property_types", name: "Filter By Type", placeholder: "Type" },
-    {
-      value: "inventory_id",
-      name: "Filter By Property Number",
-      placeholder: "Property Number",
+      value: "fullname",
+      name: "Filter By Name",
+      placeholder: "Name",
     },
   ];
 
@@ -77,6 +64,29 @@ export class AssignedLeadsComponent implements OnInit {
     this.getAllList();
   }
 
+  // Function to Get table Data
+  getAllList() {
+    this.authService.getAllAssignedLeads().subscribe(
+      (data) => {
+        this.user = data;
+
+        this.data = data;
+        console.log(this.data);
+
+        this.data.forEach((element) => {
+          element.assignedTo = [];
+          element.added_ByName = element.added_By.fullname;
+          element.cityName = element.city[0]?.city;
+          element.SubLocation = element.location[0]?.location;
+          for (let i = 0; i < element.assigned_history.length; i++)
+            element.assignedTo[i] = element.assigned_history[i]?.fullname;
+        });
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
   sort(key: any) {
     this.key = key;
     this.reverse = !this.reverse;
@@ -87,26 +97,6 @@ export class AssignedLeadsComponent implements OnInit {
     this.placeholder = e.placeholder;
     this.refId = "";
     console.log(this.selectedOption);
-  }
-
-  // Function to Get table Data
-  getAllList() {
-    this.authService.getAllAssignedLeads().subscribe(
-      (data) => {
-        this.user = data;
-        this.data = data;
-        console.log("data---->", this.data);
-        this.data.forEach((element) => {
-          element.cityName = element.city[0].city;
-          element.SubLocation = element.location[0].location;
-        });
-
-        console.log("Server response: ", this.user);
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
   }
 
   setCurrentRow(user: any) {

@@ -16,7 +16,7 @@ export class SignupComponent implements OnInit {
   locations: any;
   user: any;
   abc: any;
-  accessType = [{ access: "agent" }, { access: "city_admin" }];
+  accessType = [{ access: "agent" }, { access: "city_admin" }, { access: "call_center" }];
   selectedLocations: any = [];
   selectedCity: any;
   selectStringLocations: any = [];

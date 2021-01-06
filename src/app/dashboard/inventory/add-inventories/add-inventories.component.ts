@@ -157,20 +157,29 @@ export class AddInventoriesComponent implements OnInit {
   getUserDetails() {
     this.token = this.authService.getToken();
     this.token = this.authService.getDecodedToken(this.token).data;
-    console.log(this.token);
+    console.log(this.token.access);
   }
 
   // Function to call User data table for Assigned_To Field of the add-inventory-form
   getCityAdminList() {
     this.authService.getUsers().subscribe(
       (data) => {
+        console.log(data);
+
         for (var i = 0; i < data.length; i++) {
           // console.log(data[i].access);
           if (data[i].access == "city_admin") {
             this.cityAdminList.push(data[i]);
           } else if (data[i].access == "agent") {
-            this.agentListFull.push(data[i]);
-            this.agentList.push(data[i]);
+            if (this.token.access == "city_admin") {
+              if (this.token.city.city == data[i].city.city) {
+                this.agentListFull.push(data[i]);
+                this.agentList.push(data[i]);
+              }
+            } else {
+              this.agentListFull.push(data[i]);
+              this.agentList.push(data[i]);
+            }
             // console.log(this.agentList);
           } else if (data[i].access == "super_admin") {
             this.superAdminList.push(data[i]);
@@ -265,11 +274,11 @@ export class AddInventoriesComponent implements OnInit {
     });
   }
   updatefields() {
-  if (this.user.assigned_history) {
-      console.log(this.addinventoryForm.get('assigned_type').value);
+    if (this.user.assigned_history) {
+      console.log(this.addinventoryForm.get("assigned_type").value);
       this.assignLeadData = [];
 
-      if(this.user.assigned_type === 'Agents') {
+      if (this.user.assigned_type === "Agents") {
         for (let i = 0; i < this.user.assigned_history.length; i++) {
           console.log(this.user.assigned_history[i].fullname);
           this.agentAssignedNames.push(this.user?.assigned_history[i].fullname);
@@ -280,10 +289,12 @@ export class AddInventoriesComponent implements OnInit {
             date: new Date(),
           });
         }
-      } else if(this.user.assigned_type === 'Admin') {
+      } else if (this.user.assigned_type === "Admin") {
         for (let i = 0; i < this.user.assigned_history.length; i++) {
           console.log(this.user.assigned_history[i].fullname);
-          this.superAdminAssignedNames.push(this.user?.assigned_history[i].fullname);
+          this.superAdminAssignedNames.push(
+            this.user?.assigned_history[i].fullname
+          );
           this.assignLeadData.push({
             userId: this.user?.assigned_history[i].userId,
             fullname: this.user?.assigned_history[i].fullname,
@@ -291,10 +302,12 @@ export class AddInventoriesComponent implements OnInit {
             date: new Date(),
           });
         }
-      } else if(this.user.assigned_type === 'city_admin') {
+      } else if (this.user.assigned_type === "city_admin") {
         for (let i = 0; i < this.user.assigned_history.length; i++) {
           console.log(this.user.assigned_history[i].fullname);
-          this.cityAdminAssignedNames.push(this.user?.assigned_history[i].fullname);
+          this.cityAdminAssignedNames.push(
+            this.user?.assigned_history[i].fullname
+          );
           this.assignLeadData.push({
             userId: this.user?.assigned_history[i].userId,
             fullname: this.user?.assigned_history[i].fullname,
@@ -303,9 +316,9 @@ export class AddInventoriesComponent implements OnInit {
           });
         }
       }
-      
+
       this.addinventoryForm.patchValue({
-        assigned_history: this.assignLeadData
+        assigned_history: this.assignLeadData,
       });
     }
     console.log(this.user);

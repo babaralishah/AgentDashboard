@@ -69,6 +69,10 @@ export class InventoryComponent implements OnInit {
     this.key = key;
     this.reverse = !this.reverse;
   }
+  
+  public priceConverter(value) {
+    return this.authService.priceFilter(value);
+  }
   getInventoryList() {
     this.authService.getInventory().subscribe(
       (data) => {

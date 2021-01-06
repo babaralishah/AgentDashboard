@@ -83,6 +83,8 @@ export class LeadsComponent implements OnInit {
   getLeadsList() {
     this.authService.getLeads().subscribe(
       (data) => {
+        console.log(data);
+        
         this.data = data.leads;
         this.data.forEach((element) => {
           element.assignedTo = [];
@@ -99,6 +101,8 @@ export class LeadsComponent implements OnInit {
         console.error(error);
       }
     );
+    console.log(this.data);
+    
   }
   optionChange(e: any) {
     console.log(e);

@@ -256,7 +256,7 @@ export class AuthenticationService {
       val = Number((val / 10000000).toFixed(2)) + " CRORE";
     } else if (val >= 100000) {
       val = Number((val / 100000).toFixed(2)) + " Lac";
-    } else if (val >= 1000) val = Number((val / 1000).toFixed(2)) + " K";
+    } else if (val >= 1000) val = Number((val ).toFixed(2)) + " K";
     return val;
   }
 }

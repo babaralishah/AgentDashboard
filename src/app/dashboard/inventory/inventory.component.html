@@ -108,9 +108,9 @@
                 </td>
                 </ng-template>
 
-                            <td *ngIf="user?.demand_price == null else elseBlockDemand"><b>Max:</b> {{ user?.max_price }}<br><b>Min:</b> {{ user?.min_price }}</td>
+                            <td *ngIf="user?.demand_price == null else elseBlockDemand"><b>Max:</b> {{ user?.max_price | currency  :'Rs '  : 'symbol' : '1.0-0'}}<br><b>Min:</b> {{ user?.min_price | currency  :'Rs '  : 'symbol' : '1.0-0' }}</td>
                             <ng-template #elseBlockDemand>
-                                <td>{{ user?.demand_price }}</td>
+                                <td>{{ user?.demand_price | currency  :'Rs '  : 'symbol' : '1.0-0'}}</td>
                             </ng-template>
                             <td>{{ user?.beds_number }}</td>
                             <td>

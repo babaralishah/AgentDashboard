@@ -481,18 +481,18 @@
 
                         <div class="btn-group btn-group-toggle">
                             <label class="btn btn-primary" [class.active]="addinventoryForm.get('assigned_type').value === 'self'">
-                                <input type="radio" formControlName="assigned_type" value="self"> self
+                                <input type="radio" formControlName="assigned_type" value="self"> Self
                             </label>
 
-                            <label class="btn btn-primary" [class.active]="addinventoryForm.get('assigned_type').value === 'city_admin'">
-                                <input type="radio" formControlName="assigned_type" value="city_admin">
-                                    city_admin
-                            </label>
-
-                            <label class="btn btn-primary" [class.active]="addinventoryForm.get('assigned_type').value === 'Admin'">
+                            <label class="btn btn-primary" *ngIf="token.access == 'super_admin' || token.access == 'city_admin'" [class.active]="addinventoryForm.get('assigned_type').value === 'Admin'">
                                 <input type="radio" formControlName="assigned_type" value="Admin">
-                                    Admin
+                                    Super Admin
                             </label>
+                            <label *ngIf="token.access == 'city_admin' || token.access == 'super_admin'" class="btn btn-primary" [class.active]="addinventoryForm.get('assigned_type').value === 'city_admin'">
+                                <input type="radio" formControlName="assigned_type" value="city_admin">
+                                    City Admin
+                            </label>
+
                             <label class="btn btn-primary" [class.active]="addinventoryForm.get('assigned_type').value === 'Agents'">
                                 <input type="radio" formControlName="assigned_type" value="Agents">
                                     Agents

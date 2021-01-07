@@ -67,10 +67,31 @@
                                 {{ user.city[0]?.city }}<span></span><br /><span class="badge badge-light" *ngFor="let loc of user.location">{{ loc.location }},
               </span>
                             </td>
-                            <td *ngIf="user.area == null else elseBlockArea"><b>Max:</b> {{ user.max_area + " - " + user.area_unit}}<br><b>Min:</b> {{ user.min_area + " - " + user.area_unit}}</td>
+
+                            <td *ngIf="user?.area != null; else elseBlockArea">
+                                <span>{{ user?.area + " - " + user?.area_unit }}</span>
+                            </td>
+                            <ng-template #elseBlockArea>
+                                <td>
+                                    <span *ngIf="
+                user?.max_area == null || user?.min_area == null;
+                else elseBlockArea2
+                ">
+                <span>None</span>
+                                    </span>
+                                    <ng-template #elseBlockArea2>
+                                        <span><b>Max:</b> {{ user?.max_area + " - " + user?.area_unit
+                }}<br /><b>Min:</b>
+                {{ user?.min_area + " - " + user?.area_unit }}</span
+                >
+                </ng-template>
+                </td>
+                </ng-template>
+                        
+                            <!-- <td *ngIf="user.area == null else elseBlockArea"><b>Max:</b> {{ user.max_area + " - " + user.area_unit}}<br><b>Min:</b> {{ user.min_area + " - " + user.area_unit}}</td>
                             <ng-template #elseBlockArea>
                                 <td>{{ user.area + " - " + user.area_unit}}</td>
-                            </ng-template>
+                            </ng-template> -->
 
                             <td *ngIf="user.demand_price == null else elseBlockDemand"><b>Max:</b> {{ user.max_price }}<br><b>Min:</b> {{ user.min_price }}</td>
                             <ng-template #elseBlockDemand>
@@ -91,29 +112,29 @@
                                             </h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
-                    </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            Are you sure you want to delete it?
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                        </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete it?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
                       Close
                     </button>
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteAssignedLead()">
+                <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteAssignedLead()">
                       Delete
                     </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </tr>
-                    </tbody>
-                </table>
             </div>
-            <pagination-controls (pageChange)="p = $event"></pagination-controls>
         </div>
     </div>
+</div>
+</tr>
+</tbody>
+</table>
+</div>
+<pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>
+</div>
 </div>
 
 <div class="modal" id="myModal">

@@ -41,6 +41,11 @@ export class InventoryComponent implements OnInit {
       placeholder: "Location",
     },
     {
+      value: "demand",
+      name: "Filter By Demand",
+      placeholder: "Demand",
+    },
+    {
       value: "added_ByName",
       name: "Filter By Added By",
       placeholder: "Added By",
@@ -69,7 +74,7 @@ export class InventoryComponent implements OnInit {
     this.key = key;
     this.reverse = !this.reverse;
   }
-  
+
   public priceConverter(value) {
     return this.authService.priceFilter(value);
   }
@@ -83,8 +88,17 @@ export class InventoryComponent implements OnInit {
           element.added_ByName = element.added_By.fullname;
           element.cityName = element.city[0]?.city;
           element.SubLocation = element.location[0]?.location;
-          for (let i = 0; i < element.assigned_history.length; i++) {
-            if (element.assigned_history[i].fullname === "") continue;
+          if (element.demand_price != null) {
+            element.demand = element.demand_price;
+          } else if (element.max_price) {
+            element.demand = element.max_price;
+          } else if (element.min_price) {
+            element.demand = element.min_price;
+          }
+          console.log(element.demand);
+
+          for (let i = 0; i < element.assigned_history?.length; i++) {
+            if (element.assigned_history[i]?.fullname === "") continue;
             element.assignedTo[i] = element.assigned_history[i]?.fullname;
           }
         });

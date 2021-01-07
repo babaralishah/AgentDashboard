@@ -29,6 +29,11 @@
     height: 20px;
 }
 
+.normal {
+    height: 16px;
+    margin-left: 3px;
+}
+
 .table th {
     padding-top: 12px;
     padding-bottom: 12px;

@@ -63,10 +63,10 @@
                     <tbody>
                         <tr *ngFor="let user of user | filterlist: selectedOption:refId | orderBy: key: reverse | paginate:{itemsPerPage:50,currentPage:p};">
                             <!-- | tableFilter06: search_client | tableFilter05: search_demand | tableFilter04: search_type | tableFilter03: search_area | tableFilter02: search_location | tableFilter: search_id -->
-                            <td> <span *ngIf="user.priority == 'Super Hot' else hot"><img class="super-hot" src="\assets\icons\red-flag.png"></span>
-                                <ng-template #hot>
-                                    <img class="super-hot" src="\assets\icons\flag_yellow.png">
-                                </ng-template>
+                            <td>
+                                <span *ngIf="user?.priority == 'Super Hot'"><img class="super-hot" src="\assets\icons\red-flag.png"></span>
+                                <span *ngIf="user?.priority == 'Hot'"><img class="super-hot" src="\assets\icons\flag_yellow.png"></span>
+                                <span *ngIf="user?.priority == 'Normal'"><img class="normal" src="\assets\icons\flag-green2.png"></span>
                             </td>
 
 
@@ -116,9 +116,9 @@
                                 </ng-template>
                                 <td>{{ user?.beds_number }}</td>
                                 <td>
-                                    <span *ngIf="user?.assigned_to?.fullname === ''">Self</span>
-                                    <span *ngIf="user?.assigned_to?.length > 0">
-                                    <span *ngFor="let assign of user?.assigned_to">{{ assign?.fullname }}<br></span>
+                                    <span *ngIf="user?.assignedTo?.length === 0">Self</span>
+                                    <span *ngIf="user?.assignedTo?.length > 0">
+                                    <span *ngFor="let assign of user?.assignedTo">{{ assign }}<span>,</span><br></span>
                                     </span>
                                 </td>
                                 <td>{{ user?.created | date: "dd/MM/yyyy"}}</td>

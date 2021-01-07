@@ -52,6 +52,11 @@ export class LeadsComponent implements OnInit {
       placeholder: "Location",
     },
     {
+      value: "demand",
+      name: "Filter By Demand",
+      placeholder: "Demand",
+    },
+    {
       value: "added_ByName",
       name: "Filter By Added By",
       placeholder: "Added By",
@@ -84,13 +89,21 @@ export class LeadsComponent implements OnInit {
     this.authService.getLeads().subscribe(
       (data) => {
         console.log(data);
-        
+
         this.data = data.leads;
         this.data.forEach((element) => {
           element.assignedTo = [];
           element.added_ByName = element.added_By.fullname;
           element.cityName = element.city[0]?.city;
           element.SubLocation = element.location[0]?.location;
+          if (element.demand_price != null) {
+            element.demand = element.demand_price;
+          } else if (element.max_price) {
+            element.demand = element.max_price;
+          } else if (element.min_price) {
+            element.demand = element.min_price;
+          }
+          console.log(element.demand);
           for (let i = 0; i < element.assigned_history.length; i++)
             element.assignedTo[i] = element.assigned_history[i]?.fullname;
         });
@@ -102,7 +115,6 @@ export class LeadsComponent implements OnInit {
       }
     );
     console.log(this.data);
-    
   }
   optionChange(e: any) {
     console.log(e);

@@ -21,6 +21,11 @@
     background-color: #e8e8e8;
 }
 
+.normal {
+    height: 16px;
+    margin-left: 3px;
+}
+
 .super-hot {
     height: 20px;
 }

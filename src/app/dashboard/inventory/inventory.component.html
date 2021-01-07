@@ -65,10 +65,14 @@
 
                     <tbody>
                         <tr *ngFor="let user of user | filterlist: selectedOption:refId | orderBy: key: reverse | paginate:{itemsPerPage:50,currentPage:p}; ">
-                            <td> <span *ngIf="user?.priority == 'Super Hot' else hot"><img class="super-hot" src="\assets\icons\red-flag.png"></span>
-                                <ng-template #hot>
+                            <td>
+                                <!-- <span *ngIf="user?.priority == 'Super Hot' else hot"><img class="super-hot" src="\assets\icons\red-flag.png"></span> -->
+                                <span *ngIf="user?.priority == 'Super Hot'"><img class="super-hot" src="\assets\icons\red-flag.png"></span>
+                                <span *ngIf="user?.priority == 'Hot'"><img class="super-hot" src="\assets\icons\flag_yellow.png"></span>
+                                <span *ngIf="user?.priority == 'Normal'"><img class="normal" src="\assets\icons\flag-green2.png"></span>
+                                <!-- <ng-template #hot>
                                     <img class="super-hot" src="\assets\icons\flag_yellow.png">
-                                </ng-template>
+                                </ng-template> -->
                             </td>
 
                             <!-- | tableFilter05: search_demand | tableFilter04: search_type | tableFilter03: search_area | tableFilter02: search_location | tableFilter: search_id | filter: general_search"> -->

@@ -60,6 +60,8 @@ export class AuthenticationService {
     return this.form_title;
   }
   removeFormTitle() {
+    console.log('calling remove form titile');
+    
     this.form_title = null;
   }
   /////////////// Get data from inventory to the inventory table ////////////

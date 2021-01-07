@@ -34,6 +34,11 @@
     height: 20px;
 }
 
+.normal {
+    height: 16px;
+    margin-left: 3px;
+}
+
 .abc {
     overflow-x: hidden;
 }

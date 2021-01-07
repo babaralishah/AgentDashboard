@@ -9,8 +9,8 @@
                     <img class="img-responsive img-rounded" src="https://bootdey.com/img/Content/avatar/avatar6.png" />
                 </div>
                 <div class="user-info">
-                    <span class="user-name">{{ tokendata?.fullname }} </span>
-                    <span class="user-role">{{ tokendata?.access }}</span>
+                    <span class="user-name">{{ tokendata?.fullname | titlecase }} </span>
+                    <span class="user-role">{{ tokendata?.access | titlecase}}</span>
                     <span class="user-status">
             <i class="fa fa-circle"></i>
             <span>Online</span>

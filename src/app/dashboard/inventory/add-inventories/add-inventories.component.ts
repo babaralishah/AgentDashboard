@@ -1,9 +1,11 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { Router } from "@angular/router";
+import { NavigationStart, Router } from "@angular/router";
 import { AuthenticationService } from "src/app/services/Authentication/authentication.service";
 import { ToastrService } from "ngx-toastr";
 import * as mapboxgl from "mapbox-gl";
+import {Location} from '@angular/common';
+import { Subscription } from "rxjs";
 // import { MapserviceService } from "../services/mapservice.service";
 
 @Component({
@@ -11,7 +13,7 @@ import * as mapboxgl from "mapbox-gl";
   templateUrl: "./add-inventories.component.html",
   styleUrls: ["./add-inventories.component.css"],
 })
-export class AddInventoriesComponent implements OnInit {
+export class AddInventoriesComponent implements OnInit, OnDestroy {
   agentAssignedNames: any = [];
   superAdminAssignedNames: any = [];
   cityAdminAssignedNames: any = [];
@@ -84,12 +86,24 @@ export class AddInventoriesComponent implements OnInit {
   assignStringName: any = [];
   //////////////////////////////////
 
+  subscription: Subscription;
+
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthenticationService,
     private router: Router,
-    private toastr: ToastrService
-  ) {}
+    private toastr: ToastrService,
+    private _location: Location
+  ) {
+
+    this.subscription = router.events.subscribe((event) => {
+      if (event instanceof NavigationStart) {
+        console.log('Hello')
+        this.backClicked();
+      }
+  });
+  }
+
   get Property_typename() {
     return this.addinventoryForm.get("prop_typename");
   }
@@ -98,15 +112,21 @@ export class AddInventoriesComponent implements OnInit {
     return this.addinventoryForm.controls;
   }
 
+  backClicked() {
+    this._location.back();
+  }
+
   ngOnInit(): void {
     this.getUserDetails();
     this.user = this.authService.getUser();
     if (this.user) {
       console.log("User1: ", this.user);
 
-      this.authService.removeUser();
+      // this.authService.removeUser();
     }
     this.form_title = this.authService.getFormTitle();
+    console.log(this.form_title);
+
     this.authService.removeFormTitle();
     this.formDeclare();
 
@@ -114,6 +134,11 @@ export class AddInventoriesComponent implements OnInit {
     this.getCities();
     this.getUserList();
     this.getCityAdminList();
+  }
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    // this.authService.removeFormTitle();
   }
 
   // Form Declaration, and Validation Function
@@ -128,7 +153,7 @@ export class AddInventoriesComponent implements OnInit {
         },
       ],
       assigned_type: ["self"],
-      priority: [],
+      priority: "Normal",
       form_title: [""],
       property_purpose: ["Buy"],
       property_type: [""],
@@ -146,6 +171,7 @@ export class AddInventoriesComponent implements OnInit {
       client_name: ["", Validators.required],
       client_number: ["", Validators.required],
       client_type: [""],
+      comment: "",
       added_By: this.formBuilder.group({
         fullname: [""],
         userId: [""],

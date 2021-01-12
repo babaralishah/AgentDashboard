@@ -30,6 +30,10 @@ export class LeadsComponent implements OnInit {
   tokendata: any;
   assignLeadData: any = [];
   data: any;
+  cities: any;
+  locations: any;
+  city: any;
+  location: any;
 
   constructor(
     private authService: AuthenticationService,
@@ -47,7 +51,7 @@ export class LeadsComponent implements OnInit {
       placeholder: "City",
     },
     {
-      value: "SubLocation",
+      value: "locationName",
       name: "Filter By Location",
       placeholder: "Location",
     },
@@ -76,6 +80,7 @@ export class LeadsComponent implements OnInit {
     this.getLeadsList();
     this.getCityAdminList();
     this.tokenization();
+    this.getCities();
   }
 
   async tokenization() {
@@ -95,7 +100,7 @@ export class LeadsComponent implements OnInit {
           element.assignedTo = [];
           element.added_ByName = element.added_By.fullname;
           element.cityName = element.city[0]?.city;
-          element.SubLocation = element.location[0]?.location;
+          element.locationName = element.location[0]?.location;
           if (element.demand_price != null) {
             element.demand = element.demand_price;
           } else if (element.max_price) {
@@ -115,6 +120,50 @@ export class LeadsComponent implements OnInit {
       }
     );
     console.log(this.data);
+  }
+  // Calling Api to get the Cities
+  getCities() {
+    this.authService.getCities().subscribe(
+      (data) => {
+        console.log(data);
+        this.cities = data;
+      },
+      (err) => {
+        console.error(err);
+      }
+    );
+  }
+  // Calling Api to get the Locations
+  getLocations(selectedCity?) {
+    this.authService.getLocations().subscribe(
+      (locations) => {
+        console.log(locations);
+        this.locations = locations;
+        if (selectedCity) {
+          this.locations = locations.filter((loc) => {
+            return loc.cityId == selectedCity;
+          });
+        }
+      },
+      (err) => {
+        console.error(err);
+      }
+    );
+  }
+
+  //Function to change the city of --ng select city--
+  changeCity(city: any) {
+    this.locations = [];
+    this.location = "";
+    this.city = city?.city;
+    console.log(this.city);
+
+    this.locations = [];
+    if (city) this.getLocations(city._id);
+  }
+  changeLocation(location: any) {
+    this.location = location?.location;
+    console.log(this.location);
   }
   optionChange(e: any) {
     console.log(e);

@@ -31,7 +31,22 @@
                     <input type="text" class="form-control ml-2" placeholder="Search {{ placeholder }}" [(ngModel)]="refId" />
                 </div>
 
-                <div class="col-1"></div>
+                <div class="">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <ng-select class="ng-select inputs2" [items]="cities" bindLabel="city" bindValue="city" placeholder="Select City" (change)="changeCity($event)">
+                            </ng-select>
+                        </div>
+                    </div>
+                </div>
+                <div class="">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <ng-select class="ng-select inputs2" [items]="locations" bindLabel="location" bindValue="location" placeholder="Select Location" (change)="changeLocation($event)">
+                            </ng-select>
+                        </div>
+                    </div>
+                </div>
                 <div class="col-5">
                     <button onclick="window.print()" class="btn btn-primary">
             Print
@@ -64,7 +79,7 @@
                     </thead>
 
                     <tbody>
-                        <tr *ngFor="let user of user | filterlist: selectedOption:refId | orderBy: key: reverse | paginate:{itemsPerPage:50,currentPage:p}; ">
+                        <tr *ngFor="let user of user | filterlist: selectedOption:refId | tableFilter: city | LocationFilter:location |  orderBy: key: reverse | paginate:{itemsPerPage:50,currentPage:p}; ">
                             <td>
                                 <!-- <span *ngIf="user?.priority == 'Super Hot' else hot"><img class="super-hot" src="\assets\icons\red-flag.png"></span> -->
                                 <span *ngIf="user?.priority == 'Super Hot'"><img class="super-hot" src="\assets\icons\red-flag.png"></span>

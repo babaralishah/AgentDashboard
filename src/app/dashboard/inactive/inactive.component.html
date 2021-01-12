@@ -12,8 +12,7 @@
             </div>
             <!--end of col-->
             <div class="col">
-                <input class="form-control" id="myInput" type="text" [(ngModel)]="general_search"
-                    placeholder="Search topic or keyword">
+                <input class="form-control" id="myInput" type="text" [(ngModel)]="general_search" placeholder="Search topic or keyword">
             </div>
 
             <!-- <button class="btn btn-primary rounded-pill" type="submit">Search</button> -->
@@ -84,7 +83,7 @@
                     <i class="fa fa-search icon"></i>
                 </td>
             </tr>
-            <tr
+            <!-- <tr
                 *ngFor="let user of users | tableFilter06: search_client | tableFilter05: search_demand | tableFilter04: search_type | tableFilter03: search_area | tableFilter02: search_location | tableFilter: search_id | filter: general_search">
                 <td>{{ user.Id }}</td>
                 <td>{{ user.Client }}</td>
@@ -100,7 +99,7 @@
                 <td>{{ user.Added_on}}</td>
                 <td>
                     <button class="btn btn-primary rounded-pill">Delete</button>
-            </tr>
+            </tr> -->
         </tbody>
     </table>
 </div>

@@ -21,6 +21,17 @@ export class AuthenticationService {
 
   constructor(private httpClient: HttpClient, public router: Router) {}
 
+  // Getting cities names from api
+  getCities() {
+    console.log('getcities');
+    
+    return this.httpClient.get<any>(`${this.url}/city`);
+  }
+
+  // Getting Locations names
+  getLocations() {
+    return this.httpClient.get<any>(`${this.url}/location`);
+  }
   // Assign lead to the Agent
   editLeadToAgent(id: any, user: any) {
     return this.httpClient.put(this.url + `/assign/${id}`, user);
@@ -28,7 +39,7 @@ export class AuthenticationService {
   // Assign lead to the Agent
   assignLeadToAgent(user: any) {
     console.log(user);
-    
+
     return this.httpClient.post(`${this.url}/assign/add`, user);
   }
 
@@ -60,7 +71,6 @@ export class AuthenticationService {
     return this.form_title;
   }
   removeFormTitle() {
-    
     this.form_title = null;
   }
   /////////////// Get data from inventory to the inventory table ////////////
@@ -123,16 +133,6 @@ export class AuthenticationService {
     return this.httpClient.delete<any>(
       `https://my-asasa.herokuapp.com/inventory/${id}`
     );
-  }
-
-  // Getting cities names from api
-  getCities() {
-    return this.httpClient.get<any>(`https://asasa.com/api/get_cities`);
-  }
-
-  // Getting Locations names
-  getLocations() {
-    return this.httpClient.get<any>(`https://asasa.com/api/get_locations`);
   }
 
   // API to set user from user/inventory table to update
@@ -257,7 +257,7 @@ export class AuthenticationService {
       val = Number((val / 10000000).toFixed(2)) + " CRORE";
     } else if (val >= 100000) {
       val = Number((val / 100000).toFixed(2)) + " Lac";
-    } else if (val >= 1000) val = Number((val ).toFixed(2)) + " K";
+    } else if (val >= 1000) val = Number(val.toFixed(2)) + " K";
     return val;
   }
 }

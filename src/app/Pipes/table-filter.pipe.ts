@@ -6,14 +6,14 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class TableFilterPipe implements PipeTransform {
     transform(
         user: any,
-        search_id: string
+        cityName: string
     ): typeof user {
 
-        if (!user || !search_id) {
+        if (!user || !cityName) {
             return user;
         }
         return user.filter(user =>
-            user.userId.toLowerCase().indexOf(search_id.toLowerCase()) !== -1);
+            user.cityName.toLowerCase().indexOf(cityName.toLowerCase()) !== -1);
 
     }
 

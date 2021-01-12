@@ -16,6 +16,10 @@ export class InventoryComponent implements OnInit {
   reverse: boolean = true;
   p: number = 1;
   data: any;
+  cities: any;
+  locations: any;
+  city: any;
+  location: any;
 
   constructor(
     private router: Router,
@@ -36,7 +40,7 @@ export class InventoryComponent implements OnInit {
       placeholder: "City",
     },
     {
-      value: "SubLocation",
+      value: "locationName",
       name: "Filter By Location",
       placeholder: "Location",
     },
@@ -62,8 +66,84 @@ export class InventoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.getInventoryList();
+    this.getCities();
   }
 
+  getInventoryList() {
+    this.authService.getInventory().subscribe(
+      (data) => {
+        this.data = data.inventories;
+        console.log("data---->", this.data);
+        this.data.forEach((element) => {
+          element.assignedTo = [];
+          element.added_ByName = element.added_By.fullname;
+          element.cityName = element.city[0]?.city;
+          element.locationName = element.location[0]?.location;
+          if (element.demand_price != null) {
+            element.demand = element.demand_price;
+          } else if (element.max_price) {
+            element.demand = element.max_price;
+          } else if (element.min_price) {
+            element.demand = element.min_price;
+          }
+          // console.log(element.demand);
+
+          for (let i = 0; i < element.assigned_history?.length; i++) {
+            if (element.assigned_history[i]?.fullname === "") continue;
+            element.assignedTo[i] = element.assigned_history[i]?.fullname;
+          }
+        });
+        this.user = this.data;
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
+  // Calling Api to get the Cities
+  getCities() {
+    this.authService.getCities().subscribe(
+      (data) => {
+        console.log(data);
+        this.cities = data;
+      },
+      (err) => {
+        console.error(err);
+      }
+    );
+  }
+  // Calling Api to get the Locations
+  getLocations(selectedCity?) {
+    this.authService.getLocations().subscribe(
+      (locations) => {
+        console.log(locations);
+        this.locations = locations;
+        if (selectedCity) {
+          this.locations = locations.filter((loc) => {
+            return loc.cityId == selectedCity;
+          });
+        }
+      },
+      (err) => {
+        console.error(err);
+      }
+    );
+  }
+
+  //Function to change the city of --ng select city--
+  changeCity(city: any) {
+    this.locations = [];
+    this.location = "";
+    this.city = city?.city;
+    console.log(this.city);
+
+    this.locations = [];
+    if (city) this.getLocations(city._id);
+  }
+  changeLocation(location: any) {
+    this.location = location?.location;
+    console.log(this.location);
+  }
   optionChange(e: any) {
     this.placeholder = e.placeholder;
     this.refId = "";
@@ -77,37 +157,6 @@ export class InventoryComponent implements OnInit {
 
   public priceConverter(value) {
     return this.authService.priceFilter(value);
-  }
-  getInventoryList() {
-    this.authService.getInventory().subscribe(
-      (data) => {
-        this.data = data.inventories;
-        console.log("data---->", this.data);
-        this.data.forEach((element) => {
-          element.assignedTo = [];
-          element.added_ByName = element.added_By.fullname;
-          element.cityName = element.city[0]?.city;
-          element.SubLocation = element.location[0]?.location;
-          if (element.demand_price != null) {
-            element.demand = element.demand_price;
-          } else if (element.max_price) {
-            element.demand = element.max_price;
-          } else if (element.min_price) {
-            element.demand = element.min_price;
-          }
-          console.log(element.demand);
-
-          for (let i = 0; i < element.assigned_history?.length; i++) {
-            if (element.assigned_history[i]?.fullname === "") continue;
-            element.assignedTo[i] = element.assigned_history[i]?.fullname;
-          }
-        });
-        this.user = this.data;
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
   }
   setFormTitle(name: any) {
     this.authService.setFormTitle(name);

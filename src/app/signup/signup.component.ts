@@ -49,11 +49,11 @@ export class SignupComponent implements OnInit {
   }
   updatefields() {
     // console.log(this.user?.city.city);
-    this.registerForm.patchValue({
-      locationName: this.selectStringLocations,
-    });
+    // this.registerForm.patchValue({
+    //   locationName: this.selectStringLocations,
+    // });
 
-    this.registerForm.patchValue({ cityName: this.user?.city.city });
+    // this.registerForm.patchValue({ cityName: this.user?.city.city });
     this.registerForm.patchValue({ fullname: this.user?.fullname });
     this.registerForm.patchValue({ email: this.user?.email });
     this.registerForm.patchValue({ password: this.user?.password });
@@ -81,8 +81,8 @@ export class SignupComponent implements OnInit {
   initialize() {
     if (this.user) {
       this.registerForm = this.formBuilder.group({
-        cityName: [],
-        locationName: [],
+        // cityName: [],
+        // locationName: [],
         fullname: ["", Validators.required],
         email: [
           "",
@@ -108,8 +108,8 @@ export class SignupComponent implements OnInit {
       });
     } else {
       this.registerForm = this.formBuilder.group({
-        cityName: [],
-        locationName: [],
+        // cityName: [],
+        // locationName: [],
         fullname: ["", Validators.required],
         email: [
           "",
@@ -150,6 +150,8 @@ export class SignupComponent implements OnInit {
 
   // Calling Api to get the Cities
   getCities() {
+    console.log('getcities');
+    
     this.authService.getCities().subscribe(
       (data) => {
         console.log(data);
@@ -180,14 +182,14 @@ export class SignupComponent implements OnInit {
 
   //Function to change the city of --ng select city--
   changeCity(city: any) {
-    this.registerForm.patchValue({ cityName: city?.city });
+    // this.registerForm.patchValue({ cityName: city?.city });
     this.selectStringLocations = [];
     this.locations = [];
     if (city) this.getLocations(city._id);
     this.registerForm.patchValue({ city });
     this.locations = "";
     if (this.user) {
-      this.registerForm.patchValue({ cityName: this.user?.city[0].city });
+      // this.registerForm.patchValue({ cityName: this.user?.city[0].city });
       if (this.selectedCity == city?.city) {
         console.log(this.selectStringLocations);
         console.log(this.selectedLocations);
@@ -244,9 +246,9 @@ export class SignupComponent implements OnInit {
           }
         });
     } else {
-      this.registerForm.patchValue({
-        locationName: this.selectStringLocations,
-      });
+      // this.registerForm.patchValue({
+      //   locationName: this.selectStringLocations,
+      // });
       console.log(this.registerForm.value);
       this.authService.register(this.registerForm.value).subscribe(
         (data) => {

@@ -61,7 +61,7 @@
 
                             <tr *ngFor="let location of locations | filterlist: selectedOption:refId | orderBy: key: reverse | paginate:{itemsPerPage:50,currentPage:p};">
                                 <td>{{ location?._id }}</td>
-                                <td>{{getCityName(location?.cityId)}}</td>
+                                <td>{{ location?.cityName }}</td>
                                 <td>
                                     <span>{{ location?.location | titlecase }}</span>
                                 </td>

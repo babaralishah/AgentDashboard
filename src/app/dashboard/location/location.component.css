@@ -1,0 +1,111 @@
+.form-control {
+    display: block;
+    width: 110%;
+    height: calc(1.5em + 0.75rem + 2px);
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.col {
+    flex-basis: 0;
+    flex-grow: 1;
+    max-width: 15%;
+}
+
+.table-container {
+    overflow-x: scroll;
+    box-shadow: 0px 0px 20px 5px rgba(200, 200, 200, 0.69);
+}
+
+.table {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    overflow: hidden;
+}
+
+.table td,
+.table th {}
+
+.table tr:nth-child(even) {
+    background-color: #38baa21f;
+}
+
+.table tr:hover {
+    background-color: #e8e8e8;
+}
+
+.table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #38baa2;
+    font-size: 16px;
+    color: white;
+}
+
+.user-class {
+    margin-left: 47px;
+    margin-top: 120px;
+}
+
+.card-body {
+    padding: 0px;
+}
+
+.fa {
+    margin-left: 10px;
+}
+
+.btn:not(:disabled):not(.disabled):hover {
+    color: #fff;
+    background-color: #1f6e97;
+    border-color: #1f6e97;
+}
+
+.btn {
+    margin-left: 8px;
+    width: 100px;
+    font-size: 14px;
+    background-color: #38baa2;
+    color: white;
+    border: 1px solid transparent;
+}
+
+@media only screen and (max-width: 1650px) {
+    .user-class {
+        margin-left: 50px;
+    }
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1400px) {
+    .user-class {
+        margin-left: 80px;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .user-class {
+        margin-left: 100px;
+    }
+}
+
+@media only screen and (max-width: 1100px) {
+    .user-class {
+        margin-left: 120px;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    .user-class {
+        margin-left: -80px;
+    }
+}

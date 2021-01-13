@@ -60,6 +60,7 @@ import { BothComponent } from "./dashboard/both/both.component";
 import { AssignedLeadsComponent } from "./dashboard/assigned-leads/assigned-leads.component";
 import { PageNotFoundComponent } from "./dashboard/page-not-found/page-not-found.component";
 import { FilterPipe } from "./Pipes/filter.pipe";
+import { LocationComponent } from './dashboard/location/location.component';
 
 // const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 //   suppressScrollX: true,
@@ -108,6 +109,7 @@ registerLocaleData(en);
     AssignedLeadsComponent,
     PageNotFoundComponent,
     FilterPipe,
+    LocationComponent,
   ],
   imports: [
     HttpClientModule,

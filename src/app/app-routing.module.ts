@@ -22,6 +22,7 @@ import { RedirectLoginGuard } from "./services/guards/redirectlogin.guard";
 import { IsLoginGuard } from "./services/guards/islogin.guard";
 import { AssignedLeadsComponent } from "./dashboard/assigned-leads/assigned-leads.component";
 import { PageNotFoundComponent } from "./dashboard/page-not-found/page-not-found.component";
+import { LocationComponent } from "./dashboard/location/location.component";
 
 const routes: Routes = [
   {
@@ -79,6 +80,11 @@ const routes: Routes = [
     path: "agents",
     canActivate: [IsLoginGuard],
     component: UsersComponent,
+  },
+  {
+    path: "location",
+    canActivate: [IsLoginGuard],
+    component: LocationComponent,
   },
   {
     path: "assigned-leads",

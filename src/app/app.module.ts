@@ -1,18 +1,12 @@
 import { Ng2OrderModule } from "ng2-order-pipe";
 import { NgxPaginationModule } from "ngx-pagination";
-// import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { NgSelectModule } from "@ng-select/ng-select";
 import { MatButtonModule } from "@angular/material/button";
-// import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-// import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-// import { ButtonsModule } from 'ngx-bootstrap/buttons';
-// import {MaterialModule} from '@angular/material';
 import { HttpClientModule } from "@angular/common/http";
 import { BrowserModule } from "@angular/platform-browser";
-import { NgModule } from "@angular/core";
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from "@angular/core";
 import { FlexLayoutModule } from "@angular/flex-layout";
-// import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { MapComponent } from "./map/map.component";
@@ -25,11 +19,9 @@ import { ForgetpassverifyComponent } from "./forgetpassverify/forgetpassverify.c
 import { NewpassComponent } from "./newpass/newpass.component";
 import { LoginComponent } from "./login/login.component";
 import { SignupotpComponent } from "./signupotp/signupotp.component";
-// import { NgZorroAntdModule, NZ_I18N } from 'ng-zorro-antd';
-// import { en_US } from 'ng-zorro-antd';
 import { registerLocaleData } from "@angular/common";
 import en from "@angular/common/locales/en";
-import { DashboardComponent } from "./dashboard/dashboard.component";
+// import { DashboardComponent } from "./dashboard/dashboard.component";
 import { ProfileComponent } from "./dashboard/profile/profile.component";
 import { InventoryComponent } from "./dashboard/inventory/inventory.component";
 import { UsersComponent } from "./dashboard/users/users.component";
@@ -51,26 +43,14 @@ import { NavbarComponent } from "./navbar/navbar.component";
 import { HeaderComponent } from "./dashboard/header/header.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { SidebarComponent } from "./sidebar/sidebar.component";
-
-// import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
-// import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
-// import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { NavigationComponent } from "./header-navigation/navigation.component";
 import { BothComponent } from "./dashboard/both/both.component";
 import { AssignedLeadsComponent } from "./dashboard/assigned-leads/assigned-leads.component";
 import { PageNotFoundComponent } from "./dashboard/page-not-found/page-not-found.component";
 import { FilterPipe } from "./Pipes/filter.pipe";
-import { LocationComponent } from './dashboard/location/location.component';
-
-// const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
-//   suppressScrollX: true,
-//   wheelSpeed: 1,
-//   wheelPropagation: true,
-//   minScrollbarLength: 20
-// };
-
-// import { HighlightDirective } from './directives/highlight.directive';
-// import { FilterPipe } from './pipes/filter.pipe';
+import { LocationComponent } from "./dashboard/location/location.component";
+import { DashboardComponent } from "./dashboard/dashboard.component";
+import { AddLocationComponent } from "./dashboard/location/add-location/add-location.component";
 registerLocaleData(en);
 
 @NgModule({
@@ -88,8 +68,6 @@ registerLocaleData(en);
     InventoryComponent,
     UsersComponent,
     LeadsComponent,
-    // FilterPipe,
-    // HighlightDirective
     TableFilterPipe,
     TableFilter02Pipe,
     TableFilter03Pipe,
@@ -110,10 +88,10 @@ registerLocaleData(en);
     PageNotFoundComponent,
     FilterPipe,
     LocationComponent,
+    AddLocationComponent
   ],
   imports: [
     HttpClientModule,
-    // MDBBootstrapModule.forRoot(),
     BrowserModule,
     AppRoutingModule,
     FlexLayoutModule,
@@ -124,7 +102,6 @@ registerLocaleData(en);
     MatButtonModule,
     FormsModule,
     NgbModule,
-    // PerfectScrollbarModule,
     Ng2SearchPipeModule,
     NgSelectModule,
     NgbModule,
@@ -133,10 +110,6 @@ registerLocaleData(en);
     // MaterialModule
   ],
   providers: [
-    // {
-    //   provide: PERFECT_SCROLLBAR_CONFIG,
-    //   useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
-    // }
   ],
   bootstrap: [AppComponent],
 })

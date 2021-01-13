@@ -23,6 +23,7 @@ import { IsLoginGuard } from "./services/guards/islogin.guard";
 import { AssignedLeadsComponent } from "./dashboard/assigned-leads/assigned-leads.component";
 import { PageNotFoundComponent } from "./dashboard/page-not-found/page-not-found.component";
 import { LocationComponent } from "./dashboard/location/location.component";
+import { AddLocationComponent } from "./dashboard/location/add-location/add-location.component";
 
 const routes: Routes = [
   {
@@ -85,6 +86,11 @@ const routes: Routes = [
     path: "location",
     canActivate: [IsLoginGuard],
     component: LocationComponent,
+  },
+  {
+    path: "add-location",
+    canActivate: [IsLoginGuard],
+    component: AddLocationComponent,
   },
   {
     path: "assigned-leads",

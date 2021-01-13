@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from "@angular/core";
 import { AuthenticationService } from "../services/Authentication/authentication.service";
 import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
@@ -7,6 +7,7 @@ import { ToastrService } from "ngx-toastr";
   selector: "app-dashboard",
   templateUrl: "./dashboard.component.html",
   styleUrls: ["./dashboard.component.css"],
+ 
 })
 export class DashboardComponent implements OnInit {
   tokendata: any;

@@ -16,8 +16,8 @@ export class LocationComponent implements OnInit {
   key: any;
   reverse: boolean = true;
   p: number = 1;
-  placeholder: any;
-  refId: string;
+  // placeholder: any;
+  // refId: string;
   locations: any;
   city: any;
   constructor(
@@ -27,8 +27,8 @@ export class LocationComponent implements OnInit {
   ) {}
   options = [
     {
-      value: "location",
-      name: "Filter Location",
+      value: "locationName",
+      name: "Filter By Location",
       placeholder: "Location",
     },
     {
@@ -38,21 +38,20 @@ export class LocationComponent implements OnInit {
     },
     {
       value: "SubLocation",
-      name: "Filter By Location",
+      name: "Filter By Sub-Location",
       placeholder: "Location",
     },
   ];
+  selectedOption = this.options[0].value;
+  placeholder = this.options[0].placeholder;
+  refId: any;
   ngOnInit(): void {
     this.getCities();
-    this.getLocations();
   }
   optionChange(e: any) {
     this.placeholder = e.placeholder;
     this.refId = "";
     console.log(this.selectedOption);
-  }
-  selectedOption(selectedOption: any) {
-    throw new Error("Method not implemented.");
   }
   setUser(user: any) {
     this.authService.setUser(user);
@@ -65,6 +64,7 @@ export class LocationComponent implements OnInit {
       (city) => {
         console.log(city);
         this.city = city;
+        this.getLocations();
       },
       (err) => {
         console.error(err);
@@ -76,7 +76,19 @@ export class LocationComponent implements OnInit {
     this.authService.getLocations().subscribe(
       (locations) => {
         console.log(locations);
+        locations.forEach((element, index) => {
+          const cityName = this.getCityName(element.cityId);
+          element.cityName = cityName;
+          element.locationName = locations[index].location;
+          element.SubLocation = [];
+          if(element.subLocations) {
+            for (let i = 0; i < element.subLocations.length; i++) {
+              element.SubLocation.push(element.subLocations[i]?.subLocation);
+            }  
+          } 
+        });
         this.locations = locations;
+        console.log(this.locations);
       },
       (err) => {
         console.error(err);

@@ -70,7 +70,12 @@ export class UsersComponent implements OnInit {
         this.data.forEach((element) => {
           element.cityName = element.city.city;
           element.SubLocation = element.location[0].location;
-        });
+
+          element.SubLocation = [];
+          for (let i = 0; i < element.location.length; i++) {
+            element.SubLocation.push(element.location[i]?.location);
+          }
+       });
 
         console.log("User Get Response", this.data);
       },

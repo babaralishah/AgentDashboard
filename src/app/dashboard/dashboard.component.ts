@@ -1,7 +1,8 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from "@angular/core";
+import { Component, CUSTOM_ELEMENTS_SCHEMA, EventEmitter, Input, OnInit, Output, ViewChild } from "@angular/core";
 import { AuthenticationService } from "../services/Authentication/authentication.service";
 import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
+declare let $: any;
 
 @Component({
   selector: "app-dashboard",
@@ -11,6 +12,10 @@ import { ToastrService } from "ngx-toastr";
 })
 export class DashboardComponent implements OnInit {
   tokendata: any;
+  mini: boolean = true;
+
+  @ViewChild('sidebar') sidebar: any;
+  @Output() widthEmittedEvent = new EventEmitter<any>();
 
   constructor(
     public authService: AuthenticationService,
@@ -20,6 +25,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.tokenization();
+
   }
   async tokenization() {
     const token = await this.authService.getToken();
@@ -39,5 +45,17 @@ export class DashboardComponent implements OnInit {
     });
     console.log("\nlogout\n");
     this.router.navigateByUrl("/");
+  }
+  
+  toggleSidebar() {
+    if (this.mini) {
+      this.mini = false;
+      this.sidebar.nativeElement.style.width = '280px'
+      this.widthEmittedEvent.emit(280);
+    } else {
+      this.mini = true;
+      this.sidebar.nativeElement.style.width = '100px'
+      this.widthEmittedEvent.emit(100);
+    }
   }
 }

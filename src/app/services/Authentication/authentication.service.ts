@@ -25,41 +25,61 @@ export class AuthenticationService {
   getCities() {
     console.log('getcities');
     
-    return this.httpClient.get<any>(`${this.url}/city`);
+    return this.httpClient.get<any>(`${this.url}/city`, {
+      headers: new HttpHeaders().set("Authorization", this.getToken()),
+    });
   }
 
   // Getting Locations names
   getLocations() {
-    return this.httpClient.get<any>(`${this.url}/location`);
+    return this.httpClient.get<any>(`${this.url}/location`, {
+      headers: new HttpHeaders().set("Authorization", this.getToken()),
+    });
+  }
+  // Add new Location
+  addLocations(user: any) {
+    return this.httpClient.post<any>(`${this.url}/location/add`, user, {
+      headers: new HttpHeaders().set("Authorization", this.getToken()),
+    });
   }
   // Assign lead to the Agent
   editLeadToAgent(id: any, user: any) {
-    return this.httpClient.put(this.url + `/assign/${id}`, user);
+    return this.httpClient.put(this.url + `/assign/${id}`, user, {
+      headers: new HttpHeaders().set("Authorization", this.getToken()),
+    });
   }
   // Assign lead to the Agent
   assignLeadToAgent(user: any) {
     console.log(user);
 
-    return this.httpClient.post(`${this.url}/assign/add`, user);
+    return this.httpClient.post(`${this.url}/assign/add`, user, {
+      headers: new HttpHeaders().set("Authorization", this.getToken()),
+    });
   }
 
   // API to delete the assigned leads
   deleteAssignedLeads(id: any) {
     return this.httpClient.delete<any>(
-      `https://my-asasa.herokuapp.com/assign/${id}`
+      `https://my-asasa.herokuapp.com/assign/${id}`, {
+        headers: new HttpHeaders().set("Authorization", this.getToken()),
+      }
     );
   }
 
   // API to get all assigned leads data
   getAllAssignedLeads() {
-    return this.httpClient.get<any>(`${this.url}/assign`);
+    return this.httpClient.get<any>(`${this.url}/assign`, {
+      headers: new HttpHeaders().set("Authorization", this.getToken()),
+    });
   }
 
   //////////// Send data to inventory using inventory form /////////////
   createInventory(user: any) {
     console.log("Create user func");
     return this.httpClient
-      .post(`${this.url}/inventory/add`, user)
+      .post(`${this.url}/inventory/add`, user, {
+        headers: new HttpHeaders().set("Authorization", this.getToken()),
+      })
       .pipe(catchError(this.handleError));
   }
   // Set inventory form title
@@ -75,26 +95,36 @@ export class AuthenticationService {
   }
   /////////////// Get data from inventory to the inventory table ////////////
   getInventory() {
-    return this.httpClient.get<any>(`${this.url}/inventory`);
+    return this.httpClient.get<any>(`${this.url}/inventory`, {
+      headers: new HttpHeaders().set("Authorization", this.getToken()),
+    });
   }
   ///////// Getting user table data //////////////
   getUsers() {
-    return this.httpClient.get<any>(`${this.url}/users`);
+    return this.httpClient.get<any>(`${this.url}/users`, {
+      headers: new HttpHeaders().set("Authorization", this.getToken()),
+    });
   }
 
   getLeads() {
-    return this.httpClient.get<any>(`${this.url}/leads`);
+    return this.httpClient.get<any>(`${this.url}/leads`, {
+      headers: new HttpHeaders().set("Authorization", this.getToken()),
+    });
   }
 
   // API to get all data from Leads, Inventory i.e; both
   getAll() {
-    return this.httpClient.get<any>(`${this.url}/inventory/all`);
+    return this.httpClient.get<any>(`${this.url}/inventory/all`, {
+      headers: new HttpHeaders().set("Authorization", this.getToken()),
+    });
   }
   // API to call delete api for the user data table
   deleteUser(id) {
     console.log("Calling deleteUser", id);
     return this.httpClient.delete<any>(
-      `https://my-asasa.herokuapp.com/users/${id}`
+      `https://my-asasa.herokuapp.com/users/${id}`, {
+        headers: new HttpHeaders().set("Authorization", this.getToken()),
+      }
     );
   }
   ////////////// Send new row table data /////////////
@@ -131,7 +161,9 @@ export class AuthenticationService {
   deleteInventory(id) {
     console.log("Calling deleteInventory", id);
     return this.httpClient.delete<any>(
-      `https://my-asasa.herokuapp.com/inventory/${id}`
+      `https://my-asasa.herokuapp.com/inventory/${id}`, {
+        headers: new HttpHeaders().set("Authorization", this.getToken()),
+      }
     );
   }
 
@@ -151,7 +183,9 @@ export class AuthenticationService {
   updateUser(id, data) {
     return this.httpClient.put(
       `https://my-asasa.herokuapp.com/users/${id}`,
-      data
+      data, {
+        headers: new HttpHeaders().set("Authorization", this.getToken()),
+      }
     );
   }
   // Update a single Inventory
@@ -159,7 +193,9 @@ export class AuthenticationService {
     console.log("Calling updateInventory", id);
     return this.httpClient.put(
       `https://my-asasa.herokuapp.com/inventory/${id}`,
-      data
+      data, {
+        headers: new HttpHeaders().set("Authorization", this.getToken()),
+      }
     );
   }
   ///////// API to Register the new user /////////////

@@ -1,9 +1,10 @@
 import * as XLSX from "xlsx";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
 import { AuthenticationService } from "src/app/services/Authentication/authentication.service";
 import { ToastrService } from "ngx-toastr";
 import { JSON2SheetOpts } from "xlsx/types";
+import { formatDate } from "@angular/common";
 
 @Component({
   selector: "app-users",
@@ -17,6 +18,10 @@ export class UsersComponent implements OnInit {
   key: any;
   reverse: boolean = true;
   p: number = 1;
+  startDate: String;
+  endDate: String;
+
+  @ViewChild('content') content: any;
 
   constructor(
     // private formBuilder: FormBuilder,
@@ -49,6 +54,15 @@ export class UsersComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserList();
+  }
+
+  changeStartDate(e: any) {
+    this.startDate = formatDate(new Date(e.target.value),'yyyy-MM-dd','en_US');
+    // console.log('Start', this.startDate);
+  }
+  changeEndDate(e: any) {
+    this.endDate= formatDate(new Date(e.target.value),'yyyy-MM-dd','en_US');
+    // console.log('End', this.endDate);
   }
 
   optionChange(e: any) {
@@ -194,5 +208,9 @@ export class UsersComponent implements OnInit {
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "All Data Export");
     XLSX.writeFile(wb, "Users.xlsx");
+  }
+
+  contentWidthEmitted(value) {
+    this.content.nativeElement.style.marginLeft = `${value}px`;
   }
 }

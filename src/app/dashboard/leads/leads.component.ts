@@ -1,11 +1,12 @@
 import * as XLSX from "xlsx";
 import { JSON2SheetOpts } from "xlsx";
 
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { AuthenticationService } from "src/app/services/Authentication/authentication.service";
 import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { FormGroup } from "@angular/forms";
+import { formatDate } from "@angular/common";
 
 @Component({
   selector: "app-leads",
@@ -13,6 +14,8 @@ import { FormGroup } from "@angular/forms";
   styleUrls: ["./leads.component.css"],
 })
 export class LeadsComponent implements OnInit {
+  @ViewChild('content') content: any;
+  
   user: any;
   currentUser: any;
   withAutofocus = `<button type="button" ngbAutofocus class="btn btn-danger"
@@ -34,6 +37,8 @@ export class LeadsComponent implements OnInit {
   locations: any;
   city: any;
   location: any;
+  startDate: String;
+  endDate: String;
 
   constructor(
     private authService: AuthenticationService,
@@ -81,6 +86,15 @@ export class LeadsComponent implements OnInit {
     this.getCityAdminList();
     this.tokenization();
     this.getCities();
+  }
+
+  changeStartDate(e: any) {
+    this.startDate = formatDate(new Date(e.target.value),'yyyy-MM-dd','en_US');
+    // console.log('Start', this.startDate);
+  }
+  changeEndDate(e: any) {
+    this.endDate= formatDate(new Date(e.target.value),'yyyy-MM-dd','en_US');
+    // console.log('End', this.endDate);
   }
 
   async tokenization() {
@@ -400,5 +414,9 @@ export class LeadsComponent implements OnInit {
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "All Data Export");
     XLSX.writeFile(wb, "Leads.xlsx");
+  }
+
+  contentWidthEmitted(value) {
+    this.content.nativeElement.style.marginLeft = `${value}px`;
   }
 }

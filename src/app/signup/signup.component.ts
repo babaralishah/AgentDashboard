@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { AuthenticationService } from "../services/Authentication/authentication.service";
 import { Router } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
@@ -10,6 +10,10 @@ import { ToastrService } from "ngx-toastr";
   styleUrls: ["./signup.component.css"],
 })
 export class SignupComponent implements OnInit {
+
+  @ViewChild('content') content;
+  sideMenuCollapsed = false;
+
   submitted = false;
   registerForm: FormGroup;
   cities: any;
@@ -275,5 +279,9 @@ export class SignupComponent implements OnInit {
   // convenience getter for easy access to form fields
   get f() {
     return this.registerForm.controls;
+  }
+
+  contentWidthEmitted(value) {
+    this.content.nativeElement.style.marginLeft = `${value}px`;
   }
 }

@@ -1,187 +1,188 @@
-<!-- <div class=""> -->
-<div class="row">
-    <div class="col-12">
-        <app-header></app-header>
-    </div>
-</div>
-<div class="row">
-    <div class="col-2">
-        <!-- <app-header></app-header> -->
-        <app-dashboard></app-dashboard>
-    </div>
+<app-header></app-header>
+<div id="wrapper">
+    <app-dashboard (widthEmittedEvent)="contentWidthEmitted($event)"></app-dashboard>
+    <div id="content-wrapper" class="d-flex flex-column" #content>
+        <div id="content">
 
-    <div class="col-9">
-        <div class="inventory">
-            <!-- <br /> -->
-            <h1><b>Inventory Management</b></h1>
-            <br />
-            <div class="">
-                <button class="btn btn-primary" (click)="setFormTitle('Inventory')">
-          Add New
-        </button>
-            </div>
-            <br>
-            <!-- <div class=""> -->
-            <div class="row">
-                <div class="col-3">
-                    <ng-select [items]="options" bindLabel="name" bindValue="value" class="mr-2 ml-2" placeholder="Filter By" [(ngModel)]="selectedOption" (change)="optionChange($event)" [clearable]="false">
-                    </ng-select>
-                </div>
-                <div class="col-3">
-                    <input type="text" class="form-control ml-2" placeholder="Search {{ placeholder }}" [(ngModel)]="refId" />
-                </div>
+            <div class="container-fluid">
+                <h1 class="h3 mb-2 text-gray-800">Inventory Management</h1>
 
-                <div class="">
-                    <div class="form-group">
-                        <div class="input-group">
-                            <ng-select class="ng-select inputs2" [items]="cities" bindLabel="city" bindValue="city" placeholder="Select City" (change)="changeCity($event)">
-                            </ng-select>
-                        </div>
-                    </div>
-                </div>
-                <div class="">
-                    <div class="form-group">
-                        <div class="input-group">
-                            <ng-select class="ng-select inputs2" [items]="locations" bindLabel="location" bindValue="location" placeholder="Select Location" (change)="changeLocation($event)">
-                            </ng-select>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-5">
-                    <button onclick="window.print()" class="btn btn-primary">
-            Print
-          </button> &nbsp; &nbsp; &nbsp;<button (click)="exportTOExcel()" class="btn btn-primary">
-            Excel
-          </button>
-                </div>
-            </div>
-            <!-- </div> -->
-            <!-- <br /><br /><br /> -->
-            <!-- Inventory management table is below -->
-            <div class="table-container mb-5 mt-4">
-                <table class="table table-hover">
-                    <thead>
-                        <th> </th>
-                        <th (click)="sort('id')" scope="col">ID <i class="fa fa-sort"></i></th>
-                        <th>Added By</th>
-                        <th scope="col">Purpose</th>
-                        <th scope="col">Client Details</th>
-                        <th scope="col">Location</th>
-                        <th scope="col">Property Type</th>
-                        <th scope="col">Land Area</th>
-
-                        <th scope="col">Demand</th>
-                        <th scope="col">Beds</th>
-                        <th scope="col">Assigned To</th>
-                        <th scope="col">Added On</th>
-                        <!-- <th scope="col">Agent Assigned</th> -->
-                        <th scope="col">Operations</th>
-                    </thead>
-
-                    <tbody>
-                        <tr *ngFor="let user of user | filterlist: selectedOption:refId | tableFilter: city | LocationFilter:location |  orderBy: key: reverse | paginate:{itemsPerPage:50,currentPage:p}; ">
-                            <td>
-                                <!-- <span *ngIf="user?.priority == 'Super Hot' else hot"><img class="super-hot" src="\assets\icons\red-flag.png"></span> -->
-                                <span *ngIf="user?.priority == 'Super Hot'"><img class="super-hot" src="\assets\icons\red-flag.png"></span>
-                                <span *ngIf="user?.priority == 'Hot'"><img class="super-hot" src="\assets\icons\flag_yellow.png"></span>
-                                <span *ngIf="user?.priority == 'Normal'"><img class="normal" src="\assets\icons\flag-green2.png"></span>
-                                <!-- <ng-template #hot>
-                                    <img class="super-hot" src="\assets\icons\flag_yellow.png">
-                                </ng-template> -->
-                            </td>
-
-                            <!-- | tableFilter05: search_demand | tableFilter04: search_type | tableFilter03: search_area | tableFilter02: search_location | tableFilter: search_id | filter: general_search"> -->
-                            <td>{{ user?.refId }}</td>
-                            <td>{{user?.added_By?.fullname}}</td>
-                            <td>{{ user?.property_purpose }}</td>
-                            <td>
-                                <b>Name : </b>{{ user?.client_name |titlecase }} <br />
-                                <b>Phone : </b>{{ user?.client_number }}<br />
-                                <b>Type : </b>{{ user?.client_type | titlecase }}
-                            </td>
-                            <td>
-                                {{ user.city[0]?.city }}<span></span><br /><span class="badge badge-light" *ngFor="let loc of user?.location">{{ loc.location }},
-                </span>
-                            </td>
-
-                            <td>{{ user.property_type }}</td>
-
-
-                            <td *ngIf="user?.area != null; else elseBlockArea">
-                                <span>{{ user?.area + " - " + user?.area_unit }}</span>
-                            </td>
-                            <ng-template #elseBlockArea>
-                                <td>
-                                    <span *ngIf="
-                user?.max_area == null || user?.min_area == null;
-                else elseBlockArea2
-                ">
-                <span>None</span>
-                                    </span>
-                                    <ng-template #elseBlockArea2>
-                                        <span><b>Max:</b> {{ user?.max_area + " - " + user?.area_unit
-                }}<br /><b>Min:</b>
-                {{ user?.min_area + " - " + user?.area_unit }}</span
-                >
-                </ng-template>
-                </td>
-                </ng-template>
-
-                            <td *ngIf="user?.demand_price == null else elseBlockDemand"><b>Max:</b> {{ user?.max_price | currency  :'Rs '  : 'symbol' : '1.0-0'}}<br><b>Min:</b> {{ user?.min_price | currency  :'Rs '  : 'symbol' : '1.0-0' }}</td>
-                            <ng-template #elseBlockDemand>
-                                <td>{{ user?.demand_price | currency  :'Rs '  : 'symbol' : '1.0-0'}}</td>
-                            </ng-template>
-                            <td>{{ user?.beds_number }}</td>
-                            <td>
-
-                                <span *ngIf="user?.assignedTo?.length === 0">Self</span>
-
-                                        <span *ngIf="user?.assignedTo?.length > 0">
-                                    <span *ngFor="let assign of user?.assignedTo">{{ assign }}<br></span>
-                                        </span>
-                                </td>
-                                <td>{{ user?.created | date }}</td>
-                                <td>
-                                    <i class="fa fa-edit icon" (click)="setUserToEdit(user)"></i
-                ><a (click)="setUserToEdit(user)" role="button"></a>
-                
-                <i
-                class="fa fa-trash icon"
-                (click)="confirmID(user?._id)"
-                data-toggle="modal"
-                data-target="#exampleModal1"
-                ></i>
-                                </td>
-                                <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">
-                                                    Delete Confirmation
-                                                </h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                Are you sure you want to delete it?
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                Close
-                </button>
-                                                <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteInventory()">
-                Delete
-                </button>
-                                            </div>
-                                        </div>
+                <div class="row">
+                    <div class="col-12 mb-4 mt-4">
+                        <div class="mb-3">
+                            <button class="btn btn-primary" (click)="setFormTitle('Inventory')">
+                                Add New
+                            </button>
+                        </div>                        
+                        <div class="row">
+                            <div class="col-3">
+                                <ng-select [items]="options" bindLabel="name" bindValue="value" class="mr-2 ml-2"
+                                    placeholder="Filter By" [(ngModel)]="selectedOption" (change)="optionChange($event)"
+                                    [clearable]="false">
+                                </ng-select>
+                            </div>
+                            <div class="col-3">
+                                <input type="text" class="form-control ml-2" placeholder="Search {{ placeholder }}"
+                                    [(ngModel)]="refId" />
+                            </div>
+            
+                            <div class="">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <ng-select class="ng-select inputs2" [items]="cities" bindLabel="city" bindValue="city"
+                                            placeholder="Select City" (change)="changeCity($event)">
+                                        </ng-select>
                                     </div>
                                 </div>
-                        </tr>
-                    </tbody>
-                </table>
+                            </div>
+                            <div class="">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <ng-select class="ng-select inputs2" [items]="locations" bindLabel="location"
+                                            bindValue="location" placeholder="Select Location" (change)="changeLocation($event)">
+                                        </ng-select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ml-5">
+                                <input type="date" class="form-control" placeholder="Start Date" (change)="changeStartDate($event)">
+                            </div>
+                            <div class="ml-5">
+                                <input type="date" class="form-control" placeholder="End Date" (change)="changeEndDate($event)">
+                            </div>
+                            <div class="col-5">
+                                <button onclick="window.print()" class="btn btn-primary">
+                                    Print
+                                </button> &nbsp; &nbsp; &nbsp;<button (click)="exportTOExcel()" class="btn btn-primary">
+                                    Excel
+                                </button>
+                            </div>
+                        </div>
+                        <div class="table-container mb-5 mt-4">
+                            <table class="table table-hover">
+                                <thead>
+                                    <th> </th>
+                                    <th (click)="sort('id')" scope="col">ID <i class="fa fa-sort"></i></th>
+                                    <th>Added By</th>
+                                    <th scope="col">Purpose</th>
+                                    <th scope="col">Client Details</th>
+                                    <th scope="col">Location</th>
+                                    <th scope="col">Property Type</th>
+                                    <th scope="col">Land Area</th>
+            
+                                    <th scope="col">Demand</th>
+                                    <th scope="col">Beds</th>
+                                    <th scope="col">Assigned To</th>
+                                    <th scope="col">Added On</th>
+                                    <th scope="col">Operations</th>
+                                </thead>
+            
+                                <tbody>
+                                    <tr
+                                        *ngFor="let user of user | filterlist: selectedOption:refId | dateFilter: startDate:endDate | tableFilter: city | LocationFilter:location |  orderBy: key: reverse | paginate:{itemsPerPage:50,currentPage:p}; ">
+                                        <td>
+                                            <span *ngIf="user?.priority == 'Super Hot'"><img class="super-hot"
+                                                    src="\assets\icons\red-flag.png"></span>
+                                            <span *ngIf="user?.priority == 'Hot'"><img class="super-hot"
+                                                    src="\assets\icons\flag_yellow.png"></span>
+                                            <span *ngIf="user?.priority == 'Normal'"><img class="normal"
+                                                    src="\assets\icons\flag-green2.png"></span>
+                                        </td>
+            
+                                        <td>{{ user?.refId }}</td>
+                                        <td>{{user?.added_By?.fullname}}</td>
+                                        <td>{{ user?.property_purpose }}</td>
+                                        <td>
+                                            <b>Name : </b>{{ user?.client_name |titlecase }} <br />
+                                            <b>Phone : </b>{{ user?.client_number }}<br />
+                                            <b>Type : </b>{{ user?.client_type | titlecase }}
+                                        </td>
+                                        <td>
+                                            {{ user.city[0]?.city }}<span></span><br /><span class="badge badge-light"
+                                                *ngFor="let loc of user?.location">{{ loc.location }},
+                                            </span>
+                                        </td>
+            
+                                        <td>{{ user.property_type }}</td>
+            
+            
+                                        <td *ngIf="user?.area != null; else elseBlockArea">
+                                            <span>{{ user?.area + " - " + user?.area_unit }}</span>
+                                        </td>
+                                        <ng-template #elseBlockArea>
+                                            <td>
+                                                <span *ngIf="
+                            user?.max_area == null || user?.min_area == null;
+                            else elseBlockArea2
+                            ">
+                                                    <span>None</span>
+                                                </span>
+                                                <ng-template #elseBlockArea2>
+                                                    <span><b>Max:</b> {{ user?.max_area + " - " + user?.area_unit
+                                                        }}<br /><b>Min:</b>
+                                                        {{ user?.min_area + " - " + user?.area_unit }}</span>
+                                                </ng-template>
+                                            </td>
+                                        </ng-template>
+            
+                                        <td *ngIf="user?.demand_price == null else elseBlockDemand"><b>Max:</b> {{ user?.max_price |
+                                            currency :'Rs ' : 'symbol' : '1.0-0'}}<br><b>Min:</b> {{ user?.min_price | currency :'Rs
+                                            ' : 'symbol' : '1.0-0' }}</td>
+                                        <ng-template #elseBlockDemand>
+                                            <td>{{ user?.demand_price | currency :'Rs ' : 'symbol' : '1.0-0'}}</td>
+                                        </ng-template>
+                                        <td>{{ user?.beds_number }}</td>
+                                        <td>
+            
+                                            <span *ngIf="user?.assignedTo?.length === 0">Self</span>
+            
+                                            <span *ngIf="user?.assignedTo?.length > 0">
+                                                <span *ngFor="let assign of user?.assignedTo">{{ assign }}<br></span>
+                                            </span>
+                                        </td>
+                                        <td>{{ user?.created | date }}</td>
+                                        <td>
+                                            <i class="fa fa-edit icon" (click)="setUserToEdit(user)"></i><a
+                                                (click)="setUserToEdit(user)" role="button"></a>
+            
+                                            <i class="fa fa-trash icon" (click)="confirmID(user?._id)" data-toggle="modal"
+                                                data-target="#exampleModal1"></i>
+                                        </td>
+                                        <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
+                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">
+                                                            Delete Confirmation
+                                                        </h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        Are you sure you want to delete it?
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                                            Close
+                                                        </button>
+                                                        <button type="button" class="btn btn-danger" data-dismiss="modal"
+                                                            (click)="deleteInventory()">
+                                                            Delete
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                    </div>
+                </div>
             </div>
-            <pagination-controls (pageChange)="p = $event"></pagination-controls>
         </div>
     </div>
 </div>

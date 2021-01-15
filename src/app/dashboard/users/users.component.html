@@ -1,140 +1,123 @@
-<div class="">
-    <div class="row">
-        <div class="col-12">
-            <app-header></app-header>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-2">
-            <!-- <app-header></app-header> -->
-            <app-dashboard></app-dashboard>
-        </div>
-        <div class="col-9">
-            <div class="user-class">
-                <!-- <br> -->
-                <h1><b>Users</b></h1>
-                <br>
+<app-header></app-header>
+<div id="wrapper">
+    <app-dashboard (widthEmittedEvent)="contentWidthEmitted($event)"></app-dashboard>
+    <div id="content-wrapper" class="d-flex flex-column" #content>
+        <div id="content">
 
-                <div class="">
-                    <button class="btn btn-primary" routerLink="/register">Add New</button>
-                </div>
-                <br>
-                <div class="">
-                    <div class="card-body row">
-                        <div class="col-3">
-                            <ng-select [items]="options" bindLabel="name" bindValue="value" class="mr-2 ml-2" placeholder="Filter By" [(ngModel)]="selectedOption" (change)="optionChange($event)" [clearable]="false">
-                            </ng-select>
+            <div class="container-fluid">
+                <h1 class="h3 mb-2 text-gray-800">Users</h1>
+
+                <div class="row">
+                    <div class="col-12 mb-4 mt-4">
+                        <div class="mb-3">
+                            <button class="btn btn-primary" routerLink="/register">Add New</button>
                         </div>
-                        <div class="col-3">
-                            <input type="text" class="form-control ml-2" placeholder="Search {{ placeholder }}" [(ngModel)]="refId" />
-                            <!-- <input class="form-control" id="myInput" type="text" [(ngModel)]="general_search" placeholder="Search topic or keyword" /> -->
+                        <div class="">
+                            <div class="card-body row">
+                                <div class="col-3">
+                                    <ng-select [items]="options" bindLabel="name" bindValue="value" class="mr-2 ml-2"
+                                        placeholder="Filter By" [(ngModel)]="selectedOption"
+                                        (change)="optionChange($event)" [clearable]="false">
+                                    </ng-select>
+                                </div>
+                                <div class="col-3">
+                                    <input type="text" class="form-control ml-2" placeholder="Search {{ placeholder }}"
+                                        [(ngModel)]="refId" />
+                                </div>
+                                <div class="ml-5">
+                                    <input type="date" class="form-control" placeholder="Start Date" (change)="changeStartDate($event)">
+                                </div>
+                                <div class="ml-5">
+                                    <input type="date" class="form-control" placeholder="End Date" (change)="changeEndDate($event)">
+                                </div>
+
+                                <div class="col-1">
+                                </div>
+                                <div class="col-5">
+                                    <button onclick="window.print()" class="btn btn-primary">Print</button>&nbsp; &nbsp;
+                                    &nbsp;
+                                    <button (click)="exportTOExcel()" class="btn btn-primary">Excel</button>
+                                </div>
+                            </div>
                         </div>
+                        <div class="table-container mb-5 mt-4">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th (click)="sort('id')" scope="col">User ID <i class="fa fa-sort"></i></th>
+                                        <th scope="col">Full Name</th>
+                                        <th scope="col">Contact #</th>
+                                        <th scope="col">Location Assigned</th>
+                                        <th scope="col">Email Address</th>
+                                        <th scope="col">Access</th>
+                                        <th scope="col">Created At</th>
+                                        <th scope="col">Operations</th>
 
-                        <div class="col-1">
-                        </div>
-                        <div class="col-5">
-                            <button onclick="window.print()" class="btn btn-primary">Print</button>&nbsp; &nbsp; &nbsp;
-                            <button (click)="exportTOExcel()" class="btn btn-primary">Excel</button>
-                        </div>
-                    </div>
-                </div>
-                <!-- <br><br><br> -->
-                <!-- Inventory management table is below -->
-                <div class="table-container mb-5 mt-4">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th (click)="sort('id')" scope="col">User ID <i class="fa fa-sort"></i></th>
-                                <th scope="col">Full Name</th>
-                                <th scope="col">Contact #</th>
-                                <th scope="col">Location Assigned</th>
-                                <th scope="col">Email Address</th>
-                                <th scope="col">Access</th>
-                                <th scope="col">Created At</th>
-                                <th scope="col">Operations</th>
+                                    </tr>
+                                </thead>
 
-                            </tr>
-                        </thead>
+                                <tbody>
 
-                        <tbody>
-                            <!-- <td>
-                    <input class="form-control" type="text" [(ngModel)]="data.userId" placeholder="Search">
-                </td>
-                <td>
-                    <input class="form-control" type="text" [(ngModel)]="data.fullname" placeholder="Search">
-                </td>
-                <td>
-                    <input class="form-control" type="text" [(ngModel)]="data.contact" placeholder="Search">
-                </td>
-                <td>
-                    <input class="form-control" type="text" [(ngModel)]="data.location" placeholder="Search">
-                </td>
-                <td>
-                    <input class="form-control" type="text" placeholder="">
-                </td>
-                <td>
-                    <input class="form-control" type="text" placeholder="">
-                </td>
-                <td>
-                    <input class="form-control" type="text" placeholder="">
-                </td>
-                <td>
-                    <i class="fa fa-search icon"></i>
-                </td> -->
+                                    <tr
+                                        *ngFor="let user of data | filterlist: selectedOption:refId | dateFilter: startDate:endDate | orderBy: key: reverse | paginate:{itemsPerPage:10,currentPage:p};">
+                                        <td>{{ user?.userId }}</td>
+                                        <td>
+                                            <span *ngIf="user?.fullname">{{ user?.fullname | titlecase }}</span>
+                                            <span *ngIf="!user?.fullname">{{ user?.name | titlecase }}</span>
+                                        </td>
+                                        <td>{{ user?.contact }}</td>
 
-                            <tr *ngFor="let user of data | filterlist: selectedOption:refId | orderBy: key: reverse | paginate:{itemsPerPage:10,currentPage:p};">
-                                <!-- | tableFilter06: data.fullname | tableFilter04: data.contact | tableFilter02: data.location | tableFilter: data.userId | filter: general_search"> -->
-                                <td>{{ user?.userId }}</td>
-                                <td>
-                                    <span *ngIf="user?.fullname">{{ user?.fullname | titlecase }}</span>
-                                    <span *ngIf="!user?.fullname">{{ user?.name | titlecase }}</span>
-                                </td>
-                                <td>{{ user?.contact }}</td>
-                                <!-- <td>{{ user.location}}</td> -->
+                                        <td>
+                                            {{user?.city?.city}}<span>&nbsp;&nbsp;</span><br><span
+                                                class="badge badge-light" *ngFor="let loc of user.location">{{
+                                                loc.location }}, </span>
+                                        </td>
+                                        <td>{{ user?.email }}</td>
+                                        <td>{{user?.access | titlecase}}</td>
+                                        <td>{{user?.created | date: "dd/MM/yyyy"}}</td>
 
-                                <td>
-                                    {{user?.city?.city}}<span>&nbsp;&nbsp;</span><br><span class="badge badge-light" *ngFor="let loc of user.location">{{ loc.location }},  </span>
-                                </td>
-                                <td>{{ user?.email }}</td>
-                                <td>{{user?.access | titlecase}}</td>
-                                <td>{{user?.created | date: "dd/MM/yyyy"}}</td>
+                                        <td><i class="fa fa-edit icon" (click)="setUser(user)"></i>
+                                            <a (click)="setUser(user)" role="button"></a>
 
-                                <td><i class="fa fa-edit icon" (click)="setUser(user)"></i>
-                                    <a (click)="setUser(user)" role="button"></a>
+                                            <i class="fa fa-trash icon" (click)="confirmID(user._id)"
+                                                data-toggle="modal" data-target="#exampleModal1"></i>
 
-                                    <i class="fa fa-trash icon" (click)="confirmID(user._id)" data-toggle="modal" data-target="#exampleModal1"></i>
-
-                                </td>
-                                <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Delete Confirmation</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                Are you sure you want to delete it?
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
-          Close
-        </button>
-                                                <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteLead()">
-          Delete
-        </button>
+                                        </td>
+                                        <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
+                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Delete
+                                                            Confirmation</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        Are you sure you want to delete it?
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">
+                                                            Close
+                                                        </button>
+                                                        <button type="button" class="btn btn-danger"
+                                                            data-dismiss="modal" (click)="deleteLead()">
+                                                            Delete
+                                                        </button>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </tr>
-                        </tbody>
-                    </table>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                    </div>
                 </div>
-
-                <pagination-controls (pageChange)="p = $event"></pagination-controls>
-                <!-- end of table -->
             </div>
         </div>
     </div>

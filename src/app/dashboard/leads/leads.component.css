@@ -1,3 +1,12 @@
+#content {
+    margin: 120px 20px;
+}
+
+#content-wrapper {
+    margin-left: 100px;
+    transition: 0.5s all;
+}
+
 .no-click {
     pointer-events: none;
 }

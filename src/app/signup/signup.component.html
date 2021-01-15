@@ -1,181 +1,191 @@
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+<app-header></app-header>
+<div id="wrapper">
+    <app-dashboard (widthEmittedEvent)="contentWidthEmitted($event)"></app-dashboard>
+    <div id="content-wrapper" class="d-flex flex-column" #content>
+        <div id="content">
 
-<div class="row">
-    <div class="col-md-12">
-        <app-header></app-header>
-    </div>
-</div>
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <!-- <app-header></app-header> -->
-            <app-dashboard></app-dashboard>
-        </div>
-    </div>
-    <div class="row">
+            <div class="container-fluid">
 
-        <div class="col-md-11 col-lg-9 col-xl-7 right">
-            <div class="register">
-                <h2 class="text-center">Welcome to my asasa</h2>
-                <form class="form-register" [formGroup]="registerForm" (ngSubmit)="registerUser()">
-                    <div class="form-group">
-                        <div class="input-group">
-                            <i class="fa fa-user fa" aria-hidden="true"></i>
-                            <input type="text" class="form-control inputs" formControlName="fullname" placeholder="Full name" autocomplete="off" [ngClass]="{ 'is-invalid': submitted && f.fullname.errors }" />
-                            <div *ngIf="submitted && f.fullname.errors" class="invalid-feedback">
-                                <div *ngIf="f.fullname.errors.required">Name is required</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="input-group">
-                            <i class="fa fa-envelope" aria-hidden="true"></i>
-                            <input type="text" class="form-control emailInput" formControlName="email" id="email" autocomplete="off" placeholder="Enter Email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
-                            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                                <div *ngIf="f.email.errors.required">Email is required</div>
-                                <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Password -->
-                    <div *ngIf="user" class="form-group">
-                        <div class="form-check updatePassword">
-                            <label class="form-check-label" for="exampleCheck1">Do you want to change your Password?</label>
-                            <input (click)="changePassword()" type="checkbox" class="form-check-input" id="exampleCheck1">
-                        </div>
-                        <div class="form-group" *ngIf="checked">
-                            <div class="input-group">
-                                <i class="fas fa-unlock"></i>
-                                <input type="password" (keyup)="password($event.target.value, 'Pass')" class="form-control inputs" formControlName="password" autocomplete="off" placeholder="Password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-                                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                                    <div *ngIf="f.password.errors.required">Password is required</div>
-                                    <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+                <div class="row">
+                    <div class="col-xl-6 col-lg-8 col-md-10 col-12 offset-md-1 mb-4 mt-4">
+                        <div class="register">
+                            <h2 class="h3 mb-2 text-center">Welcome to my asasa</h2>
+                            <form class="form-register" [formGroup]="registerForm" (ngSubmit)="registerUser()">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <i class="fa fa-user fa" aria-hidden="true"></i>
+                                        <input type="text" class="form-control inputs" formControlName="fullname"
+                                            placeholder="Full name" autocomplete="off"
+                                            [ngClass]="{ 'is-invalid': submitted && f.fullname.errors }" />
+                                        <div *ngIf="submitted && f.fullname.errors" class="invalid-feedback">
+                                            <div *ngIf="f.fullname.errors.required">Name is required</div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                                        <input type="text" class="form-control emailInput" formControlName="email" id="email"
+                                            autocomplete="off" placeholder="Enter Email"
+                                            [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                                        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                            <div *ngIf="f.email.errors.required">Email is required</div>
+                                            <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div *ngIf="user" class="form-group">
+                                    <div class="form-check updatePassword">
+                                        <label class="form-check-label" for="exampleCheck1">Do you want to change your
+                                            Password?</label>
+                                        <input (click)="changePassword()" type="checkbox" class="form-check-input"
+                                            id="exampleCheck1">
+                                    </div>
+                                    <div class="form-group" *ngIf="checked">
+                                        <div class="input-group">
+                                            <i class="fas fa-unlock"></i>
+                                            <input type="password" (keyup)="password($event.target.value, 'Pass')"
+                                                class="form-control inputs" formControlName="password" autocomplete="off"
+                                                placeholder="Password"
+                                                [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                                            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                                                <div *ngIf="f.password.errors.required">Password is required</div>
+                                                <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+            
+            
+                                <div class="form-group" *ngIf="!user">
+                                    <div class="input-group">
+                                        <i class="fas fa-unlock"></i>
+                                        <input type="password" (keyup)="password($event.target.value, 'Pass')"
+                                            class="form-control inputs" formControlName="password" autocomplete="off"
+                                            placeholder="Password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                                        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                                            <div *ngIf="f.password.errors.required">Password is required.</div>
+                                            <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+                                        </div>
+                                    </div>
+                                </div>
+            
+                                <div class="form-group" *ngIf="!user">
+                                    <div class="input-group">
+                                        <i class="fas fa-unlock"></i>
+                                        <input type="password" (keyup)="password($event.target.value, 'Conf')"
+                                            class="form-control inputs" formControlName="confirm_password" autocomplete="off"
+                                            placeholder="Confirm Password"
+                                            [ngClass]="{ 'is-invalid': submitted && f.confirm_password.errors }" />
+                                        <div *ngIf="submitted && f.confirm_password.errors" class="invalid-feedback">
+                                            <div *ngIf="f.confirm_password.errors.required">Confirm Password is required</div>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="!submitted" class="texts">{{abc}}</div>
+                                    <div *ngIf="submitted && !f.confirm_password.errors" class="texts">{{abc}}</div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <i class="fas fa-phone"></i>
+                                        <input formControlName="contact" type="text" class="form-control inputs" autocomplete="off"
+                                            placeholder="Phone Number - (92**********)"
+                                            [ngClass]="{ 'is-invalid': submitted && f.contact.errors }"
+                                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+                                        <div *ngIf="submitted && f.contact.errors" class="invalid-feedback">
+                                            <div *ngIf="f.contact.errors.required">Contact is required</div>
+                                            <div *ngIf="f.contact.errors.minlength">Contact must not be less 12 characters</div>
+                                            <div *ngIf="f.contact.errors.maxlength">Contact must not be more than 12 characters
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id='message'></div>
+                                </div>
+                                <div class="form-group" *ngIf="!user">
+                                    <div class="input-group">
+                                        <i class="fas fa-building"></i>
+                                        <ng-select class="ng-select inputs2 notvalid" [items]="cities" bindLabel="city"
+                                            bindValue="_id" placeholder="Select City"
+                                            [ngClass]="{ 'is-invalid': submitted && f.city.errors }" (change)="changeCity($event)"
+                                            required>
+                                        </ng-select>
+                                        <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
+                                            <div *ngIf="f.city.errors.required">City is required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group" *ngIf="user">
+                                    <div class="input-group">
+                                        <i class="fas fa-building"></i>
+                                        <ng-select [(ngModel)]="user.city.city" [ngModelOptions]="{standalone: true}"
+                                            class="ng-select inputs2" [items]="cities" bindLabel="city" bindValue="city"
+                                            placeholder="Select City" [ngClass]="{ 'is-invalid': submitted && f.city.errors }"
+                                            (change)="changeCity($event)">
+                                        </ng-select>
+                                        <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
+                                            <div *ngIf="f.city.errors.required">City is required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group" *ngIf="user">
+                                    <div class="input-group">
+                                        <i class="fas fa-street-view"></i>
+                                        <ng-select [(ngModel)]="selectStringLocations" [multiple]="true"
+                                            [ngModelOptions]="{standalone: true}" class="ng-select inputs2" [items]="locations"
+                                            bindLabel="location" bindValue="location" placeholder="Select Location"
+                                            (change)="changeLocation($event)">
+                                        </ng-select>
+                                    </div>
+                                </div>
+            
+                                <div class="form-group" *ngIf="!user">
+                                    <div class="input-group">
+                                        <i class="fas fa-street-view"></i>
+                                        <ng-select class="ng-select inputs2" [(ngModel)]="selectStringLocations" [multiple]="true"
+                                            [ngModelOptions]="{standalone: true}" [items]="locations" bindLabel="location"
+                                            bindValue="location" placeholder="Select Location"
+                                            [ngClass]="{ 'is-invalid': submitted && f.location.errors }"
+                                            (change)="changeLocation($event)">
+                                        </ng-select>
+                                        <div *ngIf="submitted && f.location.errors" class="invalid-feedback">
+                                            <div *ngIf="f.location.errors.required">Location is required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group" *ngIf="!user">
+                                    <div class="input-group">
+                                        <i class="fas fa-universal-access"></i>
+                                        <ng-select class="ng-select inputs2" [items]="accessType" bindLabel="access"
+                                            bindValue="access" placeholder="Select Access Type"
+                                            [ngClass]="{ 'is-invalid': submitted && f.access.errors }"
+                                            (change)="changeAccess($event)">
+                                        </ng-select>
+                                        <div *ngIf="submitted && f.access.errors" class="invalid-feedback">
+                                            <div *ngIf="f.access.errors.required">Access is required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group" *ngIf="user">
+                                    <div class="input-group">
+                                        <i class="fas fa-universal-access"></i>
+                                        <ng-select [(ngModel)]="user.access" [ngModelOptions]="{standalone: true}"
+                                            class="ng-select inputs2" [items]="accessType" bindLabel="access" bindValue="access"
+                                            placeholder="Select Access Type" (change)="changeAccess($event)">
+                                        </ng-select>
+                                    </div>
+                                </div>
+                                <div class="form-group pull-right">
+                                    <button type="submit" class='btn' class="btn btn-primary">
+                                        <span *ngIf="!user">Register</span>
+                                        <span *ngIf="user">Save</span>
+                                    </button>
+                                </div>
+                            </form>
+            
                         </div>
                     </div>
-
-
-                    <div class="form-group" *ngIf="!user">
-                        <div class="input-group">
-                            <i class="fas fa-unlock"></i>
-                            <input type="password" (keyup)="password($event.target.value, 'Pass')" class="form-control inputs" formControlName="password" autocomplete="off" placeholder="Password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-                            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                                <div *ngIf="f.password.errors.required">Password is required.</div>
-                                <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Confirm Password -->
-                    <div class="form-group" *ngIf="!user">
-                        <div class="input-group">
-                            <i class="fas fa-unlock"></i>
-                            <input type="password" (keyup)="password($event.target.value, 'Conf')" class="form-control inputs" formControlName="confirm_password" autocomplete="off" placeholder="Confirm Password" [ngClass]="{ 'is-invalid': submitted && f.confirm_password.errors }"
-                            />
-                            <div *ngIf="submitted && f.confirm_password.errors" class="invalid-feedback">
-                                <div *ngIf="f.confirm_password.errors.required">Confirm Password is required</div>
-                            </div>
-                        </div>
-                        <div *ngIf="!submitted" class="texts">{{abc}}</div>
-                        <div *ngIf="submitted && !f.confirm_password.errors" class="texts">{{abc}}</div>
-                    </div>
-                    <!-- Contact -->
-                    <div class="form-group">
-                        <div class="input-group">
-                            <i class="fas fa-phone"></i>
-                            <input formControlName="contact" type="text" class="form-control inputs" autocomplete="off" placeholder="Phone Number - (92**********)" [ngClass]="{ 'is-invalid': submitted && f.contact.errors }" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                            />
-                            <div *ngIf="submitted && f.contact.errors" class="invalid-feedback">
-                                <div *ngIf="f.contact.errors.required">Contact is required</div>
-                                <div *ngIf="f.contact.errors.minlength">Contact must not be less 12 characters</div>
-                                <div *ngIf="f.contact.errors.maxlength">Contact must not be more than 12 characters</div>
-                            </div>
-                        </div>
-                        <div id='message'></div>
-                    </div>
-                    <!-- City -->
-                    <div class="form-group" *ngIf="!user">
-                        <div class="input-group">
-                            <!-- <b>Select City</b> -->
-                            <i class="fas fa-building"></i>
-                            <ng-select class="ng-select inputs2 notvalid" [items]="cities" bindLabel="city" bindValue="_id" placeholder="Select City" [ngClass]="{ 'is-invalid': submitted && f.city.errors }" (change)="changeCity($event)" required>
-                            </ng-select>
-                            <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
-                                <div *ngIf="f.city.errors.required">City is required</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group" *ngIf="user">
-                        <div class="input-group">
-                            <!-- <b>Select City</b> -->
-                            <i class="fas fa-building"></i>
-                            <ng-select [(ngModel)]="user.city.city" [ngModelOptions]="{standalone: true}" class="ng-select inputs2" [items]="cities" bindLabel="city" bindValue="city" placeholder="Select City" [ngClass]="{ 'is-invalid': submitted && f.city.errors }" (change)="changeCity($event)">
-                            </ng-select>
-                            <!-- {{user.city.city}} -->
-                            <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
-                                <div *ngIf="f.city.errors.required">City is required</div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Location -->
-                    <div class="form-group" *ngIf="user">
-                        <div class="input-group">
-                            <i class="fas fa-street-view"></i>
-                            <ng-select [(ngModel)]="selectStringLocations" [multiple]="true" [ngModelOptions]="{standalone: true}" class="ng-select inputs2" [items]="locations" bindLabel="location" bindValue="location" placeholder="Select Location" (change)="changeLocation($event)">
-                            </ng-select>
-                        </div>
-                    </div>
-
-                    <div class="form-group" *ngIf="!user">
-                        <div class="input-group">
-                            <!-- <b>Select Location</b> -->
-                            <i class="fas fa-street-view"></i>
-                            <ng-select class="ng-select inputs2" [(ngModel)]="selectStringLocations" [multiple]="true" [ngModelOptions]="{standalone: true}" [items]="locations" bindLabel="location" bindValue="location" placeholder="Select Location" [ngClass]="{ 'is-invalid': submitted && f.location.errors }"
-                                (change)="changeLocation($event)">
-                            </ng-select>
-                            <div *ngIf="submitted && f.location.errors" class="invalid-feedback">
-                                <div *ngIf="f.location.errors.required">Location is required</div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Access Type -->
-                    <div class="form-group" *ngIf="!user">
-                        <div class="input-group">
-                            <!-- <b>Select Access</b> -->
-                            <i class="fas fa-universal-access"></i>
-                            <ng-select class="ng-select inputs2" [items]="accessType" bindLabel="access" bindValue="access" placeholder="Select Access Type" [ngClass]="{ 'is-invalid': submitted && f.access.errors }" (change)="changeAccess($event)">
-                            </ng-select>
-                            <div *ngIf="submitted && f.access.errors" class="invalid-feedback">
-                                <div *ngIf="f.access.errors.required">Access is required</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group" *ngIf="user">
-                        <div class="input-group">
-                            <!-- <b>Select Access</b> -->
-                            <i class="fas fa-universal-access"></i>
-                            <ng-select [(ngModel)]="user.access" [ngModelOptions]="{standalone: true}" class="ng-select inputs2" [items]="accessType" bindLabel="access" bindValue="access" placeholder="Select Access Type" (change)="changeAccess($event)">
-                                <!-- <ng-select class="ng-select inputs2" [items]="access" bindLabel="access" bindValue="access" placeholder="Select Access Type" (change)="changeAccess($event)">
-                            <option>dasdas</option> -->
-                            </ng-select>
-                            <!-- {{user.access}} -->
-                        </div>
-                    </div>
-                    <div class="form-group pull-right">
-                        <button type="submit" class='btn' class="btn btn-primary">
-                            <span *ngIf="!user">Register</span>
-                            <span *ngIf="user">Save</span>
-                        </button>
-                    </div>
-                </form>
-
+                </div>
             </div>
         </div>
     </div>
-
-
 </div>

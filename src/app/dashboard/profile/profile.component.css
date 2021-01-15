@@ -1,26 +1,23 @@
-.card1 {
-    width: 500px;
-    min-height: 200px;
-    padding: 25px;
-    border-radius: 15px;
-    background-color: white;
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
-    margin-left: 700px;
+#content {
+    margin: 120px 20px;
 }
 
-.profile-details {
-    margin-top: 20px;
+#content-wrapper {
+    margin-left: 100px;
+    transition: 0.5s all;
 }
 
 .fileField {
     opacity: 0;
-    margin-left: -97px;
-    margin-left: -230px;
-    margin-top: 21px;
+    display: none;
 }
 
 .badge {
     font-size: 17px;
+}
+.badge-warning {
+    color: #212529;
+    background: #ffc107;
 }
 
 .badgescard,
@@ -28,30 +25,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-html {
-    height: 100%;
-}
-
-body {
-    font-family: 'Open Sans', sans-serif;
-    width: 100%;
-    min-height: 100%;
-    background: #00bcd4;
-    font-size: 16px;
-    overflow: hidden;
-}
-
-*,
-*:before,
-*:after {
-    box-sizing: border-box;
-}
-
-.content {
-    position: relative;
-    animation: animatop 0.9s cubic-bezier(0.425, 1.14, 0.47, 1.125) forwards;
 }
 
 .btn {
@@ -62,27 +35,37 @@ body {
 }
 
 .card {
-    width: 500px;
-    min-height: 100px;
+    min-width: 500px;
+    min-height: 200px;
     padding: 25px;
     border-radius: 15px;
     background-color: white;
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
     position: relative;
     overflow: hidden;
-    margin-top: 140px;
-    margin-left: 30px;
+    margin: 0;
 }
 
-.input-container {
+/* .input-container {
     margin-left: 100px;
-}
+} */
 
-@media only screen and (min-width: 1400px)and (max-width: 1500px) {
+.sideMenuIcon {
+    cursor: pointer;
+    margin-left: 60px;
+}
+/* .contentCollapsed {
+    margin-left: 60px;
+} */
+
+/* @media only screen and (min-width: 1400px)and (max-width: 1500px) {
     .card,
     .profile,
     .input-container {
         margin-left: 70px;
+    }
+    .sideMenuIcon {
+        margin-left: 80px;
     }
     .card1 {
         margin-left: 600px;
@@ -92,6 +75,9 @@ body {
 @media only screen and (min-width: 1100px)and (max-width: 1400px) {
     .card,
     .profile {
+        margin-left: 130px;
+    }
+    .sideMenuIcon {
         margin-left: 130px;
     }
     .input-container {
@@ -105,9 +91,12 @@ body {
 @media only screen and (max-width: 1100px) {
     .card,
     .profile {
-        margin-left: 120px;
+        margin-left: 140px;
     }
     .card1 {
+        margin-left: 150px;
+    }
+    .sideMenuIcon {
         margin-left: 150px;
     }
     .input-container {
@@ -118,7 +107,10 @@ body {
 @media only screen and (max-width: 992px) {
     .card,
     .profile {
-        margin-left: 20px;
+        margin-left: 30px;
+    }
+    .sideMenuIcon {
+        margin-left: 50px;
     }
     .card1 {
         margin-left: 20px;
@@ -126,7 +118,7 @@ body {
     .input-container {
         margin-left: 0;
     }
-}
+} */
 
 .card:after {
     content: '';
@@ -136,27 +128,6 @@ body {
     background: #38bba2;
     position: absolute;
     animation: rotatemagic 0.75s cubic-bezier(0.425, 1.04, 0.47, 1.105) 1s both;
-}
-
-.badgescard {
-    margin-left: -65px;
-    padding: 10px 20px;
-    border-radius: 3px;
-    background-color: #00bcd4;
-    color: #fff;
-    width: 630px;
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
-    position: absolute;
-    z-index: -1;
-    left: 10px;
-    bottom: 10px;
-    animation: animainfos 0.5s cubic-bezier(0.425, 1.04, 0.47, 1.105) 0.75s forwards;
-}
-
-.badgescard span {
-    font-size: 1.6em;
-    margin: 0px 6px;
-    opacity: 0.6;
 }
 
 .firstinfo {
@@ -172,6 +143,7 @@ body {
 }
 
 .firstinfo .profileinfo {
+    color: #333;
     padding: 0px 20px;
     margin-left: 38px;
 }

@@ -1,3 +1,12 @@
+#content {
+    margin: 120px 20px;
+}
+
+#content-wrapper {
+    margin-left: 100px;
+    transition: 0.5s all;
+}
+
 /* input,
 input::-webkit-input-placeholder {
     font-size: 20px;
@@ -556,7 +565,6 @@ textarea.question:invalid~input[type="submit"] {
 
 .register-heading {
     text-align: center;
-    margin-top: 100px;
     color: #495057;
 }
 

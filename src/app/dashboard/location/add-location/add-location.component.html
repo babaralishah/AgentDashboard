@@ -1,28 +1,86 @@
-<div class="row">
-    <div class="col-md-12">
-        <app-header></app-header>
-    </div>
-</div>
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <app-dashboard></app-dashboard>
+<app-header></app-header>
+<div id="wrapper">
+    <app-dashboard (widthEmittedEvent)="contentWidthEmitted($event)"></app-dashboard>
+    <div id="content-wrapper" class="d-flex flex-column" #content>
+        <div id="content">
+
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-12 col-md-10 offset-md-1 mb-4 mt-4">
+                        <h1 class="h3 mb-2 text-gray-800">Add Location</h1>
+                        <form class="form-register" [formGroup]="addLocationForm" (ngSubmit)="addLocation()">
+                            <div class="radio mt-5">
+                                <div class="btn-group btn-group-toggle">
+                                    <label class="btn btn-primary">
+                                    <input type="radio" formControlName="city" value="Islamabad"> Islamabad
+                                </label>
+            
+                                    <label class="btn btn-primary">
+                                    <input type="radio" formControlName="city"  value="Rawalpindi">
+                                    Rawalpindi
+                                </label>
+            
+                                    <label class="btn btn-primary">
+                                    <input type="radio" formControlName="city"  value="Peshawar">
+                                    Peshawar
+                                </label>
+            
+                                </div>
+                            </div>
+            
+                            <div class="row mt-3">
+            
+                                <div class="col-md-3 col-sm-3 form-group">
+                                    <div class=""><br> <b>Add new Location</b>
+                                        <input formControlName="location" class="form-control" type="text" placeholder="Location " />
+            
+            
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+            
+                                <div class="col-12 pull-right">
+                                    <button class="btn btn-primary">submit</button>
+            
+                                </div>
+                            </div>
+                            <div class="row mt-5 ml-1">
+                                <h3><b>Add Sub Location</b></h3>
+                            </div>
+                            <div class="row mt-3">
+            
+                                <div class="col-3">
+                                    <ng-select class="ng-select" formControlName="city" [items]="cities" bindLabel="city" bindValue="city" placeholder="Select City" (change)="changeCity($event)">
+                                    </ng-select>
+                                </div>
+                                <div class="col-3">
+                                    <ng-select class="ng-select" formControlName="location" [(ngModel)]="selectStringLocations" [items]="locations" bindLabel="location" bindValue="location" placeholder="Select Location">
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+            
+                                <div class="col-md-3 col-sm-3 form-group">
+                                    <div class=""><br> <b>Add new Sub Location</b>
+                                        <input formControlName="subLocation" class="form-control" type="text" placeholder="Sub-Location " />
+            
+            
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+            
+                                <div class="col-12 pull-right">
+                                    <button class="btn btn-primary">submit</button>
+            
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="row">
-        <div class="section"><span>1</span>&nbsp; Add Location</div>
-        <div>
-
-        </div>
-    </div>
-
-
-    <div class="row">
-        <div class="section"><span>2</span>&nbsp; Add Sub Location</div>
-        <div>
-
-        </div>
-    </div>
-
-
 </div>

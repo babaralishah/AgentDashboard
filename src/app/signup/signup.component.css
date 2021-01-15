@@ -1,3 +1,12 @@
+#content {
+    margin: 120px 30px;
+}
+
+#content-wrapper {
+    margin-left: 100px;
+    transition: 0.5s all;
+}
+
 .invalid-feedback {
     /* display: none; */
     width: 100%;
@@ -73,7 +82,7 @@ h2 {
     margin-top: -10px;
 }
 
-i:before {
+.register i:before {
     position: relative;
     top: 30%;
     font-size: 22px;
@@ -160,14 +169,22 @@ i:before {
 }
 
 .right {
-    margin-top: 160px;
+    margin-top: 60px;
 }
 
 .input-area1 {
     margin-left: 20px;
 }
 
-@media only screen and (max-width: 1750px) {
+.sideMenuIcon {
+    cursor: pointer;
+    margin-left: 60px;
+}
+.contentCollapsed {
+    margin-left: 60px;
+}
+
+/* @media only screen and (max-width: 1750px) {
     .register {
         margin-left: 50px;
     }
@@ -201,4 +218,4 @@ i:before {
     .register {
         margin-left: 20px;
     }
-}
+} */

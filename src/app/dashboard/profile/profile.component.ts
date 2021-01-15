@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import { AuthenticationService } from "src/app/services/Authentication/authentication.service";
 
@@ -16,6 +16,8 @@ export class ProfileComponent implements OnInit {
   tokendata: any;
   url: string | ArrayBuffer;
   selectedFile: ImageSnippet;
+
+  @ViewChild('content') content: any;
 
   constructor(
     public router: Router,
@@ -56,5 +58,9 @@ export class ProfileComponent implements OnInit {
       .subscribe((res) => {
         console.log("Subscribed data: ", res);
       });
+  }
+
+  contentWidthEmitted(value) {
+    this.content.nativeElement.style.marginLeft = `${value}px`;
   }
 }

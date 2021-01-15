@@ -1,15 +1,18 @@
 import * as XLSX from "xlsx";
 import { JSON2SheetOpts } from "xlsx";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { AuthenticationService } from "src/app/services/Authentication/authentication.service";
 import { ToastrService } from "ngx-toastr";
 import { Router } from "@angular/router";
+import { formatDate } from "@angular/common";
 @Component({
   selector: "app-inventory",
   templateUrl: "./inventory.component.html",
   styleUrls: ["./inventory.component.css"],
 })
 export class InventoryComponent implements OnInit {
+
+  @ViewChild('content') content: any;
   user: any;
   deleteId: any;
   key: any;
@@ -63,10 +66,21 @@ export class InventoryComponent implements OnInit {
   selectedOption = this.options[0].value;
   placeholder = this.options[0].placeholder;
   refId: any;
+  startDate: String;
+  endDate: String;
 
   ngOnInit(): void {
     this.getInventoryList();
     this.getCities();
+  }
+
+  changeStartDate(e: any) {
+    this.startDate = formatDate(new Date(e.target.value),'yyyy-MM-dd','en_US');
+    // console.log('Start', this.startDate);
+  }
+  changeEndDate(e: any) {
+    this.endDate= formatDate(new Date(e.target.value),'yyyy-MM-dd','en_US');
+    // console.log('End', this.endDate);
   }
 
   getInventoryList() {
@@ -238,5 +252,9 @@ export class InventoryComponent implements OnInit {
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "All Data Export");
     XLSX.writeFile(wb, "Inventory.xlsx");
+  }
+
+  contentWidthEmitted(value) {
+    this.content.nativeElement.style.marginLeft = `${value}px`;
   }
 }

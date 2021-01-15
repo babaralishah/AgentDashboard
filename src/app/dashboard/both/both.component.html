@@ -1,161 +1,163 @@
-<div class="row">
-    <div class="col-lg-12 col-sm-12 col-md-2">
-        <app-header></app-header>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-2 col-lg-2 col-sm-2">
-        <!-- <app-header></app-header> -->
-        <app-dashboard></app-dashboard>
-    </div>
-    <!-- </div> -->
-    <div class="col-md-9 col-lg-9 col-sm-9">
-        <div class="both">
-            <h1><b>Both Leads/Inventory Table</b></h1>
-            <br>
-            <div class="">
-                <button class="btn btn-primary" (click)="setFormTitle('Both')">Add New</button>
-            </div>
-            <br>
-            <div class="">
-                <div class="row">
-                    <div class="col-3">
-                        <ng-select [items]="options" bindLabel="name" bindValue="value" class="mr-2 ml-2" placeholder="Filter By" [(ngModel)]="selectedOption" (change)="optionChange($event)" [clearable]="false">
-                        </ng-select>
-                    </div>
-                    <div class="col-3">
-                        <input type="text" class="form-control ml-2" placeholder="Search {{ placeholder }}" [(ngModel)]="refId" />
-                    </div>
+<app-header></app-header>
+<div id="wrapper">
+    <app-dashboard (widthEmittedEvent)="contentWidthEmitted($event)"></app-dashboard>
+    <div id="content-wrapper" class="d-flex flex-column" #content>
+        <div id="content">
 
-                    <div class="col-1"></div>
-                    <div class="col-5">
-                        <button onclick="window.print()" class="btn btn-primary">Print</button> &nbsp; &nbsp; &nbsp;
-                        <button (click)="exportTOExcel()" class="btn btn-primary">Excel</button>
+            <div class="container-fluid">
+                <h1 class="h3 mb-2 text-gray-800">Both Leads/Inventory Table</h1>
+
+                <div class="row">
+                    <div class="col-12 mb-4 mt-4">
+                        <div class="">
+                            <button class="btn btn-primary" (click)="setFormTitle('Both')">Add New</button>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-3">
+                                <ng-select [items]="options" bindLabel="name" bindValue="value" class="mr-2 ml-2"
+                                    placeholder="Filter By" [(ngModel)]="selectedOption" (change)="optionChange($event)"
+                                    [clearable]="false">
+                                </ng-select>
+                            </div>
+                            <div class="col-3">
+                                <input type="text" class="form-control ml-2" placeholder="Search {{ placeholder }}"
+                                    [(ngModel)]="refId" />
+                            </div>
+                            <div class="ml-5">
+                                <input type="date" class="form-control" placeholder="Start Date" (change)="changeStartDate($event)">
+                            </div>
+                            <div class="ml-5">
+                                <input type="date" class="form-control" placeholder="End Date" (change)="changeEndDate($event)">
+                            </div>
+                            <div class="col-1"></div>
+                            <div class="col-5">
+                                <button onclick="window.print()" class="btn btn-primary">Print</button> &nbsp; &nbsp; &nbsp;
+                                <button (click)="exportTOExcel()" class="btn btn-primary">Excel</button>
+                            </div>
+                        </div>
+                        <div class="table-container mb-5 mt-4">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th (click)="sort('id')" scope="col">ID <i class="fa fa-sort"></i></th>
+                                        <th scope="col">Added By</th>
+                                        <th scope="col">Purpose</th>
+                                        <th scope="col">Client</th>
+            
+                                        <th scope="col">Prop. Type</th>
+                                        <th scope="col">Area</th>
+                                        <th scope="col" width="30">Location</th>
+                                        <th scope="col">Demand</th>
+                                        <th scope="col">Beds</th>
+                                        <th scope="col">Assigned To</th>
+                                        <th scope="col">Added On</th>
+                                        <th scope="col">Operations</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr
+                                        *ngFor="let user of user | filterlist: selectedOption:refId | dateFilter: startDate:endDate | orderBy: key: reverse | paginate:{itemsPerPage:50,currentPage:p};">
+                                        <td>
+                                            <span *ngIf="user?.priority == 'Super Hot'"><img class="super-hot"
+                                                    src="\assets\icons\red-flag.png"></span>
+                                            <span *ngIf="user?.priority == 'Hot'"><img class="super-hot"
+                                                    src="\assets\icons\flag_yellow.png"></span>
+                                            <span *ngIf="user?.priority == 'Normal'"><img class="normal"
+                                                    src="\assets\icons\flag-green2.png"></span>
+                                        </td>
+            
+            
+                                        <td>{{ user?.refId }}</td>
+                                        <td>{{user?.added_By?.fullname}}</td>
+                                        <td>{{ user?.property_purpose }}</td>
+            
+                                        <td><b>Name : </b>{{ user?.client_name | titlecase }} <br> <b>Number : </b>{{
+                                            user?.client_number}} <br>
+                                            <b> Client Type :</b> {{ user?.client_type }}
+                                        </td>
+            
+                                        <td>{{ user?.property_type }}</td>
+            
+            
+                                        <td *ngIf="user?.area != null; else elseBlockArea">
+                                            <span>{{ user?.area + " - " + user?.area_unit }}</span>
+                                        </td>
+                                        <ng-template #elseBlockArea>
+                                            <td>
+                                                <span *ngIf="
+                            user?.max_area == null || user?.min_area == null;
+                            else elseBlockArea2
+                            ">
+                                                    <span>None</span>
+                                                </span>
+                                                <ng-template #elseBlockArea2>
+                                                    <span><b>Max:</b> {{ user?.max_area + " - " + user?.area_unit
+                                                        }}<br /><b>Min:</b>
+                                                        {{ user?.min_area + " - " + user?.area_unit }}</span>
+                                                </ng-template>
+                                            </td>
+                                        </ng-template>
+            
+                                        <td>
+                                            {{user?.city[0]?.city}}<span>&nbsp;&nbsp;</span><br><span class="badge badge-light"
+                                                *ngFor="let loc of user?.location">{{ loc.location }}, </span>
+                                        </td>
+            
+                                        <td *ngIf="user.demand_price == null else elseBlockDemand"><b>Max:</b> {{ user.max_price
+                                            }}<br><b>Min:</b> {{ user.min_price }}</td>
+                                        <ng-template #elseBlockDemand>
+                                            <td>{{ user.demand_price }}</td>
+                                        </ng-template>
+                                        <td>{{ user?.beds_number }}</td>
+                                        <td>
+                                            <span *ngIf="user?.assignedTo?.length === 0">Self</span>
+                                            <span *ngIf="user?.assignedTo?.length > 0">
+                                                <span *ngFor="let assign of user?.assignedTo">{{ assign }}<span>,</span><br></span>
+                                            </span>
+                                        </td>
+                                        <td>{{ user?.created | date: "dd/MM/yyyy"}}</td>
+                                        <td><i class="fa fa-edit icon" (click)="setUserToEdit(user)"></i>
+                                            <a (click)="setUserToEdit(user)" role="button"></a>
+            
+                                            <i class="fa fa-trash icon" (click)="confirmID(user._id)" data-toggle="modal"
+                                                data-target="#exampleModal1"></i>
+            
+                                        </td>
+                                        <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
+                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Delete Confirmation</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        Are you sure you want to Delete it?
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                                            Close
+                                                        </button>
+                                                        <button type="button" class="btn btn-danger" data-dismiss="modal"
+                                                            (click)="deleteLead()">
+                                                            Delete
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <pagination-controls (pageChange)="p = $event"></pagination-controls>
                     </div>
                 </div>
             </div>
-            <!-- Inventory management table is below -->
-            <div class="table-container mb-5 mt-4">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th (click)="sort('id')" scope="col">ID <i class="fa fa-sort"></i></th>
-                            <th scope="col">Added By</th>
-                            <th scope="col">Purpose</th>
-                            <th scope="col">Client</th>
-
-                            <th scope="col">Prop. Type</th>
-                            <!-- <th scope="col">Prop. #</th> -->
-                            <th scope="col">Area</th>
-                            <th scope="col" width="30">Location</th>
-                            <th scope="col">Demand</th>
-                            <th scope="col">Beds</th>
-                            <!-- <th scope="col">Phone #</th> -->
-                            <!-- <th scope="col">Comment</th> -->
-                            <th scope="col">Assigned To</th>
-                            <!-- <th scope="col">Admin Status</th>
-                        <th scope="col">Agent Status</th> -->
-                            <th scope="col">Added On</th>
-                            <th scope="col">Operations</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let user of user | filterlist: selectedOption:refId | orderBy: key: reverse | paginate:{itemsPerPage:50,currentPage:p};">
-                            <!-- | tableFilter06: search_client | tableFilter05: search_demand | tableFilter04: search_type | tableFilter03: search_area | tableFilter02: search_location | tableFilter: search_id -->
-                            <td>
-                                <span *ngIf="user?.priority == 'Super Hot'"><img class="super-hot" src="\assets\icons\red-flag.png"></span>
-                                <span *ngIf="user?.priority == 'Hot'"><img class="super-hot" src="\assets\icons\flag_yellow.png"></span>
-                                <span *ngIf="user?.priority == 'Normal'"><img class="normal" src="\assets\icons\flag-green2.png"></span>
-                            </td>
-
-
-                            <td>{{ user?.refId }}</td>
-                            <td>{{user?.added_By?.fullname}}</td>
-                            <td>{{ user?.property_purpose }}</td>
-
-                            <td><b>Name : </b>{{ user?.client_name | titlecase }} <br> <b>Number : </b>{{ user?.client_number}} <br>
-                                <b> Client Type :</b> {{ user?.client_type }} </td>
-                            <!-- <td>{{ user.client_name }}</td> -->
-
-                            <td>{{ user?.property_type }}</td>
-                            <!-- <td>{{ user?.Prop_num }}</td> -->
-
-
-                            <td *ngIf="user?.area != null; else elseBlockArea">
-                                <span>{{ user?.area + " - " + user?.area_unit }}</span>
-                            </td>
-                            <ng-template #elseBlockArea>
-                                <td>
-                                    <span *ngIf="
-                user?.max_area == null || user?.min_area == null;
-                else elseBlockArea2
-                ">
-                <span>None</span>
-                                    </span>
-                                    <ng-template #elseBlockArea2>
-                                        <span><b>Max:</b> {{ user?.max_area + " - " + user?.area_unit
-                }}<br /><b>Min:</b>
-                {{ user?.min_area + " - " + user?.area_unit }}</span
-                >
-                </ng-template>
-                </td>
-                </ng-template>
-
-                            <!-- <td *ngIf="user.area == null else elseBlockArea"><b>Max:</b> {{ user.max_area + " - " + user.area_unit}}<br><b>Min:</b> {{ user.min_area + " - " + user.area_unit}}</td>
-                            <ng-template #elseBlockArea>
-                                <td>{{ user.area + " - " + user.area_unit}}</td>
-                            </ng-template> -->
-                            <td>
-                                {{user?.city[0]?.city}}<span>&nbsp;&nbsp;</span><br><span class="badge badge-light" *ngFor="let loc of user?.location">{{ loc.location }},  </span>
-                                </td>
-
-                                <td *ngIf="user.demand_price == null else elseBlockDemand"><b>Max:</b> {{ user.max_price }}<br><b>Min:</b> {{ user.min_price }}</td>
-                                <ng-template #elseBlockDemand>
-                                    <td>{{ user.demand_price }}</td>
-                                </ng-template>
-                                <td>{{ user?.beds_number }}</td>
-                                <td>
-                                    <span *ngIf="user?.assignedTo?.length === 0">Self</span>
-                                    <span *ngIf="user?.assignedTo?.length > 0">
-                                    <span *ngFor="let assign of user?.assignedTo">{{ assign }}<span>,</span><br></span>
-                                    </span>
-                                </td>
-                                <td>{{ user?.created | date: "dd/MM/yyyy"}}</td>
-                                <td><i class="fa fa-edit icon" (click)="setUserToEdit(user)"></i>
-                                    <a (click)="setUserToEdit(user)" role="button"></a>
-
-                                    <i class="fa fa-trash icon" (click)="confirmID(user._id)" data-toggle="modal" data-target="#exampleModal1"></i>
-
-                                </td>
-                                <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Delete Confirmation</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                Are you sure you want to Delete it?
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
-          Close
-        </button>
-                                                <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteLead()">
-          Delete
-        </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <pagination-controls (pageChange)="p = $event"></pagination-controls>
         </div>
     </div>
 </div>

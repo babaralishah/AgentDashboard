@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { AuthenticationService } from "src/app/services/Authentication/authentication.service";
@@ -12,6 +12,8 @@ import * as mapboxgl from "mapbox-gl";
   styleUrls: ["./add-inventories.component.css"],
 })
 export class AddInventoriesComponent implements OnInit {
+
+  @ViewChild('content') content: any;
   agentAssignedNames: any = [];
   superAdminAssignedNames: any = [];
   cityAdminAssignedNames: any = [];
@@ -611,5 +613,9 @@ export class AddInventoriesComponent implements OnInit {
         }
       );
     }
+  }
+
+  contentWidthEmitted(value) {
+    this.content.nativeElement.style.marginLeft = `${value}px`;
   }
 }

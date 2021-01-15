@@ -1,5 +1,5 @@
 import * as XLSX from "xlsx";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
 import { AuthenticationService } from "src/app/services/Authentication/authentication.service";
 import { ToastrService } from "ngx-toastr";
@@ -20,6 +20,9 @@ export class LocationComponent implements OnInit {
   // refId: string;
   locations: any;
   city: any;
+
+  @ViewChild('content') content: any;
+
   constructor(
     private authService: AuthenticationService,
     private router: Router,
@@ -99,25 +102,17 @@ export class LocationComponent implements OnInit {
   confirmID(id: any) {}
 
   // Function to delete the single inventory
-  deleteLead() {
-    console.log(this.deleteId);
-
-    this.authService.deleteUser(this.deleteId).subscribe((data) => {
-      console.log(data);
-      if (data.code === 200) {
-        this.toastr.success(data.message, "Success", {
-          timeOut: 5000,
-        });
-      }
-    });
-  }
+  deletelocation() {}
   deleteId(deleteId: any) {
     throw new Error("Method not implemented.");
   }
 
   getCityName(cityId: any) {
     for (let i = 0; i < this.city.length; i++) {
-      if (cityId === this.city[i]._id) return this.city[i].city;
+      if (cityId === this.city[i]._id) {
+        // console.log(cityId, this.city[i]._id);
+        return this.city[i].city;
+      } else if (cityId === 8) return "Karachi";
     }
   }
 
@@ -163,16 +158,12 @@ export class LocationComponent implements OnInit {
     ];
 
     ws["!cols"] = wscols;
-    ws["!cols"][0] = { hidden: true };
-
-    ws["!cols"][2] = { hidden: true };
-    ws["!cols"][3] = { hidden: true };
-
-    ws["!cols"][6] = { hidden: true };
-    ws["!cols"][10] = { hidden: true };
-
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "All Data Export");
     XLSX.writeFile(wb, "Users.xlsx");
+  }
+
+  contentWidthEmitted(value) {
+    this.content.nativeElement.style.marginLeft = `${value}px`;
   }
 }

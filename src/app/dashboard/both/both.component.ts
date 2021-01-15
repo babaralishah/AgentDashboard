@@ -1,9 +1,10 @@
 import * as XLSX from "xlsx";
 import { JSON2SheetOpts } from "xlsx";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { AuthenticationService } from "src/app/services/Authentication/authentication.service";
 import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
+import { formatDate } from "@angular/common";
 
 @Component({
   selector: "app-both",
@@ -11,6 +12,8 @@ import { ToastrService } from "ngx-toastr";
   styleUrls: ["./both.component.css"],
 })
 export class BothComponent implements OnInit {
+
+  @ViewChild('content') content: any;
   user: any;
   savedId: any;
 
@@ -59,11 +62,21 @@ export class BothComponent implements OnInit {
   selectedOption = this.options[0].value;
   placeholder = this.options[0].placeholder;
   refId: any;
+  startDate: String;
+  endDate: String;
 
   ngOnInit(): void {
     this.getAllList();
   }
 
+  changeStartDate(e: any) {
+    this.startDate = formatDate(new Date(e.target.value),'yyyy-MM-dd','en_US');
+    // console.log('Start', this.startDate);
+  }
+  changeEndDate(e: any) {
+    this.endDate= formatDate(new Date(e.target.value),'yyyy-MM-dd','en_US');
+    // console.log('End', this.endDate);
+  }
   getAllList() {
     this.authService.getAll().subscribe(
       (data) => {
@@ -190,5 +203,9 @@ export class BothComponent implements OnInit {
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "All Data Export");
     XLSX.writeFile(wb, "Both.xlsx");
+  }
+
+  contentWidthEmitted(value) {
+    this.content.nativeElement.style.marginLeft = `${value}px`;
   }
 }

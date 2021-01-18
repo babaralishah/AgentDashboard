@@ -13,12 +13,12 @@ import { formatDate } from "@angular/common";
 export class InventoryComponent implements OnInit {
 
   @ViewChild('content') content: any;
-  user: any;
+  user: any = [];
   deleteId: any;
   key: any;
   reverse: boolean = true;
   p: number = 1;
-  data: any;
+  data: any = [];
   cities: any;
   locations: any;
   city: any;
@@ -35,6 +35,8 @@ export class InventoryComponent implements OnInit {
   search_location: string;
   search_type: string;
   search_demand: string;
+
+  currentLoginUser: any;
 
   options = [
     {
@@ -70,8 +72,16 @@ export class InventoryComponent implements OnInit {
   endDate: String;
 
   ngOnInit(): void {
+    this.tokenization();
     this.getInventoryList();
     this.getCities();
+  }
+  
+  async tokenization() {
+    const token = await this.authService.getToken();
+    const decodedToken = await this.authService.getDecodedToken(token);
+    this.currentLoginUser = decodedToken.data;
+    console.log(this.currentLoginUser);
   }
 
   changeStartDate(e: any) {
@@ -86,9 +96,9 @@ export class InventoryComponent implements OnInit {
   getInventoryList() {
     this.authService.getInventory().subscribe(
       (data) => {
-        this.data = data.inventories;
-        console.log("data---->", this.data);
-        this.data.forEach((element) => {
+        data = data.inventories;
+        
+        data.forEach((element) => {
           element.assignedTo = [];
           element.added_ByName = element.added_By.fullname;
           element.cityName = element.city[0]?.city;
@@ -100,14 +110,35 @@ export class InventoryComponent implements OnInit {
           } else if (element.min_price) {
             element.demand = element.min_price;
           }
-          // console.log(element.demand);
 
           for (let i = 0; i < element.assigned_history?.length; i++) {
             if (element.assigned_history[i]?.fullname === "") continue;
             element.assignedTo[i] = element.assigned_history[i]?.fullname;
           }
+
+          if(this.currentLoginUser.access === "city_admin") {
+            element.city.forEach(city => {
+              if(this.currentLoginUser.city.city === city.city) {
+                this.user.push(element);
+                return;
+              }
+            });
+          } else if(this.currentLoginUser.access === "agent") {
+            if(this.currentLoginUser.userId === element.added_By.userId) {
+              this.user.push(element);
+              return;
+            } else {
+              element.assigned_history.forEach(history => {
+                if(this.currentLoginUser.userId === history?.userId) {
+                  this.user.push(element);
+                  return;
+                }
+              });
+            }
+          } else {
+            this.user.push(element);
+          }
         });
-        this.user = this.data;
       },
       (error) => {
         console.error(error);

@@ -18,8 +18,10 @@ export class LocationComponent implements OnInit {
   p: number = 1;
   // placeholder: any;
   // refId: string;
-  locations: any;
+  locations: any = [];
   city: any;
+
+  currentLoginUser: any;
 
   @ViewChild('content') content: any;
 
@@ -49,8 +51,17 @@ export class LocationComponent implements OnInit {
   placeholder = this.options[0].placeholder;
   refId: any;
   ngOnInit(): void {
+    this.tokenization();
     this.getCities();
   }
+  
+  async tokenization() {
+    const token = await this.authService.getToken();
+    const decodedToken = await this.authService.getDecodedToken(token);
+    this.currentLoginUser = decodedToken.data;
+    console.log(this.currentLoginUser);
+  }
+  
   optionChange(e: any) {
     this.placeholder = e.placeholder;
     this.refId = "";
@@ -81,6 +92,13 @@ export class LocationComponent implements OnInit {
         console.log(locations);
         locations.forEach((element, index) => {
           const cityName = this.getCityName(element.cityId);
+
+          if(this.currentLoginUser.access === "city_admin" || this.currentLoginUser.access === "agent") {
+            if(this.currentLoginUser.city.city !== cityName) {
+              return;
+            }
+          }
+          
           element.cityName = cityName;
           element.locationName = locations[index].location;
           element.SubLocation = [];
@@ -88,9 +106,11 @@ export class LocationComponent implements OnInit {
             for (let i = 0; i < element.subLocations.length; i++) {
               element.SubLocation.push(element.subLocations[i]?.subLocation);
             }  
-          } 
+          }
+          
+          this.locations.push(element);
         });
-        this.locations = locations;
+        // this.locations = locations;
         console.log(this.locations);
       },
       (err) => {

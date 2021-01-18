@@ -25,7 +25,7 @@ export class AddInventoriesComponent implements OnInit {
   formSendingStatus = "Post Ad";
   locations: any;
   subsLocations: any;
-  city: any;
+  city: any = [];
   user: any;
   client_type = [
     { access: "Direct Seller" },
@@ -91,7 +91,7 @@ export class AddInventoriesComponent implements OnInit {
     private authService: AuthenticationService,
     private router: Router,
     private toastr: ToastrService
-  ) {}
+  ) { }
   get Property_typename() {
     return this.addinventoryForm.get("prop_typename");
   }
@@ -115,7 +115,7 @@ export class AddInventoriesComponent implements OnInit {
     this.addinventoryForm.patchValue({ form_title: this.form_title });
     this.getCities();
     this.getUserList();
-    this.getCityAdminList();
+    this.getAllUsersList();
   }
 
   // Form Declaration, and Validation Function
@@ -148,7 +148,7 @@ export class AddInventoriesComponent implements OnInit {
       client_name: ["", Validators.required],
       client_number: ["", Validators.required],
       client_type: [""],
-      comment:"",
+      comments: "",
       added_By: this.formBuilder.group({
         fullname: [""],
         userId: [""],
@@ -160,35 +160,51 @@ export class AddInventoriesComponent implements OnInit {
   getUserDetails() {
     this.token = this.authService.getToken();
     this.token = this.authService.getDecodedToken(this.token).data;
-    console.log(this.token.access);
+    console.log(this.token);
   }
 
   // Function to call User data table for Assigned_To Field of the add-inventory-form
-  getCityAdminList() {
+  getAllUsersList() {
     this.authService.getUsers().subscribe(
       (data) => {
-        console.log(data);
 
         for (var i = 0; i < data.length; i++) {
-          // console.log(data[i].access);
-          if (data[i].access == "city_admin") {
-            this.cityAdminList.push(data[i]);
-          } else if (data[i].access == "agent") {
-            if (this.token.access == "city_admin") {
-              if (this.token.city.city == data[i].city.city) {
-                this.agentListFull.push(data[i]);
+
+          if (this.token.access === "city_admin") {
+            if (data[i].access == "city_admin") {
+              if(this.token.city.city === data[i].city.city) {
+                this.cityAdminList.push(data[i]);
+              }
+            } else if (data[i].access == "agent") {
+              if(this.token.city.city === data[i].city.city) {
                 this.agentList.push(data[i]);
               }
-            } else {
-              this.agentListFull.push(data[i]);
-              this.agentList.push(data[i]);
             }
-            // console.log(this.agentList);
-          } else if (data[i].access == "super_admin") {
-            this.superAdminList.push(data[i]);
+          } else if (this.token.access === "agent") {
+            if (data[i].access == "city_admin") {
+              if(this.token.city.city === data[i].city.city) {
+                this.cityAdminList.push(data[i]);
+              }
+            } else if (data[i].access == "agent") {
+              if(this.token.city.city === data[i].city.city) {
+                this.agentList.push(data[i]);
+              }
+            } else if (data[i].access == "super_admin") {
+              this.superAdminList.push(data[i]);
+            }
+          } else if (this.token.access === "super_admin") {
+            if (data[i].access == "city_admin") {
+              this.cityAdminList.push(data[i]);
+            } else if (data[i].access == "agent") {
+              this.agentList.push(data[i]);
+            } else if (data[i].access == "super_admin") {
+              this.superAdminList.push(data[i]);
+            }
           }
         }
+        console.log(this.superAdminList);
         console.log(this.cityAdminList);
+        console.log(this.agentList);
         if (this.user) {
           this.updatefields();
         }
@@ -459,15 +475,16 @@ export class AddInventoriesComponent implements OnInit {
   getCities() {
     this.authService.getCities().subscribe(
       (cities) => {
-        if (this.user?.access == "islamabad_admin") {
-          this.city.push(cities[2]);
-          this.cities = this.city;
-        } else if (this.user?.access == "rawalpindi_admin") {
-          this.city.push(cities[1]);
-          this.cities = this.city;
-        } else if (this.user?.access == "peshawar_admin") {
-          this.city.push(cities[0]);
-          this.cities = this.city;
+        if(this.token.access === 'city_admin' || this.token.access === 'agent') {
+          if (this.token?.city.city == "Islamabad") {
+            this.city.push(cities[2]);
+            this.cities = this.city;
+          } else if (this.token?.city.city == "Rawalpindi") {
+            this.city.push(cities[1]);
+            this.cities = this.city;
+          } else if (this.token?.city.city == "Peshawar") {
+            this.city.push(cities[0]);
+          }  
         } else {
           this.cities = cities;
         }

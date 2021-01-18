@@ -82,11 +82,11 @@
                                         *ngFor="let user of user | filterlist: selectedOption:refId | dateFilter: startDate:endDate | tableFilter: city | LocationFilter:location |  orderBy: key: reverse | paginate:{itemsPerPage:50,currentPage:p}; ">
                                         <td>
                                             <span *ngIf="user?.priority == 'Super Hot'"><img class="super-hot"
-                                                    src="\assets\icons\red-flag.png"></span>
+                                                    src="\assets\icons\super_hot.svg"></span>
                                             <span *ngIf="user?.priority == 'Hot'"><img class="super-hot"
-                                                    src="\assets\icons\flag_yellow.png"></span>
+                                                    src="\assets\icons\hot.svg"></span>
                                             <span *ngIf="user?.priority == 'Normal'"><img class="normal"
-                                                    src="\assets\icons\flag-green2.png"></span>
+                                                    src="\assets\icons\normal.svg"></span>
                                         </td>
             
                                         <td>{{ user?.refId }}</td>

@@ -16,7 +16,7 @@ import { formatDate } from "@angular/common";
 export class LeadsComponent implements OnInit {
   @ViewChild('content') content: any;
   
-  user: any;
+  user: any = [];
   currentUser: any;
   withAutofocus = `<button type="button" ngbAutofocus class="btn btn-danger"
       (click)="modal.close('Ok click')">Ok</button>`;
@@ -32,13 +32,15 @@ export class LeadsComponent implements OnInit {
   p: number = 1;
   tokendata: any;
   assignLeadData: any = [];
-  data: any;
+  data: any = [];
   cities: any;
   locations: any;
   city: any;
   location: any;
   startDate: String;
   endDate: String;
+
+  currentLoginUser: any;
 
   constructor(
     private authService: AuthenticationService,
@@ -81,11 +83,19 @@ export class LeadsComponent implements OnInit {
   refId: any;
 
   ngOnInit(): void {
+    this.tokenization();
     this.getUserDetails();
     this.getLeadsList();
     this.getCityAdminList();
     this.tokenization();
     this.getCities();
+  }
+  
+  async tokenization() {
+    const token = await this.authService.getToken();
+    const decodedToken = await this.authService.getDecodedToken(token);
+    this.currentLoginUser = decodedToken.data;
+    console.log(this.currentLoginUser);
   }
 
   changeStartDate(e: any) {
@@ -97,20 +107,12 @@ export class LeadsComponent implements OnInit {
     // console.log('End', this.endDate);
   }
 
-  async tokenization() {
-    const token = await this.authService.getToken();
-    const decodedToken = await this.authService.getDecodedToken(token);
-    this.tokendata = decodedToken.data;
-    console.log(this.tokendata);
-  }
-
   getLeadsList() {
     this.authService.getLeads().subscribe(
       (data) => {
-        console.log(data);
-
-        this.data = data.leads;
-        this.data.forEach((element) => {
+        data = data.leads;
+        
+        data.forEach((element) => {
           element.assignedTo = [];
           element.added_ByName = element.added_By.fullname;
           element.cityName = element.city[0]?.city;
@@ -122,12 +124,35 @@ export class LeadsComponent implements OnInit {
           } else if (element.min_price) {
             element.demand = element.min_price;
           }
-          console.log(element.demand);
-          for (let i = 0; i < element.assigned_history.length; i++)
-            element.assignedTo[i] = element.assigned_history[i]?.fullname;
-        });
 
-        this.user = this.data;
+          for (let i = 0; i < element.assigned_history?.length; i++) {
+            if (element.assigned_history[i]?.fullname === "") continue;
+            element.assignedTo[i] = element.assigned_history[i]?.fullname;
+          }
+
+          if(this.currentLoginUser.access === "city_admin") {
+            element.city.forEach(city => {
+              if(this.currentLoginUser.city.city === city.city) {
+                this.user.push(element);
+                return;
+              }
+            });
+          } else if(this.currentLoginUser.access === "agent") {
+            if(this.currentLoginUser.userId === element.added_By.userId) {
+              this.user.push(element);
+              return;
+            } else {
+              element.assigned_history.forEach(history => {
+                if(this.currentLoginUser.userId === history?.userId) {
+                  this.user.push(element);
+                  return;
+                }
+              });
+            }
+          } else {
+            this.user.push(element);
+          }
+        });
       },
       (error) => {
         console.error(error);

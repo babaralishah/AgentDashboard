@@ -13,13 +13,15 @@ import { formatDate } from "@angular/common";
 })
 export class UsersComponent implements OnInit {
   general_search: string;
-  data: any;
+  data: any = [];
   deleteId: any;
   key: any;
   reverse: boolean = true;
   p: number = 1;
   startDate: String;
   endDate: String;
+
+  currentLoginUser: any;
 
   @ViewChild('content') content: any;
 
@@ -53,7 +55,15 @@ export class UsersComponent implements OnInit {
   refId: any;
 
   ngOnInit(): void {
+    this.tokenization();
     this.getUserList();
+  }
+  
+  async tokenization() {
+    const token = await this.authService.getToken();
+    const decodedToken = await this.authService.getDecodedToken(token);
+    this.currentLoginUser = decodedToken.data;
+    console.log(this.currentLoginUser);
   }
 
   changeStartDate(e: any) {
@@ -79,16 +89,20 @@ export class UsersComponent implements OnInit {
   getUserList() {
     this.authService.getUsers().subscribe(
       (data) => {
-        this.data = data;
-        console.log("data---->", this.data);
-        this.data.forEach((element) => {
-          element.cityName = element.city.city;
-          element.SubLocation = element.location[0].location;
+        // this.data = data;
 
+        data.forEach((element) => {
+          if(this.currentLoginUser.access === "city_admin") {
+            if(this.currentLoginUser.city.city !== element.city.city) {
+              return;
+            }
+          }
+          element.cityName = element.city.city;
           element.SubLocation = [];
           for (let i = 0; i < element.location.length; i++) {
             element.SubLocation.push(element.location[i]?.location);
           }
+          this.data.push(element);
        });
 
         console.log("User Get Response", this.data);

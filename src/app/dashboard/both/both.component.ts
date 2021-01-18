@@ -14,7 +14,7 @@ import { formatDate } from "@angular/common";
 export class BothComponent implements OnInit {
 
   @ViewChild('content') content: any;
-  user: any;
+  user: any = [];
   savedId: any;
 
   withAutofocus = `<button type="button" ngbAutofocus class="btn btn-danger"
@@ -23,7 +23,9 @@ export class BothComponent implements OnInit {
   key: any;
   reverse: boolean = true;
   p: number = 1;
-  data: any;
+  data: any = [];
+
+  currentLoginUser: any;
 
   constructor(
     private router: Router,
@@ -66,7 +68,15 @@ export class BothComponent implements OnInit {
   endDate: String;
 
   ngOnInit(): void {
+    this.tokenization();
     this.getAllList();
+  }
+  
+  async tokenization() {
+    const token = await this.authService.getToken();
+    const decodedToken = await this.authService.getDecodedToken(token);
+    this.currentLoginUser = decodedToken.data;
+    console.log(this.currentLoginUser);
   }
 
   changeStartDate(e: any) {
@@ -80,14 +90,14 @@ export class BothComponent implements OnInit {
   getAllList() {
     this.authService.getAll().subscribe(
       (data) => {
-        this.user = data.inventories;
-        this.data = data.inventories;
-        // console.log("data---->", this.data);
-        this.data.forEach((element) => {
+        // this.user = data.inventories;
+        data = data.inventories;
+        
+        data.forEach((element) => {
           element.assignedTo = [];
-          element.added_ByName = element.added_By?.fullname;
+          element.added_ByName = element.added_By.fullname;
           element.cityName = element.city[0]?.city;
-          element.SubLocation = element.location[0]?.location;
+          element.locationName = element.location[0]?.location;
           if (element.demand_price != null) {
             element.demand = element.demand_price;
           } else if (element.max_price) {
@@ -95,12 +105,35 @@ export class BothComponent implements OnInit {
           } else if (element.min_price) {
             element.demand = element.min_price;
           }
-          console.log(element.demand);
-          for (let i = 0; i < element.assigned_history.length; i++)
-            element.assignedTo[i] = element.assigned_history[i]?.fullname;
-        });
 
-        console.log("Server response: ", data);
+          for (let i = 0; i < element.assigned_history?.length; i++) {
+            if (element.assigned_history[i]?.fullname === "") continue;
+            element.assignedTo[i] = element.assigned_history[i]?.fullname;
+          }
+
+          if(this.currentLoginUser.access === "city_admin") {
+            element.city.forEach(city => {
+              if(this.currentLoginUser.city.city === city.city) {
+                this.user.push(element);
+                return;
+              }
+            });
+          } else if(this.currentLoginUser.access === "agent") {
+            if(this.currentLoginUser.userId === element.added_By.userId) {
+              this.user.push(element);
+              return;
+            } else {
+              element.assigned_history.forEach(history => {
+                if(this.currentLoginUser.userId === history?.userId) {
+                  this.user.push(element);
+                  return;
+                }
+              });
+            }
+          } else {
+            this.user.push(element);
+          }
+        });
       },
       (error) => {
         console.error(error);

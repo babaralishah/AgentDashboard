@@ -59,9 +59,10 @@
                                     <tr
                                         *ngFor="let user of user | filterlist: selectedOption:refId | dateFilter: startDate:endDate | paginate:{itemsPerPage:10,currentPage:p}; ">
                                         <td> <span *ngIf="user.priority == 'Super Hot' else hot"><img class="super-hot"
-                                                    src="\assets\icons\red-flag.png"></span>
+                                                    src="\assets\icons\super_hot.svg"></span>
+                                                    
                                             <ng-template #hot>
-                                                <img class="super-hot" src="\assets\icons\flag_yellow.png">
+                                                <img class="super-hot" src="\assets\icons\hot.svg">
                                             </ng-template>
                                         </td>
                                         <td>{{ user.refId }}</td>
@@ -104,7 +105,7 @@
                                         </ng-template>
                                         <td>
                                             <i class="fa fa-trash icon" (click)="confirmID(user._id)" data-toggle="modal"
-                                                data-target="#exampleModal1"></i>
+                                                data-target="#exampleModal1" *ngIf="currentLoginUser?.access !== 'agent'"></i>
             
                                             <i class="fas fa-exchange-alt ml-2" (click)="setCurrentRow(user)" data-toggle="modal"
                                                 data-target="#myModal"></i>

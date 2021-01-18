@@ -54,8 +54,8 @@ export class DashboardComponent implements OnInit {
       this.widthEmittedEvent.emit(280);
     } else {
       this.mini = true;
-      this.sidebar.nativeElement.style.width = '100px'
-      this.widthEmittedEvent.emit(100);
+      this.sidebar.nativeElement.style.width = '70px'
+      this.widthEmittedEvent.emit(70);
     }
   }
 }

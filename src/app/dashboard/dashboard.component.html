@@ -1,9 +1,13 @@
-<!-- Sidebar -->
 <div class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar"
     (mouseover)="toggleSidebar()" (mouseout)="toggleSidebar()" #sidebar>
     <ul>
 
         <div class="sidebar-header">
+            <!-- <div class="">
+                <div class="" style="margin-left: -10px;">
+                    <span class="user-role">{{ tokendata?.access | titlecase}}</span>
+                </div>
+            </div> -->
             <div class="user-pic">
                 <img class="img-responsive img-rounded" src="https://bootdey.com/img/Content/avatar/avatar6.png" />
             </div>
@@ -24,7 +28,7 @@
                 <span>User Profile</span>
             </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="tokendata?.access  !== 'agent'">
             <a class="nav-link" routerLink="/agents">
                 <i class="fa fa-users"></i>
                 <span>Agents</span>
@@ -67,29 +71,11 @@
             </a>
         </li>
         <hr class="sidebar-divider" />
-        <!-- Sidebar Toggler (Sidebar) -->
-        <!-- <div class="text-center d-none d-md-inline">
-            <button class="rounded-circle border-0" id="sidebarToggle"></button>
-        </div> -->
-
         <div class="sidebar-footer">
             <a routerLink="/" *ngIf="isLogin()" (click)="logout()">
                 <i class="fa fa-lock"></i>
                 <span class="badge-logout">Logout</span>
             </a>
-            <!-- <a routerLink="/" *ngIf="isLogin()" (click)="logout()">
-                <i class="fa fa-lock"></i>
-                <span class="badge badge-pill badge-warning notification">Log out</span>
-            </a> -->
-            <!-- <a routerLink="/profile">
-                <i class="fa fa-bell"></i>
-                <span class="badge badge-pill badge-success notification">3</span>
-            </a>
-            <a href="#">
-                <i class="fa fa-cog"></i>
-                <span class="badge-sonar"></span>
-            </a> -->
         </div>
     </ul>
-    <!-- End of Sidebar -->
 </div>

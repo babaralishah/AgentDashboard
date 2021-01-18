@@ -13,15 +13,17 @@ import { formatDate } from "@angular/common";
 export class AssignedLeadsComponent implements OnInit {
 
   @ViewChild('content') content: any;
-  user: any;
+  user: any = [];
   deleteId: any;
   row: any = [];
   key: any;
   reverse: boolean = true;
   p: number = 1;
-  data: any;
+  data: any = [];
   startDate: String;
   endDate: String;
+
+  currentLoginUser: any;
 
   constructor(
     private router: Router,
@@ -71,7 +73,15 @@ export class AssignedLeadsComponent implements OnInit {
   refId2: any;
 
   ngOnInit(): void {
+    this.tokenization();
     this.getAllList();
+  }
+  
+  async tokenization() {
+    const token = await this.authService.getToken();
+    const decodedToken = await this.authService.getDecodedToken(token);
+    this.currentLoginUser = decodedToken.data;
+    console.log(this.currentLoginUser);
   }
 
   changeStartDate(e: any) {
@@ -87,16 +97,15 @@ export class AssignedLeadsComponent implements OnInit {
   getAllList() {
     this.authService.getAllAssignedLeads().subscribe(
       (data) => {
-        this.user = data;
+        // this.user = data;
 
-        this.data = data;
-        console.log(this.data);
-
-        this.data.forEach((element) => {
+        // this.data = data;
+        
+        data.forEach((element) => {
           element.assignedTo = [];
           element.added_ByName = element.added_By.fullname;
           element.cityName = element.city[0]?.city;
-          element.SubLocation = element.location[0]?.location;
+          element.locationName = element.location[0]?.location;
           if (element.demand_price != null) {
             element.demand = element.demand_price;
           } else if (element.max_price) {
@@ -104,9 +113,34 @@ export class AssignedLeadsComponent implements OnInit {
           } else if (element.min_price) {
             element.demand = element.min_price;
           }
-          console.log(element.demand);
-          for (let i = 0; i < element.assigned_history.length; i++)
+
+          for (let i = 0; i < element.assigned_history?.length; i++) {
+            if (element.assigned_history[i]?.fullname === "") continue;
             element.assignedTo[i] = element.assigned_history[i]?.fullname;
+          }
+
+          if(this.currentLoginUser.access === "city_admin") {
+            element.city.forEach(city => {
+              if(this.currentLoginUser.city.city === city.city) {
+                this.user.push(element);
+                return;
+              }
+            });
+          } else if(this.currentLoginUser.access === "agent") {
+            if(this.currentLoginUser.userId === element.added_By.userId) {
+              this.user.push(element);
+              return;
+            } else {
+              element.assigned_history.forEach(history => {
+                if(this.currentLoginUser.userId === history?.userId) {
+                  this.user.push(element);
+                  return;
+                }
+              });
+            }
+          } else {
+            this.user.push(element);
+          }
         });
       },
       (error) => {

@@ -535,7 +535,7 @@
                                 <div class="col-3 form-group">
                                     <b>Comment</b>
                                     <label for="exampleFormControlTextarea1"></label>
-                                    <textarea class="form-control" formControlName="comment" placeholder="Comment here"></textarea>
+                                    <textarea class="form-control" formControlName="comments" placeholder="Comment here"></textarea>
                                 </div>
                             </div>
                 
@@ -557,7 +557,7 @@
                                                 <input type="radio" formControlName="assigned_type" value="Admin">
                                                 Super Admin
                                             </label>
-                                            <label *ngIf="token.access == 'city_admin' || token.access == 'super_admin'"
+                                            <label
                                                 class="btn btn-primary"
                                                 [class.active]="addinventoryForm.get('assigned_type').value === 'city_admin'">
                                                 <input type="radio" formControlName="assigned_type" value="city_admin">

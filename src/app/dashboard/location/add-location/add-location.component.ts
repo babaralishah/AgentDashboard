@@ -22,7 +22,7 @@ export class AddLocationComponent implements OnInit {
       subLocation: "",
     },
   ];
-  changeType: any;
+  changeType: any = 'location';
   location: any;
   constructor(
     public formBuilder: FormBuilder,

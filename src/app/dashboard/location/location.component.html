@@ -7,30 +7,29 @@
             <div class="container-fluid">
                 <h1 class="h3 mb-2 text-gray-800">Location</h1>
 
+                <div class="row mb-3 mt-5">
+                    <div class="col-12">
+                        <button class="btn btn-primary" routerLink="/add-location">Add New</button>
+                    </div>
+                </div>
                 <div class="row">
-                    <div class="col-12 mb-4 mt-4">
-                        <div class="" *ngIf="currentLoginUser?.access !== 'agent'">
-                            <button class="btn btn-primary" routerLink="/add-location">Add New</button>
-                        </div>
-                        <br>
-                        <div class="">
-                            <div class="card-body row">
-                                <div class="col-3">
-                                    <ng-select [items]="options" bindLabel="name" bindValue="value" class="mr-2 ml-2" placeholder="Filter By" [(ngModel)]="selectedOption" (change)="optionChange($event)" [clearable]="false">
-                                    </ng-select>
-                                </div>
-                                <div class="col-3">
-                                    <input type="text" class="form-control ml-2" placeholder="Search {{ placeholder }}" [(ngModel)]="refId" />
-                                </div>
+                    <div class="col-12 col-sm-6 col-lg-3 mb-3">
+                        <ng-select [items]="options" bindLabel="name" bindValue="value" placeholder="Filter By" [(ngModel)]="selectedOption" (change)="optionChange($event)" [clearable]="false">
+                        </ng-select>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3 mb-3">
+                        <input type="text" class="form-control" placeholder="Search {{ placeholder }}" [(ngModel)]="refId" />
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="btn-container">
+                        <button onclick="window.print()" class="btn btn-primary">Print</button>
+                        <button (click)="exportTOExcel()" class="btn btn-primary">Excel</button>
+                    </div>
+                </div>
 
-                                <div class="col-1">
-                                </div>
-                                <div class="col-5">
-                                    <button onclick="window.print()" class="btn btn-primary">Print</button>&nbsp; &nbsp; &nbsp;
-                                    <button (click)="exportTOExcel()" class="btn btn-primary">Excel</button>
-                                </div>
-                            </div>
-                        </div>
+                <div class="row">
+                    <div class="col-12">
                         <div class="table-container mb-5 mt-4">
                             <table class="table table-hover">
                                 <thead>

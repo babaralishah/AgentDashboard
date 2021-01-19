@@ -9,8 +9,16 @@
                 <div class="row">
                     <div class="col-12 col-md-10 offset-md-1 mb-4 mt-4">
                         <div>
-                            <button *ngIf="changeType != 'subLocation'" class="btn btn-primary" (click)="setChangeType('location')">Location</button>
-                            <button *ngIf="changeType != 'location'" class="btn btn-primary ml-3" (click)="setChangeType('subLocation')">Sub Location</button>
+
+                            <div class="radio mb-5">
+                                <div class="btn-group btn-group-toggle">
+                                    <button [class.active]="changeType === 'location'" class="btn btn-primary"
+                                        (click)="setChangeType('location')">Location</button>
+                                    <button *ngIf="!user" [class.active]="changeType === 'subLocation'" class="btn btn-primary ml-3"
+                                        (click)="setChangeType('subLocation')">Sub Location</button>
+
+                                </div>
+                            </div>
                         </div>
                         <form class="form-register" [formGroup]="addLocationForm">
                             <div *ngIf="changeType == 'location'">
@@ -22,14 +30,20 @@
 
                                         <div class="radio">
                                             <div class="btn-group btn-group-toggle">
-                                                <label class="btn btn-primary" [class.active]="addLocationForm.get('city').value === 'Islamabad'">
-                                                    <input type="radio" formControlName="city" value="Islamabad"> Islamabad
+                                                <label class="btn btn-primary"
+                                                    [class.active]="addLocationForm.get('city').value === 'Islamabad'">
+                                                    <input type="radio" formControlName="city" value="Islamabad">
+                                                    Islamabad
                                                 </label>
-                                                <label class="btn btn-primary ml-3" [class.active]="addLocationForm.get('city').value === 'Rawalpindi'">
-                                                    <input type="radio" formControlName="city" value="Rawalpindi"> Rawalpindi
+                                                <label class="btn btn-primary ml-3"
+                                                    [class.active]="addLocationForm.get('city').value === 'Rawalpindi'">
+                                                    <input type="radio" formControlName="city" value="Rawalpindi">
+                                                    Rawalpindi
                                                 </label>
-                                                <label class="btn btn-primary ml-3" [class.active]="addLocationForm.get('city').value === 'Peshawar'">
-                                                    <input type="radio" formControlName="city" value="Peshawar"> Peshawar
+                                                <label class="btn btn-primary ml-3"
+                                                    [class.active]="addLocationForm.get('city').value === 'Peshawar'">
+                                                    <input type="radio" formControlName="city" value="Peshawar">
+                                                    Peshawar
                                                 </label>
 
                                             </div>
@@ -60,7 +74,8 @@
                                 <div class="row mt-3">
                                     <div class="col-md-3 col-sm-3 form-group">
                                         <div class=""><br> <b>Add new Location</b>
-                                            <input formControlName="location" class="form-control" type="text" placeholder="Location " />
+                                            <input formControlName="location" class="form-control" type="text"
+                                                placeholder="Location " />
                                         </div>
                                     </div>
                                 </div>
@@ -68,7 +83,9 @@
 
                                     <div class="col-md-3 col-sm-3 form-group">
                                         <div class=""><br> <b>Add new Sub Location</b>
-                                            <input [(ngModel)]="subLocation[0].subLocation" [ngModelOptions]="{standalone: true}" class="form-control" type="text" placeholder="Sub-Location " />
+                                            <input [(ngModel)]="subLocation[0].subLocation"
+                                                [ngModelOptions]="{standalone: true}" class="form-control" type="text"
+                                                placeholder="Sub-Location " />
                                         </div>
                                     </div>
                                 </div>
@@ -86,11 +103,16 @@
                                 <div class="row mt-3">
 
                                     <div class="col-3">
-                                        <ng-select class="ng-select" formControlName="city" [items]="cities" bindLabel="city" bindValue="city" placeholder="Select City" (change)="changeCity($event)">
+                                        <ng-select class="ng-select" formControlName="city" [items]="cities"
+                                            bindLabel="city" bindValue="city" placeholder="Select City"
+                                            (change)="changeCity($event)">
                                         </ng-select>
                                     </div>
                                     <div class="col-3">
-                                        <ng-select class="ng-select" formControlName="location" [(ngModel)]="selectStringLocations" [items]="locations" bindLabel="location" bindValue="location" (change)="changeLocation($event)" placeholder="Select Location">
+                                        <ng-select class="ng-select" formControlName="location"
+                                            [(ngModel)]="selectStringLocations" [items]="locations" bindLabel="location"
+                                            bindValue="location" (change)="changeLocation($event)"
+                                            placeholder="Select Location">
                                         </ng-select>
                                     </div>
                                 </div>
@@ -98,7 +120,9 @@
 
                                     <div class="col-md-3 col-sm-3 form-group">
                                         <div class=""><br> <b>Add new Sub Location</b>
-                                            <input [(ngModel)]="subLocation[0].subLocation" [ngModelOptions]="{standalone: true}" class="form-control" type="text" placeholder="Sub-Location " />
+                                            <input [(ngModel)]="subLocation[0].subLocation"
+                                                [ngModelOptions]="{standalone: true}" class="form-control" type="text"
+                                                placeholder="Sub-Location " />
                                         </div>
                                     </div>
                                 </div>

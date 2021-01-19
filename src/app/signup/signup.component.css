@@ -98,7 +98,7 @@ h2 {
 }
 
 .emailInput {
-    margin-left: 16px;
+    margin-left: 10px;
 }
 
 .input-field {
@@ -180,9 +180,11 @@ h2 {
     cursor: pointer;
     margin-left: 60px;
 }
+
 .contentCollapsed {
     margin-left: 60px;
 }
+
 
 /* @media only screen and (max-width: 1750px) {
     .register {

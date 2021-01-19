@@ -16,16 +16,13 @@
                         <div class="">
                             <div class="card-body row">
                                 <div class="col-3">
-                                    <ng-select [items]="options" bindLabel="name" bindValue="value" class="mr-2 ml-2"
-                                        placeholder="Filter By" [(ngModel)]="selectedOption" (change)="optionChange($event)"
-                                        [clearable]="false">
+                                    <ng-select [items]="options" bindLabel="name" bindValue="value" class="mr-2 ml-2" placeholder="Filter By" [(ngModel)]="selectedOption" (change)="optionChange($event)" [clearable]="false">
                                     </ng-select>
                                 </div>
                                 <div class="col-3">
-                                    <input type="text" class="form-control ml-2" placeholder="Search {{ placeholder }}"
-                                        [(ngModel)]="refId" />
+                                    <input type="text" class="form-control ml-2" placeholder="Search {{ placeholder }}" [(ngModel)]="refId" />
                                 </div>
-        
+
                                 <div class="col-1">
                                 </div>
                                 <div class="col-5">
@@ -43,42 +40,38 @@
                                         <th scope="col">Location</th>
                                         <th scope="col">Sub Locations</th>
                                         <th scope="col" *ngIf="currentLoginUser?.access !== 'agent'">Operations</th>
-        
+
                                     </tr>
                                 </thead>
-        
+
                                 <tbody>
-        
-                                    <tr
-                                        *ngFor="let location of locations | filterlist: selectedOption:refId | orderBy: key: reverse | paginate:{itemsPerPage:50,currentPage:p};">
+
+                                    <tr *ngFor="let location of locations | filterlist: selectedOption:refId | orderBy: key: reverse | paginate:{itemsPerPage:50,currentPage:p};">
                                         <td>{{ location?._id }}</td>
                                         <td>{{ location?.cityName }}</td>
                                         <td>
                                             <span>{{ location?.location | titlecase }}</span>
                                         </td>
                                         <td *ngIf="location?.subLocations else LocationBlock">
-        
+
                                             <span *ngFor="let sublocation of location?.subLocations">{{ sublocation?.subLocation
                                                 }}, </span>
                                         </td>
                                         <ng-template #LocationBlock>
                                             {{'N/A'}}
                                         </ng-template>
-                                        <td *ngIf="currentLoginUser?.access !== 'agent'"><i class="fa fa-edit icon" (click)="setUser(location)"></i>
-                                            <a (click)="setUser(location)" role="button"></a>
-        
-                                            <i class="fa fa-trash icon" (click)="confirmID(location._id)" data-toggle="modal"
-                                                data-target="#exampleModal1"></i>
-        
+                                        <td *ngIf="currentLoginUser?.access !== 'agent'"><i class="fa fa-edit icon" (click)="setLocation(location)"></i>
+                                            <a (click)="setLocation(location)" role="button"></a>
+
+                                            <i class="fa fa-trash icon" (click)="confirmID(location._id)" data-toggle="modal" data-target="#exampleModal1"></i>
+
                                         </td>
-                                        <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
-                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title" id="exampleModalLabel">Delete Confirmation</h5>
-                                                        <button type="button" class="close" data-dismiss="modal"
-                                                            aria-label="Close">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
@@ -89,8 +82,7 @@
                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">
                                                             Close
                                                         </button>
-                                                        <button type="button" class="btn btn-danger" data-dismiss="modal"
-                                                            (click)="deleteLocation">
+                                                        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteLocation()">
                                                             Delete
                                                         </button>
                                                     </div>
@@ -101,7 +93,7 @@
                                 </tbody>
                             </table>
                         </div>
-        
+
                         <pagination-controls (pageChange)="p = $event"></pagination-controls>
                     </div>
                 </div>

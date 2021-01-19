@@ -12,8 +12,7 @@ import * as mapboxgl from "mapbox-gl";
   styleUrls: ["./add-inventories.component.css"],
 })
 export class AddInventoriesComponent implements OnInit {
-
-  @ViewChild('content') content: any;
+  @ViewChild("content") content: any;
   agentAssignedNames: any = [];
   superAdminAssignedNames: any = [];
   cityAdminAssignedNames: any = [];
@@ -76,7 +75,6 @@ export class AddInventoriesComponent implements OnInit {
   demandValueVariable1: any;
   demandValueVariable2: any;
   agentListFull: any = [];
-  // assignLeadData: any[];
   assignLeadData = [
     { fullname: "" },
     { userId: "" },
@@ -91,7 +89,7 @@ export class AddInventoriesComponent implements OnInit {
     private authService: AuthenticationService,
     private router: Router,
     private toastr: ToastrService
-  ) { }
+  ) {}
   get Property_typename() {
     return this.addinventoryForm.get("prop_typename");
   }
@@ -105,13 +103,11 @@ export class AddInventoriesComponent implements OnInit {
     this.user = this.authService.getUser();
     if (this.user) {
       console.log("User1: ", this.user);
-
       this.authService.removeUser();
     }
     this.form_title = this.authService.getFormTitle();
     this.authService.removeFormTitle();
     this.formDeclare();
-
     this.addinventoryForm.patchValue({ form_title: this.form_title });
     this.getCities();
     this.getUserList();
@@ -167,26 +163,24 @@ export class AddInventoriesComponent implements OnInit {
   getAllUsersList() {
     this.authService.getUsers().subscribe(
       (data) => {
-
         for (var i = 0; i < data.length; i++) {
-
           if (this.token.access === "city_admin") {
             if (data[i].access == "city_admin") {
-              if(this.token.city.city === data[i].city.city) {
+              if (this.token.city.city === data[i].city.city) {
                 this.cityAdminList.push(data[i]);
               }
             } else if (data[i].access == "agent") {
-              if(this.token.city.city === data[i].city.city) {
+              if (this.token.city.city === data[i].city.city) {
                 this.agentList.push(data[i]);
               }
             }
           } else if (this.token.access === "agent") {
             if (data[i].access == "city_admin") {
-              if(this.token.city.city === data[i].city.city) {
+              if (this.token.city.city === data[i].city.city) {
                 this.cityAdminList.push(data[i]);
               }
             } else if (data[i].access == "agent") {
-              if(this.token.city.city === data[i].city.city) {
+              if (this.token.city.city === data[i].city.city) {
                 this.agentList.push(data[i]);
               }
             } else if (data[i].access == "super_admin") {
@@ -475,7 +469,10 @@ export class AddInventoriesComponent implements OnInit {
   getCities() {
     this.authService.getCities().subscribe(
       (cities) => {
-        if(this.token.access === 'city_admin' || this.token.access === 'agent') {
+        if (
+          this.token.access === "city_admin" ||
+          this.token.access === "agent"
+        ) {
           if (this.token?.city.city == "Islamabad") {
             this.city.push(cities[2]);
             this.cities = this.city;
@@ -484,7 +481,7 @@ export class AddInventoriesComponent implements OnInit {
             this.cities = this.city;
           } else if (this.token?.city.city == "Peshawar") {
             this.city.push(cities[0]);
-          }  
+          }
         } else {
           this.cities = cities;
         }

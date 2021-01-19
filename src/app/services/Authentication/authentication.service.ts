@@ -23,8 +23,6 @@ export class AuthenticationService {
 
   // Getting cities names from api
   getCities() {
-    console.log('getcities');
-    
     return this.httpClient.get<any>(`${this.url}/city`, {
       headers: new HttpHeaders().set("Authorization", this.getToken()),
     });
@@ -42,6 +40,23 @@ export class AuthenticationService {
       headers: new HttpHeaders().set("Authorization", this.getToken()),
     });
   }
+  // Add new Sub Location
+  addSubLocation(id: any, user: any) {
+    return this.httpClient.put<any>(`${this.url}/location/${id}`, user, {
+      headers: new HttpHeaders().set("Authorization", this.getToken()),
+    });
+  }
+
+  // Delete Single Location
+  deleteLocation(id) {
+    return this.httpClient.delete<any>(
+      `https://my-asasa.herokuapp.com/location/${id}`,
+      {
+        headers: new HttpHeaders().set("Authorization", this.getToken()),
+      }
+    );
+  }
+
   // Assign lead to the Agent
   editLeadToAgent(id: any, user: any) {
     return this.httpClient.put(this.url + `/assign/${id}`, user, {
@@ -60,7 +75,8 @@ export class AuthenticationService {
   // API to delete the assigned leads
   deleteAssignedLeads(id: any) {
     return this.httpClient.delete<any>(
-      `https://my-asasa.herokuapp.com/assign/${id}`, {
+      `https://my-asasa.herokuapp.com/assign/${id}`,
+      {
         headers: new HttpHeaders().set("Authorization", this.getToken()),
       }
     );
@@ -122,7 +138,8 @@ export class AuthenticationService {
   deleteUser(id) {
     console.log("Calling deleteUser", id);
     return this.httpClient.delete<any>(
-      `https://my-asasa.herokuapp.com/users/${id}`, {
+      `https://my-asasa.herokuapp.com/users/${id}`,
+      {
         headers: new HttpHeaders().set("Authorization", this.getToken()),
       }
     );
@@ -161,7 +178,8 @@ export class AuthenticationService {
   deleteInventory(id) {
     console.log("Calling deleteInventory", id);
     return this.httpClient.delete<any>(
-      `https://my-asasa.herokuapp.com/inventory/${id}`, {
+      `https://my-asasa.herokuapp.com/inventory/${id}`,
+      {
         headers: new HttpHeaders().set("Authorization", this.getToken()),
       }
     );
@@ -183,7 +201,8 @@ export class AuthenticationService {
   updateUser(id, data) {
     return this.httpClient.put(
       `https://my-asasa.herokuapp.com/users/${id}`,
-      data, {
+      data,
+      {
         headers: new HttpHeaders().set("Authorization", this.getToken()),
       }
     );
@@ -193,7 +212,8 @@ export class AuthenticationService {
     console.log("Calling updateInventory", id);
     return this.httpClient.put(
       `https://my-asasa.herokuapp.com/inventory/${id}`,
-      data, {
+      data,
+      {
         headers: new HttpHeaders().set("Authorization", this.getToken()),
       }
     );

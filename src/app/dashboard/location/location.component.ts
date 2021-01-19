@@ -16,14 +16,13 @@ export class LocationComponent implements OnInit {
   key: any;
   reverse: boolean = true;
   p: number = 1;
-  // placeholder: any;
-  // refId: string;
   locations: any = [];
   city: any;
 
   currentLoginUser: any;
 
-  @ViewChild('content') content: any;
+  @ViewChild("content") content: any;
+  deletedId: any;
 
   constructor(
     private authService: AuthenticationService,
@@ -42,7 +41,7 @@ export class LocationComponent implements OnInit {
       placeholder: "City",
     },
     {
-      value: "SubLocation",
+      value: "SubLocationName",
       name: "Filter By Sub-Location",
       placeholder: "Location",
     },
@@ -54,22 +53,22 @@ export class LocationComponent implements OnInit {
     this.tokenization();
     this.getCities();
   }
-  
+
   async tokenization() {
     const token = await this.authService.getToken();
     const decodedToken = await this.authService.getDecodedToken(token);
     this.currentLoginUser = decodedToken.data;
     console.log(this.currentLoginUser);
   }
-  
+
   optionChange(e: any) {
     this.placeholder = e.placeholder;
     this.refId = "";
     console.log(this.selectedOption);
   }
-  setUser(user: any) {
+  setLocation(user: any) {
     this.authService.setUser(user);
-    this.router.navigateByUrl("/register");
+    this.router.navigateByUrl("/add-location");
   }
 
   // Calling Api to get the Cities
@@ -93,24 +92,27 @@ export class LocationComponent implements OnInit {
         locations.forEach((element, index) => {
           const cityName = this.getCityName(element.cityId);
 
-          if(this.currentLoginUser.access === "city_admin" || this.currentLoginUser.access === "agent") {
-            if(this.currentLoginUser.city.city !== cityName) {
+          if (
+            this.currentLoginUser.access === "city_admin" ||
+            this.currentLoginUser.access === "agent"
+          ) {
+            if (this.currentLoginUser.city.city !== cityName) {
               return;
             }
           }
-          
           element.cityName = cityName;
           element.locationName = locations[index].location;
-          element.SubLocation = [];
-          if(element.subLocations) {
+          element.SubLocationName = [];
+          if (element.subLocations) {
             for (let i = 0; i < element.subLocations.length; i++) {
-              element.SubLocation.push(element.subLocations[i]?.subLocation);
-            }  
+              element.SubLocationName.push(
+                element.subLocations[i]?.subLocation
+              );
+            }
           }
-          
+
           this.locations.push(element);
         });
-        // this.locations = locations;
         console.log(this.locations);
       },
       (err) => {
@@ -119,13 +121,34 @@ export class LocationComponent implements OnInit {
     );
   }
 
-  confirmID(id: any) {}
+  deleteLocation() {
+    console.log(this.deletedId);
 
-  // Function to delete the single inventory
-  deletelocation() {}
-  deleteId(deleteId: any) {
-    throw new Error("Method not implemented.");
+    this.authService.deleteLocation(this.deletedId).subscribe((data) => {
+      console.log(data);
+      const code = data.code;
+      if (code == 200) {
+        this.toastr.success(data.message, "Success", {
+          timeOut: 5000,
+        });
+        // for (let i = 0; i < this.locations; i++) {
+        //   if (this.locations[i]._id === this.deletedId) {
+        //     this.locations.splice(i, 1);
+        //     i--;
+        //   }
+        // }
+        // this.getCities();
+      }
+    });
   }
+
+  confirmID(id: any) {
+    this.deletedId = id;
+  }
+
+  // deleteId(deleteId: any) {
+  //   this.deletedId = deleteId;
+  // }
 
   getCityName(cityId: any) {
     for (let i = 0; i < this.city.length; i++) {

@@ -6,45 +6,55 @@
 
             <div class="container-fluid">
                 <h1 class="h3 mb-2 text-gray-800">Users</h1>
-
+                                
+                <div class="row mb-3 mt-5">
+                    <div class="col-12">
+                        <button class="btn btn-primary" routerLink="/register">Add New</button>
+                    </div>
+                </div>
                 <div class="row">
-                    <div class="col-12 mb-4 mt-4">
-                        <div class="mb-3">
-                            <button class="btn btn-primary" routerLink="/register">Add New</button>
-                        </div>
-                        <div class="">
-                            <div class="card-body row">
-                                <div class="col-3">
-                                    <ng-select [items]="options" bindLabel="name" bindValue="value" class="mr-2 ml-2"
-                                        placeholder="Filter By" [(ngModel)]="selectedOption"
-                                        (change)="optionChange($event)" [clearable]="false">
-                                    </ng-select>
-                                </div>
-                                <div class="col-3">
-                                    <input type="text" class="form-control ml-2" placeholder="Search {{ placeholder }}"
-                                        [(ngModel)]="refId" />
-                                </div>
-                                <div class="ml-5">
-                                    <input type="date" class="form-control" placeholder="Start Date" (change)="changeStartDate($event)">
-                                </div>
-                                <div class="ml-5">
-                                    <input type="date" class="form-control" placeholder="End Date" (change)="changeEndDate($event)">
-                                </div>
-
-                                <div class="col-1">
-                                </div>
-                                <div class="col-5">
-                                    <button onclick="window.print()" class="btn btn-primary">Print</button>&nbsp; &nbsp;
-                                    &nbsp;
-                                    <button (click)="exportTOExcel()" class="btn btn-primary">Excel</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="table-container mb-5 mt-4">
+                    <div class="col-12 col-sm-6 col-xl-2 mb-3">
+                        <ng-select [items]="options" bindLabel="name" bindValue="value" placeholder="Filter By"
+                            [(ngModel)]="selectedOption" (change)="optionChange($event)" [clearable]="false">
+                        </ng-select>
+                    </div>
+                    <div class="col-12 col-sm-6 col-xl-2 mb-3">
+                        <input type="text" class="form-control" placeholder="Search {{ placeholder }}"
+                            [(ngModel)]="refId" />
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3 col-xl-2 mb-3">
+                        <ng-select class="ng-select inputs2" [items]="cities" bindLabel="city" bindValue="city"
+                            placeholder="Select City" (change)="changeCity($event)">
+                        </ng-select>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3 col-xl-2 mb-3">
+                        <ng-select class="ng-select inputs2" [items]="locations" bindLabel="location"
+                            bindValue="location" placeholder="Select Location" (change)="changeLocation($event)">
+                        </ng-select>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3 col-xl-2 mb-3">
+                        <input type="date" class="form-control" placeholder="Start Date"
+                            (change)="changeStartDate($event)">
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3 col-xl-2 mb-3">
+                        <input type="date" class="form-control" placeholder="End Date"
+                            (change)="changeEndDate($event)">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="btn-container">
+                        <button onclick="window.print()" class="btn btn-primary">Print</button>
+                        <button (click)="exportTOExcel()" class="btn btn-primary">Excel</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="table-container mb-5">
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th (click)="sort('id')" scope="col">User ID <i class="fa fa-sort"></i></th>
+                                        <th (click)="sort('id')" scope="col">User ID <i class="fa fa-sort"></i>
+                                        </th>
                                         <th scope="col">Full Name</th>
                                         <th scope="col">Contact #</th>
                                         <th scope="col">Location Assigned</th>
@@ -59,7 +69,7 @@
                                 <tbody>
 
                                     <tr
-                                        *ngFor="let user of data | filterlist: selectedOption:refId | dateFilter: startDate:endDate | orderBy: key: reverse | paginate:{itemsPerPage:10,currentPage:p};">
+                                        *ngFor="let user of data | filterlist: selectedOption:refId | tableFilter: city | LocationFilter:location | dateFilter: startDate:endDate | orderBy: key: reverse | paginate:{itemsPerPage:10,currentPage:p};">
                                         <td>{{ user?.userId }}</td>
                                         <td>
                                             <span *ngIf="user?.fullname">{{ user?.fullname | titlecase }}</span>
@@ -104,7 +114,7 @@
                                                             Close
                                                         </button>
                                                         <button type="button" class="btn btn-danger"
-                                                            data-dismiss="modal" (click)="deleteLead()">
+                                                            data-dismiss="modal" (click)="deleteUser()">
                                                             Delete
                                                         </button>
                                                     </div>

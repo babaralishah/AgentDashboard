@@ -7,35 +7,54 @@
             <div class="container-fluid">
                 <h1 class="h3 mb-2 text-gray-800">Both Leads/Inventory Table</h1>
 
+                <div class="row mb-3 mt-5">
+                    <div class="col-12">
+                        <button class="btn btn-primary" (click)="setFormTitle('Both')">Add New</button>
+                    </div>
+                </div>
                 <div class="row">
-                    <div class="col-12 mb-4 mt-4">
-                        <div class="">
-                            <button class="btn btn-primary" (click)="setFormTitle('Both')">Add New</button>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <div class="col-3">
-                                <ng-select [items]="options" bindLabel="name" bindValue="value" class="mr-2 ml-2"
-                                    placeholder="Filter By" [(ngModel)]="selectedOption" (change)="optionChange($event)"
-                                    [clearable]="false">
-                                </ng-select>
-                            </div>
-                            <div class="col-3">
-                                <input type="text" class="form-control ml-2" placeholder="Search {{ placeholder }}"
-                                    [(ngModel)]="refId" />
-                            </div>
-                            <div class="ml-5">
-                                <input type="date" class="form-control" placeholder="Start Date" (change)="changeStartDate($event)">
-                            </div>
-                            <div class="ml-5">
-                                <input type="date" class="form-control" placeholder="End Date" (change)="changeEndDate($event)">
-                            </div>
-                            <div class="col-1"></div>
-                            <div class="col-5">
-                                <button onclick="window.print()" class="btn btn-primary">Print</button> &nbsp; &nbsp; &nbsp;
-                                <button (click)="exportTOExcel()" class="btn btn-primary">Excel</button>
-                            </div>
-                        </div>
+                    <div class="col-12 col-sm-6 col-lg-3 mb-3">
+                        <ng-select [items]="options" bindLabel="name" bindValue="value"
+                            placeholder="Filter By" [(ngModel)]="selectedOption" (change)="optionChange($event)"
+                            [clearable]="false">
+                        </ng-select>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3 mb-3">
+                        <input type="text" class="form-control" placeholder="Search {{ placeholder }}"
+                            [(ngModel)]="refId" />
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3 mb-3">
+                        <ng-select class="ng-select inputs2" [items]="cities" bindLabel="city" bindValue="city"
+                            placeholder="Select City" (change)="changeCity($event)">
+                        </ng-select>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3 mb-3">
+                        <ng-select class="ng-select inputs2" [items]="locations" bindLabel="location"
+                            bindValue="location" placeholder="Select Location" (change)="changeLocation($event)">
+                        </ng-select>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3 mb-3">
+                        <input type="date" class="form-control" placeholder="Start Date"
+                            (change)="changeStartDate($event)">
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3 mb-3">
+                        <input type="date" class="form-control" placeholder="End Date" (change)="changeEndDate($event)">
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3 mb-3">
+                        <input type="number" class="form-control" placeholder="Min Demand" [(ngModel)]="minDemand">
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3 mb-3">
+                        <input type="number" class="form-control" placeholder="Max Demand" [(ngModel)]="maxDemand">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="btn-container">
+                        <button onclick="window.print()" class="btn btn-primary">Print</button>
+                        <button (click)="exportTOExcel()" class="btn btn-primary">Excel</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
                         <div class="table-container mb-5 mt-4">
                             <table class="table table-hover">
                                 <thead>
@@ -58,7 +77,7 @@
                                 </thead>
                                 <tbody>
                                     <tr
-                                        *ngFor="let user of user | filterlist: selectedOption:refId | dateFilter: startDate:endDate | orderBy: key: reverse | paginate:{itemsPerPage:50,currentPage:p};">
+                                        *ngFor="let user of user | filterlist: selectedOption:refId | tableFilter: city | LocationFilter:location | demandFilter: minDemand:maxDemand | dateFilter: startDate:endDate | orderBy: key: reverse | paginate:{itemsPerPage:50,currentPage:p};">
                                         <td>
                                             <span *ngIf="user?.priority == 'Super Hot'"><img class="super-hot"
                                                     src="\assets\icons\super_hot.svg"></span>
@@ -105,10 +124,10 @@
                                                 *ngFor="let loc of user?.location">{{ loc.location }}, </span>
                                         </td>
             
-                                        <td *ngIf="user.demand_price == null else elseBlockDemand"><b>Max:</b> {{ user.max_price
-                                            }}<br><b>Min:</b> {{ user.min_price }}</td>
+                                        <td *ngIf="user.min_price != null && user.max_price != null else elseBlockDemand"><b>Max:</b> {{ user.max_price | currency :'Rs ' : 'symbol' : '1.0-0'
+                                            }}<br><b>Min:</b> {{ user.min_price | currency :'Rs ' : 'symbol' : '1.0-0' }}</td>
                                         <ng-template #elseBlockDemand>
-                                            <td>{{ user.demand_price }}</td>
+                                            <td>{{ user.demand_price | currency :'Rs ' : 'symbol' : '1.0-0' }}</td>
                                         </ng-template>
                                         <td>{{ user?.beds_number }}</td>
                                         <td>

@@ -30,6 +30,15 @@
     background-color: #e8e8e8;
 }
 
+.normal {
+    height: 16px;
+    margin-left: 3px;
+}
+
+.super-hot {
+    height: 20px;
+}
+
 .table th {
     padding-top: 12px;
     padding-bottom: 12px;
@@ -37,15 +46,6 @@
     background-color: #38baa2;
     font-size: 16px;
     color: white;
-}
-
-.super-hot {
-    height: 20px;
-}
-
-.normal {
-    height: 16px;
-    margin-left: 3px;
 }
 
 .abc {
@@ -93,7 +93,7 @@
     background-color: #3e8e41;
 }
 
-.both {
+.inventory {
     margin-left: 47px;
     margin-top: 120px;
     width: 100%;
@@ -110,12 +110,35 @@
 }
 
 .btn {
-    margin-left: 8px;
     width: 100px;
     font-size: 14px;
     background-color: #38baa2;
     color: white;
     border: 1px solid transparent;
+}
+
+.btn-container {
+    margin-left: auto;
+    margin-right: 12px;
+}
+.btn-container button {
+    margin-left: 10px;
+}
+
+.form-control {
+    height: calc(1.5em + 0.75rem + 2px);
+    padding: 1.1rem 0.75rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+ng-select, .form-control {
+    font-size: 0.8rem;
+    font-weight: 400;
 }
 
 .form-control-borderless {
@@ -124,32 +147,32 @@
 }
 
 @media only screen and (max-width: 1650px) {
-    .both {
+    .inventory {
         margin-left: 50px;
     }
 }
 
 @media only screen and (min-width: 1200px) and (max-width: 1400px) {
-    .both {
+    .inventory {
         margin-left: 80px;
     }
 }
 
-@media only screen and (max-width: 1260px) {
-    .both {
+@media only screen and (max-width: 1200px) {
+    .inventory {
         margin-left: 100px;
         overflow-x: auto;
     }
 }
 
-@media only screen and (max-width: 1150px) {
-    .both {
+@media only screen and (max-width: 1100px) {
+    .inventory {
         margin-left: 120px;
     }
 }
 
 @media only screen and (max-width: 992px) {
-    .both {
+    .inventory {
         margin-left: -80px;
     }
 }

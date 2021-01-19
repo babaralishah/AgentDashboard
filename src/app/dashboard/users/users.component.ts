@@ -20,6 +20,10 @@ export class UsersComponent implements OnInit {
   p: number = 1;
   startDate: String;
   endDate: String;
+  cities: any = [];
+  locations: any = [];
+  city: any;
+  location: any;
 
   currentLoginUser: any;
 
@@ -57,6 +61,7 @@ export class UsersComponent implements OnInit {
   ngOnInit(): void {
     this.tokenization();
     this.getUserList();
+    this.getCities();
   }
   
   async tokenization() {
@@ -64,6 +69,34 @@ export class UsersComponent implements OnInit {
     const decodedToken = await this.authService.getDecodedToken(token);
     this.currentLoginUser = decodedToken.data;
     console.log(this.currentLoginUser);
+  }
+  
+  getCities() {
+    this.authService.getCities().subscribe(
+      (data) => {
+        console.log(data);
+        this.cities = data;
+      },
+      (err) => {
+        console.error(err);
+      }
+    );
+  }
+  getLocations(selectedCity?) {
+    this.authService.getLocations().subscribe(
+      (locations) => {
+        console.log(locations);
+        this.locations = locations;
+        if (selectedCity) {
+          this.locations = locations.filter((loc) => {
+            return loc.cityId == selectedCity;
+          });
+        }
+      },
+      (err) => {
+        console.error(err);
+      }
+    );
   }
 
   changeStartDate(e: any) {
@@ -98,8 +131,11 @@ export class UsersComponent implements OnInit {
             }
           }
           element.cityName = element.city.city;
+          // element.locationName = element.location[0]?.location;
+          element.locationName = [];
           element.SubLocation = [];
           for (let i = 0; i < element.location.length; i++) {
+            element.locationName.push(element.location[i]?.location);
             element.SubLocation.push(element.location[i]?.location);
           }
           this.data.push(element);
@@ -112,6 +148,20 @@ export class UsersComponent implements OnInit {
       }
     );
   }
+  
+  changeCity(city: any) {
+    this.locations = [];
+    this.location = "";
+    this.city = city?.city;
+    console.log(this.city);
+
+    this.locations = [];
+    if (city) this.getLocations(city._id);
+  }
+  changeLocation(location: any) {
+    this.location = location?.location;
+    console.log(this.location);
+  }
 
   confirmID(id: any) {
     console.log(id);
@@ -119,7 +169,7 @@ export class UsersComponent implements OnInit {
   }
 
   // Function to delete the single inventory
-  deleteLead() {
+  deleteUser() {
     console.log(this.deleteId);
 
     this.authService.deleteUser(this.deleteId).subscribe((data) => {

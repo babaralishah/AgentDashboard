@@ -8,12 +8,8 @@
 }
 
 .form-control {
-    display: block;
-    width: 110%;
     height: calc(1.5em + 0.75rem + 2px);
-    padding: 0.375rem 0.75rem;
-    font-size: 1rem;
-    font-weight: 400;
+    padding: 1.1rem 0.75rem;
     line-height: 1.5;
     color: #495057;
     background-color: #fff;
@@ -21,6 +17,10 @@
     border: 1px solid #ced4da;
     border-radius: 0.25rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+ng-select, .form-control {
+    font-size: 0.8rem;
+    font-weight: 400;
 }
 
 .col {
@@ -81,12 +81,19 @@
 }
 
 .btn {
-    margin-left: 8px;
     width: 100px;
     font-size: 14px;
     background-color: #38baa2;
     color: white;
     border: 1px solid transparent;
+}
+
+.btn-container {
+    margin-left: auto;
+    margin-right: 12px;
+}
+.btn-container button {
+    margin-left: 10px;
 }
 
 @media only screen and (max-width: 1650px) {

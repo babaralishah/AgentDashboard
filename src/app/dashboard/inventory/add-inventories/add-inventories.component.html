@@ -48,15 +48,13 @@
                                     <div class="col-md-5 col-sm-5"><br><br>
                                         <div class="radio">
                                             <div class="btn-group btn-group-toggle">
-                                                <label style="
-                                                margin-left: 0px;
-                                            " class="btn btn-primary"
-                                                    [class.active]="addinventoryForm.get('property_purpose').value === 'Buy'">
-                                                    <input type="radio" formControlName="property_purpose" value="Buy"> Buy
-                                                </label>
-                                                <label class="btn btn-primary"
+                                                <label style="margin-left: 0px;" class="btn btn-primary"
                                                     [class.active]="addinventoryForm.get('property_purpose').value === 'Sell'">
                                                     <input type="radio" formControlName="property_purpose" value="Sell"> Sell
+                                                </label>
+                                                <label class="btn btn-primary"
+                                                    [class.active]="addinventoryForm.get('property_purpose').value === 'Buy'">
+                                                    <input type="radio" formControlName="property_purpose" value="Buy"> Buy
                                                 </label>
                                                 <label class="btn btn-primary"
                                                     [class.active]="addinventoryForm.get('property_purpose').value === 'Rent'">

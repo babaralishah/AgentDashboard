@@ -70,6 +70,8 @@ export class InventoryComponent implements OnInit {
   refId: any;
   startDate: String;
   endDate: String;
+  minDemand: any;
+  maxDemand: any;
 
   ngOnInit(): void {
     this.tokenization();
@@ -102,7 +104,12 @@ export class InventoryComponent implements OnInit {
           element.assignedTo = [];
           element.added_ByName = element.added_By.fullname;
           element.cityName = element.city[0]?.city;
-          element.locationName = element.location[0]?.location;
+          element.locationName = [];
+          element.SubLocation = [];
+          for (let i = 0; i < element.location.length; i++) {
+            element.locationName.push(element.location[i]?.location);
+            element.SubLocation.push(element.location[i]?.location);
+          }
           if (element.demand_price != null) {
             element.demand = element.demand_price;
           } else if (element.max_price) {
@@ -139,6 +146,7 @@ export class InventoryComponent implements OnInit {
             this.user.push(element);
           }
         });
+        console.log("User Get Response", this.user);
       },
       (error) => {
         console.error(error);

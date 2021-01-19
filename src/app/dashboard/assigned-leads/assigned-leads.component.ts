@@ -22,6 +22,12 @@ export class AssignedLeadsComponent implements OnInit {
   data: any = [];
   startDate: String;
   endDate: String;
+  minDemand: any;
+  maxDemand: any;
+  cities: any;
+  locations: any;
+  city: any;
+  location: any;
 
   currentLoginUser: any;
 
@@ -75,6 +81,7 @@ export class AssignedLeadsComponent implements OnInit {
   ngOnInit(): void {
     this.tokenization();
     this.getAllList();
+    this.getCities();
   }
   
   async tokenization() {
@@ -105,7 +112,12 @@ export class AssignedLeadsComponent implements OnInit {
           element.assignedTo = [];
           element.added_ByName = element.added_By.fullname;
           element.cityName = element.city[0]?.city;
-          element.locationName = element.location[0]?.location;
+          element.locationName = [];
+          element.SubLocation = [];
+          for (let i = 0; i < element.location.length; i++) {
+            element.locationName.push(element.location[i]?.location);
+            element.SubLocation.push(element.location[i]?.location);
+          }
           if (element.demand_price != null) {
             element.demand = element.demand_price;
           } else if (element.max_price) {
@@ -148,6 +160,50 @@ export class AssignedLeadsComponent implements OnInit {
       }
     );
   }
+  
+  getCities() {
+    this.authService.getCities().subscribe(
+      (data) => {
+        console.log(data);
+        this.cities = data;
+      },
+      (err) => {
+        console.error(err);
+      }
+    );
+  }
+  // Calling Api to get the Locations
+  getLocations(selectedCity?) {
+    this.authService.getLocations().subscribe(
+      (locations) => {
+        console.log(locations);
+        this.locations = locations;
+        if (selectedCity) {
+          this.locations = locations.filter((loc) => {
+            return loc.cityId == selectedCity;
+          });
+        }
+      },
+      (err) => {
+        console.error(err);
+      }
+    );
+  }
+  
+  changeCity(city: any) {
+    this.locations = [];
+    this.location = "";
+    this.city = city?.city;
+    console.log(this.city);
+
+    this.locations = [];
+    if (city) this.getLocations(city._id);
+  }
+  changeLocation(location: any) {
+    this.location = location?.location;
+    console.log(this.location);
+  }
+
   sort(key: any) {
     this.key = key;
     this.reverse = !this.reverse;

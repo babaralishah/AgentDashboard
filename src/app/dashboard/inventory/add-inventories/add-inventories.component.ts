@@ -132,7 +132,7 @@ export class AddInventoriesComponent implements OnInit {
       assigned_type: ["self"],
       priority: "Normal",
       form_title: [""],
-      property_purpose: ["Buy"],
+      property_purpose: ["Sell"],
       property_type: [""],
 
       city: ["", Validators.required],

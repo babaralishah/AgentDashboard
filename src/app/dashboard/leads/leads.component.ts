@@ -39,6 +39,8 @@ export class LeadsComponent implements OnInit {
   location: any;
   startDate: String;
   endDate: String;
+  minDemand: any;
+  maxDemand: any;
 
   currentLoginUser: any;
 
@@ -100,11 +102,9 @@ export class LeadsComponent implements OnInit {
 
   changeStartDate(e: any) {
     this.startDate = formatDate(new Date(e.target.value),'yyyy-MM-dd','en_US');
-    // console.log('Start', this.startDate);
   }
   changeEndDate(e: any) {
     this.endDate= formatDate(new Date(e.target.value),'yyyy-MM-dd','en_US');
-    // console.log('End', this.endDate);
   }
 
   getLeadsList() {
@@ -116,7 +116,12 @@ export class LeadsComponent implements OnInit {
           element.assignedTo = [];
           element.added_ByName = element.added_By.fullname;
           element.cityName = element.city[0]?.city;
-          element.locationName = element.location[0]?.location;
+          element.locationName = [];
+          element.SubLocation = [];
+          for (let i = 0; i < element.location.length; i++) {
+            element.locationName.push(element.location[i]?.location);
+            element.SubLocation.push(element.location[i]?.location);
+          }
           if (element.demand_price != null) {
             element.demand = element.demand_price;
           } else if (element.max_price) {

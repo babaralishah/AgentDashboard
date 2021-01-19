@@ -54,20 +54,20 @@ export class LeadsComponent implements OnInit {
   selectedUserLocation: any;
 
   options = [
+    // {
+    //   value: "cityName",
+    //   name: "Filter By City",
+    //   placeholder: "City",
+    // },
+    // {
+    //   value: "locationName",
+    //   name: "Filter By Location",
+    //   placeholder: "Location",
+    // },
     {
-      value: "cityName",
-      name: "Filter By City",
-      placeholder: "City",
-    },
-    {
-      value: "locationName",
-      name: "Filter By Location",
-      placeholder: "Location",
-    },
-    {
-      value: "demand",
-      name: "Filter By Demand",
-      placeholder: "Demand",
+      value: "property_type",
+      name: "Filter By Property Type",
+      placeholder: "Property Type",
     },
     {
       value: "added_ByName",
@@ -111,6 +111,7 @@ export class LeadsComponent implements OnInit {
     this.authService.getLeads().subscribe(
       (data) => {
         data = data.leads;
+        console.log(data);
         
         data.forEach((element) => {
           element.assignedTo = [];

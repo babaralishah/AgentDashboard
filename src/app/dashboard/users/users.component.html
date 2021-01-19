@@ -6,7 +6,7 @@
 
             <div class="container-fluid">
                 <h1 class="h3 mb-2 text-gray-800">Users</h1>
-                                
+
                 <div class="row mb-3 mt-5">
                     <div class="col-12">
                         <button class="btn btn-primary" routerLink="/register">Add New</button>
@@ -14,31 +14,27 @@
                 </div>
                 <div class="row">
                     <div class="col-12 col-sm-6 col-xl-2 mb-3">
-                        <ng-select [items]="options" bindLabel="name" bindValue="value" placeholder="Filter By"
-                            [(ngModel)]="selectedOption" (change)="optionChange($event)" [clearable]="false">
+                        <ng-select [items]="options" bindLabel="name" bindValue="value" placeholder="Filter By" [(ngModel)]="selectedOption" (change)="optionChange($event)" [clearable]="false">
                         </ng-select>
                     </div>
                     <div class="col-12 col-sm-6 col-xl-2 mb-3">
-                        <input type="text" class="form-control" placeholder="Search {{ placeholder }}"
-                            [(ngModel)]="refId" />
+                        <input type="text" class="form-control" placeholder="Search {{ placeholder }}" [(ngModel)]="refId" />
                     </div>
                     <div class="col-12 col-sm-6 col-lg-3 col-xl-2 mb-3">
-                        <ng-select class="ng-select inputs2" [items]="cities" bindLabel="city" bindValue="city"
-                            placeholder="Select City" (change)="changeCity($event)">
+                        <ng-select class="ng-select inputs2" [items]="cities" bindLabel="city" bindValue="city" placeholder="Select City" (change)="changeCity($event)">
                         </ng-select>
                     </div>
                     <div class="col-12 col-sm-6 col-lg-3 col-xl-2 mb-3">
-                        <ng-select class="ng-select inputs2" [items]="locations" bindLabel="location"
-                            bindValue="location" placeholder="Select Location" (change)="changeLocation($event)">
+                        <ng-select class="ng-select inputs2" [items]="locations" bindLabel="location" bindValue="location" placeholder="Select Location" (change)="changeLocation($event)">
                         </ng-select>
                     </div>
                     <div class="col-12 col-sm-6 col-lg-3 col-xl-2 mb-3">
-                        <input type="date" class="form-control" placeholder="Start Date"
-                            (change)="changeStartDate($event)">
+                        <input placeholder="Start Date" class="form-control" type="text" onfocus="(this.type='date')" (change)="changeStartDate($event)">
+                        <!-- <input type="date" class="form-control" placeholder="Start Date"
+                            (change)="changeStartDate($event)"> -->
                     </div>
                     <div class="col-12 col-sm-6 col-lg-3 col-xl-2 mb-3">
-                        <input type="date" class="form-control" placeholder="End Date"
-                            (change)="changeEndDate($event)">
+                        <input type="text" onfocus="(this.type='date')" class="form-control" placeholder="End Date" (change)="changeEndDate($event)">
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -68,8 +64,7 @@
 
                                 <tbody>
 
-                                    <tr
-                                        *ngFor="let user of data | filterlist: selectedOption:refId | tableFilter: city | LocationFilter:location | dateFilter: startDate:endDate | orderBy: key: reverse | paginate:{itemsPerPage:10,currentPage:p};">
+                                    <tr *ngFor="let user of data | filterlist: selectedOption:refId | tableFilter: city | LocationFilter:location | dateFilter: startDate:endDate | orderBy: key: reverse | paginate:{itemsPerPage:10,currentPage:p};">
                                         <td>{{ user?.userId }}</td>
                                         <td>
                                             <span *ngIf="user?.fullname">{{ user?.fullname | titlecase }}</span>
@@ -78,8 +73,7 @@
                                         <td>{{ user?.contact }}</td>
 
                                         <td>
-                                            {{user?.city?.city}}<span>&nbsp;&nbsp;</span><br><span
-                                                class="badge badge-light" *ngFor="let loc of user.location">{{
+                                            {{user?.city?.city}}<span>&nbsp;&nbsp;</span><br><span class="badge badge-light" *ngFor="let loc of user.location">{{
                                                 loc.location }}, </span>
                                         </td>
                                         <td>{{ user?.email }}</td>
@@ -89,19 +83,16 @@
                                         <td><i class="fa fa-edit icon" (click)="setUser(user)"></i>
                                             <a (click)="setUser(user)" role="button"></a>
 
-                                            <i class="fa fa-trash icon" (click)="confirmID(user._id)"
-                                                data-toggle="modal" data-target="#exampleModal1"></i>
+                                            <i class="fa fa-trash icon" (click)="confirmID(user._id)" data-toggle="modal" data-target="#exampleModal1"></i>
 
                                         </td>
-                                        <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
-                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Delete
-                                                            Confirmation</h5>
-                                                        <button type="button" class="close" data-dismiss="modal"
-                                                            aria-label="Close">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Delete Confirmation
+                                                        </h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
@@ -109,12 +100,10 @@
                                                         Are you sure you want to delete it?
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary"
-                                                            data-dismiss="modal">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
                                                             Close
                                                         </button>
-                                                        <button type="button" class="btn btn-danger"
-                                                            data-dismiss="modal" (click)="deleteUser()">
+                                                        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteUser()">
                                                             Delete
                                                         </button>
                                                     </div>

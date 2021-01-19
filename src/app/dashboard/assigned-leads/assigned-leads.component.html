@@ -6,34 +6,28 @@
 
             <div class="container-fluid">
                 <h1 class="h3 mb-2 text-gray-800">Assigned Leads Table</h1>
-                
+
                 <div class="row mt-5">
                     <div class="col-12 col-sm-6 col-lg-3 mb-3">
-                        <ng-select [items]="options" bindLabel="name" bindValue="value"
-                            placeholder="Filter By" [(ngModel)]="selectedOption" (change)="optionChange($event)"
-                            [clearable]="false">
+                        <ng-select [items]="options" bindLabel="name" bindValue="value" placeholder="Filter By" [(ngModel)]="selectedOption" (change)="optionChange($event)" [clearable]="false">
                         </ng-select>
                     </div>
                     <div class="col-12 col-sm-6 col-lg-3 mb-3">
-                        <input type="text" class="form-control" placeholder="Search {{ placeholder }}"
-                            [(ngModel)]="refId" />
+                        <input type="text" class="form-control" placeholder="Search {{ placeholder }}" [(ngModel)]="refId" />
                     </div>
                     <div class="col-12 col-sm-6 col-lg-3 mb-3">
-                        <ng-select class="ng-select inputs2" [items]="cities" bindLabel="city" bindValue="city"
-                            placeholder="Select City" (change)="changeCity($event)">
+                        <ng-select class="ng-select inputs2" [items]="cities" bindLabel="city" bindValue="city" placeholder="Select City" (change)="changeCity($event)">
                         </ng-select>
                     </div>
                     <div class="col-12 col-sm-6 col-lg-3 mb-3">
-                        <ng-select class="ng-select inputs2" [items]="locations" bindLabel="location"
-                            bindValue="location" placeholder="Select Location" (change)="changeLocation($event)">
+                        <ng-select class="ng-select inputs2" [items]="locations" bindLabel="location" bindValue="location" placeholder="Select Location" (change)="changeLocation($event)">
                         </ng-select>
                     </div>
                     <div class="col-12 col-sm-6 col-lg-3 mb-3">
-                        <input type="date" class="form-control" placeholder="Start Date"
-                            (change)="changeStartDate($event)">
+                        <input type="text" onfocus="(this.type='date')" class="form-control" placeholder="Start Date" (change)="changeStartDate($event)">
                     </div>
                     <div class="col-12 col-sm-6 col-lg-3 mb-3">
-                        <input type="date" class="form-control" placeholder="End Date" (change)="changeEndDate($event)">
+                        <input type="text" onfocus="(this.type='date')" class="form-control" placeholder="End Date" (change)="changeEndDate($event)">
                     </div>
                     <div class="col-12 col-sm-6 col-lg-3 mb-3">
                         <input type="number" class="form-control" placeholder="Min Demand" [(ngModel)]="minDemand">
@@ -60,17 +54,16 @@
                                     <th scope="col">Client Details</th>
                                     <th scope="col">Location</th>
                                     <th scope="col">Land Area</th>
-            
+
                                     <th scope="col">Demand</th>
                                     <th scope="col">Operations</th>
                                 </thead>
-            
+
                                 <tbody>
-                                    <tr
-                                        *ngFor="let user of user | filterlist: selectedOption:refId | tableFilter: city | LocationFilter:location | demandFilter: minDemand:maxDemand | dateFilter: startDate:endDate | paginate:{itemsPerPage:10,currentPage:p}; ">
+                                    <tr *ngFor="let user of user | filterlist: selectedOption:refId | tableFilter: city | LocationFilter:location | demandFilter: minDemand:maxDemand | dateFilter: startDate:endDate | paginate:{itemsPerPage:10,currentPage:p}; ">
                                         <td> <span *ngIf="user.priority == 'Super Hot' else hot"><img class="super-hot"
                                                     src="\assets\icons\super_hot.svg"></span>
-                                                    
+
                                             <ng-template #hot>
                                                 <img class="super-hot" src="\assets\icons\hot.svg">
                                             </ng-template>
@@ -84,11 +77,10 @@
                                             <b>Name : </b>{{ user.client_type |titlecase }}
                                         </td>
                                         <td>
-                                            {{ user.city[0]?.city }}<span></span><br /><span class="badge badge-light"
-                                                *ngFor="let loc of user.location">{{ loc.location }},
+                                            {{ user.city[0]?.city }}<span></span><br /><span class="badge badge-light" *ngFor="let loc of user.location">{{ loc.location }},
                                             </span>
                                         </td>
-            
+
                                         <td *ngIf="user?.area != null; else elseBlockArea">
                                             <span>{{ user?.area + " - " + user?.area_unit }}</span>
                                         </td>
@@ -107,21 +99,18 @@
                                                 </ng-template>
                                             </td>
                                         </ng-template>
-            
-                                        <td *ngIf="user.min_price != null && user.max_price != null else elseBlockDemand"><b>Max:</b> {{ user.max_price | currency :'Rs ' : 'symbol' : '1.0-0'
-                                            }}<br><b>Min:</b> {{ user.min_price | currency :'Rs ' : 'symbol' : '1.0-0' }}</td>
+
+                                        <td *ngIf="user.min_price != null && user.max_price != null else elseBlockDemand"><b>Max:</b> {{ user.max_price | currency :'Rs ' : 'symbol' : '1.0-0' }}
+                                            <br><b>Min:</b> {{ user.min_price | currency :'Rs ' : 'symbol' : '1.0-0' }}</td>
                                         <ng-template #elseBlockDemand>
                                             <td>{{ user.demand_price | currency :'Rs ' : 'symbol' : '1.0-0' }}</td>
                                         </ng-template>
                                         <td>
-                                            <i class="fa fa-trash icon" (click)="confirmID(user._id)" data-toggle="modal"
-                                                data-target="#exampleModal1" *ngIf="currentLoginUser?.access !== 'agent'"></i>
-            
-                                            <i class="fas fa-exchange-alt ml-2" (click)="setCurrentRow(user)" data-toggle="modal"
-                                                data-target="#myModal"></i>
+                                            <i class="fa fa-trash icon" (click)="confirmID(user._id)" data-toggle="modal" data-target="#exampleModal1" *ngIf="currentLoginUser?.access !== 'agent'"></i>
+
+                                            <i class="fas fa-exchange-alt ml-2" (click)="setCurrentRow(user)" data-toggle="modal" data-target="#myModal"></i>
                                         </td>
-                                        <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
-                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -139,8 +128,7 @@
                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">
                                                             Close
                                                         </button>
-                                                        <button type="button" class="btn btn-danger" data-dismiss="modal"
-                                                            (click)="deleteAssignedLead()">
+                                                        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteAssignedLead()">
                                                             Delete
                                                         </button>
                                                     </div>
@@ -172,14 +160,11 @@
             <div class="modal-body">
                 <div class="card-body row">
                     <div class="col">
-                        <ng-select [items]="options2" bindLabel="name" bindValue="value" class="mr-2 ml-2"
-                            placeholder="Filter By" [(ngModel)]="selectedOption2" (change)="optionChange($event)"
-                            [clearable]="false">
+                        <ng-select [items]="options2" bindLabel="name" bindValue="value" class="mr-2 ml-2" placeholder="Filter By" [(ngModel)]="selectedOption2" (change)="optionChange($event)" [clearable]="false">
                         </ng-select>
                     </div>
                     <div class="col">
-                        <input class="form-control" type="text" placeholder="Search {{ placeholder }}"
-                            [(ngModel)]="refId2">
+                        <input class="form-control" type="text" placeholder="Search {{ placeholder }}" [(ngModel)]="refId2">
                     </div>
                 </div>
                 <table class="table table-hover">
@@ -192,8 +177,7 @@
                     </thead>
 
                     <tbody>
-                        <tr
-                            *ngFor="let history of row.assigned_history | orderBy: key: reverse | filterlist: selectedOption2:refId2">
+                        <tr *ngFor="let history of row.assigned_history | orderBy: key: reverse | filterlist: selectedOption2:refId2">
                             <td>{{ history.userId }}</td>
                             <td>{{ history.fullname }}</td>
                             <td>{{history.date | date}}

@@ -44,15 +44,15 @@ export class UsersComponent implements OnInit {
       placeholder: "Name",
     },
     {
-      value: "cityName",
-      name: "Filter By City",
-      placeholder: "City",
+      value: "access",
+      name: "Filter By Access",
+      placeholder: "Access",
     },
-    {
-      value: "SubLocation",
-      name: "Filter By Location",
-      placeholder: "Location",
-    },
+    // {
+    //   value: "SubLocation",
+    //   name: "Filter By Location",
+    //   placeholder: "Location",
+    // },
   ];
   selectedOption = this.options[0].value;
   placeholder = this.options[0].placeholder;

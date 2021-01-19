@@ -39,20 +39,20 @@ export class InventoryComponent implements OnInit {
   currentLoginUser: any;
 
   options = [
+    // {
+    //   value: "cityName",
+    //   name: "Filter By City",
+    //   placeholder: "City",
+    // },
+    // {
+    //   value: "locationName",
+    //   name: "Filter By Location",
+    //   placeholder: "Location",
+    // },
     {
-      value: "cityName",
-      name: "Filter By City",
-      placeholder: "City",
-    },
-    {
-      value: "locationName",
-      name: "Filter By Location",
-      placeholder: "Location",
-    },
-    {
-      value: "demand",
-      name: "Filter By Demand",
-      placeholder: "Demand",
+      value: "property_type",
+      name: "Filter By Property Type",
+      placeholder: "Property Type",
     },
     {
       value: "added_ByName",

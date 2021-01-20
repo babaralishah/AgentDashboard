@@ -1,21 +1,17 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { Pipe, PipeTransform } from "@angular/core";
 
 @Pipe({
-  name: 'tableFilter03'
+  // name: 'tableFilter03'
+  name: "nameFilter",
 })
 export class TableFilter03Pipe implements PipeTransform {
-
-  transform(
-    user,
-    search_area: string
-  ):typeof user {
-
-    if (!user || !search_area) {
+  transform(user: any, fullname: string): typeof user {
+    if (!user || !fullname) {
       return user;
     }
-    return user.filter(user =>
-      user.Area.toLowerCase().indexOf(search_area.toLowerCase()) !== -1);
-
+    return user.filter(
+      (user) =>
+        user.fullname.toLowerCase().indexOf(fullname.toLowerCase()) !== -1
+    );
   }
-
 }

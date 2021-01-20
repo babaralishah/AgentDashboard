@@ -54,11 +54,11 @@ export class LeadsComponent implements OnInit {
   selectedUserLocation: any;
 
   options = [
-    // {
-    //   value: "cityName",
-    //   name: "Filter By City",
-    //   placeholder: "City",
-    // },
+    {
+      value: "client_name",
+      name: "Filter By Client Name",
+      placeholder: "Client Name",
+    },
     // {
     //   value: "locationName",
     //   name: "Filter By Location",

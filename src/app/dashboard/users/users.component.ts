@@ -24,10 +24,12 @@ export class UsersComponent implements OnInit {
   locations: any = [];
   city: any;
   location: any;
+  agentList: any = [];
+  agentAssignedName: any = [];
 
   currentLoginUser: any;
 
-  @ViewChild('content') content: any;
+  @ViewChild("content") content: any;
 
   constructor(
     // private formBuilder: FormBuilder,
@@ -62,15 +64,16 @@ export class UsersComponent implements OnInit {
     this.tokenization();
     this.getUserList();
     this.getCities();
+    this.getAllUsersList();
   }
-  
+
   async tokenization() {
     const token = await this.authService.getToken();
     const decodedToken = await this.authService.getDecodedToken(token);
     this.currentLoginUser = decodedToken.data;
     console.log(this.currentLoginUser);
   }
-  
+
   getCities() {
     this.authService.getCities().subscribe(
       (data) => {
@@ -98,13 +101,21 @@ export class UsersComponent implements OnInit {
       }
     );
   }
-
+  changeAssignedAgent(event:any){
+    this.agentAssignedName = event?.fullname
+    console.log(this.agentAssignedName);
+    
+  }
   changeStartDate(e: any) {
-    this.startDate = formatDate(new Date(e.target.value),'yyyy-MM-dd','en_US');
+    this.startDate = formatDate(
+      new Date(e.target.value),
+      "yyyy-MM-dd",
+      "en_US"
+    );
     // console.log('Start', this.startDate);
   }
   changeEndDate(e: any) {
-    this.endDate= formatDate(new Date(e.target.value),'yyyy-MM-dd','en_US');
+    this.endDate = formatDate(new Date(e.target.value), "yyyy-MM-dd", "en_US");
     // console.log('End', this.endDate);
   }
 
@@ -118,6 +129,24 @@ export class UsersComponent implements OnInit {
     this.router.navigateByUrl("/register");
   }
 
+  // Function to call User data table for Assigned_To Field of the add-inventory-form
+  getAllUsersList() {
+    this.authService.getUsers().subscribe(
+      (users) => {
+        const data = users;
+        // for(let i=0;i<data.length;i++){
+          
+        // this.agentList[i] = data[i].fullname;
+        // }
+        // console.log(data);
+        this.agentList = data;
+        console.log(this.agentList);
+      },
+      (err) => {
+        console.error(err);
+      }
+    );
+  }
   // Function to call User data table
   getUserList() {
     this.authService.getUsers().subscribe(
@@ -125,8 +154,8 @@ export class UsersComponent implements OnInit {
         // this.data = data;
 
         data.forEach((element) => {
-          if(this.currentLoginUser.access === "city_admin") {
-            if(this.currentLoginUser.city.city !== element.city.city) {
+          if (this.currentLoginUser.access === "city_admin") {
+            if (this.currentLoginUser.city.city !== element.city.city) {
               return;
             }
           }
@@ -139,7 +168,7 @@ export class UsersComponent implements OnInit {
             element.SubLocation.push(element.location[i]?.location);
           }
           this.data.push(element);
-       });
+        });
 
         console.log("User Get Response", this.data);
       },
@@ -148,7 +177,7 @@ export class UsersComponent implements OnInit {
       }
     );
   }
-  
+
   changeCity(city: any) {
     this.locations = [];
     this.location = "";

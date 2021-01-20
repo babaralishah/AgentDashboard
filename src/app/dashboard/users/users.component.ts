@@ -25,7 +25,7 @@ export class UsersComponent implements OnInit {
   city: any;
   location: any;
   agentList: any = [];
-  agentAssignedName: any = [];
+  agentAssignedName: any;
 
   currentLoginUser: any;
 
@@ -101,11 +101,6 @@ export class UsersComponent implements OnInit {
       }
     );
   }
-  changeAssignedAgent(event:any){
-    this.agentAssignedName = event?.fullname
-    console.log(this.agentAssignedName);
-    
-  }
   changeStartDate(e: any) {
     this.startDate = formatDate(
       new Date(e.target.value),
@@ -135,7 +130,7 @@ export class UsersComponent implements OnInit {
       (users) => {
         const data = users;
         // for(let i=0;i<data.length;i++){
-          
+
         // this.agentList[i] = data[i].fullname;
         // }
         // console.log(data);
@@ -187,9 +182,15 @@ export class UsersComponent implements OnInit {
     this.locations = [];
     if (city) this.getLocations(city._id);
   }
+
   changeLocation(location: any) {
     this.location = location?.location;
     console.log(this.location);
+  }
+
+  changeAssignedAgent(agent: any) {
+    this.agentAssignedName = agent?.fullname;
+    console.log(this.agentAssignedName);
   }
 
   confirmID(id: any) {

@@ -24,6 +24,7 @@ import { AssignedLeadsComponent } from "./dashboard/assigned-leads/assigned-lead
 import { PageNotFoundComponent } from "./dashboard/page-not-found/page-not-found.component";
 import { LocationComponent } from "./dashboard/location/location.component";
 import { AddLocationComponent } from "./dashboard/location/add-location/add-location.component";
+import { RoleGuard } from "./services/guards/role.guard";
 
 const routes: Routes = [
   {
@@ -38,7 +39,10 @@ const routes: Routes = [
   },
   {
     path: "register",
-    canActivate: [IsLoginGuard],
+    canActivate: [RoleGuard],
+    data: { 
+      expectedRole: ['super_admin', 'city_admin']
+    },
     component: SignupComponent,
   },
   { path: "forgetpass-component", component: ForgetpassComponent },
@@ -89,7 +93,10 @@ const routes: Routes = [
   },
   {
     path: "add-location",
-    canActivate: [IsLoginGuard],
+    canActivate: [RoleGuard],
+    data: { 
+      expectedRole: ['super_admin', 'city_admin']
+    },
     component: AddLocationComponent,
   },
   {

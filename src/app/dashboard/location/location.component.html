@@ -8,7 +8,7 @@
                 <h1 class="h3 mb-2 text-gray-800">Location</h1>
 
                 <div class="row mb-3 mt-5">
-                    <div class="col-12">
+                    <div class="col-12" *ngIf="currentLoginUser?.access !== 'agent'">
                         <button class="btn btn-primary" routerLink="/add-location">Add New</button>
                     </div>
                 </div>

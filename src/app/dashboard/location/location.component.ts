@@ -88,6 +88,7 @@ export class LocationComponent implements OnInit {
   getLocations() {
     this.authService.getLocations().subscribe(
       (locations) => {
+        this.locations = [];
         console.log(locations);
         locations.forEach((element, index) => {
           const cityName = this.getCityName(element.cityId);
@@ -131,6 +132,7 @@ export class LocationComponent implements OnInit {
         this.toastr.success(data.message, "Success", {
           timeOut: 5000,
         });
+        this.getLocations();
         // for (let i = 0; i < this.locations; i++) {
         //   if (this.locations[i]._id === this.deletedId) {
         //     this.locations.splice(i, 1);

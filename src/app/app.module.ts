@@ -53,6 +53,7 @@ import { DashboardComponent } from "./dashboard/dashboard.component";
 import { AddLocationComponent } from "./dashboard/location/add-location/add-location.component";
 import { TableDatePipe } from "./Pipes/table-date-filter.pipe";
 import { TableDemandPipe } from "./Pipes/table-demand-filter.pipe";
+import { RoleGuard } from "./services/guards/role.guard";
 registerLocaleData(en);
 
 @NgModule({
@@ -114,6 +115,7 @@ registerLocaleData(en);
     // MaterialModule
   ],
   providers: [
+    RoleGuard
   ],
   bootstrap: [AppComponent],
 })

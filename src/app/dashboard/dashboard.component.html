@@ -64,7 +64,7 @@
                 <span>Location</span>
             </a>
         </li>
-        <li class="nav-item" *ngIf="tokendata?.access  == 'super_admin'">
+        <li class="nav-item" *ngIf="tokendata?.access  !== 'agent'">
             <a class="nav-link" routerLink="/register">
                 <i class="fas fa-tachometer-alt"></i>
                 <span>Register</span>

@@ -29,7 +29,7 @@
                         </ng-select>
                     </div>
                     <div class="col-12 col-sm-6 col-lg-3 col-xl-2 mb-3">
-                        <ng-select class="ng-select inputs2" [items]="locations" bindLabel="location" bindValue="location" placeholder="Select Location" (change)="changeLocation($event)">
+                        <ng-select class="ng-select inputs2" [(ngModel)]="locationName" [ngModelOptions]="{standalone: true}" [items]="locations" bindLabel="location" bindValue="location" placeholder="Select Location" (change)="changeLocation($event)">
                         </ng-select>
                     </div>
                     <!-- <div class="col-12 col-sm-6 col-lg-3 col-xl-2 mb-3">
@@ -66,7 +66,7 @@
 
                                 <tbody>
 
-                                    <tr *ngFor="let user of data | filterlist: selectedOption:refId | nameFilter: agentAssignedName | tableFilter: city | LocationFilter:location | dateFilter: startDate:endDate | orderBy: key: reverse | paginate:{itemsPerPage:10,currentPage:p};">
+                                    <tr *ngFor="let user of data | filterlist: selectedOption:refId | nameFilter: agentAssignedName | tableFilter: city | LocationFilter:locationName | dateFilter: startDate:endDate | orderBy: key: reverse | paginate:{itemsPerPage:10,currentPage:p};">
                                         <td>{{ user?.userId }}</td>
                                         <td>
                                             <span *ngIf="user?.fullname">{{ user?.fullname | titlecase }}</span>

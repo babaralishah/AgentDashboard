@@ -23,7 +23,7 @@ export class UsersComponent implements OnInit {
   cities: any = [];
   locations: any = [];
   city: any;
-  location: any;
+  locationName: any;
   agentList: any = [];
   agentAssignedName: any;
 
@@ -32,7 +32,6 @@ export class UsersComponent implements OnInit {
   @ViewChild("content") content: any;
 
   constructor(
-    // private formBuilder: FormBuilder,
     private authService: AuthenticationService,
     private router: Router,
     private toastr: ToastrService
@@ -44,7 +43,7 @@ export class UsersComponent implements OnInit {
       value: "access",
       name: "Filter By Access",
       placeholder: "Access",
-    }
+    },
   ];
   selectedOption = this.options[0].value;
   placeholder = this.options[0].placeholder;
@@ -154,17 +153,15 @@ export class UsersComponent implements OnInit {
 
   changeCity(city: any) {
     this.locations = [];
-    this.location = "";
+    this.locationName = null;
     this.city = city?.city;
     console.log(this.city);
-
-    this.locations = [];
     if (city) this.getLocations(city._id);
   }
 
   changeLocation(location: any) {
-    this.location = location?.location;
-    console.log(this.location);
+    this.locationName = location?.location;
+    console.log(this.locationName);
   }
 
   changeAssignedAgent(agent: any) {
@@ -188,8 +185,6 @@ export class UsersComponent implements OnInit {
           timeOut: 5000,
         });
         this.getUserList();
-        //   for ( let i = 0; i < this.user.length; i++){
-        //      if ( this.user[i]._id === this.saveID) { this.user.splice(i, 1); i--; }}
       }
     });
   }
@@ -198,39 +193,6 @@ export class UsersComponent implements OnInit {
     this.key = key;
     this.reverse = !this.reverse;
   }
-
-  // deleteUser(id) {
-  //   console.log('Calling deleteInventory', id);
-
-  //   this.authService.deleteUser(id).subscribe((data) => {
-  //     console.log(data);
-  //     if (data.code === 200) {
-  //       this.toastr.success(data.message, 'Success', {
-  //         timeOut: 5000,
-  //       });
-  //       for (let i = 0; i < this.data.length; i++) {
-  //         if (this.data[i]._id === id) {
-  //           this.data.splice(i, 1);
-  //           i--;
-  //         }
-  //       }
-  //     } else {
-  //       this.toastr.error(data.message, 'Error', {
-  //         timeOut: 5000,
-  //       });
-  //     }
-  //   });
-  // }
-  // isLogin() {
-
-  //   const token = this.authService.getToken();
-  //   return token;
-  // }
-  // logout() {
-  //   localStorage.removeItem('token');
-  //   console.log('\nlogout\n');
-  //   this.router.navigateByUrl('/');
-  // }
   // Function to Get Excel File of the Data Table
   exportTOExcel() {
     let options: JSON2SheetOpts = { header: [] };

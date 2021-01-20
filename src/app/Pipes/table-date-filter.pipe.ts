@@ -12,7 +12,7 @@ export class TableDatePipe implements PipeTransform {
     ): typeof users {
 
         if (!startDate && !endDate || !users) {
-            console.log('Empty');
+            // console.log('Empty');
             return users;
         }
         

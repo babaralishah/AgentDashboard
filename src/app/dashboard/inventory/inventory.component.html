@@ -63,7 +63,7 @@
 
                                     <th scope="col">Demand</th>
                                     <th scope="col">Beds</th>
-                                    <th scope="col">Assigned To</th>
+                                    <!-- <th scope="col">Assigned To</th> -->
                                     <th scope="col">Added On</th>
                                     <th scope="col">Operations</th>
                                 </thead>
@@ -122,14 +122,14 @@
                                         </ng-template>
 
                                         <td>{{ user?.beds_number }}</td>
-                                        <td>
+                                        <!-- <td>
 
                                             <span *ngIf="user?.assignedTo?.length === 0">Self</span>
 
                                             <span *ngIf="user?.assignedTo?.length > 0">
                                                 <span *ngFor="let assign of user?.assignedTo">{{ assign }}<br></span>
                                             </span>
-                                        </td>
+                                        </td> -->
                                         <td>{{ user?.created | date }}</td>
                                         <td>
                                             <i class="fa fa-edit icon" (click)="setUserToEdit(user)"></i>

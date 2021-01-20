@@ -124,7 +124,6 @@ export class LocationComponent implements OnInit {
 
   deleteLocation() {
     console.log(this.deletedId);
-
     this.authService.deleteLocation(this.deletedId).subscribe((data) => {
       console.log(data);
       const code = data.code;
@@ -133,13 +132,6 @@ export class LocationComponent implements OnInit {
           timeOut: 5000,
         });
         this.getLocations();
-        // for (let i = 0; i < this.locations; i++) {
-        //   if (this.locations[i]._id === this.deletedId) {
-        //     this.locations.splice(i, 1);
-        //     i--;
-        //   }
-        // }
-        // this.getCities();
       }
     });
   }
@@ -148,14 +140,9 @@ export class LocationComponent implements OnInit {
     this.deletedId = id;
   }
 
-  // deleteId(deleteId: any) {
-  //   this.deletedId = deleteId;
-  // }
-
   getCityName(cityId: any) {
     for (let i = 0; i < this.city.length; i++) {
       if (cityId === this.city[i]._id) {
-        // console.log(cityId, this.city[i]._id);
         return this.city[i].city;
       } else if (cityId === 8) return "Karachi";
     }

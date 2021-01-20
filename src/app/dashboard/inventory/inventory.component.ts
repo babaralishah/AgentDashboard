@@ -11,8 +11,7 @@ import { formatDate } from "@angular/common";
   styleUrls: ["./inventory.component.css"],
 })
 export class InventoryComponent implements OnInit {
-
-  @ViewChild('content') content: any;
+  @ViewChild("content") content: any;
   user: any = [];
   deleteId: any;
   key: any;
@@ -78,7 +77,7 @@ export class InventoryComponent implements OnInit {
     this.getInventoryList();
     this.getCities();
   }
-  
+
   async tokenization() {
     const token = await this.authService.getToken();
     const decodedToken = await this.authService.getDecodedToken(token);
@@ -87,11 +86,15 @@ export class InventoryComponent implements OnInit {
   }
 
   changeStartDate(e: any) {
-    this.startDate = formatDate(new Date(e.target.value),'yyyy-MM-dd','en_US');
+    this.startDate = formatDate(
+      new Date(e.target.value),
+      "yyyy-MM-dd",
+      "en_US"
+    );
     // console.log('Start', this.startDate);
   }
   changeEndDate(e: any) {
-    this.endDate= formatDate(new Date(e.target.value),'yyyy-MM-dd','en_US');
+    this.endDate = formatDate(new Date(e.target.value), "yyyy-MM-dd", "en_US");
     // console.log('End', this.endDate);
   }
 
@@ -99,7 +102,7 @@ export class InventoryComponent implements OnInit {
     this.authService.getInventory().subscribe(
       (data) => {
         data = data.inventories;
-        
+
         data.forEach((element) => {
           element.assignedTo = [];
           element.added_ByName = element.added_By.fullname;
@@ -123,20 +126,20 @@ export class InventoryComponent implements OnInit {
             element.assignedTo[i] = element.assigned_history[i]?.fullname;
           }
 
-          if(this.currentLoginUser.access === "city_admin") {
-            element.city.forEach(city => {
-              if(this.currentLoginUser.city.city === city.city) {
+          if (this.currentLoginUser.access === "city_admin") {
+            element.city.forEach((city) => {
+              if (this.currentLoginUser.city.city === city.city) {
                 this.user.push(element);
                 return;
               }
             });
-          } else if(this.currentLoginUser.access === "agent") {
-            if(this.currentLoginUser.userId === element.added_By.userId) {
+          } else if (this.currentLoginUser.access === "agent") {
+            if (this.currentLoginUser.userId === element.added_By.userId) {
               this.user.push(element);
               return;
             } else {
-              element.assigned_history.forEach(history => {
-                if(this.currentLoginUser.userId === history?.userId) {
+              element.assigned_history.forEach((history) => {
+                if (this.currentLoginUser.userId === history?.userId) {
                   this.user.push(element);
                   return;
                 }

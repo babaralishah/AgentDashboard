@@ -10,8 +10,7 @@ import { ToastrService } from "ngx-toastr";
   styleUrls: ["./signup.component.css"],
 })
 export class SignupComponent implements OnInit {
-
-  @ViewChild('content') content;
+  @ViewChild("content") content;
   sideMenuCollapsed = false;
 
   submitted = false;
@@ -20,7 +19,11 @@ export class SignupComponent implements OnInit {
   locations: any;
   user: any;
   abc: any;
-  accessType = [{ access: "agent" }, { access: "city_admin" }, { access: "call_center" }];
+  accessType = [
+    { access: "agent" },
+    { access: "city_admin" },
+    { access: "call_center" },
+  ];
   selectedLocations: any = [];
   selectedCity: any;
   selectStringLocations: any = [];
@@ -52,12 +55,6 @@ export class SignupComponent implements OnInit {
     this.user = this.authService.getUser();
   }
   updatefields() {
-    // console.log(this.user?.city.city);
-    // this.registerForm.patchValue({
-    //   locationName: this.selectStringLocations,
-    // });
-
-    // this.registerForm.patchValue({ cityName: this.user?.city.city });
     this.registerForm.patchValue({ fullname: this.user?.fullname });
     this.registerForm.patchValue({ email: this.user?.email });
     this.registerForm.patchValue({ password: this.user?.password });
@@ -85,8 +82,6 @@ export class SignupComponent implements OnInit {
   initialize() {
     if (this.user) {
       this.registerForm = this.formBuilder.group({
-        // cityName: [],
-        // locationName: [],
         fullname: ["", Validators.required],
         email: [
           "",
@@ -97,8 +92,8 @@ export class SignupComponent implements OnInit {
           ],
         ],
         location: ["", Validators.required],
-        contact: [""
-          ,
+        contact: [
+          "",
           [
             Validators.required,
             Validators.minLength(12),
@@ -112,8 +107,6 @@ export class SignupComponent implements OnInit {
       });
     } else {
       this.registerForm = this.formBuilder.group({
-        // cityName: [],
-        // locationName: [],
         fullname: ["", Validators.required],
         email: [
           "",
@@ -126,8 +119,8 @@ export class SignupComponent implements OnInit {
         password: ["", [Validators.required, Validators.minLength(6)]],
         location: [, Validators.required],
         city: ["", Validators.required],
-        contact: ["92"
-          ,
+        contact: [
+          "92",
           [
             Validators.required,
             Validators.minLength(12),
@@ -140,7 +133,7 @@ export class SignupComponent implements OnInit {
     }
     this.getCities();
   }
-  password(event, value) {
+  password(event: any, value: any) {
     const password = this.registerForm.get("password");
     const confirm_password = this.registerForm.get("confirm_password");
     if (value === "Pass" && event === confirm_password?.value) {
@@ -154,8 +147,8 @@ export class SignupComponent implements OnInit {
 
   // Calling Api to get the Cities
   getCities() {
-    console.log('getcities');
-    
+    console.log("getcities");
+
     this.authService.getCities().subscribe(
       (data) => {
         console.log(data);
@@ -186,14 +179,12 @@ export class SignupComponent implements OnInit {
 
   //Function to change the city of --ng select city--
   changeCity(city: any) {
-    // this.registerForm.patchValue({ cityName: city?.city });
     this.selectStringLocations = [];
     this.locations = [];
     if (city) this.getLocations(city._id);
     this.registerForm.patchValue({ city });
     this.locations = "";
     if (this.user) {
-      // this.registerForm.patchValue({ cityName: this.user?.city[0].city });
       if (this.selectedCity == city?.city) {
         console.log(this.selectStringLocations);
         console.log(this.selectedLocations);
@@ -250,9 +241,6 @@ export class SignupComponent implements OnInit {
           }
         });
     } else {
-      // this.registerForm.patchValue({
-      //   locationName: this.selectStringLocations,
-      // });
       console.log(this.registerForm.value);
       this.authService.register(this.registerForm.value).subscribe(
         (data) => {

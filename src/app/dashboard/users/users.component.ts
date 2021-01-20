@@ -41,20 +41,10 @@ export class UsersComponent implements OnInit {
 
   options = [
     {
-      value: "fullname",
-      name: "Filter By Name",
-      placeholder: "Name",
-    },
-    {
       value: "access",
       name: "Filter By Access",
       placeholder: "Access",
-    },
-    // {
-    //   value: "SubLocation",
-    //   name: "Filter By Location",
-    //   placeholder: "Location",
-    // },
+    }
   ];
   selectedOption = this.options[0].value;
   placeholder = this.options[0].placeholder;
@@ -107,11 +97,9 @@ export class UsersComponent implements OnInit {
       "yyyy-MM-dd",
       "en_US"
     );
-    // console.log('Start', this.startDate);
   }
   changeEndDate(e: any) {
     this.endDate = formatDate(new Date(e.target.value), "yyyy-MM-dd", "en_US");
-    // console.log('End', this.endDate);
   }
 
   optionChange(e: any) {
@@ -123,17 +111,11 @@ export class UsersComponent implements OnInit {
     this.authService.setUser(user);
     this.router.navigateByUrl("/register");
   }
-
   // Function to call User data table for Assigned_To Field of the add-inventory-form
   getAllUsersList() {
     this.authService.getUsers().subscribe(
       (users) => {
         const data = users;
-        // for(let i=0;i<data.length;i++){
-
-        // this.agentList[i] = data[i].fullname;
-        // }
-        // console.log(data);
         this.agentList = data;
         console.log(this.agentList);
       },
@@ -146,8 +128,6 @@ export class UsersComponent implements OnInit {
   getUserList() {
     this.authService.getUsers().subscribe(
       (data) => {
-        // this.data = data;
-
         data.forEach((element) => {
           if (this.currentLoginUser.access === "city_admin") {
             if (this.currentLoginUser.city.city !== element.city.city) {
@@ -155,7 +135,6 @@ export class UsersComponent implements OnInit {
             }
           }
           element.cityName = element.city.city;
-          // element.locationName = element.location[0]?.location;
           element.locationName = [];
           element.SubLocation = [];
           for (let i = 0; i < element.location.length; i++) {

@@ -68,6 +68,7 @@
                                         <th scope="col">Added On</th>
                                         <th scope="col">Assigned To</th>
                                         <!-- <th scope="col">Media</th> -->
+                                        <!-- <th scope="col">Comments</th> -->
                                         <th scope="col">Operations</th>
                                     </tr>
                                 </thead>
@@ -136,11 +137,12 @@
                                         <!-- <td>
                                             <span><b>Media: </b> {{ user?.media }}</span><br />
                                         </td> -->
+                                        <!-- <td>{{user?.comments}}</td> -->
                                         <td style="width: 12%;">
                                             <i class="fa fa-edit icon" (click)="setUserToEdit(user)"></i>
                                             <a (click)="setUserToEdit(user)" role="button"></a>
 
-                                            <i class="fa fa-trash icon" (click)="confirmID(user._id)" data-toggle="modal" data-target="#exampleModal1"></i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <i class="fa fa-trash icon" (click)="confirmID(user._id)" data-toggle="modal" data-target="#exampleModal1"></i> &nbsp;&nbsp;
                                             <span><i class="fas fa-exchange-alt" data-toggle="modal"
                                                     data-target="#myModal" (click)="setCurrentUser(user)"></i></span>
                                         </td>
@@ -183,6 +185,9 @@
 
 <div class="modal" id="myModal">
     <div class="modal-dialog modal-dialog-scrollable">
+        <!-- <div class="modal-content" style="height: 500px; 
+        margin: 1.75rem auto; 
+        max-width: 600px;"> -->
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="text-center">Agent Assignment</h4>
@@ -191,8 +196,8 @@
                 </button>
             </div>
 
-            <div class="modal-body">
-                <br />
+            <div class="modal-body" style="height: 300px;max-width: 500px;">
+                <!-- <div class="modal-body"> -->
                 <div class="row">
                     <div class="col-md-5 col-sm-5">
                         <div class="radio">
@@ -202,12 +207,12 @@
                                     City Admin
                                 </label>
 
-                                <label class="btn btn-primary" style="width: 139px" [class.active]="assigned_type === 'Admin'">
+                                <label class="btn btn-primary ml-3" style="width: 139px" [class.active]="assigned_type === 'Admin'">
                                     <input type="radio" [(ngModel)]="assigned_type" value="Admin" />
                                     Admins
                                 </label>
 
-                                <label class="btn btn-primary" style="width: 139px" [class.active]="assigned_type === 'Agents'">
+                                <label class="btn btn-primary ml-3" style="width: 139px" [class.active]="assigned_type === 'Agents'">
                                     <input type="radio" [(ngModel)]="assigned_type" value="Agents" />
                                     Agents
                                 </label>
@@ -218,21 +223,31 @@
 
                 <br />
                 <div class="row">
-                    <br /><br />
-                    <div *ngIf="assigned_type === 'city_admin'">
-                        <ng-select class="ng-select inputs2" [items]="cityAdminList" bindLabel="city.city" bindValue="fullname" placeholder="Select city admin" (change)="changeAssignedToCityAdmin($event)">
+                    <div class="col-8" *ngIf="assigned_type === 'city_admin'">
+                        <ng-select class="ng-select inputs2 mt-3" [items]="cityAdminList" bindLabel="city.city" bindValue="fullname" placeholder="Select city admin" (change)="changeAssignedToCityAdmin($event)">
                         </ng-select>
                     </div>
 
-                    <div *ngIf="assigned_type === 'Admin'">
-                        <ng-select class="ng-select inputs2" [items]="superAdminList" bindLabel="access" bindValue="access" placeholder="Select Admin" (change)="changeAssignedAdmin($event)">
+                    <div class="col-8" *ngIf="assigned_type === 'Admin'">
+                        <ng-select class="ng-select inputs2  mt-3" [items]="superAdminList" bindLabel="access" bindValue="access" placeholder="Select Admin" (change)="changeAssignedAdmin($event)">
                         </ng-select>
                     </div>
 
-                    <div *ngIf="assigned_type === 'Agents'">
-                        <ng-select #agentSelect class="ng-select inputs2" [items]="agentList" [multiple]="true" bindLabel="fullname" bindValue="fullname" placeholder="Select Agent" (change)="changeAssignedAgent($event)">
+                    <div class="col-8" *ngIf="assigned_type === 'Agents'">
+                        <ng-select #agentSelect class="ng-select inputs2 mt-3" [items]="agentList" [multiple]="true" bindLabel="fullname" bindValue="fullname" placeholder="Select Agent" (change)="changeAssignedAgent($event)">
                         </ng-select>
                     </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="form-check updatePassword">
+                        <label class="form-check-label" for="exampleCheck1">Do you want to write Comment?</label>
+                        <input (click)="isComment()" type="checkbox" class="form-check-input" id="exampleCheck1">
+                    </div>
+                </div>
+
+                <div *ngIf="isCheckComment">
+                    <textarea>{{currentUser?.comments}}
+                        </textarea>
                 </div>
             </div>
             <div class="modal-footer">

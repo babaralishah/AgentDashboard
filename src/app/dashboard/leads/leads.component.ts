@@ -14,8 +14,8 @@ import { formatDate } from "@angular/common";
   styleUrls: ["./leads.component.css"],
 })
 export class LeadsComponent implements OnInit {
-  @ViewChild('content') content: any;
-  
+  @ViewChild("content") content: any;
+
   user: any = [];
   currentUser: any;
   withAutofocus = `<button type="button" ngbAutofocus class="btn btn-danger"
@@ -43,6 +43,7 @@ export class LeadsComponent implements OnInit {
   maxDemand: any;
 
   currentLoginUser: any;
+  isCheckComment: boolean;
 
   constructor(
     private authService: AuthenticationService,
@@ -59,11 +60,6 @@ export class LeadsComponent implements OnInit {
       name: "Filter By Client Name",
       placeholder: "Client Name",
     },
-    // {
-    //   value: "locationName",
-    //   name: "Filter By Location",
-    //   placeholder: "Location",
-    // },
     {
       value: "property_type",
       name: "Filter By Property Type",
@@ -92,7 +88,7 @@ export class LeadsComponent implements OnInit {
     this.tokenization();
     this.getCities();
   }
-  
+
   async tokenization() {
     const token = await this.authService.getToken();
     const decodedToken = await this.authService.getDecodedToken(token);
@@ -101,18 +97,24 @@ export class LeadsComponent implements OnInit {
   }
 
   changeStartDate(e: any) {
-    this.startDate = formatDate(new Date(e.target.value),'yyyy-MM-dd','en_US');
+    this.startDate = formatDate(
+      new Date(e.target.value),
+      "yyyy-MM-dd",
+      "en_US"
+    );
   }
   changeEndDate(e: any) {
-    this.endDate= formatDate(new Date(e.target.value),'yyyy-MM-dd','en_US');
+    this.endDate = formatDate(new Date(e.target.value), "yyyy-MM-dd", "en_US");
   }
-
+  isComment() {
+    this.isCheckComment = !this.isCheckComment;
+  }
   getLeadsList() {
     this.authService.getLeads().subscribe(
       (data) => {
         data = data.leads;
         console.log(data);
-        
+
         data.forEach((element) => {
           element.assignedTo = [];
           element.added_ByName = element.added_By.fullname;
@@ -136,20 +138,20 @@ export class LeadsComponent implements OnInit {
             element.assignedTo[i] = element.assigned_history[i]?.fullname;
           }
 
-          if(this.currentLoginUser.access === "city_admin") {
-            element.city.forEach(city => {
-              if(this.currentLoginUser.city.city === city.city) {
+          if (this.currentLoginUser.access === "city_admin") {
+            element.city.forEach((city) => {
+              if (this.currentLoginUser.city.city === city.city) {
                 this.user.push(element);
                 return;
               }
             });
-          } else if(this.currentLoginUser.access === "agent") {
-            if(this.currentLoginUser.userId === element.added_By.userId) {
+          } else if (this.currentLoginUser.access === "agent") {
+            if (this.currentLoginUser.userId === element.added_By.userId) {
               this.user.push(element);
               return;
             } else {
-              element.assigned_history.forEach(history => {
-                if(this.currentLoginUser.userId === history?.userId) {
+              element.assigned_history.forEach((history) => {
+                if (this.currentLoginUser.userId === history?.userId) {
                   this.user.push(element);
                   return;
                 }
@@ -219,8 +221,6 @@ export class LeadsComponent implements OnInit {
 
   setCurrentUser(user: any) {
     this.currentUser = user;
-
-    // this.currentUser["assigned_to"] = [];
     let date = new Date(this.currentUser.created);
     console.log(
       date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear()

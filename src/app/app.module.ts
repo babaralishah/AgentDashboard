@@ -93,7 +93,7 @@ registerLocaleData(en);
     PageNotFoundComponent,
     FilterPipe,
     LocationComponent,
-    AddLocationComponent
+    AddLocationComponent,
   ],
   imports: [
     HttpClientModule,

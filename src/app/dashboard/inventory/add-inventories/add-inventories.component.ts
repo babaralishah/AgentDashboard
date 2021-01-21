@@ -351,6 +351,7 @@ export class AddInventoriesComponent implements OnInit {
       assigned_type: this.user?.assigned_type,
     });
     this.addinventoryForm.patchValue({ area: this.user?.area });
+    this.addinventoryForm.patchValue({ comments: this.user?.comments });
     this.addinventoryForm.patchValue({ area_unit: this.user?.area_unit });
     this.addinventoryForm.patchValue({ max_area: this.user?.max_area });
     this.addinventoryForm.patchValue({ max_price: this.user?.max_price });

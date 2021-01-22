@@ -245,8 +245,10 @@
                     </div>
                 </div>
 
-                <div *ngIf="isCheckComment">
-                    <textarea>{{currentUser?.comments}}
+                <div *ngIf="isCheckComment" class="form-group mt-3">
+                    <textarea class="form-control" style="
+                    height: 100px;
+                ">{{currentUser?.comments}}
                         </textarea>
                 </div>
             </div>

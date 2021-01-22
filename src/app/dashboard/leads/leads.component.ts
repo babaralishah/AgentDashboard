@@ -15,7 +15,7 @@ import { formatDate } from "@angular/common";
 })
 export class LeadsComponent implements OnInit {
   @ViewChild("content") content: any;
-
+  userComments:any;
   user: any = [];
   currentUser: any;
   withAutofocus = `<button type="button" ngbAutofocus class="btn btn-danger"

@@ -18,7 +18,9 @@
     border-radius: 0.25rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
-ng-select, .form-control {
+
+ng-select,
+.form-control {
     font-size: 0.8rem;
     font-weight: 400;
 }
@@ -41,9 +43,6 @@ ng-select, .form-control {
     overflow: hidden;
 }
 
-.table td,
-.table th {}
-
 .table tr:nth-child(even) {
     background-color: #38baa21f;
 }
@@ -61,10 +60,12 @@ ng-select, .form-control {
     color: white;
 }
 
+
+/* 
 .user-class {
     margin-left: 47px;
     margin-top: 120px;
-}
+} */
 
 .card-body {
     padding: 0px;
@@ -92,10 +93,13 @@ ng-select, .form-control {
     margin-left: auto;
     margin-right: 12px;
 }
+
 .btn-container button {
     margin-left: 10px;
 }
 
+
+/* 
 @media only screen and (max-width: 1650px) {
     .user-class {
         margin-left: 50px;
@@ -106,15 +110,17 @@ ng-select, .form-control {
     .user-class {
         margin-left: 80px;
     }
-}
+} */
 
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1250px) {
     .user-class {
-        margin-left: 100px;
+        margin-left: -42px;
+        width: 108%;
     }
 }
 
-@media only screen and (max-width: 1100px) {
+
+/* @media only screen and (max-width: 1100px) {
     .user-class {
         margin-left: 120px;
     }
@@ -124,12 +130,4 @@ ng-select, .form-control {
     .user-class {
         margin-left: -80px;
     }
-}
-
-
-/* 
-.form-control-borderless:hover, .form-control-borderless:active, .form-control-borderless:focus {
-    border: none;
-    outline: none;
-    box-shadow: none;
 } */

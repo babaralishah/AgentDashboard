@@ -41,6 +41,8 @@ export class LeadsComponent implements OnInit {
   endDate: String;
   minDemand: any;
   maxDemand: any;
+  usersList: any = [];
+  agentAssignedName: any;
 
   currentLoginUser: any;
   isCheckComment: boolean;
@@ -296,6 +298,19 @@ export class LeadsComponent implements OnInit {
   getCityAdminList() {
     this.authService.getUsers().subscribe(
       (data) => {
+        
+        this.usersList = [];
+        data.forEach(element => {
+          if (this.currentLoginUser.access === "city_admin") {
+            if (this.currentLoginUser.city.city !== element?.city?.city) {
+              return;
+            }
+          }
+          
+          this.usersList.push(element);
+        });
+        console.log(this.agentList);
+
         for (var i = 0; i < data.length; i++) {
           if (data[i].access == "city_admin") {
             this.cityAdminList.push(data[i]);
@@ -370,6 +385,12 @@ export class LeadsComponent implements OnInit {
     });
     console.log(this.assignLeadData);
     // this.currentUser["assigned_to"] = this.assignLeadData;
+  }
+
+  changeAssignAgent(agent: any) {
+    console.log(agent);
+    this.agentAssignedName = agent?.fullname;
+    console.log(this.agentAssignedName);
   }
   changeAssignedAgent(access: any) {
     console.log(access);

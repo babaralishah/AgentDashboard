@@ -34,6 +34,8 @@ export class InventoryComponent implements OnInit {
   search_location: string;
   search_type: string;
   search_demand: string;
+  agentList: any = [];
+  agentAssignedName: any;
 
   currentLoginUser: any;
 
@@ -75,6 +77,7 @@ export class InventoryComponent implements OnInit {
   ngOnInit(): void {
     this.tokenization();
     this.getInventoryList();
+    this.getAllUsersList();
     this.getCities();
   }
 
@@ -96,6 +99,33 @@ export class InventoryComponent implements OnInit {
   changeEndDate(e: any) {
     this.endDate = formatDate(new Date(e.target.value), "yyyy-MM-dd", "en_US");
     // console.log('End', this.endDate);
+  }
+
+  changeAssignedAgent(agent: any) {
+    console.log(agent);
+    this.agentAssignedName = agent?.fullname;
+    console.log(this.agentAssignedName);
+  }
+  getAllUsersList() {
+    this.authService.getUsers().subscribe(
+      (users) => {
+        this.agentList = [];
+        const data = users;
+        data.forEach(element => {
+          if (this.currentLoginUser.access === "city_admin") {
+            if (this.currentLoginUser.city.city !== element?.city?.city) {
+              return;
+            }
+          }
+          
+          this.agentList.push(element);
+        });
+        console.log(this.agentList);
+      },
+      (err) => {
+        console.error(err);
+      }
+    );
   }
 
   getInventoryList() {

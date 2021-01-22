@@ -114,8 +114,17 @@ export class UsersComponent implements OnInit {
   getAllUsersList() {
     this.authService.getUsers().subscribe(
       (users) => {
+        this.agentList = [];
         const data = users;
-        this.agentList = data;
+        data.forEach(element => {
+          if (this.currentLoginUser.access === "city_admin") {
+            if (this.currentLoginUser.city.city !== element?.city?.city) {
+              return;
+            }
+          }
+          
+          this.agentList.push(element);
+        });
         console.log(this.agentList);
       },
       (err) => {

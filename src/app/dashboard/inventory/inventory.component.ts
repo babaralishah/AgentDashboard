@@ -111,13 +111,13 @@ export class InventoryComponent implements OnInit {
       (users) => {
         this.agentList = [];
         const data = users;
-        data.forEach(element => {
+        data.forEach((element) => {
           if (this.currentLoginUser.access === "city_admin") {
             if (this.currentLoginUser.city.city !== element?.city?.city) {
               return;
             }
           }
-          
+
           this.agentList.push(element);
         });
         console.log(this.agentList);

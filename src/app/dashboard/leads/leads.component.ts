@@ -15,7 +15,7 @@ import { formatDate } from "@angular/common";
 })
 export class LeadsComponent implements OnInit {
   @ViewChild("content") content: any;
-  userComments:any;
+  userComments: any;
   user: any = [];
   currentUser: any;
   withAutofocus = `<button type="button" ngbAutofocus class="btn btn-danger"
@@ -227,7 +227,7 @@ export class LeadsComponent implements OnInit {
     console.log(
       date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear()
     );
-    console.log(this.currentUser.created);
+    console.log(this.currentUser.comments);
   }
 
   sort(key: any) {
@@ -298,15 +298,14 @@ export class LeadsComponent implements OnInit {
   getCityAdminList() {
     this.authService.getUsers().subscribe(
       (data) => {
-        
         this.usersList = [];
-        data.forEach(element => {
+        data.forEach((element) => {
           if (this.currentLoginUser.access === "city_admin") {
             if (this.currentLoginUser.city.city !== element?.city?.city) {
               return;
             }
           }
-          
+
           this.usersList.push(element);
         });
         console.log(this.agentList);

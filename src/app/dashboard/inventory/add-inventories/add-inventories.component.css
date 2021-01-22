@@ -1,3 +1,9 @@
+.require {
+    color: #d93025;
+    margin-left: 5px;
+    font-size: 16px;
+}
+
 #content {
     margin: 120px 20px;
 }
@@ -6,6 +12,7 @@
     margin-left: 100px;
     transition: 0.5s all;
 }
+
 
 /* input,
 input::-webkit-input-placeholder {

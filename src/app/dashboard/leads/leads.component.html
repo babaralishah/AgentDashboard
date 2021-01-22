@@ -47,7 +47,7 @@
                     <div class="btn-container">
                         <button onclick="window.print()" class="btn btn-primary">Print</button>
                         <button (click)="exportTOExcel()" class="btn btn-primary">Excel</button>
-                    </div>   
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-12">
@@ -248,7 +248,7 @@
                 </div>
 
                 <div *ngIf="isCheckComment" class="form-group mt-3">
-                    <textarea class="form-control" ngModel style="height: 140px;">{{currentUser?.comments}}
+                    <textarea class="form-control" style="height: 140px;">{{currentUser?.comments}}
                         </textarea>
                 </div>
             </div>

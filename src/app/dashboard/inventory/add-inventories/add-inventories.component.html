@@ -20,6 +20,8 @@
                                             <label *ngIf="addinventoryForm.get('form_title').value == 'Lead'" class="btn btn-primary" [class.active]="addinventoryForm.get('form_title').value === 'Lead'">
                                                 <input type="radio" formControlName="form_title" value="Lead"> Lead
                                             </label>
+                                            <h6 *ngIf="addinventoryForm.get('form_title').value == 'Lead'" class="require">*</h6>
+
 
                                             <label *ngIf="addinventoryForm.get('form_title').value == 'Inventory'" class="btn btn-primary" [class.active]="addinventoryForm.get('form_title').value === 'Inventory'">
                                                 <input type="radio"
@@ -27,6 +29,7 @@
                                                     formControlName="form_title" value="Inventory">
                                                 Inventory
                                             </label>
+                                            <h6 *ngIf="addinventoryForm.get('form_title').value == 'Inventory'" class="require">*</h6>
 
                                             <label *ngIf="addinventoryForm.get('form_title').value == 'Both'" class="btn btn-primary" [class.active]="addinventoryForm.get('form_title').value === 'Both'">
                                                 <input type="radio"
@@ -34,6 +37,7 @@
                                                     formControlName="form_title" value="Both">
                                                 Both
                                             </label>
+                                            <h6 *ngIf="addinventoryForm.get('form_title').value == 'Both'" class="require">*</h6>
 
                                         </div>
                                     </div>

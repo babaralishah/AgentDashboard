@@ -100,10 +100,13 @@ export class AuthenticationService {
   }
   // Set inventory form title
   setFormTitle(name) {
+    // localStorage.setItem()
+    localStorage.setItem("form_title", name);
     this.form_title = name;
   }
   // Get inventory form title
   getFormTitle() {
+    return localStorage.getItem("form_title");
     return this.form_title;
   }
   removeFormTitle() {

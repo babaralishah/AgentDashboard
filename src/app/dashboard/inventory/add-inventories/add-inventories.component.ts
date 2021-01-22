@@ -82,6 +82,7 @@ export class AddInventoriesComponent implements OnInit {
     { date: new Date() },
   ];
   assignStringName: any = [];
+  href: string;
   //////////////////////////////////
 
   constructor(
@@ -99,6 +100,8 @@ export class AddInventoriesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.href = this.router.url;
+    console.log(this.href);
     this.getUserDetails();
     this.user = this.authService.getUser();
     if (this.user) {

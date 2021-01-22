@@ -51,7 +51,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <div class="table-container mb-5 mt-4">
+                        <div class="table-container mb-5 mt-4 leads">
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
@@ -247,8 +247,8 @@
                     </div>
                 </div>
 
-                <div *ngIf="isCheckComment">
-                    <textarea>{{currentUser?.comments}}
+                <div *ngIf="isCheckComment" class="form-group mt-3">
+                    <textarea class="form-control" ngModel style="height: 140px;">{{currentUser?.comments}}
                         </textarea>
                 </div>
             </div>

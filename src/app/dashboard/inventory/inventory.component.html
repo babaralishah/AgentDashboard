@@ -51,7 +51,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <div class="table-container mb-5 mt-4">
+                        <div class="table-container mb-5 mt-4 inventory">
                             <table class="table table-hover">
                                 <thead>
                                     <th> </th>
@@ -123,7 +123,15 @@
                                             <td>{{ user.demand_price | currency :'Rs ' : 'symbol' : '1.0-0' }}</td>
                                         </ng-template>
 
-                                        <td>{{ user?.beds_number }}</td>
+                                        <td *ngIf="user?.beds_number != null; else elseBeds">
+                                            <span>{{ user?.beds_number }}</span>
+                                        </td>
+                                        <ng-template #elseBeds>
+                                            <td>
+                                                <span>None</span>
+                                            </td>
+                                        </ng-template>
+                                        <!-- <td>{{ user?.beds_number }}</td> -->
                                         <!-- <td>
 
                                             <span *ngIf="user?.assignedTo?.length === 0">Self</span>

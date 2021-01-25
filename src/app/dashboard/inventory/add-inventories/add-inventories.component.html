@@ -96,54 +96,58 @@
                                 </div>
                                 <br><br>
                                 <div class="row">
-                                    <div class="form-group" *ngIf="!user">
-                                        <div class="row ml-3">
-                                            <b class="steps">City</b>
-                                            <h5 class="require">*</h5>
+                                    <div class="col-3">
+                                        <div class="form-group" *ngIf="!user">
+                                            <div class="row ml-3">
+                                                <b class="steps">City</b>
+                                                <h5 class="require">*</h5>
+                                            </div>
+                                            <div>
+                                                <ng-select class="ng-select" [items]="cities" bindLabel="city" bindValue="_id" placeholder="Select City" [ngClass]="{ 'is-invalid': submitted && f.city.errors }" (change)="changeCity($event)">
+                                                </ng-select>
+                                                <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
+                                                    <div *ngIf="f.city.errors.required">City is required</div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div>
-                                            <ng-select class="ng-select" [items]="cities" bindLabel="city" bindValue="_id" placeholder="Select City" [ngClass]="{ 'is-invalid': submitted && f.city.errors }" (change)="changeCity($event)">
-                                            </ng-select>
-                                            <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
-                                                <div *ngIf="f.city.errors.required">City is required</div>
+                                        <div class="form-group" *ngIf="user">
+                                            <div class="row ml-3">
+                                                <b class="steps">City</b>
+                                                <h5 class="require">*</h5>
+                                            </div>
+                                            <div>
+                                                <ng-select [(ngModel)]="user.city[0].city" [ngModelOptions]="{standalone: true}" class="ng-select" [items]="cities" bindLabel="city" bindValue="city" placeholder="Select City" [ngClass]="{ 'is-invalid': submitted && f.city.errors }" (change)="changeCity($event)">
+                                                </ng-select>
+                                                <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
+                                                    <div *ngIf="f.city.errors.required">City is required</div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group" *ngIf="user">
-                                        <div class="row ml-3">
-                                            <b class="steps">City</b>
-                                            <h5 class="require">*</h5>
-                                        </div>
-                                        <div>
-                                            <ng-select [(ngModel)]="user.city[0].city" [ngModelOptions]="{standalone: true}" class="ng-select" [items]="cities" bindLabel="city" bindValue="city" placeholder="Select City" [ngClass]="{ 'is-invalid': submitted && f.city.errors }" (change)="changeCity($event)">
-                                            </ng-select>
-                                            <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
-                                                <div *ngIf="f.city.errors.required">City is required</div>
+                                    <div class="col-3">
+                                        <div class="form-group" *ngIf="user">
+                                            <div class="row ml-3">
+                                                <b class="steps">Location</b>
+                                                <h5 class="require">*</h5>
+                                            </div>
+                                            <div class="input-group">
+                                                <ng-select [(ngModel)]="selectStringLocations" [ngModelOptions]="{standalone: true}" class="ng-select inputs2" [items]="locations" bindLabel="location" bindValue="location" placeholder="Select Location" (change)="changeLocation($event)">
+                                                </ng-select>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group" *ngIf="user">
-                                        <div class="row ml-3">
-                                            <b class="steps">Location</b>
-                                            <h5 class="require">*</h5>
-                                        </div>
-                                        <div class="input-group">
-                                            <ng-select [(ngModel)]="selectStringLocations" [ngModelOptions]="{standalone: true}" class="ng-select inputs2" [items]="locations" bindLabel="location" bindValue="location" placeholder="Select Location" (change)="changeLocation($event)">
-                                            </ng-select>
-                                        </div>
-                                    </div>
 
-                                    <div class="form-group" *ngIf="!user">
-                                        <div class="row ml-3">
-                                            <b class="steps">Location</b>
-                                            <h5 class="require">*</h5>
-                                        </div>
-                                        <div>
-                                            <ng-select class="ng-select inputs2" [(ngModel)]="selectStringLocations" [ngModelOptions]="{standalone: true}" [items]="locations" bindLabel="location" bindValue="location" placeholder="Select Location" [ngClass]="{ 'is-invalid': submitted && f.location.errors }"
-                                                (change)="changeLocation($event)">
-                                            </ng-select>
-                                            <div *ngIf="submitted && f.location.errors" class="invalid-feedback">
-                                                <div *ngIf="f.location.errors.required">Location is required</div>
+                                        <div class="form-group" *ngIf="!user">
+                                            <div class="row ml-3">
+                                                <b class="steps">Location</b>
+                                                <h5 class="require">*</h5>
+                                            </div>
+                                            <div>
+                                                <ng-select class="ng-select inputs2" [(ngModel)]="selectStringLocations" [ngModelOptions]="{standalone: true}" [items]="locations" bindLabel="location" bindValue="location" placeholder="Select Location" [ngClass]="{ 'is-invalid': submitted && f.location.errors }"
+                                                    (change)="changeLocation($event)">
+                                                </ng-select>
+                                                <div *ngIf="submitted && f.location.errors" class="invalid-feedback">
+                                                    <div *ngIf="f.location.errors.required">Location is required</div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -369,7 +373,10 @@
                                 <div class="row">
                                     <div class="col-md-8 col-sm-4">
 
-                                        <div class="radio">
+                                        <div class="row">
+                                            <b class="steps ml-3">Area Unit</b>
+                                        </div>
+                                        <div class="radio mt-2">
                                             <div class="btn-group btn-group-toggle">
                                                 <label style="
                                                 margin-left: 0px;
@@ -423,8 +430,10 @@
                                         </div>
                                     </div>
                                     <div class="col-md-5 col-sm-2">
-
-                                        <div class="radio select-btn">
+                                        <div class="row">
+                                            <b class="steps ml-3">Area Unit</b>
+                                        </div>
+                                        <div class="radio mt-2">
                                             <div class="btn-group btn-group-toggle">
                                                 <label style="
                                                 margin-left: 0px;
@@ -521,7 +530,8 @@
 
                             <div class="row mt-3">
                                 <div class="col-md-5 col-sm-5">
-                                    <div class="radio">
+                                    <b class="steps">Assign To</b>
+                                    <div class="radio mt-3">
 
                                         <div class="btn-group btn-group-toggle">
                                             <label style="
@@ -551,7 +561,6 @@
 
                             <br />
                             <div class="row">
-                                <br /><br />
                                 <div *ngIf="addinventoryForm.get('assigned_type').value === 'city_admin'">
                                     <ng-select class="ng-select inputs2" [(ngModel)]="cityAdminAssignedNames" [ngModelOptions]="{standalone: true}" [items]="cityAdminList" bindLabel="city.city" [multiple]="true" bindValue="fullname" placeholder="Select city admin" (change)="changeAssignedToCityAdmin($event)">
                                     </ng-select>
@@ -569,7 +578,6 @@
                             </div>
                             <div class="form-group pull-right">
                                 <button type="submit" class="btn btn1 btn-primary">{{formSendingStatus}}</button>
-                                <br><br><br>
                             </div>
                         </form>
                     </div>

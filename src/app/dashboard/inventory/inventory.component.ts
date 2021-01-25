@@ -46,6 +46,11 @@ export class InventoryComponent implements OnInit {
       placeholder: "Client Name",
     },
     {
+      value: "beds_number",
+      name: "Filter By Beds",
+      placeholder: "Beds",
+    },
+    {
       value: "property_type",
       name: "Filter By Property Type",
       placeholder: "Property Type",

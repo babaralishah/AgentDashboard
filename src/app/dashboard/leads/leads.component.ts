@@ -67,11 +67,11 @@ export class LeadsComponent implements OnInit {
       name: "Filter By Property Type",
       placeholder: "Property Type",
     },
-    // {
-    //   value: "added_ByName",
-    //   name: "Filter By Added By",
-    //   placeholder: "Added By",
-    // },
+    {
+      value: "beds_number",
+      name: "Filter By Beds",
+      placeholder: "Beds",
+    },
     {
       value: "assignedTo",
       name: "Filter By Assigned To",

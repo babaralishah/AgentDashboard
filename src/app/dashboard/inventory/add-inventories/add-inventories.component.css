@@ -53,6 +53,7 @@ input::-webkit-input-placeholder {
     color: #676767;
     /* color: #1f6e97; */
     font-size: 15px;
+    font-weight: 500;
 }
 
 b {

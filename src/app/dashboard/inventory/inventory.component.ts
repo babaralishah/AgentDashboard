@@ -55,11 +55,11 @@ export class InventoryComponent implements OnInit {
       name: "Filter By Property Type",
       placeholder: "Property Type",
     },
-    {
-      value: "added_ByName",
-      name: "Filter By Added By",
-      placeholder: "Added By",
-    },
+    // {
+    //   value: "added_ByName",
+    //   name: "Filter By Added By",
+    //   placeholder: "Added By",
+    // },
     {
       value: "assignedTo",
       name: "Filter By Assigned To",

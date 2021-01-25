@@ -41,13 +41,13 @@
                         <input type="number" class="form-control" placeholder="Max Demand" [(ngModel)]="maxDemand">
                     </div>
                     <div class="col-12 col-sm-6 col-lg-3 mb-3" *ngIf="currentLoginUser?.access !== 'agent'">
-                        <ng-select class="ng-select inputs2" [items]="agentList" bindLabel="fullname" bindValue="fullname" placeholder="Select Agent" (change)="changeAssignedAgent($event)">
+                        <ng-select class="ng-select inputs2" [items]="agentList" bindLabel="fullname" bindValue="fullname" placeholder="Select Added By" (change)="changeAssignedAgent($event)">
                         </ng-select>
                     </div>
                     <div class="btn-container">
                         <button onclick="window.print()" class="btn btn-primary">Print</button>
                         <button (click)="exportTOExcel()" class="btn btn-primary">Excel</button>
-                    </div>   
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-12">

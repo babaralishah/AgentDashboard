@@ -9,15 +9,19 @@ export class TableFilter03Pipe implements PipeTransform {
     if (!user || !fullname) {
       return user;
     }
-    
-    return user.filter(
-      (user) => {
-        if(user.fullname) {
-          return user.fullname.toLowerCase().indexOf(fullname.toLowerCase()) !== -1          
-        } else if(user.added_By.fullname) {
-          return user.added_By.fullname.toLowerCase().indexOf(fullname.toLowerCase()) !== -1;
-        }
+
+    return user.filter((user) => {
+      if (user.fullname) {
+        return (
+          user.fullname.toLowerCase().indexOf(fullname.toLowerCase()) !== -1
+        );
+      } else if (user.added_By.fullname) {
+        return (
+          user.added_By.fullname
+            .toLowerCase()
+            .indexOf(fullname.toLowerCase()) !== -1
+        );
       }
-    );
+    });
   }
 }

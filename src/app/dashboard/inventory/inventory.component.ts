@@ -252,7 +252,13 @@ export class InventoryComponent implements OnInit {
         this.toastr.success(data.message, "Success", {
           timeOut: 5000,
         });
-        this.getInventoryList();
+        // this.getInventoryList();
+        for (let i = 0; i < this.user.length; i++) {
+          if (this.user[i]._id === this.deleteId) {
+            this.user.splice(i, 1);
+            i--;
+          }
+        }
       }
     });
   }

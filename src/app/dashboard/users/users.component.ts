@@ -116,13 +116,13 @@ export class UsersComponent implements OnInit {
       (users) => {
         this.agentList = [];
         const data = users;
-        data.forEach(element => {
+        data.forEach((element) => {
           if (this.currentLoginUser.access === "city_admin") {
             if (this.currentLoginUser.city.city !== element?.city?.city) {
               return;
             }
           }
-          
+
           this.agentList.push(element);
         });
         console.log(this.agentList);
@@ -188,12 +188,19 @@ export class UsersComponent implements OnInit {
     console.log(this.deleteId);
 
     this.authService.deleteUser(this.deleteId).subscribe((data) => {
+      // this.getUserList();
       console.log(data);
       if (data.code === 200) {
         this.toastr.success(data.message, "Success", {
           timeOut: 5000,
         });
-        this.getUserList();
+        // this.getUserList();
+        for (let i = 0; i < this.data?.length; i++) {
+          if (this.data[i]._id === this.deleteId) {
+            this.data.splice(i, 1);
+            i--;
+          }
+        }
       }
     });
   }

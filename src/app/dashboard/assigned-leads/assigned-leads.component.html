@@ -56,12 +56,13 @@
                                     <th scope="col">Land Area</th>
 
                                     <th scope="col">Demand</th>
+                                    <th scope="col">Comment</th>
                                     <th scope="col">Operations</th>
                                 </thead>
 
                                 <tbody>
                                     <tr *ngFor="let user of user | filterlist: selectedOption:refId | tableFilter: city | LocationFilter:location | demandFilter: minDemand:maxDemand | dateFilter: startDate:endDate | paginate:{itemsPerPage:10,currentPage:p}; ">
-                                        <td> <span *ngIf="user.priority == 'Super Hot' else hot"><img class="super-hot"
+                                        <td> <span *ngIf="user?.priority == 'Super Hot' else hot"><img class="super-hot"
                                                     src="\assets\icons\super_hot.svg"></span>
 
                                             <ng-template #hot>
@@ -72,12 +73,12 @@
                                         <td>{{user.added_ByName}}</td>
                                         <td>{{ user.property_purpose }}</td>
                                         <td>
-                                            <b>Name : </b>{{ user.client_name |titlecase }} <br />
-                                            <b>Phone : </b>{{ user.client_number }} <br />
-                                            <b>Name : </b>{{ user.client_type |titlecase }}
+                                            <b>Name : </b>{{ user?.client_name |titlecase }} <br />
+                                            <b>Phone : </b>{{ user?.client_number }} <br />
+                                            <b>Name : </b>{{ user?.client_type |titlecase }}
                                         </td>
                                         <td>
-                                            {{ user.city[0]?.city }}<span></span><br /><span class="badge badge-light" *ngFor="let loc of user.location">{{ loc.location }},
+                                            {{ user.city[0]?.city }}<span></span><br /><span class="badge badge-light" *ngFor="let loc of user.location">{{ loc?.location }},
                                             </span>
                                         </td>
 
@@ -100,11 +101,12 @@
                                             </td>
                                         </ng-template>
 
-                                        <td *ngIf="user.min_price != null && user.max_price != null else elseBlockDemand"><b>Max:</b> {{ user.max_price | currency :'Rs ' : 'symbol' : '1.0-0' }}
-                                            <br><b>Min:</b> {{ user.min_price | currency :'Rs ' : 'symbol' : '1.0-0' }}</td>
+                                        <td *ngIf="user?.min_price != null && user?.max_price != null else elseBlockDemand"><b>Max:</b> {{ user?.max_price | currency :'Rs ' : 'symbol' : '1.0-0' }}
+                                            <br><b>Min:</b> {{ user?.min_price | currency :'Rs ' : 'symbol' : '1.0-0' }}</td>
                                         <ng-template #elseBlockDemand>
-                                            <td>{{ user.demand_price | currency :'Rs ' : 'symbol' : '1.0-0' }}</td>
+                                            <td>{{ user?.demand_price | currency :'Rs ' : 'symbol' : '1.0-0' }}</td>
                                         </ng-template>
+                                        <td>{{user?.comments}}</td>
                                         <td>
                                             <i class="fa fa-trash icon" (click)="confirmID(user._id)" data-toggle="modal" data-target="#exampleModal1" *ngIf="currentLoginUser?.access !== 'agent'"></i>
 

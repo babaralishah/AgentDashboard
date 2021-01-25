@@ -131,7 +131,13 @@ export class LocationComponent implements OnInit {
         this.toastr.success(data.message, "Success", {
           timeOut: 5000,
         });
-        this.getLocations();
+        // this.getLocations();
+        for (let i = 0; i < this.locations?.length; i++) {
+          if (this.locations[i]._id === this.deletedId) {
+            this.locations.splice(i, 1);
+            i--;
+          }
+        }
       }
     });
   }

@@ -3091,11 +3091,11 @@ class InventoryComponent {
         this.data = [];
         this.agentList = [];
         this.options = [
-            // {
-            //   value: "cityName",
-            //   name: "Filter By City",
-            //   placeholder: "City",
-            // },
+            {
+                value: "client_name",
+                name: "Filter By Client Name",
+                placeholder: "Client Name",
+            },
             // {
             //   value: "locationName",
             //   name: "Filter By Location",
@@ -3105,16 +3105,6 @@ class InventoryComponent {
                 value: "property_type",
                 name: "Filter By Property Type",
                 placeholder: "Property Type",
-            },
-            // {
-            //   value: "added_ByName",
-            //   name: "Filter By Added By",
-            //   placeholder: "Added By",
-            // },
-            {
-                value: "assignedTo",
-                name: "Filter By Assigned To",
-                placeholder: "Assigned To",
             },
         ];
         this.selectedOption = this.options[0].value;
@@ -3160,7 +3150,7 @@ class InventoryComponent {
                 }
                 this.agentList.push(element);
             });
-            console.log(this.agentList);
+            // console.log(this.agentList);
         }, (err) => {
             console.error(err);
         });
@@ -3227,7 +3217,7 @@ class InventoryComponent {
     // Calling Api to get the Cities
     getCities() {
         this.authService.getCities().subscribe((data) => {
-            console.log(data);
+            // console.log(data);
             this.cities = data;
         }, (err) => {
             console.error(err);

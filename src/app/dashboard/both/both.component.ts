@@ -12,8 +12,7 @@ import { formatDate } from "@angular/common";
   styleUrls: ["./both.component.css"],
 })
 export class BothComponent implements OnInit {
-
-  @ViewChild('content') content: any;
+  @ViewChild("content") content: any;
   user: any = [];
   savedId: any;
 
@@ -30,6 +29,7 @@ export class BothComponent implements OnInit {
   location: any;
 
   currentLoginUser: any;
+  agentAssignedName: any;
 
   constructor(
     private router: Router,
@@ -39,16 +39,6 @@ export class BothComponent implements OnInit {
   general_search: any;
 
   options = [
-    // {
-    //   value: "cityName",
-    //   name: "Filter By City",
-    //   placeholder: "City",
-    // },
-    // {
-    //   value: "SubLocation",
-    //   name: "Filter By Location",
-    //   placeholder: "Location",
-    // },
     {
       value: "property_type",
       name: "Filter By Property Type",
@@ -72,13 +62,15 @@ export class BothComponent implements OnInit {
   endDate: String;
   minDemand: any;
   maxDemand: any;
+  agentList: any = [];
 
   ngOnInit(): void {
     this.tokenization();
     this.getAllList();
+    this.getAllUsersList();
     this.getCities();
   }
-  
+
   async tokenization() {
     const token = await this.authService.getToken();
     const decodedToken = await this.authService.getDecodedToken(token);
@@ -87,11 +79,15 @@ export class BothComponent implements OnInit {
   }
 
   changeStartDate(e: any) {
-    this.startDate = formatDate(new Date(e.target.value),'yyyy-MM-dd','en_US');
+    this.startDate = formatDate(
+      new Date(e.target.value),
+      "yyyy-MM-dd",
+      "en_US"
+    );
     // console.log('Start', this.startDate);
   }
   changeEndDate(e: any) {
-    this.endDate= formatDate(new Date(e.target.value),'yyyy-MM-dd','en_US');
+    this.endDate = formatDate(new Date(e.target.value), "yyyy-MM-dd", "en_US");
     // console.log('End', this.endDate);
   }
   getAllList() {
@@ -99,7 +95,7 @@ export class BothComponent implements OnInit {
       (data) => {
         // this.user = data.inventories;
         data = data.inventories;
-        
+
         data.forEach((element) => {
           element.assignedTo = [];
           element.added_ByName = element.added_By.fullname;
@@ -123,20 +119,20 @@ export class BothComponent implements OnInit {
             element.assignedTo[i] = element.assigned_history[i]?.fullname;
           }
 
-          if(this.currentLoginUser.access === "city_admin") {
-            element.city.forEach(city => {
-              if(this.currentLoginUser.city.city === city.city) {
+          if (this.currentLoginUser.access === "city_admin") {
+            element.city.forEach((city) => {
+              if (this.currentLoginUser.city.city === city.city) {
                 this.user.push(element);
                 return;
               }
             });
-          } else if(this.currentLoginUser.access === "agent") {
-            if(this.currentLoginUser.userId === element.added_By.userId) {
+          } else if (this.currentLoginUser.access === "agent") {
+            if (this.currentLoginUser.userId === element.added_By.userId) {
               this.user.push(element);
               return;
             } else {
-              element.assigned_history.forEach(history => {
-                if(this.currentLoginUser.userId === history?.userId) {
+              element.assigned_history.forEach((history) => {
+                if (this.currentLoginUser.userId === history?.userId) {
                   this.user.push(element);
                   return;
                 }
@@ -153,7 +149,33 @@ export class BothComponent implements OnInit {
     );
   }
 
-  
+  changeAssignedAgent(agent: any) {
+    console.log(agent);
+    this.agentAssignedName = agent?.fullname;
+    console.log(this.agentAssignedName);
+  }
+  getAllUsersList() {
+    this.authService.getUsers().subscribe(
+      (users) => {
+        this.agentList = [];
+        const data = users;
+        data.forEach((element) => {
+          if (this.currentLoginUser.access === "city_admin") {
+            if (this.currentLoginUser.city.city !== element?.city?.city) {
+              return;
+            }
+          }
+
+          this.agentList.push(element);
+        });
+        // console.log(this.agentList);
+      },
+      (err) => {
+        console.error(err);
+      }
+    );
+  }
+
   changeCity(city: any) {
     this.locations = [];
     this.location = "";
@@ -167,7 +189,7 @@ export class BothComponent implements OnInit {
     this.location = location?.location;
     console.log(this.location);
   }
-  
+
   // Calling Api to get the Cities
   getCities() {
     this.authService.getCities().subscribe(

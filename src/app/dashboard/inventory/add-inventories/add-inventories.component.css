@@ -1,7 +1,8 @@
 .require {
     color: #d93025;
-    margin-left: 5px;
-    font-size: 16px;
+    margin-left: 3px;
+    font-size: 20px;
+    margin-top: 12px;
 }
 
 #content {
@@ -49,8 +50,9 @@ input::-webkit-input-placeholder {
 }
 
 .steps {
-    color: #1f6e97;
-    font-size: 12px;
+    color: #676767;
+    /* color: #1f6e97; */
+    font-size: 15px;
 }
 
 b {

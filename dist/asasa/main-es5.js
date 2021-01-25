@@ -6033,12 +6033,11 @@
           this.p = 1;
           this.data = [];
           this.agentList = [];
-          this.options = [// {
-          //   value: "cityName",
-          //   name: "Filter By City",
-          //   placeholder: "City",
-          // },
-          // {
+          this.options = [{
+            value: "client_name",
+            name: "Filter By Client Name",
+            placeholder: "Client Name"
+          }, // {
           //   value: "locationName",
           //   name: "Filter By Location",
           //   placeholder: "Location",
@@ -6047,15 +6046,6 @@
             value: "property_type",
             name: "Filter By Property Type",
             placeholder: "Property Type"
-          }, // {
-          //   value: "added_ByName",
-          //   name: "Filter By Added By",
-          //   placeholder: "Added By",
-          // },
-          {
-            value: "assignedTo",
-            name: "Filter By Assigned To",
-            placeholder: "Assigned To"
           }];
           this.selectedOption = this.options[0].value;
           this.placeholder = this.options[0].placeholder;
@@ -6134,8 +6124,7 @@
                 }
 
                 _this17.agentList.push(element);
-              });
-              console.log(_this17.agentList);
+              }); // console.log(this.agentList);
             }, function (err) {
               console.error(err);
             });
@@ -6212,7 +6201,7 @@
             var _this19 = this;
 
             this.authService.getCities().subscribe(function (data) {
-              console.log(data);
+              // console.log(data);
               _this19.cities = data;
             }, function (err) {
               console.error(err);

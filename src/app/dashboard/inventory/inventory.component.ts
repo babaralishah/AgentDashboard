@@ -40,30 +40,15 @@ export class InventoryComponent implements OnInit {
   currentLoginUser: any;
 
   options = [
-    // {
-    //   value: "cityName",
-    //   name: "Filter By City",
-    //   placeholder: "City",
-    // },
-    // {
-    //   value: "locationName",
-    //   name: "Filter By Location",
-    //   placeholder: "Location",
-    // },
+    {
+      value: "client_name",
+      name: "Filter By Client Name",
+      placeholder: "Client Name",
+    },
     {
       value: "property_type",
       name: "Filter By Property Type",
       placeholder: "Property Type",
-    },
-    // {
-    //   value: "added_ByName",
-    //   name: "Filter By Added By",
-    //   placeholder: "Added By",
-    // },
-    {
-      value: "assignedTo",
-      name: "Filter By Assigned To",
-      placeholder: "Assigned To",
     },
   ];
   selectedOption = this.options[0].value;
@@ -120,7 +105,7 @@ export class InventoryComponent implements OnInit {
 
           this.agentList.push(element);
         });
-        console.log(this.agentList);
+        // console.log(this.agentList);
       },
       (err) => {
         console.error(err);
@@ -190,7 +175,7 @@ export class InventoryComponent implements OnInit {
   getCities() {
     this.authService.getCities().subscribe(
       (data) => {
-        console.log(data);
+        // console.log(data);
         this.cities = data;
       },
       (err) => {

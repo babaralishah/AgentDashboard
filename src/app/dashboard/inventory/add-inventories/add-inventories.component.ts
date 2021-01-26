@@ -47,6 +47,7 @@ export class AddInventoriesComponent implements OnInit {
   selectedLocations: any;
   selectedCity: any;
   selectStringLocations: any;
+  subLocation: any[];
   selectAgentValue: any;
   selectedUserCity: any;
   selectedUserLocation: any;
@@ -434,14 +435,14 @@ export class AddInventoriesComponent implements OnInit {
   }
 
   changeCity(city: any) {
-    console.log(city.city);
+    console.log(city?.city);
 
     this.userLocationMatched = false;
     this.selectStringLocations = null;
     this.selectAgentValue = null;
     this.locations = [];
 
-    if (city) this.getLocations(city._id);
+    if (city) this.getLocations(city?._id);
     this.addinventoryForm.patchValue({ city });
     this.locations = "";
     if (this.user) {
@@ -458,6 +459,7 @@ export class AddInventoriesComponent implements OnInit {
   changeLocation(location: any) {
     this.userLocationMatched = false;
     this.selectAgentValue = null;
+    if (location) this.getsubLocations(location._id);
     this.selectedLocations = location?.location;
     this.addinventoryForm.patchValue({ location });
     console.log(this.addinventoryForm.value);
@@ -503,16 +505,30 @@ export class AddInventoriesComponent implements OnInit {
     this.authService.getLocations().subscribe(
       (locations) => {
         this.locations = locations;
+        console.log(this.locations);
         if (selectedCity) {
           this.locations = locations.filter((loc) => {
             return loc.cityId == selectedCity;
           });
+          console.log(this.locations);
         }
       },
       (err) => {
         console.error(err);
       }
     );
+  }
+  getsubLocations(selectedLocation?: any) {
+    console.log(selectedLocation);
+    console.log(this.locations);
+    if (selectedLocation) {
+      for (let i = 0; i < this.locations.length; i++) {
+        if (this.locations[i]._id == selectedLocation) {
+          this.subLocation = this.locations[i].subLocations;
+        }
+      }
+    }
+    console.log(this.subLocation);
   }
   // Check whether user pressed 'buy' or 'rent' button
   setValue(value: string) {

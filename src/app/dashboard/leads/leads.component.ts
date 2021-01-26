@@ -227,12 +227,15 @@ export class LeadsComponent implements OnInit {
     console.log(
       date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear()
     );
-    console.log(this.currentUser.comments);
   }
 
   sort(key: any) {
     this.key = key;
     this.reverse = !this.reverse;
+  }
+  updatingTheComments(event: any) {
+    this.userComments = event.target.value;
+    console.log(this.userComments);
   }
   assignLeadToAgent() {
     console.log(this.currentUser);
@@ -241,6 +244,7 @@ export class LeadsComponent implements OnInit {
     delete this.currentUser.cityName;
     delete this.currentUser.locationName;
     console.log(this.currentUser);
+    this.currentUser.comments = this.userComments;
 
     this.currentUser["assigned_history"] = this.assignLeadData;
     this.assignLeadData = [];

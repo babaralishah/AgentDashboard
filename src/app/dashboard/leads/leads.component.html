@@ -248,7 +248,7 @@
                 </div>
 
                 <div *ngIf="isCheckComment" class="form-group mt-3">
-                    <textarea class="form-control" style="height: 140px;">{{currentUser?.comments}}
+                    <textarea class="form-control" (change)="updatingTheComments($event)" style="height: 140px;">{{currentUser?.comments}}
                         </textarea>
                 </div>
             </div>

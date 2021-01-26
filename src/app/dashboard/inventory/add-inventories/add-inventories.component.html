@@ -151,6 +151,21 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col-3">
+                                        <div class="form-group" *ngIf="!user">
+                                            <div class="row ml-3">
+                                                <b class="steps">Sub Location</b>
+                                                <h5 class="require">*</h5>
+                                            </div>
+                                            <div>
+                                                <ng-select class="ng-select inputs2" [items]="subLocation" bindLabel="subLocation" bindValue="subLocation" placeholder="Select Sub Location">
+                                                </ng-select>
+                                                <div *ngIf="submitted && f.location.errors" class="invalid-feedback">
+                                                    <div *ngIf="f.location.errors.required">Location is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="row ml-1 ">
                                     <b class="steps">Property Types</b>

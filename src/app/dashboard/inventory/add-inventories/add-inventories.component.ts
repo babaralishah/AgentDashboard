@@ -84,6 +84,7 @@ export class AddInventoriesComponent implements OnInit {
   ];
   assignStringName: any = [];
   href: string;
+  subLocationName: void;
   //////////////////////////////////
 
   constructor(
@@ -134,7 +135,8 @@ export class AddInventoriesComponent implements OnInit {
       form_title: [""],
       property_purpose: ["Sell"],
       property_type: [""],
-
+      property_number: [""],
+      subLocation: [""],
       city: ["", Validators.required],
       location: [, Validators.required],
       min_price: [],
@@ -371,6 +373,9 @@ export class AddInventoriesComponent implements OnInit {
       },
     });
     console.log(this.user.location);
+    this.subLocation = this.user?.location[0]?.subLocations;
+    console.log(this.subLocation);
+    this.subLocationName = this.user?.location[0]?.subLocations[0];
 
     this.addinventoryForm.patchValue({ min_area: this.user?.min_area });
     this.addinventoryForm.patchValue({ min_price: this.user?.min_price });
@@ -459,12 +464,27 @@ export class AddInventoriesComponent implements OnInit {
   changeLocation(location: any) {
     this.userLocationMatched = false;
     this.selectAgentValue = null;
+    console.log(location);
+
     if (location) this.getsubLocations(location._id);
     this.selectedLocations = location?.location;
     this.addinventoryForm.patchValue({ location });
     console.log(this.addinventoryForm.value);
   }
+  changeSubLocation(subLocation: any) {
+    console.log(subLocation);
+    const subLocations = subLocation;
+    console.log(this.addinventoryForm.value);
+    // this.addinventoryForm.patchValue({ subLocations });
 
+    // this.addinventoryForm.patchValue({
+    //   location: {
+    //     subLocations: subLocations,
+    //   },
+    // });
+    // console.log(this.addinventoryForm.value);
+    // this.subLocation = subLocation;
+  }
   changeClientType(clientType: any) {
     this.clientType = clientType?.access;
     this.addinventoryForm.patchValue({ client_type: this.clientType });
@@ -554,6 +574,13 @@ export class AddInventoriesComponent implements OnInit {
       return;
     }
     if (this.addinventoryForm.get("assigned_type").value === "self") {
+      // this.addinventoryForm.patchValue({
+      //   assigned_history: {
+      //     fullname: this.user?.added_By?.fullname,
+      //     userId: this.user?.added_By?.userId,
+      //     contact: this.user?.added_By?.contact,
+      //   },
+      // });
     }
 
     this.assignLeadData = [];
@@ -602,25 +629,6 @@ export class AddInventoriesComponent implements OnInit {
       this.authService.createInventory(this.addinventoryForm.value).subscribe(
         (data) => {
           console.log("signup data: ", data);
-
-          //
-          // this.authService.assignLeadToAgent(this.addinventoryForm.value).subscribe(
-          //   (data: any) => {
-          //     console.log(data);
-          //     this.toastr.success(data.message, "Success", {
-          //       timeOut: 5000,
-          //     });
-          //   },
-          //   (error) => {
-          //     console.log(error);
-
-          //     if (error.error.code == 11000)
-          //       this.toastr.error(error.error.message, "Error", {
-          //         timeOut: 5000,
-          //       });
-          //   }
-          // );
-          //
           const email = this.addinventoryForm.value.email;
           if (form_title === "Inventory") {
             this.toastr.success("Inventory Added", "Success", {

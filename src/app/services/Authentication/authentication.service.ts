@@ -41,6 +41,12 @@ export class AuthenticationService {
     });
   }
   // Add new Sub Location
+  updateLocation(id: any, user: any) {
+    return this.httpClient.put<any>(`${this.url}/location/${id}`, user, {
+      headers: new HttpHeaders().set("Authorization", this.getToken()),
+    });
+  }
+  // Add new Sub Location
   addSubLocation(id: any, user: any) {
     return this.httpClient.put<any>(`${this.url}/location/${id}`, user, {
       headers: new HttpHeaders().set("Authorization", this.getToken()),

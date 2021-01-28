@@ -1,21 +1,21 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'tableFilter04'
+  name: 'property_type'
 })
 export class TableFilter04Pipe implements PipeTransform {
 
   transform(
     // user: User[],,
     user: any,
-    search_type: string
+    property_type: string
   ): typeof user {
 
-    if (!user || !search_type) {
+    if (!user || !property_type) {
       return user;
     }
     return user.filter(user =>
-      user.contact.toLowerCase().indexOf(search_type.toLowerCase()) !== -1);
+      user.property_type.toLowerCase().indexOf(property_type.toLowerCase()) !== -1);
 
   }
 

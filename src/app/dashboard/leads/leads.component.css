@@ -1,3 +1,9 @@
+.filter-btn {
+    width: 200px;
+    color: black;
+    background-color: #dcdcdc;
+}
+
 .form-check-input {
     margin-left: 13px;
     margin-top: 2px;

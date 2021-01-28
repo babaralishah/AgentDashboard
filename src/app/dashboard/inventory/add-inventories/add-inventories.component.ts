@@ -117,6 +117,7 @@ export class AddInventoriesComponent implements OnInit {
     this.getCities();
     this.getUserList();
     this.getAllUsersList();
+    this.changedAssignedToSelf();
   }
 
   // Form Declaration, and Validation Function
@@ -235,6 +236,21 @@ export class AddInventoriesComponent implements OnInit {
   //Function that is working on AREA filter/check
   public onChangeArea(event: any): void {
     this.isInvalidArea = this.minimumAreaRange > this.maximumAreaRange;
+  }
+
+  changedAssignedToSelf() {
+    this.assignLeadData = [];
+    const fullname: any = this.token.fullname + ' ( Self )';
+    this.assignLeadData.push({
+      userId: this.token.userId,
+      fullname: fullname,
+      contact: this.token.contact,
+      date: new Date(),
+    });
+    this.addinventoryForm.patchValue({
+      assigned_history: this.assignLeadData,
+    });
+    console.log(this.assignLeadData);
   }
 
   // Function to patch the value from ng select
@@ -467,24 +483,19 @@ export class AddInventoriesComponent implements OnInit {
     console.log(location);
 
     if (location) this.getsubLocations(location._id);
-    this.selectedLocations = location?.location;
-    this.addinventoryForm.patchValue({ location });
+    const loc = location;
+    loc.subLocations = [];
+    this.selectedLocations = loc?.location;
+    this.addinventoryForm.patchValue({ location: loc });
+    console.log(loc);
     console.log(this.addinventoryForm.value);
   }
   changeSubLocation(subLocation: any) {
-    console.log(subLocation);
-    const subLocations = subLocation;
-    console.log(this.addinventoryForm.value);
-    // this.addinventoryForm.patchValue({ subLocations });
-
-    // this.addinventoryForm.patchValue({
-    //   location: {
-    //     subLocations: subLocations,
-    //   },
-    // });
-    // console.log(this.addinventoryForm.value);
-    // this.subLocation = subLocation;
+    const location = this.addinventoryForm.get('location').value;
+    location.subLocations.push(subLocation);
+    this.addinventoryForm.patchValue({ location });
   }
+
   changeClientType(clientType: any) {
     this.clientType = clientType?.access;
     this.addinventoryForm.patchValue({ client_type: this.clientType });

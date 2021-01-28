@@ -54,6 +54,7 @@ import { AddLocationComponent } from "./dashboard/location/add-location/add-loca
 import { TableDatePipe } from "./Pipes/table-date-filter.pipe";
 import { TableDemandPipe } from "./Pipes/table-demand-filter.pipe";
 import { RoleGuard } from "./services/guards/role.guard";
+import { TableAreaPipe } from "./Pipes/table-area-filter.pipe";
 registerLocaleData(en);
 
 @NgModule({
@@ -71,6 +72,7 @@ registerLocaleData(en);
     InventoryComponent,
     UsersComponent,
     LeadsComponent,
+    TableAreaPipe,
     TableDemandPipe,
     TableDatePipe,
     TableFilterPipe,

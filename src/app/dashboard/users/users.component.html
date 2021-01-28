@@ -20,17 +20,21 @@
                     <div class="col-12 col-sm-6 col-xl-2 mb-3">
                         <input type="text" class="form-control" placeholder="Search {{ placeholder }}" [(ngModel)]="refId" />
                     </div> -->
-                    <div class="col-12 col-sm-6 col-lg-3 col-xl-2 mb-3">
+                    <div class="col-12 col-sm-6 col-lg-3 mb-3">
                         <ng-select class="ng-select inputs2" [items]="agentList" bindLabel="fullname" bindValue="fullname" placeholder="Select Agent" (change)="changeAssignedAgent($event)">
                         </ng-select>
                     </div>
-                    <div class="col-12 col-sm-6 col-lg-3 col-xl-2 mb-3">
+                    <div class="col-12 col-sm-6 col-lg-3 mb-3">
                         <ng-select class="ng-select inputs2" [items]="cities" bindLabel="city" bindValue="city" placeholder="Select City" (change)="changeCity($event)">
                         </ng-select>
                     </div>
-                    <div class="col-12 col-sm-6 col-lg-3 col-xl-2 mb-3">
+                    <div class="col-12 col-sm-6 col-lg-3 mb-3">
                         <ng-select class="ng-select inputs2" [(ngModel)]="locationName" [ngModelOptions]="{standalone: true}" [items]="locations" bindLabel="location" bindValue="location" placeholder="Select Location" (change)="changeLocation($event)">
                         </ng-select>
+                    </div>
+                    <div class="btn-container">
+                        <button onclick="window.print()" class="btn btn-primary">Print</button>
+                        <button (click)="exportTOExcel()" class="btn btn-primary">Excel</button>
                     </div>
                     <!-- <div class="col-12 col-sm-6 col-lg-3 col-xl-2 mb-3">
                         <input placeholder="Start Date" class="form-control" type="text" onfocus="(this.type='date')" (change)="changeStartDate($event)">
@@ -38,12 +42,6 @@
                     <div class="col-12 col-sm-6 col-lg-3 col-xl-2 mb-3">
                         <input type="text" onfocus="(this.type='date')" class="form-control" placeholder="End Date" (change)="changeEndDate($event)">
                     </div> -->
-                </div>
-                <div class="row mb-3">
-                    <div class="btn-container">
-                        <button onclick="window.print()" class="btn btn-primary">Print</button>
-                        <button (click)="exportTOExcel()" class="btn btn-primary">Excel</button>
-                    </div>
                 </div>
                 <div class="row">
                     <div class="col-12">

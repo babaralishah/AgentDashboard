@@ -5,7 +5,7 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { AuthenticationService } from "src/app/services/Authentication/authentication.service";
 import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
-import { FormGroup } from "@angular/forms";
+import { FormBuilder, FormGroup } from "@angular/forms";
 import { formatDate } from "@angular/common";
 
 @Component({
@@ -43,15 +43,21 @@ export class LeadsComponent implements OnInit {
   maxDemand: any;
   usersList: any = [];
   agentAssignedName: any;
+  minArea: any;
+  maxArea: any;
+  area_unit: any;
 
   currentLoginUser: any;
   isCheckComment: boolean;
 
+  filterForm: FormGroup;
+
   constructor(
     private authService: AuthenticationService,
     private router: Router,
-    private toastr: ToastrService
-  ) {}
+    private toastr: ToastrService,
+    private fb: FormBuilder
+  ) { }
   general_search: string;
   // assigned_to: any;
   selectedUserLocation: any;
@@ -83,6 +89,7 @@ export class LeadsComponent implements OnInit {
   refId: any;
 
   ngOnInit(): void {
+    this.formdeclare();
     this.tokenization();
     this.getUserDetails();
     this.getLeadsList();
@@ -91,23 +98,51 @@ export class LeadsComponent implements OnInit {
     this.getCities();
   }
 
+  formdeclare() {
+    // make a function of declaring reactive form then call it in ngoninit
+    this.filterForm = this.fb.group({
+      minPrice: [],
+      maxPrice: [],
+      area: [],
+      minArea: [],
+      maxArea: [],
+      startDate: [],
+      endDate: []
+    });
+  }
+
+  filter() {
+    this.minDemand = this.filterForm.get('minPrice').value;
+    this.maxDemand = this.filterForm.get('maxPrice').value;
+    this.area_unit = this.filterForm.get('area').value;
+    this.minArea = this.filterForm.get('minArea').value;
+    this.maxArea = this.filterForm.get('maxArea').value;
+    if(this.filterForm.get('startDate').value) {
+      this.startDate = formatDate(new Date(this.filterForm.get('startDate').value), "yyyy-MM-dd", "en_US");
+    }
+    if(this.filterForm.get('endDate').value) {
+      this.endDate = formatDate(new Date(this.filterForm.get('endDate').value), "yyyy-MM-dd", "en_US");
+    }
+  }
+
+  resetFilters() {
+    this.filterForm.reset();
+    this.minDemand = null;
+    this.maxDemand = null;
+    this.area_unit = null;
+    this.minArea = null;
+    this.maxArea = null;
+    this.startDate = null;
+    this.endDate = null;
+  }
+
   async tokenization() {
     const token = await this.authService.getToken();
     const decodedToken = await this.authService.getDecodedToken(token);
     this.currentLoginUser = decodedToken.data;
     console.log(this.currentLoginUser);
   }
-
-  changeStartDate(e: any) {
-    this.startDate = formatDate(
-      new Date(e.target.value),
-      "yyyy-MM-dd",
-      "en_US"
-    );
-  }
-  changeEndDate(e: any) {
-    this.endDate = formatDate(new Date(e.target.value), "yyyy-MM-dd", "en_US");
-  }
+  
   isComment() {
     this.isCheckComment = !this.isCheckComment;
   }
@@ -152,12 +187,14 @@ export class LeadsComponent implements OnInit {
               this.user.push(element);
               return;
             } else {
-              element.assigned_history.forEach((history) => {
-                if (this.currentLoginUser.userId === history?.userId) {
-                  this.user.push(element);
-                  return;
-                }
-              });
+              if (element.assigned_history) {
+                element?.assigned_history.forEach((history) => {
+                  if (this.currentLoginUser.userId === history?.userId) {
+                    this.user.push(element);
+                    return;
+                  }
+                });
+              }
             }
           } else {
             this.user.push(element);

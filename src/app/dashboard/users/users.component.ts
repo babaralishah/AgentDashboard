@@ -67,7 +67,16 @@ export class UsersComponent implements OnInit {
     this.authService.getCities().subscribe(
       (data) => {
         console.log(data);
-        this.cities = data;
+        this.cities = [];
+        data.forEach(element => {
+          if(this.currentLoginUser.access === "city_admin") {
+            if(element?.city === this.currentLoginUser?.city?.city) {
+              this.cities.push(element);
+            }  
+          } else {
+            this.cities.push(element);
+          }
+        });
       },
       (err) => {
         console.error(err);

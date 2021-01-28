@@ -118,13 +118,14 @@
     margin-right: 12px;
 }
 
-.btn-container button {
-    margin-left: 10px;
+.modal-header .logo {
+    width: auto;
+    height: 80px;
 }
 
 .form-control {
     height: calc(1.5em + 0.75rem + 2px);
-    padding: 1.1rem 0.75rem;
+    /* padding: 1.1rem 0.75rem; */
     line-height: 1.5;
     color: #495057;
     background-color: #fff;

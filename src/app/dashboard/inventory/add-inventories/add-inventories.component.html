@@ -576,7 +576,7 @@
                                             <label style="
                                             margin-left: 0px;
                                         " class="btn btn-primary" [class.active]="addinventoryForm.get('assigned_type').value === 'self'">
-                                                <input type="radio" formControlName="assigned_type" value="self"> Self
+                                                <input type="radio" formControlName="assigned_type" value="self" (change)="changedAssignedToSelf()"> Self
                                             </label>
 
                                             <label class="btn btn-primary" *ngIf="token.access == 'super_admin' || token.access == 'city_admin'" [class.active]="addinventoryForm.get('assigned_type').value === 'Admin'">

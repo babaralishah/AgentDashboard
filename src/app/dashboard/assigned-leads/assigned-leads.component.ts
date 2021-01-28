@@ -5,6 +5,7 @@ import { AuthenticationService } from "src/app/services/Authentication/authentic
 import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { formatDate } from "@angular/common";
+import { FormBuilder, FormGroup } from "@angular/forms";
 @Component({
   selector: "app-assigned-leads",
   templateUrl: "./assigned-leads.component.html",
@@ -23,17 +24,22 @@ export class AssignedLeadsComponent implements OnInit {
   endDate: String;
   minDemand: any;
   maxDemand: any;
+  minArea: any;
+  maxArea: any;
+  area_unit: any;
   cities: any;
   locations: any;
   city: any;
   location: any;
 
   currentLoginUser: any;
+  filterForm: FormGroup;
 
   constructor(
     private router: Router,
     private authService: AuthenticationService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private fb: FormBuilder
   ) {}
 
   general_search: any;
@@ -68,6 +74,7 @@ export class AssignedLeadsComponent implements OnInit {
   refId2: any;
 
   ngOnInit(): void {
+    this.formdeclare();
     this.tokenization();
     this.getAllList();
     this.getCities();
@@ -80,17 +87,42 @@ export class AssignedLeadsComponent implements OnInit {
     console.log(this.currentLoginUser);
   }
 
-  changeStartDate(e: any) {
-    this.startDate = formatDate(
-      new Date(e.target.value),
-      "yyyy-MM-dd",
-      "en_US"
-    );
-    // console.log('Start', this.startDate);
+  formdeclare() {
+    // make a function of declaring reactive form then call it in ngoninit
+    this.filterForm = this.fb.group({
+      minPrice: [],
+      maxPrice: [],
+      area: [],
+      minArea: [],
+      maxArea: [],
+      startDate: [],
+      endDate: []
+    });
   }
-  changeEndDate(e: any) {
-    this.endDate = formatDate(new Date(e.target.value), "yyyy-MM-dd", "en_US");
-    // console.log('End', this.endDate);
+
+  filter() {
+    this.minDemand = this.filterForm.get('minPrice').value;
+    this.maxDemand = this.filterForm.get('maxPrice').value;
+    this.area_unit = this.filterForm.get('area').value;
+    this.minArea = this.filterForm.get('minArea').value;
+    this.maxArea = this.filterForm.get('maxArea').value;
+    if(this.filterForm.get('startDate').value) {
+      this.startDate = formatDate(new Date(this.filterForm.get('startDate').value), "yyyy-MM-dd", "en_US");
+    }
+    if(this.filterForm.get('endDate').value) {
+      this.endDate = formatDate(new Date(this.filterForm.get('endDate').value), "yyyy-MM-dd", "en_US");
+    }
+  }
+
+  resetFilters() {
+    this.filterForm.reset();
+    this.minDemand = null;
+    this.maxDemand = null;
+    this.area_unit = null;
+    this.minArea = null;
+    this.maxArea = null;
+    this.startDate = null;
+    this.endDate = null;
   }
 
   // Function to Get table Data

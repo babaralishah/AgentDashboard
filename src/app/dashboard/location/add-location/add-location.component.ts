@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 // import { first } from 'rxjs/operators';
 import { ToastrService } from "ngx-toastr";
 import { AuthenticationService } from "src/app/services/Authentication/authentication.service";
+import { elementAt } from "rxjs/operators";
 
 @Component({
   selector: "app-add-location",
@@ -11,27 +12,29 @@ import { AuthenticationService } from "src/app/services/Authentication/authentic
   styleUrls: ["./add-location.component.css"],
 })
 export class AddLocationComponent implements OnInit {
+
+  addNewSublocation = (item) => ({ subLocation: item });
+  addNewSublocationUpdation = (item) => ({ subLocationsList: item });
+
   @ViewChild("content") content: any;
   addLocationForm: FormGroup;
+
   cities: any;
   locations: any;
   selectStringLocations: any;
   user: any;
-  subLocationsList: any[];
-  subLocation: any = [
-    {
-      subLocation: "",
-    },
-  ];
+  subLocationsList: any[] = [];
+  subLocation: any = [];
   subLocationName: any;
   changeType: any = "location";
   location: any;
+
   constructor(
     public formBuilder: FormBuilder,
     public authService: AuthenticationService,
     public router: Router,
     private toastr: ToastrService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.initialize();
@@ -44,6 +47,7 @@ export class AddLocationComponent implements OnInit {
 
     this.getCities();
   }
+
   initialize() {
     this.addLocationForm = this.formBuilder.group({
       cityId: [],
@@ -53,10 +57,12 @@ export class AddLocationComponent implements OnInit {
     });
     this.getCities();
   }
+
   setChangeType(type: any) {
     this.changeType = type;
     this.addLocationForm.reset();
   }
+
   updateLocationForm() {
     console.log(this.user);
 
@@ -77,6 +83,7 @@ export class AddLocationComponent implements OnInit {
     console.log(this.addLocationForm.get("city").value);
     console.log(this.addLocationForm.get("location").value);
   }
+
   getCities() {
     this.authService.getCities().subscribe(
       (data) => {
@@ -88,6 +95,7 @@ export class AddLocationComponent implements OnInit {
       }
     );
   }
+
   getLocations(selectedCity?) {
     this.authService.getLocations().subscribe(
       (locations) => {
@@ -103,18 +111,21 @@ export class AddLocationComponent implements OnInit {
       }
     );
   }
+
   changeCity(city: any) {
     this.selectStringLocations = null;
     this.locations = [];
     this.subLocationsList = [];
     if (city) this.getLocations(city._id);
   }
+
   changeLocation(location: any) {
     this.location = location;
     this.subLocationsList = [];
 
     if (location) this.getsubLocations(location._id);
   }
+
   getsubLocations(selectedLocation?: any) {
     console.log(selectedLocation);
     console.log(this.locations);
@@ -136,35 +147,34 @@ export class AddLocationComponent implements OnInit {
     this.subLocationsList = array;
     console.log(this.subLocationsList);
   }
+
   changeSubLocation(subLocation: any) {
-    console.log(subLocation);
+    console.log(this.subLocation);
     // const subLocations = subLocation;
   }
-  addLocation() {
-    console.log(this.subLocationName);
-    console.log(this.addLocationForm.value);
-    if (this.subLocationName != null) {
-      let subLocation: any = [
-        {
-          subLocation: "",
-        },
-      ];
-      subLocation[0].subLocation = this.subLocationName;
-      console.log(subLocation);
 
-      this.addLocationForm.patchValue({
-        subLocations: subLocation,
-      });
-    }
-    console.log(this.addLocationForm.value);
+  addLocation() {
     if (this.addLocationForm.get("city").value == "Islamabad")
       this.addLocationForm.patchValue({ cityId: 5 });
     if (this.addLocationForm.get("city").value == "Rawalpindi")
       this.addLocationForm.patchValue({ cityId: 4 });
     if (this.addLocationForm.get("city").value == "Peshawar")
       this.addLocationForm.patchValue({ cityId: 3 });
+
+
+    if (this.subLocation.length > 0) {
+      this.subLocation.forEach((element, index) => {
+        this.subLocation[index] = { subLocation: element };
+      });
+    }
+
+    this.addLocationForm.patchValue({
+      subLocations: this.subLocation,
+    });
     console.log(this.addLocationForm.value);
+
     if (!this.user) {
+
       this.authService
         .addLocations(this.addLocationForm.value)
         .subscribe((data) => {
@@ -178,7 +188,7 @@ export class AddLocationComponent implements OnInit {
           }
         });
     } else if (this.user) {
-      console.log(this.user?._id_id);
+      console.log(this.user?._id);
 
       this.authService
         .addSubLocation(this.user?._id, this.addLocationForm.value)
@@ -188,33 +198,33 @@ export class AddLocationComponent implements OnInit {
         });
     }
   }
+
   addSubLocation() {
-    // console.log(this.subLocation[0]?.subLocation);
-    console.log(this.location.subLocations);
-    let subLoc = [];
-    for (let i = 0; i < this.location?.subLocations?.length; i++) {
-      subLoc[i] = this.location?.subLocations[i];
+    if (this.addLocationForm.get("city").value == "Islamabad")
+      this.addLocationForm.patchValue({ cityId: 5 });
+    if (this.addLocationForm.get("city").value == "Rawalpindi")
+      this.addLocationForm.patchValue({ cityId: 4 });
+    if (this.addLocationForm.get("city").value == "Peshawar")
+      this.addLocationForm.patchValue({ cityId: 3 });
+
+    if (this.subLocationsList.length > 0) {
+      this.subLocationsList.forEach((element, index) => {
+        this.subLocationsList[index] = { subLocation: element };
+      });
     }
-    console.log(subLoc);
-    console.log(this.subLocationName);
 
-    subLoc.push({
-      subLocation: this.subLocationName,
-      // subLocation: this.subLocation[0].subLocation,
+    this.addLocationForm.patchValue({
+      subLocations: this.subLocationsList,
     });
-    console.log(subLoc);
-    console.log(this.location);
-    this.location.subLocations = subLoc;
-    console.log(this.location);
-    console.log(this.location);
-
+    
     this.authService
-      .addSubLocation(this.location?._id, this.location)
+      .addSubLocation(this.location?._id, this.addLocationForm.value)
       .subscribe((data) => {
         console.log(data);
         this.router.navigate(["/location"]);
       });
   }
+
   contentWidthEmitted(value) {
     this.content.nativeElement.style.marginLeft = `${value}px`;
   }

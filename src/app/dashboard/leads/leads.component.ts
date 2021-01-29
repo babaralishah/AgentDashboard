@@ -131,6 +131,8 @@ export class LeadsComponent implements OnInit {
     this.maxArea = null;
     this.startDate = null;
     this.endDate = null;
+    this.property_type = null;
+    this.property_type2 = null;
   }
 
   async tokenization() {

@@ -59,21 +59,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row" *ngIf="!user">
-
+                                <div class="row">
                                     <div class="col-md-3 col-sm-3 form-group">
                                         <div class=""><br> <b>Add new Sub Location</b>
-                                            <input [(ngModel)]="subLocationName" [ngModelOptions]="{standalone: true}" class="form-control" type="text" placeholder="Sub-Location " />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row" *ngIf="user">
-
-                                    <div class="col-md-3 col-sm-3 form-group">
-                                        <div class=""><br> <b>Add new Sub Location</b>
-                                            <!-- <input [(ngModel)]="subLocation" [multiple]="true" [ngModelOptions]="{standalone: true}" class="form-control" type="text" placeholder="Sub-Location " (change)="changeSubLocation($event)" /> -->
-
-                                            <ng-select [(ngModel)]="subLocation" [multiple]="true" [items]="subLocation" bindLabel="subLocation" bindValue="subLocation" [ngModelOptions]="{standalone: true}" class="ng-select" placeholder="Sub-Location" (change)="changeSubLocation($event)">
+                                            <ng-select [addTag]="addNewSublocation" [(ngModel)]="subLocation" [multiple]="true" [items]="subLocation" bindLabel="subLocation" bindValue="subLocation" [ngModelOptions]="{standalone: true}" class="ng-select" placeholder="Sub-Location" (change)="changeSubLocation($event)">
                                             </ng-select>
                                         </div>
                                     </div>
@@ -87,7 +76,6 @@
                             </div>
                             <div *ngIf="changeType == 'subLocation'">
                                 <div class="row mt-5 ml-1">
-                                    <!-- <h2 class="h3 mb-2 text-gray-600"><b>Add Sub Location</b></h2> -->
                                 </div>
                                 <div class="row mt-3">
 
@@ -100,12 +88,12 @@
                                         </ng-select>
                                     </div>
                                     <div class="col-3">
-                                        <ng-select class="ng-select" [(ngModel)]="subLocationsList" [multiple]="true" [ngModelOptions]="{standalone: true}" placeholder="Sub Locations">
+                                        <ng-select [addTag]="addNewSublocationUpdation" class="ng-select" [(ngModel)]="subLocationsList" [multiple]="true" [items]="subLocationsList" bindLabel="subLocationsList" bindValue="subLocationsList" [ngModelOptions]="{standalone: true}" placeholder="Sub Locations" (change)="changeSubLocation($event)">
                                         </ng-select>
                                     </div>
                                 </div>
 
-                                <div class="row" *ngIf="!user">
+                                <!-- <div class="row" *ngIf="!user">
 
                                     <div class="col-md-3 col-sm-3 form-group">
                                         <div class="mt-2"><br> <b>Add new Sub Location</b>
@@ -114,7 +102,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="row mt-3">
 
                                     <div class="col-12 pull-right">

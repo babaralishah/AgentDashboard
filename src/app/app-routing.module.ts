@@ -25,6 +25,7 @@ import { PageNotFoundComponent } from "./dashboard/page-not-found/page-not-found
 import { LocationComponent } from "./dashboard/location/location.component";
 import { AddLocationComponent } from "./dashboard/location/add-location/add-location.component";
 import { RoleGuard } from "./services/guards/role.guard";
+import { FeedbackComponent } from "./dashboard/feedback/feedback.component";
 
 const routes: Routes = [
   {
@@ -40,8 +41,8 @@ const routes: Routes = [
   {
     path: "register",
     canActivate: [RoleGuard],
-    data: { 
-      expectedRole: ['super_admin', 'city_admin']
+    data: {
+      expectedRole: ["super_admin", "city_admin"],
     },
     component: SignupComponent,
   },
@@ -87,6 +88,11 @@ const routes: Routes = [
     component: UsersComponent,
   },
   {
+    path: "feedback",
+    canActivate: [IsLoginGuard],
+    component: FeedbackComponent,
+  },
+  {
     path: "location",
     canActivate: [IsLoginGuard],
     component: LocationComponent,
@@ -94,8 +100,8 @@ const routes: Routes = [
   {
     path: "add-location",
     canActivate: [RoleGuard],
-    data: { 
-      expectedRole: ['super_admin', 'city_admin']
+    data: {
+      expectedRole: ["super_admin", "city_admin"],
     },
     component: AddLocationComponent,
   },

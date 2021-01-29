@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-// import { first } from 'rxjs/operators';
 import { ToastrService } from "ngx-toastr";
 import { AuthenticationService } from "src/app/services/Authentication/authentication.service";
 

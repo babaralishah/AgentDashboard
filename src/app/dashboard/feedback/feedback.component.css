@@ -1,0 +1,249 @@
+#content {
+    margin: 120px 20px;
+}
+
+#content-wrapper {
+    margin-left: 100px;
+    transition: 0.5s all;
+}
+
+.btn-city {
+    margin-left: 30px;
+    width: 100px;
+    font-size: 14px;
+    background-color: #38baa2;
+    color: white;
+    border: 1px solid transparent;
+}
+
+.user-input-class {
+    margin-left: 30px;
+    /* / margin-top: 120px; / */
+}
+
+.user-class {
+    margin-left: 47px;
+    margin-top: 120px;
+}
+
+.container {
+    margin-top: 70px
+}
+
+.section {
+    font: normal 20px 'Bitter', serif;
+    color: #38baa2;
+    margin-bottom: 5px;
+}
+
+span {
+    background: #38baa2;
+    padding: 5px 10px 5px 10px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border: 4px solid #fff;
+    font-size: 14px;
+    margin-left: -45px;
+    color: #fff;
+    margin-top: -3px;
+}
+
+.invalid-feedback {
+    /* / display: none; / */
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 80%;
+    color: #dc3545;
+    transform: translate(33px, 0);
+    border-color: #dc3545;
+}
+
+.updatePassword {
+    margin-left: 15px;
+    margin-bottom: 14px;
+}
+
+.form-check-input {
+    margin-left: 13px;
+    margin-top: 2px;
+}
+
+.errors {
+    border-color: #e8051b;
+}
+
+.texts {
+    color: #dc3545;
+    font-size: 0.7rem;
+}
+
+.ng-select.ng-select-single .ng-select-container {
+    height: 36px;
+    border: 1px solid #dc3545;
+}
+
+.ng-select .ng-select-container {
+    color: #333;
+    background-color: #fff;
+    border-radius: 30px !important;
+    border: 1px solid #ccc;
+    min-height: 42px;
+    align-items: center;
+    border: 1px solid #dc3545;
+}
+
+.form-control {
+    height: 35px;
+}
+
+.form-group {
+    margin-bottom: 2rem;
+}
+
+.inputs2 {
+    margin-top: -15px;
+    color: #333;
+    background-color: #fff;
+    border-radius: 34px;
+    width: 400%;
+    margin-left: 33px;
+}
+
+.lastdiv {
+    margin-left: 40px;
+}
+
+a {
+    color: #38baa2;
+}
+
+h2 {
+    color: #38baa2;
+    font-weight: 600;
+    margin-top: -10px;
+}
+
+i:before {
+    position: relative;
+    top: 30%;
+    font-size: 22px;
+    color: #38bba3;
+    margin-right: -3px;
+}
+
+.word {
+    color: #38baa2;
+    letter-spacing: 1px;
+    padding: 20 px;
+    font: bold 14px arial, sans-serif;
+}
+
+.emailInput {
+    margin-left: 16px;
+}
+
+.input-field {
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+}
+
+.input-icons i {
+    position: absolute;
+}
+
+.input-container {
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.a {
+    text-align: left;
+}
+
+.vl {
+    border-left: 2.2px solid #38baa2;
+    height: 250px;
+    margin-left: 22px;
+}
+
+.v2 {
+    margin-top: 40px;
+    color: #38baa2;
+    font-weight: bold;
+}
+
+.login {
+    height: auto;
+    min-height: 100vh;
+}
+
+.btn:not(:disabled):not(.disabled):hover {
+    color: #fff;
+    background-color: #1f6e97;
+    border-color: #1f6e97;
+}
+
+.btn {
+    /* / margin-top: 20px; /
+    / margin-left: 40px; / */
+    /* width: 100px; */
+    /* font-size: 14px; */
+    background-color: #38baa2;
+    color: white;
+    border: 1px solid transparent;
+}
+
+.left-img {
+    width: 45%;
+    margin-left: 80px;
+}
+
+.inputs {
+    margin-left: 15px;
+}
+
+.left {
+    margin-top: 145px;
+}
+
+.right {
+    margin-top: 160px;
+}
+
+.input-area1 {
+    margin-left: 20px;
+}
+
+@media only screen and (max-width: 1650px) {
+    .user-class {
+        margin-left: 50px;
+    }
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1400px) {
+    .user-class {
+        margin-left: 80px;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .user-class {
+        margin-left: 100px;
+    }
+}
+
+@media only screen and (max-width: 1100px) {
+    .user-class {
+        margin-left: 120px;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    .user-class {
+        margin-left: -80px;
+    }
+}

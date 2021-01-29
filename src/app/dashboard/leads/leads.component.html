@@ -10,33 +10,27 @@
                 <div class="row mb-3 mt-5">
                     <div class="col-12">
                         <button class="btn btn-primary" (click)="setFormTitle('Lead')">Add New</button>
-                        <button class="btn btn-secondary ml-3" data-toggle="modal"
-                            data-target="#searchFilterModal">Filter</button>
+                        <button class="btn btn-secondary ml-3" data-toggle="modal" data-target="#searchFilterModal">Filter</button>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-12 col-sm-6 col-lg-3 mb-3">
-                        <ng-select [items]="options" bindLabel="name" bindValue="value" placeholder="Filter By"
-                            [(ngModel)]="selectedOption" (change)="optionChange($event)" [clearable]="false">
+                        <ng-select [items]="options" bindLabel="name" bindValue="value" placeholder="Filter By" [(ngModel)]="selectedOption" (change)="optionChange($event)" [clearable]="false">
                         </ng-select>
                     </div>
                     <div class="col-12 col-sm-6 col-lg-3 mb-3">
-                        <input class="form-control" id="myInput" type="text" placeholder="Search {{ placeholder }}"
-                            [(ngModel)]="refId" />
+                        <input class="form-control" id="myInput" type="text" placeholder="Search {{ placeholder }}" [(ngModel)]="refId" />
                     </div>
                     <div class="col-12 col-sm-6 col-lg-3 mb-3">
-                        <ng-select class="ng-select inputs2" [items]="cities" bindLabel="city" bindValue="city"
-                            placeholder="Select City" (change)="changeCity($event)">
+                        <ng-select class="ng-select inputs2" [items]="cities" bindLabel="city" bindValue="city" placeholder="Select City" (change)="changeCity($event)">
                         </ng-select>
                     </div>
                     <div class="col-12 col-sm-6 col-lg-3 mb-3">
-                        <ng-select class="ng-select inputs2" [items]="locations" bindLabel="location"
-                            bindValue="location" placeholder="Select Location" (change)="changeLocation($event)">
+                        <ng-select class="ng-select inputs2" [items]="locations" bindLabel="location" bindValue="location" placeholder="Select Location" (change)="changeLocation($event)">
                         </ng-select>
                     </div>
                     <div class="col-12 col-sm-6 col-lg-3 mb-3" *ngIf="currentLoginUser?.access !== 'agent'">
-                        <ng-select class="ng-select inputs2" [items]="usersList" bindLabel="fullname"
-                            bindValue="fullname" placeholder="Added By" (change)="changeAssignAgent($event)">
+                        <ng-select class="ng-select inputs2" [items]="usersList" bindLabel="fullname" bindValue="fullname" placeholder="Added By" (change)="changeAssignAgent($event)">
                         </ng-select>
                     </div>
 
@@ -73,14 +67,13 @@
                                         <th scope="col">Added On</th>
                                         <th scope="col">Assigned To</th>
                                         <!-- <th scope="col">Media</th> -->
-                                        <!-- <th scope="col">Comments</th> -->
+                                        <th scope="col">Comments</th>
                                         <th scope="col">Operations</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr
-                                        *ngFor="let user of user| filterlist: selectedOption:refId | property_type: property_type2 | nameFilter: agentAssignedName  | dateFilter: startDate:endDate | demandFilter: minDemand:maxDemand | areaFilter: area_unit:minArea:maxArea | orderBy: key:reverse | tableFilter: city | LocationFilter:location | paginate: { itemsPerPage: 50, currentPage: p }">
-                                    <!-- <tr *ngFor="let user of user| filterlist: selectedOption:refId | nameFilter: agentAssignedName  | dateFilter: startDate:endDate | demandFilter: minDemand:maxDemand| orderBy: key:reverse | tableFilter: city | LocationFilter:location | paginate: { itemsPerPage: 50, currentPage: p }"> -->
+                                    <tr *ngFor="let user of user| filterlist: selectedOption:refId | property_type: property_type2 | nameFilter: agentAssignedName  | dateFilter: startDate:endDate | demandFilter: minDemand:maxDemand | areaFilter: area_unit:minArea:maxArea | orderBy: key:reverse | tableFilter: city | LocationFilter:location | paginate: { itemsPerPage: 50, currentPage: p }">
+                                        <!-- <tr *ngFor="let user of user| filterlist: selectedOption:refId | nameFilter: agentAssignedName  | dateFilter: startDate:endDate | demandFilter: minDemand:maxDemand| orderBy: key:reverse | tableFilter: city | LocationFilter:location | paginate: { itemsPerPage: 50, currentPage: p }"> -->
                                         <td>
                                             <span *ngIf="user?.priority == 'Super Hot'">
                                                 <img class="super-hot" src="\assets\icons\super_hot.svg">
@@ -110,8 +103,7 @@
                                         </td>
                                         <ng-template #elseBlockArea>
                                             <td>
-                                                <span
-                                                    *ngIf="user?.max_area == null || user?.min_area == null;else elseBlockArea2">
+                                                <span *ngIf="user?.max_area == null || user?.min_area == null;else elseBlockArea2">
                                                     <span>None</span>
                                                 </span>
                                                 <ng-template #elseBlockArea2>
@@ -123,15 +115,13 @@
                                         </ng-template>
 
                                         <td>
-                                            {{ user.city[0]?.city }}<span>&nbsp;&nbsp;</span><br /><span
-                                                class="badge badge-light" *ngFor="let loc of user.location">{{
+                                            {{ user.city[0]?.city }}<span>&nbsp;&nbsp;</span><br /><span class="badge badge-light" *ngFor="let loc of user.location">{{
                                                 loc.location }},
                                             </span>
                                         </td>
                                         <td *ngIf="user.demand_price == null; else elseBlockDemand">
-                                            <b>Max:</b> {{ user.max_price | currency :'Rs ' : 'symbol' : '1.0-0'
-                                            }}<br /><b>Min:</b> {{ user.min_price | currency :'Rs ' : 'symbol' : '1.0-0'
-                                            }}
+                                            <b>Max:</b> {{ user.max_price | currency :'Rs ' : 'symbol' : '1.0-0' }}
+                                            <br /><b>Min:</b> {{ user.min_price | currency :'Rs ' : 'symbol' : '1.0-0' }}
                                         </td>
                                         <ng-template #elseBlockDemand>
                                             <td>{{ user.demand_price | currency :'Rs ' : 'symbol' : '1.0-0' }}</td>
@@ -148,26 +138,23 @@
                                         <!-- <td>
                                             <span><b>Media: </b> {{ user?.media }}</span><br />
                                         </td> -->
-                                        <!-- <td>{{user?.comments}}</td> -->
+                                        <td>{{user?.comments}}</td>
                                         <td style="width: 12%;">
                                             <i class="fa fa-edit icon" (click)="setUserToEdit(user)"></i>
                                             <a (click)="setUserToEdit(user)" role="button"></a>
 
-                                            <i class="fa fa-trash icon" (click)="confirmID(user._id)"
-                                                data-toggle="modal" data-target="#exampleModal1"></i> &nbsp;&nbsp;
+                                            <i class="fa fa-trash icon" (click)="confirmID(user._id)" data-toggle="modal" data-target="#exampleModal1"></i> &nbsp;&nbsp;
                                             <span><i class="fas fa-exchange-alt" data-toggle="modal"
                                                     data-target="#myModal" (click)="setCurrentUser(user)"></i></span>
                                         </td>
-                                        <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
-                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title" id="exampleModalLabel">
                                                             Delete Confirmation
                                                         </h5>
-                                                        <button type="button" class="close" data-dismiss="modal"
-                                                            aria-label="Close">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
@@ -175,12 +162,10 @@
                                                         Are you sure you want to delete it?
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary"
-                                                            data-dismiss="modal">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
                                                             Close
                                                         </button>
-                                                        <button type="button" class="btn btn-danger"
-                                                            data-dismiss="modal" (click)="deleteLead()">
+                                                        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteLead()">
                                                             Delete
                                                         </button>
                                                     </div>
@@ -218,20 +203,17 @@
                     <div class="col-md-5 col-sm-5">
                         <div class="radio">
                             <div class="btn-group btn-group-toggle">
-                                <label class="btn btn-primary" style="width: 139px"
-                                    [class.active]="assigned_type === 'city_admin'">
+                                <label class="btn btn-primary" style="width: 139px" [class.active]="assigned_type === 'city_admin'">
                                     <input type="radio" [(ngModel)]="assigned_type" value="city_admin" />
                                     City Admin
                                 </label>
 
-                                <label class="btn btn-primary ml-3" style="width: 139px"
-                                    [class.active]="assigned_type === 'Admin'">
+                                <label class="btn btn-primary ml-3" style="width: 139px" [class.active]="assigned_type === 'Admin'">
                                     <input type="radio" [(ngModel)]="assigned_type" value="Admin" />
                                     Admins
                                 </label>
 
-                                <label class="btn btn-primary ml-3" style="width: 139px"
-                                    [class.active]="assigned_type === 'Agents'">
+                                <label class="btn btn-primary ml-3" style="width: 139px" [class.active]="assigned_type === 'Agents'">
                                     <input type="radio" [(ngModel)]="assigned_type" value="Agents" />
                                     Agents
                                 </label>
@@ -243,22 +225,17 @@
                 <br />
                 <div class="row">
                     <div class="col-8" *ngIf="assigned_type === 'city_admin'">
-                        <ng-select class="ng-select inputs2 mt-3" [items]="cityAdminList" bindLabel="city.city"
-                            bindValue="fullname" placeholder="Select city admin"
-                            (change)="changeAssignedToCityAdmin($event)">
+                        <ng-select class="ng-select inputs2 mt-3" [items]="cityAdminList" bindLabel="city.city" bindValue="fullname" placeholder="Select city admin" (change)="changeAssignedToCityAdmin($event)">
                         </ng-select>
                     </div>
 
                     <div class="col-8" *ngIf="assigned_type === 'Admin'">
-                        <ng-select class="ng-select inputs2  mt-3" [items]="superAdminList" bindLabel="access"
-                            bindValue="access" placeholder="Select Admin" (change)="changeAssignedAdmin($event)">
+                        <ng-select class="ng-select inputs2  mt-3" [items]="superAdminList" bindLabel="access" bindValue="access" placeholder="Select Admin" (change)="changeAssignedAdmin($event)">
                         </ng-select>
                     </div>
 
                     <div class="col-8" *ngIf="assigned_type === 'Agents'">
-                        <ng-select #agentSelect class="ng-select inputs2 mt-3" [items]="agentList" [multiple]="true"
-                            bindLabel="fullname" bindValue="fullname" placeholder="Select Agent"
-                            (change)="changeAssignedAgent($event)">
+                        <ng-select #agentSelect class="ng-select inputs2 mt-3" [items]="agentList" [multiple]="true" bindLabel="fullname" bindValue="fullname" placeholder="Select Agent" (change)="changeAssignedAgent($event)">
                         </ng-select>
                     </div>
                 </div>
@@ -277,8 +254,7 @@
                 <button type="button" class="btn btn-danger" data-dismiss="modal">
                     Close
                 </button>
-                <button (click)="assignLeadToAgent()" [class.no-click]="assignLeadData.length === 0" type="button"
-                    class="btn" data-dismiss="modal">
+                <button (click)="assignLeadToAgent()" [class.no-click]="assignLeadData.length === 0" type="button" class="btn" data-dismiss="modal">
                     Assign
                 </button>
             </div>
@@ -286,8 +262,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="searchFilterModal" tabindex="-1" role="dialog" aria-labelledby="searchFilterModalLabel"
-    aria-hidden="true">
+<div class="modal fade" id="searchFilterModal" tabindex="-1" role="dialog" aria-labelledby="searchFilterModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -309,15 +284,13 @@
                     <div class="row modal-rows">
                         <div class="col-sm-3 col-md-4">
                             <div class="form-group price">
-                                <input type="number" class="form-control" placeholder="Min Demand"
-                                    formControlName="minPrice">
+                                <input type="number" class="form-control" placeholder="Min Demand" formControlName="minPrice">
                             </div>
                         </div>
 
                         <div class="col-sm-3 col-md-4">
                             <div class="form-group price">
-                                <input type="number" class="form-control" placeholder="Max Demand"
-                                    formControlName="maxPrice">
+                                <input type="number" class="form-control" placeholder="Max Demand" formControlName="maxPrice">
                             </div>
                         </div>
                     </div>
@@ -328,15 +301,13 @@
                     <div class="row modal-rows">
                         <div class="col-sm-3 col-md-4">
                             <div class="form-group date">
-                                <input type="text" onfocus="(this.type='date')" class="form-control"
-                                    placeholder="Start Date" formControlName="startDate">
+                                <input type="text" onfocus="(this.type='date')" class="form-control" placeholder="Start Date" formControlName="startDate">
                             </div>
                         </div>
 
                         <div class="col-sm-3 col-md-4">
                             <div class="form-group date">
-                                <input type="text" onfocus="(this.type='date')" class="form-control"
-                                    placeholder="End Date" formControlName="endDate">
+                                <input type="text" onfocus="(this.type='date')" class="form-control" placeholder="End Date" formControlName="endDate">
                             </div>
                         </div>
                     </div>
@@ -371,8 +342,7 @@
                 <button type="button" class="btn btn-danger reset" data-dismiss="modal" (click)="resetFilters()">
                     <span class="fas fa-undo"></span> Reset
                 </button>
-                <button type="button" class="btn btn-primary filter-button" [disabled]="filterForm.invalid"
-                    data-dismiss="modal" (click)="filter()">
+                <button type="button" class="btn btn-primary filter-button" [disabled]="filterForm.invalid" data-dismiss="modal" (click)="filter()">
                     <span class="fas fa-check"></span>Search
                 </button>
             </div>

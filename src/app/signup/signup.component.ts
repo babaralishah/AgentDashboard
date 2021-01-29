@@ -192,6 +192,8 @@ export class SignupComponent implements OnInit {
         console.log(this.selectStringLocations);
 
         this.registerForm.patchValue({ location: this.user?.location });
+        console.log(this.user?.location);
+        
       } else this.selectStringLocations = [];
     }
   }

@@ -142,61 +142,13 @@
     </div>
 </div>
 
-<div class="modal" id="myModal">
-    <div class="modal-dialog modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="text-center">Assigned Agents History</h4>
-                <button type="button" class="close" data-dismiss="modal">
-                    &times;
-                </button>
-            </div>
-
-            <div class="modal-body">
-                <div class="card-body row">
-                    <div class="col">
-                        <ng-select [items]="options2" bindLabel="name" bindValue="value" class="mr-2 ml-2" placeholder="Filter By" [(ngModel)]="selectedOption2" (change)="optionChange($event)" [clearable]="false">
-                        </ng-select>
-                    </div>
-                    <div class="col">
-                        <input class="form-control" type="text" placeholder="Search {{ placeholder2 }}" [(ngModel)]="refId2">
-                    </div>
-                </div>
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>ID </th>
-                            <th scope="col">Full Name</th>
-                            <th (click)="sort('id')" scope="col">Date <i class="fa fa-sort"></i></th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        <tr *ngFor="let history of row.assigned_history | orderBy: key: reverse | filterlist: selectedOption2:refId2">
-                            <td>{{ history.userId }}</td>
-                            <td>{{ history.fullname }}</td>
-                            <td>{{history.date | date}}
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">
-                    Close
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class="modal fade" id="searchFilterModal" tabindex="-1" role="dialog" aria-labelledby="searchFilterModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <img alt="ASASA.com" class="logo" src="/assets/asasa/asasa_logo.png" />
+                <!-- <img alt="ASASA.com" class="logo" src="/assets/asasa/asasa_logo.png" /> -->
+                <h1>Filter</h1>
 
                 <h5 class="modal-title" id="searchFilterModalLabel"></h5>
 
@@ -208,7 +160,7 @@
             <div class="modal-body filter-modal">
                 <form [formGroup]="filterForm">
                     <br />
-                    <h5><i class="fas fa-caret-right"></i> Price</h5>
+                    <h5> Price</h5>
 
                     <div class="row modal-rows">
                         <div class="col-sm-3 col-md-4">
@@ -227,7 +179,7 @@
                     </div>
                     <br />
 
-                    <h5><i class="fas fa-caret-right"></i> Date</h5>
+                    <h5> Date</h5>
 
                     <div class="row modal-rows">
                         <div class="col-sm-3 col-md-4">
@@ -246,7 +198,7 @@
                     </div>
                     <br />
 
-                    <h5><i class="fas fa-caret-right"></i> Area</h5>
+                    <h5> Area</h5>
                     <div class="row modal-rows">
                         <div class="com-sm-3 col-md-4">
                             <select class="form-control" formControlName="area">

@@ -175,94 +175,95 @@
 </div>
 
 <div class="modal fade" id="searchFilterModal" tabindex="-1" role="dialog" aria-labelledby="searchFilterModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <img alt="ASASA.com" class="logo" src="/assets/asasa/asasa_logo.png" />
+aria-hidden="true">
+<div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <!-- <img alt="ASASA.com" class="logo" src="/assets/asasa/asasa_logo.png" /> -->
+            <h1>Filter</h1>
 
-                <h5 class="modal-title" id="searchFilterModalLabel"></h5>
+            <h5 class="modal-title" id="searchFilterModalLabel"></h5>
 
-                <a class="btn btn-default btn-sm" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </a>
-            </div>
+            <a class="btn btn-default btn-sm" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </a>
+        </div>
 
-            <div class="modal-body filter-modal">
-                <form [formGroup]="filterForm">
-                    <br />
-                    <h5><i class="fas fa-caret-right"></i> Price</h5>
+        <div class="modal-body filter-modal">
+            <form [formGroup]="filterForm">
+                <br />
+                <h5> Price</h5>
 
-                    <div class="row modal-rows">
-                        <div class="col-sm-3 col-md-4">
-                            <div class="form-group price">
-                                <input type="number" class="form-control" placeholder="Min Demand"
-                                    formControlName="minPrice">
-                            </div>
-                        </div>
-
-                        <div class="col-sm-3 col-md-4">
-                            <div class="form-group price">
-                                <input type="number" class="form-control" placeholder="Max Demand"
-                                    formControlName="maxPrice">
-                            </div>
+                <div class="row modal-rows">
+                    <div class="col-sm-3 col-md-4">
+                        <div class="form-group price">
+                            <input type="number" class="form-control" placeholder="Min Demand"
+                                formControlName="minPrice">
                         </div>
                     </div>
-                    <br />
 
-                    <h5><i class="fas fa-caret-right"></i> Date</h5>
-
-                    <div class="row modal-rows">
-                        <div class="col-sm-3 col-md-4">
-                            <div class="form-group date">
-                                <input type="text" onfocus="(this.type='date')" class="form-control"
-                                    placeholder="Start Date" formControlName="startDate">
-                            </div>
-                        </div>
-
-                        <div class="col-sm-3 col-md-4">
-                            <div class="form-group date">
-                                <input type="text" onfocus="(this.type='date')" class="form-control"
-                                    placeholder="End Date" formControlName="endDate">
-                            </div>
+                    <div class="col-sm-3 col-md-4">
+                        <div class="form-group price">
+                            <input type="number" class="form-control" placeholder="Max Demand"
+                                formControlName="maxPrice">
                         </div>
                     </div>
-                    <br />
+                </div>
+                <br />
 
-                    <h5><i class="fas fa-caret-right"></i> Area</h5>
-                    <div class="row modal-rows">
-                        <div class="com-sm-3 col-md-4">
-                            <select class="form-control" formControlName="area">
-                                <option [ngValue]="null">Select Area</option>
-                                <option value="Kanal">Kanal</option>
-                                <option value="Marla">Marla</option>
+                <h5> Date</h5>
 
-                                <option value="Sq.Yard">Square Yard</option>
-                                <option value="Sq.Feet">Square Feet</option>
-                            </select>
+                <div class="row modal-rows">
+                    <div class="col-sm-3 col-md-4">
+                        <div class="form-group date">
+                            <input type="text" onfocus="(this.type='date')" class="form-control"
+                                placeholder="Start Date" formControlName="startDate">
                         </div>
+                    </div>
 
-                        <div class="col-sm-5 col-md-3">
-                            <input type="number" class="form-control" placeholder="Min Area" formControlName="minArea">
+                    <div class="col-sm-3 col-md-4">
+                        <div class="form-group date">
+                            <input type="text" onfocus="(this.type='date')" class="form-control"
+                                placeholder="End Date" formControlName="endDate">
                         </div>
-                        <div class="col-sm-3 col-md-3">
-                            <input type="number" class="form-control" placeholder="Min Area" formControlName="maxArea">
-                        </div>
-                        <br />
+                    </div>
+                </div>
+                <br />
+
+                <h5> Area</h5>
+                <div class="row modal-rows">
+                    <div class="com-sm-3 col-md-4">
+                        <select class="form-control" formControlName="area">
+                            <option [ngValue]="null">Select Area</option>
+                            <option value="Kanal">Kanal</option>
+                            <option value="Marla">Marla</option>
+
+                            <option value="Sq.Yard">Square Yard</option>
+                            <option value="Sq.Feet">Square Feet</option>
+                        </select>
+                    </div>
+
+                    <div class="col-sm-5 col-md-3">
+                        <input type="number" class="form-control" placeholder="Min Area" formControlName="minArea">
+                    </div>
+                    <div class="col-sm-3 col-md-3">
+                        <input type="number" class="form-control" placeholder="Min Area" formControlName="maxArea">
                     </div>
                     <br />
-                </form>
-            </div>
+                </div>
+                <br />
+            </form>
+        </div>
 
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger reset" data-dismiss="modal" (click)="resetFilters()">
-                    <span class="fas fa-undo"></span> Reset
-                </button>
-                <button type="button" class="btn btn-primary filter-button" [disabled]="filterForm.invalid"
-                    data-dismiss="modal" (click)="filter()">
-                    <span class="fas fa-check"></span>Search
-                </button>
-            </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger reset" data-dismiss="modal" (click)="resetFilters()">
+                <span class="fas fa-undo"></span> Reset
+            </button>
+            <button type="button" class="btn btn-primary filter-button" [disabled]="filterForm.invalid"
+                data-dismiss="modal" (click)="filter()">
+                <span class="fas fa-check"></span>Search
+            </button>
         </div>
     </div>
+</div>
 </div>

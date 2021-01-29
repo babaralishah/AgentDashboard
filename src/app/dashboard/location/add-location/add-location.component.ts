@@ -17,12 +17,14 @@ export class AddLocationComponent implements OnInit {
   locations: any;
   selectStringLocations: any;
   user: any;
+  subLocationsList: any[];
   subLocation: any = [
     {
       subLocation: "",
     },
   ];
-  changeType: any = 'location';
+  subLocationName: any;
+  changeType: any = "location";
   location: any;
   constructor(
     public formBuilder: FormBuilder,
@@ -47,31 +49,33 @@ export class AddLocationComponent implements OnInit {
       cityId: [],
       city: [, Validators.required],
       location: [, Validators.required],
-      subLocations: [
-        {
-          subLocation: "",
-        },
-        Validators.required,
-      ],
+      subLocations: [],
     });
     this.getCities();
   }
   setChangeType(type: any) {
     this.changeType = type;
+    this.addLocationForm.reset();
   }
   updateLocationForm() {
-    console.log(this.user?.subLocations);
+    console.log(this.user);
 
+    if (this.user?.subLocations) {
+      console.log(this.user?.subLocations);
+
+      for (let i = 0; i < this.user?.subLocations.length; i++) {
+        this.subLocation[i] = this.user?.subLocations[i].subLocation;
+      }
+      // this.subLocation = this.user?.subLocations;
+      console.log(this.subLocation);
+    } else {
+      this.subLocation = null;
+    }
     this.addLocationForm.patchValue({ city: this.user?.cityName });
-    this.subLocation = this.user?.subLocations;
-    console.log(this.subLocation);
-
     this.addLocationForm.patchValue({ location: this.user?.location });
     this.selectStringLocations = this.user?.location;
     console.log(this.addLocationForm.get("city").value);
     console.log(this.addLocationForm.get("location").value);
-    // if(this.addLocationForm.get("city").value == 'Islamabad')
-    // console.log('true');
   }
   getCities() {
     this.authService.getCities().subscribe(
@@ -102,20 +106,56 @@ export class AddLocationComponent implements OnInit {
   changeCity(city: any) {
     this.selectStringLocations = null;
     this.locations = [];
+    this.subLocationsList = [];
     if (city) this.getLocations(city._id);
   }
   changeLocation(location: any) {
     this.location = location;
-    // console.log(this.location);
+    this.subLocationsList = [];
+
+    if (location) this.getsubLocations(location._id);
+  }
+  getsubLocations(selectedLocation?: any) {
+    console.log(selectedLocation);
+    console.log(this.locations);
+    if (selectedLocation) {
+      for (let i = 0; i < this.locations.length; i++) {
+        if (this.locations[i]._id == selectedLocation) {
+          this.subLocation = this.locations[i].subLocations;
+        }
+      }
+    }
+    console.log(this.subLocation);
+    console.log(this.subLocationsList);
+    let array: any = [];
+    for (let i = 0; i < this.subLocation?.length; i++) {
+      console.log(this.subLocation[i]?.subLocation);
+
+      array[i] = this.subLocation[i]?.subLocation;
+    }
+    this.subLocationsList = array;
+    console.log(this.subLocationsList);
+  }
+  changeSubLocation(subLocation: any) {
+    console.log(subLocation);
+    // const subLocations = subLocation;
   }
   addLocation() {
-    console.log(this.subLocation);
+    console.log(this.subLocationName);
     console.log(this.addLocationForm.value);
+    if (this.subLocationName != null) {
+      let subLocation: any = [
+        {
+          subLocation: "",
+        },
+      ];
+      subLocation[0].subLocation = this.subLocationName;
+      console.log(subLocation);
 
-    this.addLocationForm.patchValue({
-      subLocations: this.subLocation,
-    });
-
+      this.addLocationForm.patchValue({
+        subLocations: subLocation,
+      });
+    }
     console.log(this.addLocationForm.value);
     if (this.addLocationForm.get("city").value == "Islamabad")
       this.addLocationForm.patchValue({ cityId: 5 });
@@ -124,29 +164,43 @@ export class AddLocationComponent implements OnInit {
     if (this.addLocationForm.get("city").value == "Peshawar")
       this.addLocationForm.patchValue({ cityId: 3 });
     console.log(this.addLocationForm.value);
-    this.authService
-      .addLocations(this.addLocationForm.value)
-      .subscribe((data) => {
-        console.log(data);
-        const code = data.code;
-        if (code === 200) {
-          this.toastr.success(data.message, "Success", {
-            timeOut: 5000,
-          });
+    if (!this.user) {
+      this.authService
+        .addLocations(this.addLocationForm.value)
+        .subscribe((data) => {
+          console.log(data);
+          const code = data.code;
+          if (code === 200) {
+            this.toastr.success(data.message, "Success", {
+              timeOut: 5000,
+            });
+            this.router.navigate(["/location"]);
+          }
+        });
+    } else if (this.user) {
+      console.log(this.user?._id_id);
+
+      this.authService
+        .addSubLocation(this.user?._id, this.addLocationForm.value)
+        .subscribe((data) => {
+          console.log(data);
           this.router.navigate(["/location"]);
-        }
-      });
+        });
+    }
   }
   addSubLocation() {
-    console.log(this.subLocation[0].subLocation);
+    // console.log(this.subLocation[0]?.subLocation);
     console.log(this.location.subLocations);
     let subLoc = [];
-    for (let i = 0; i < this.location.subLocations.length; i++) {
+    for (let i = 0; i < this.location?.subLocations?.length; i++) {
       subLoc[i] = this.location?.subLocations[i];
     }
     console.log(subLoc);
+    console.log(this.subLocationName);
+
     subLoc.push({
-      subLocation: this.subLocation[0].subLocation,
+      subLocation: this.subLocationName,
+      // subLocation: this.subLocation[0].subLocation,
     });
     console.log(subLoc);
     console.log(this.location);
@@ -158,6 +212,7 @@ export class AddLocationComponent implements OnInit {
       .addSubLocation(this.location?._id, this.location)
       .subscribe((data) => {
         console.log(data);
+        this.router.navigate(["/location"]);
       });
   }
   contentWidthEmitted(value) {

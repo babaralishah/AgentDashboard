@@ -46,6 +46,8 @@ export class LeadsComponent implements OnInit {
   minArea: any;
   maxArea: any;
   area_unit: any;
+  property_type: any;
+  property_type2: any;
 
   currentLoginUser: any;
   isCheckComment: boolean;
@@ -67,11 +69,6 @@ export class LeadsComponent implements OnInit {
       value: "client_name",
       name: "Filter By Client Name",
       placeholder: "Client Name",
-    },
-    {
-      value: "property_type",
-      name: "Filter By Property Type",
-      placeholder: "Property Type",
     },
     {
       value: "beds_number",

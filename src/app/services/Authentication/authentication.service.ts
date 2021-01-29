@@ -21,6 +21,11 @@ export class AuthenticationService {
 
   constructor(private httpClient: HttpClient, public router: Router) {}
 
+  sendMessage(user: any) {
+    return this.httpClient.post<any>(`${this.url}/messageApi`, user, {
+      headers: new HttpHeaders().set("Authorization", this.getToken()),
+    });
+  }
   // Getting cities names from api
   getCities() {
     return this.httpClient.get<any>(`${this.url}/city`, {

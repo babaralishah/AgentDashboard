@@ -10,8 +10,7 @@
                 <div class="row mb-3 mt-5">
                     <div class="col-12">
                         <button class="btn btn-primary" (click)="setFormTitle('Inventory')">Add New</button>
-                        <button class="btn btn-secondary ml-3" data-toggle="modal"
-                            data-target="#searchFilterModal">Filter</button>
+                        <button class="btn btn-secondary ml-3" data-toggle="modal" data-target="#searchFilterModal">Filter</button>
                     </div>
                 </div>
                 <div class="row">
@@ -30,10 +29,10 @@
                         <ng-select class="ng-select inputs2" [items]="locations" bindLabel="location" bindValue="location" placeholder="Select Location" (change)="changeLocation($event)">
                         </ng-select>
                     </div>
-                    <div class="col-12 col-sm-6 col-lg-3 mb-3" *ngIf="currentLoginUser?.access !== 'agent'">
+                    <!-- <div class="col-12 col-sm-6 col-lg-3 mb-3" *ngIf="currentLoginUser?.access !== 'agent'">
                         <ng-select class="ng-select inputs2" [items]="agentList" bindLabel="fullname" bindValue="fullname" placeholder="Select Added By" (change)="changeAssignedAgent($event)">
                         </ng-select>
-                    </div>
+                    </div> -->
                     <div class="btn-container">
                         <button onclick="window.print()" class="btn btn-primary">Print</button>
                         <button (click)="exportTOExcel()" class="btn btn-primary ml-3">Excel</button>
@@ -46,9 +45,9 @@
                                 <thead>
                                     <th> </th>
                                     <th (click)="sort('id')" scope="col">ID <i class="fa fa-sort"></i></th>
-                                    <th>Added By</th>
-                                    <th scope="col">Purpose</th>
+                                    <!-- <th>Added By</th> -->
                                     <th scope="col">Client Details</th>
+                                    <th scope="col">Purpose</th>
                                     <th scope="col">Location</th>
                                     <th scope="col">Property Type</th>
                                     <th scope="col">Land Area</th>
@@ -57,6 +56,8 @@
                                     <th scope="col">Beds</th>
                                     <!-- <th scope="col">Assigned To</th> -->
                                     <th scope="col">Added On</th>
+
+                                    <th scope="col">Comments</th>
                                     <th scope="col">Operations</th>
                                 </thead>
 
@@ -72,13 +73,13 @@
                                         </td>
 
                                         <td>{{ user?.refId }}</td>
-                                        <td>{{user?.added_By?.fullname}}</td>
-                                        <td>{{ user?.property_purpose }}</td>
+                                        <!-- <td>{{user?.added_By?.fullname}}</td> -->
                                         <td>
                                             <b>Name : </b>{{ user?.client_name |titlecase }} <br />
                                             <b>Phone : </b>{{ user?.client_number }}<br />
                                             <b>Type : </b>{{ user?.client_type | titlecase }}
                                         </td>
+                                        <td>{{ user?.property_purpose }}</td>
                                         <td>
                                             {{ user.city[0]?.city }}<span></span><br /><span class="badge badge-light" *ngFor="let loc of user?.location">{{ loc.location }},
                                             </span>
@@ -131,6 +132,7 @@
                                             </span>
                                         </td> -->
                                         <td>{{ user?.created | date }}</td>
+                                        <td>{{user?.comments}}</td>
                                         <td>
                                             <i class="fa fa-edit icon" (click)="setUserToEdit(user)"></i>
                                             <a (click)="setUserToEdit(user)" role="button"></a>
@@ -174,66 +176,61 @@
     </div>
 </div>
 
-<div class="modal fade" id="searchFilterModal" tabindex="-1" role="dialog" aria-labelledby="searchFilterModalLabel"
-aria-hidden="true">
-<div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-        <div class="modal-header">
-            <!-- <img alt="ASASA.com" class="logo" src="/assets/asasa/asasa_logo.png" /> -->
-            <h1>Filter</h1>
+<div class="modal fade" id="searchFilterModal" tabindex="-1" role="dialog" aria-labelledby="searchFilterModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!-- <img alt="ASASA.com" class="logo" src="/assets/asasa/asasa_logo.png" /> -->
+                <h1>Filter</h1>
 
-            <h5 class="modal-title" id="searchFilterModalLabel"></h5>
+                <h5 class="modal-title" id="searchFilterModalLabel"></h5>
 
-            <a class="btn btn-default btn-sm" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </a>
-        </div>
+                <a class="btn btn-default btn-sm" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </a>
+            </div>
 
-        <div class="modal-body filter-modal">
-            <form [formGroup]="filterForm">
-                <br />
-                <h5> Price</h5>
+            <div class="modal-body filter-modal">
+                <form [formGroup]="filterForm">
+                    <br />
+                    <h5> Price</h5>
 
-                <div class="row modal-rows">
-                    <div class="col-sm-3 col-md-4">
-                        <div class="form-group price">
-                            <input type="number" class="form-control" placeholder="Min Demand"
-                                formControlName="minPrice">
+                    <div class="row modal-rows">
+                        <div class="col-sm-3 col-md-4">
+                            <div class="form-group price">
+                                <input type="number" class="form-control" placeholder="Min Demand" formControlName="minPrice">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3 col-md-4">
+                            <div class="form-group price">
+                                <input type="number" class="form-control" placeholder="Max Demand" formControlName="maxPrice">
+                            </div>
                         </div>
                     </div>
+                    <br />
 
-                    <div class="col-sm-3 col-md-4">
-                        <div class="form-group price">
-                            <input type="number" class="form-control" placeholder="Max Demand"
-                                formControlName="maxPrice">
+                    <h5> Date</h5>
+
+                    <div class="row modal-rows">
+                        <div class="col-sm-3 col-md-4">
+                            <div class="form-group date">
+                                <input type="text" onfocus="(this.type='date')" class="form-control" placeholder="Start Date" formControlName="startDate">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3 col-md-4">
+                            <div class="form-group date">
+                                <input type="text" onfocus="(this.type='date')" class="form-control" placeholder="End Date" formControlName="endDate">
+                            </div>
                         </div>
                     </div>
-                </div>
-                <br />
+                    <br />
 
-                <h5> Date</h5>
-
-                <div class="row modal-rows">
-                    <div class="col-sm-3 col-md-4">
-                        <div class="form-group date">
-                            <input type="text" onfocus="(this.type='date')" class="form-control"
-                                placeholder="Start Date" formControlName="startDate">
-                        </div>
-                    </div>
-
-                    <div class="col-sm-3 col-md-4">
-                        <div class="form-group date">
-                            <input type="text" onfocus="(this.type='date')" class="form-control"
-                                placeholder="End Date" formControlName="endDate">
-                        </div>
-                    </div>
-                </div>
-                <br />
-
-                <h5> Area</h5>
-                <div class="row modal-rows">
-                    <div class="com-sm-3 col-md-4">
-                        <select class="form-control" formControlName="area">
+                    <h5> Area</h5>
+                    <div class="row modal-rows">
+                        <div class="com-sm-3 col-md-4">
+                            <select class="form-control" formControlName="area">
                             <option [ngValue]="null">Select Area</option>
                             <option value="Kanal">Kanal</option>
                             <option value="Marla">Marla</option>
@@ -241,29 +238,28 @@ aria-hidden="true">
                             <option value="Sq.Yard">Square Yard</option>
                             <option value="Sq.Feet">Square Feet</option>
                         </select>
-                    </div>
+                        </div>
 
-                    <div class="col-sm-5 col-md-3">
-                        <input type="number" class="form-control" placeholder="Min Area" formControlName="minArea">
-                    </div>
-                    <div class="col-sm-3 col-md-3">
-                        <input type="number" class="form-control" placeholder="Min Area" formControlName="maxArea">
+                        <div class="col-sm-5 col-md-3">
+                            <input type="number" class="form-control" placeholder="Min Area" formControlName="minArea">
+                        </div>
+                        <div class="col-sm-3 col-md-3">
+                            <input type="number" class="form-control" placeholder="Min Area" formControlName="maxArea">
+                        </div>
+                        <br />
                     </div>
                     <br />
-                </div>
-                <br />
-            </form>
-        </div>
+                </form>
+            </div>
 
-        <div class="modal-footer">
-            <button type="button" class="btn btn-danger reset" data-dismiss="modal" (click)="resetFilters()">
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger reset" data-dismiss="modal" (click)="resetFilters()">
                 <span class="fas fa-undo"></span> Reset
             </button>
-            <button type="button" class="btn btn-primary filter-button" [disabled]="filterForm.invalid"
-                data-dismiss="modal" (click)="filter()">
+                <button type="button" class="btn btn-primary filter-button" [disabled]="filterForm.invalid" data-dismiss="modal" (click)="filter()">
                 <span class="fas fa-check"></span>Search
             </button>
+            </div>
         </div>
     </div>
-</div>
 </div>

@@ -11,13 +11,13 @@ export class TableFilter03Pipe implements PipeTransform {
     }
 
     return user.filter((user) => {
-      if (user.fullname) {
+      if (user?.fullname) {
         return (
-          user.fullname.toLowerCase().indexOf(fullname.toLowerCase()) !== -1
+          user?.fullname.toLowerCase().indexOf(fullname.toLowerCase()) !== -1
         );
-      } else if (user.added_By.fullname) {
+      } else if (user?.added_By?.fullname) {
         return (
-          user.added_By.fullname
+          user?.added_By?.fullname
             .toLowerCase()
             .indexOf(fullname.toLowerCase()) !== -1
         );

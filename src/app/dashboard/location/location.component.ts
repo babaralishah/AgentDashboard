@@ -43,7 +43,7 @@ export class LocationComponent implements OnInit {
     {
       value: "SubLocationName",
       name: "Filter By Sub-Location",
-      placeholder: "Location",
+      placeholder: "Sub Location",
     },
   ];
   selectedOption = this.options[0].value;

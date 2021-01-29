@@ -1,3 +1,4 @@
+import { AngularEditorModule } from "@kolkov/angular-editor";
 import { Ng2OrderModule } from "ng2-order-pipe";
 import { NgxPaginationModule } from "ngx-pagination";
 import { MatToolbarModule } from "@angular/material/toolbar";
@@ -55,6 +56,7 @@ import { TableDatePipe } from "./Pipes/table-date-filter.pipe";
 import { TableDemandPipe } from "./Pipes/table-demand-filter.pipe";
 import { RoleGuard } from "./services/guards/role.guard";
 import { TableAreaPipe } from "./Pipes/table-area-filter.pipe";
+import { FeedbackComponent } from "./dashboard/feedback/feedback.component";
 registerLocaleData(en);
 
 @NgModule({
@@ -96,6 +98,7 @@ registerLocaleData(en);
     FilterPipe,
     LocationComponent,
     AddLocationComponent,
+    FeedbackComponent,
   ],
   imports: [
     HttpClientModule,
@@ -114,11 +117,10 @@ registerLocaleData(en);
     NgbModule,
     Ng2OrderModule,
     NgxPaginationModule,
+    AngularEditorModule,
     // MaterialModule
   ],
-  providers: [
-    RoleGuard
-  ],
+  providers: [RoleGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

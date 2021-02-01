@@ -9,8 +9,7 @@
 
                 <div class="row mb-3 mt-5">
                     <div class="col-12">
-                        <button class="btn btn-secondary" data-toggle="modal"
-                            data-target="#searchFilterModal">Filter</button>
+                        <button class="btn btn-secondary" data-toggle="modal" data-target="#searchFilterModal">Filter</button>
                     </div>
                 </div>
 
@@ -54,7 +53,7 @@
                                 </thead>
 
                                 <tbody>
-                                    <tr *ngFor="let user of user | filterlist: selectedOption:refId | tableFilter: city | LocationFilter:location | areaFilter: area_unit:minArea:maxArea | demandFilter: minDemand:maxDemand | dateFilter: startDate:endDate | paginate:{itemsPerPage:10,currentPage:p}; ">
+                                    <tr *ngFor="let user of user | filterlist: selectedOption:refId | tableFilter: city | LocationFilter:location | areaFilter: area_unit:minArea:maxArea | demandFilter: minDemand:maxDemand | dateFilter: startDate:endDate | paginate:{itemsPerPage:50,currentPage:p}; ">
                                         <td> <span *ngIf="user?.priority == 'Super Hot' else hot"><img class="super-hot"
                                                     src="\assets\icons\super_hot.svg"></span>
 
@@ -142,8 +141,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="searchFilterModal" tabindex="-1" role="dialog" aria-labelledby="searchFilterModalLabel"
-    aria-hidden="true">
+<div class="modal fade" id="searchFilterModal" tabindex="-1" role="dialog" aria-labelledby="searchFilterModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -165,15 +163,13 @@
                     <div class="row modal-rows">
                         <div class="col-sm-3 col-md-4">
                             <div class="form-group price">
-                                <input type="number" class="form-control" placeholder="Min Demand"
-                                    formControlName="minPrice">
+                                <input type="number" class="form-control" placeholder="Min Demand" formControlName="minPrice">
                             </div>
                         </div>
 
                         <div class="col-sm-3 col-md-4">
                             <div class="form-group price">
-                                <input type="number" class="form-control" placeholder="Max Demand"
-                                    formControlName="maxPrice">
+                                <input type="number" class="form-control" placeholder="Max Demand" formControlName="maxPrice">
                             </div>
                         </div>
                     </div>
@@ -184,15 +180,13 @@
                     <div class="row modal-rows">
                         <div class="col-sm-3 col-md-4">
                             <div class="form-group date">
-                                <input type="text" onfocus="(this.type='date')" class="form-control"
-                                    placeholder="Start Date" formControlName="startDate">
+                                <input type="text" onfocus="(this.type='date')" class="form-control" placeholder="Start Date" formControlName="startDate">
                             </div>
                         </div>
 
                         <div class="col-sm-3 col-md-4">
                             <div class="form-group date">
-                                <input type="text" onfocus="(this.type='date')" class="form-control"
-                                    placeholder="End Date" formControlName="endDate">
+                                <input type="text" onfocus="(this.type='date')" class="form-control" placeholder="End Date" formControlName="endDate">
                             </div>
                         </div>
                     </div>
@@ -227,9 +221,49 @@
                 <button type="button" class="btn btn-danger reset" data-dismiss="modal" (click)="resetFilters()">
                     <span class="fas fa-undo"></span> Reset
                 </button>
-                <button type="button" class="btn btn-primary filter-button" [disabled]="filterForm.invalid"
-                    data-dismiss="modal" (click)="filter()">
+                <button type="button" class="btn btn-primary filter-button" [disabled]="filterForm.invalid" data-dismiss="modal" (click)="filter()">
                     <span class="fas fa-check"></span>Search
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="searchFilterModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1>Assigned Agents History</h1>
+
+                <h5 class="modal-title" id="searchFilterModalLabel"></h5>
+
+                <a class="btn btn-default btn-sm" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </a>
+            </div>
+
+            <div class="modal-body filter-modal">
+                <table class="table table-hover">
+                    <thead>
+                        <th scope="col">ID</th>
+                        <th>Assigned To</th>
+                        <th scope="col">Date</th>
+                    </thead>
+
+                    <tbody>
+                        <tr *ngFor="let history of row.assigned_history | orderBy: key: reverse | filterlist: selectedOption2:refId2">
+
+                            <td>{{ history.userId }}</td>
+                            <td>{{ history.fullname }}</td>
+                            <td>{{ history.date | date }}
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary fa fa-window-close" data-dismiss="modal">
                 </button>
             </div>
         </div>

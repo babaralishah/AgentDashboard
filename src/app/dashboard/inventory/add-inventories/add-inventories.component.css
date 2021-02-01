@@ -1,8 +1,8 @@
 .require {
     color: #d93025;
-    margin-left: 3px;
+    margin-left: 5px;
     font-size: 20px;
-    margin-top: 12px;
+    margin-top: 5px;
 }
 
 #content {
@@ -31,7 +31,7 @@ input::-webkit-input-placeholder {
 }
 
 .ng-select {
-    margin-left: 15px;
+    margin-left: 5px;
     display: block;
     position: relative;
     width: 91%;

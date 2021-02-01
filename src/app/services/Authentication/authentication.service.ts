@@ -60,17 +60,14 @@ export class AuthenticationService {
 
   // Delete Single Location
   deleteLocation(id) {
-    return this.httpClient.delete<any>(
-      `https://my-asasa.herokuapp.com/location/${id}`,
-      {
-        headers: new HttpHeaders().set("Authorization", this.getToken()),
-      }
-    );
+    return this.httpClient.delete<any>(`${this.url}/location/${id}`, {
+      headers: new HttpHeaders().set("Authorization", this.getToken()),
+    });
   }
 
   // Assign lead to the Agent
   editLeadToAgent(id: any, user: any) {
-    return this.httpClient.put(this.url + `/assign/${id}`, user, {
+    return this.httpClient.put(`${this.url}/assign/${id}`, user, {
       headers: new HttpHeaders().set("Authorization", this.getToken()),
     });
   }
@@ -85,12 +82,9 @@ export class AuthenticationService {
 
   // API to delete the assigned leads
   deleteAssignedLeads(id: any) {
-    return this.httpClient.delete<any>(
-      `https://my-asasa.herokuapp.com/assign/${id}`,
-      {
-        headers: new HttpHeaders().set("Authorization", this.getToken()),
-      }
-    );
+    return this.httpClient.delete<any>(`${this.url}/assign/${id}`, {
+      headers: new HttpHeaders().set("Authorization", this.getToken()),
+    });
   }
 
   // API to get all assigned leads data
@@ -151,12 +145,9 @@ export class AuthenticationService {
   // API to call delete api for the user data table
   deleteUser(id) {
     console.log("Calling deleteUser", id);
-    return this.httpClient.delete<any>(
-      `https://my-asasa.herokuapp.com/users/${id}`,
-      {
-        headers: new HttpHeaders().set("Authorization", this.getToken()),
-      }
-    );
+    return this.httpClient.delete<any>(`${this.url}/users/${id}`, {
+      headers: new HttpHeaders().set("Authorization", this.getToken()),
+    });
   }
   ////////////// Send new row table data /////////////
   createUsers(user: any) {
@@ -191,12 +182,9 @@ export class AuthenticationService {
   // API to delete the single inventory
   deleteInventory(id) {
     console.log("Calling deleteInventory", id);
-    return this.httpClient.delete<any>(
-      `https://my-asasa.herokuapp.com/inventory/${id}`,
-      {
-        headers: new HttpHeaders().set("Authorization", this.getToken()),
-      }
-    );
+    return this.httpClient.delete<any>(`${this.url}/inventory/${id}`, {
+      headers: new HttpHeaders().set("Authorization", this.getToken()),
+    });
   }
 
   // API to set user from user/inventory table to update
@@ -213,24 +201,24 @@ export class AuthenticationService {
 
   // Api call to Update the already existed user/agent in the user component
   updateUser(id, data) {
-    return this.httpClient.put(
-      `https://my-asasa.herokuapp.com/users/${id}`,
-      data,
-      {
+    console.log(data?.name);
+    if (data instanceof File) {
+      const formData = new FormData();
+      formData.append("images", data, data.name);
+      return this.httpClient.put(`${this.url}/users/${id}`, data, {
         headers: new HttpHeaders().set("Authorization", this.getToken()),
-      }
-    );
+      });
+    }
+    return this.httpClient.put(`${this.url}/users/${id}`, data, {
+      headers: new HttpHeaders().set("Authorization", this.getToken()),
+    });
   }
   // Update a single Inventory
   updateInventory(id, data) {
     console.log("Calling updateInventory", id);
-    return this.httpClient.put(
-      `https://my-asasa.herokuapp.com/inventory/${id}`,
-      data,
-      {
-        headers: new HttpHeaders().set("Authorization", this.getToken()),
-      }
-    );
+    return this.httpClient.put(`${this.url}/inventory/${id}`, data, {
+      headers: new HttpHeaders().set("Authorization", this.getToken()),
+    });
   }
   ///////// API to Register the new user /////////////
   register(user: any): Observable<any> {
@@ -319,7 +307,7 @@ export class AuthenticationService {
   }
   // ////////////////////////////////////////
 
-  priceFilter(value) {
+  priceFilter(value: any) {
     var val: any = Math.abs(value);
     if (val >= 1000000000) {
       val = Number((val / 1000000000).toFixed(2)) + "Billion";

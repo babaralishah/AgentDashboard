@@ -1,57 +1,57 @@
 <app-header></app-header>
 <div id="wrapper">
-  <app-dashboard (widthEmittedEvent)="contentWidthEmitted($event)"></app-dashboard>
-  <div id="content-wrapper" class="d-flex flex-column" #content>
-    <div id="content">
+    <app-dashboard (widthEmittedEvent)="contentWidthEmitted($event)"></app-dashboard>
+    <div id="content-wrapper" class="d-flex flex-column" #content>
+        <div id="content">
 
-      <div class="container-fluid">
-        <h1 class="h3 mb-2 text-gray-800">User Profile</h1>
+            <div class="container-fluid">
+                <h1 class="h3 mb-2 text-gray-800">User Profile</h1>
 
-        <div class="row">
-          <div class="col-xl-4 col-lg-5 col-md-6 mb-4 mt-3">
-            <div class="card">
-              <div class="firstinfo">
-                <img *ngIf="!selectedFile" src="https://bootdey.com/img/Content/avatar/avatar6.png" />
-                <img *ngIf="selectedFile" [src]="selectedFile.src" />
-                <div class="profileinfo">
-                  <h1>{{tokendata?.fullname}}</h1>
-                  <span class=" badge badge-warning mb-4">{{tokendata?.access | titlecase}}</span>
+                <div class="row">
+                    <div class="col-xl-4 col-lg-5 col-md-6 mb-4 mt-3">
+                        <div class="card">
+                            <div class="firstinfo">
+                                <img *ngIf="!selectedFile" src="https://bootdey.com/img/Content/avatar/avatar6.png" />
+                                <img *ngIf="selectedFile" [src]="selectedFile.src" />
+                                <div class="profileinfo">
+                                    <h1>{{tokendata?.fullname}}</h1>
+                                    <span class=" badge badge-warning mb-4">{{tokendata?.access | titlecase}}</span>
 
-                  <div class="profile-details">
-                    <b>Email :</b> &nbsp;&nbsp;&nbsp;&nbsp;{{tokendata?.email}} <br>
-                    <b>Contact :</b> &nbsp;&nbsp;&nbsp;{{tokendata?.contact}}
-                  </div>
+                                    <div class="profile-details">
+                                        <b>Email :</b> &nbsp;&nbsp;&nbsp;&nbsp;{{tokendata?.email}} <br>
+                                        <b>Contact :</b> &nbsp;&nbsp;&nbsp;{{tokendata?.contact}}
+                                    </div>
 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
 
-        <div class="row">
-          <div class="col-xl-5 col-lg-6 col-md-8 mb-4 mt-3">
-            <div class="row">
-              <div class="col-6">
-                <div class="upload-btn-wrapper  text-right input-container">
-                  <button (click)="file.click()" class="btn text-center mr-2" style="width: 100px;">
+                <div class="row">
+                    <div class="col-xl-5 col-lg-6 col-md-8 mb-4 mt-3">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="upload-btn-wrapper  text-right input-container">
+                                    <button (click)="file.click()" class="btn text-center mr-2" style="width: 100px;">
                     <i class="fa fa-camera" aria-hidden="true">&nbsp;</i>
                     <span class="upload"><b>Upload</b></span>
                   </button>
-                  <input #file type='file' class="fileField" (change)="onSelectFile($event)"><br><br>
-                </div>
-              </div>
-              <div class="col-6">
-                <div class="upload-btn-wrapper  text-left">
-                  <button (click)="updateImage()" class="btn text-center mr-2" style="width: 100px;">
+                                    <input #file type='file' class="fileField" (change)="onSelectFile($event)"><br><br>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="upload-btn-wrapper  text-left">
+                                    <button (click)="updateImage()" class="btn text-center mr-2" style="width: 100px;">
                     <i class="fa fa-save">&nbsp;</i>
                     <span class="upload"><b>Save</b></span>
                   </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>

@@ -15,9 +15,9 @@ export class ProfileComponent implements OnInit {
   email: string;
   tokendata: any;
   url: string | ArrayBuffer;
-  selectedFile: ImageSnippet;
+  selectedFile: ImageSnippet | File;
 
-  @ViewChild('content') content: any;
+  @ViewChild("content") content: any;
 
   constructor(
     public router: Router,
@@ -40,12 +40,15 @@ export class ProfileComponent implements OnInit {
   onSelectFile(event) {
     if (event.target.files && event.target.files[0]) {
       const file: File = event.target.files[0];
-      const reader = new FileReader();
 
-      reader.addEventListener("load", (event: any) => {
-        this.selectedFile = new ImageSnippet(event.target.result, file);
-      });
-      reader.readAsDataURL(file);
+      this.selectedFile = file;
+      console.log(this.selectedFile);
+      // const reader = new FileReader();
+
+      // reader.addEventListener("load", (event: any) => {
+      //   this.selectedFile = new ImageSnippet(event.target.result, file);
+      // });
+      // reader.readAsDataURL(file);
     }
   }
 
@@ -54,7 +57,7 @@ export class ProfileComponent implements OnInit {
     console.log("Save Image", this.selectedFile);
     console.log(this.tokendata._id);
     this.authService
-      .updateUser(this.tokendata._id, this.selectedFile.file)
+      .updateUser(this.tokendata._id, this.selectedFile)
       .subscribe((res) => {
         console.log("Subscribed data: ", res);
       });

@@ -127,6 +127,7 @@ export class SignupComponent implements OnInit {
             Validators.maxLength(12),
           ],
         ],
+        image: [],
         access: ["", Validators.required],
         confirm_password: ["", [Validators.required, Validators.minLength(6)]],
       });
@@ -193,7 +194,6 @@ export class SignupComponent implements OnInit {
 
         this.registerForm.patchValue({ location: this.user?.location });
         console.log(this.user?.location);
-        
       } else this.selectStringLocations = [];
     }
   }

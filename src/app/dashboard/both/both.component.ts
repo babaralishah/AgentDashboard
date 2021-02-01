@@ -94,21 +94,29 @@ export class BothComponent implements OnInit {
       minArea: [],
       maxArea: [],
       startDate: [],
-      endDate: []
+      endDate: [],
     });
   }
 
   filter() {
-    this.minDemand = this.filterForm.get('minPrice').value;
-    this.maxDemand = this.filterForm.get('maxPrice').value;
-    this.area_unit = this.filterForm.get('area').value;
-    this.minArea = this.filterForm.get('minArea').value;
-    this.maxArea = this.filterForm.get('maxArea').value;
-    if(this.filterForm.get('startDate').value) {
-      this.startDate = formatDate(new Date(this.filterForm.get('startDate').value), "yyyy-MM-dd", "en_US");
+    this.minDemand = this.filterForm.get("minPrice").value;
+    this.maxDemand = this.filterForm.get("maxPrice").value;
+    this.area_unit = this.filterForm.get("area").value;
+    this.minArea = this.filterForm.get("minArea").value;
+    this.maxArea = this.filterForm.get("maxArea").value;
+    if (this.filterForm.get("startDate").value) {
+      this.startDate = formatDate(
+        new Date(this.filterForm.get("startDate").value),
+        "yyyy-MM-dd",
+        "en_US"
+      );
     }
-    if(this.filterForm.get('endDate').value) {
-      this.endDate = formatDate(new Date(this.filterForm.get('endDate').value), "yyyy-MM-dd", "en_US");
+    if (this.filterForm.get("endDate").value) {
+      this.endDate = formatDate(
+        new Date(this.filterForm.get("endDate").value),
+        "yyyy-MM-dd",
+        "en_US"
+      );
     }
   }
 
@@ -154,18 +162,18 @@ export class BothComponent implements OnInit {
 
           if (this.currentLoginUser.access === "city_admin") {
             element.city.forEach((city) => {
-              if (this.currentLoginUser.city.city === city.city) {
+              if (this.currentLoginUser?.city?.city === city?.city) {
                 this.user.push(element);
                 return;
               }
             });
-          } else if (this.currentLoginUser.access === "agent") {
-            if (this.currentLoginUser.userId === element.added_By.userId) {
+          } else if (this.currentLoginUser?.access === "agent") {
+            if (this.currentLoginUser?.userId === element.added_By?.userId) {
               this.user.push(element);
               return;
             } else {
-              element.assigned_history.forEach((history) => {
-                if (this.currentLoginUser.userId === history?.userId) {
+              element.assigned_history?.forEach((history) => {
+                if (this.currentLoginUser?.userId === history?.userId) {
                   this.user.push(element);
                   return;
                 }

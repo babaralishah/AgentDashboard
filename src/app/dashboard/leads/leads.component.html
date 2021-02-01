@@ -34,14 +34,12 @@
                         </ng-select>
                     </div>
 
-                    <!-- <div class="row mb-3 mt-5"> -->
                     <div class="col-5">
                         <button class="btn btn-primary" data-toggle="modal" style="
                         width: 200px;
                         color: black;
                         background-color: #dcdcdc;" data-target="#Property_Type">Search By <b>Property Type</b></button>
                     </div>
-                    <!-- </div> -->
                     <div class="btn-container">
                         <button onclick="window.print()" class="btn btn-primary">Print</button>
                         <button (click)="exportTOExcel()" class="btn btn-primary ml-3">Excel</button>
@@ -57,7 +55,6 @@
                                         <th (click)="sort('id')" scope="col">
                                             ID <i class="fa fa-sort"></i>
                                         </th>
-                                        <!-- <th>Added By</th> -->
                                         <th scope="col">Client Details</th>
                                         <th scope="col">Purpose</th>
                                         <th scope="col">Property Type</th>
@@ -66,14 +63,13 @@
                                         <th scope="col">Demand</th>
                                         <th scope="col">Added On</th>
                                         <th scope="col">Assigned To</th>
-                                        <!-- <th scope="col">Media</th> -->
                                         <th scope="col">Comments</th>
                                         <th scope="col">Operations</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let user of user| filterlist: selectedOption:refId | property_type: property_type2 | nameFilter: agentAssignedName  | dateFilter: startDate:endDate | demandFilter: minDemand:maxDemand | areaFilter: area_unit:minArea:maxArea | orderBy: key:reverse | tableFilter: city | LocationFilter:location | paginate: { itemsPerPage: 50, currentPage: p }">
-                                        <!-- <tr *ngFor="let user of user| filterlist: selectedOption:refId | nameFilter: agentAssignedName  | dateFilter: startDate:endDate | demandFilter: minDemand:maxDemand| orderBy: key:reverse | tableFilter: city | LocationFilter:location | paginate: { itemsPerPage: 50, currentPage: p }"> -->
+
                                         <td>
                                             <span *ngIf="user?.priority == 'Super Hot'">
                                                 <img class="super-hot" src="\assets\icons\super_hot.svg">
@@ -88,7 +84,6 @@
 
 
                                         <td>{{ user.refId }}</td>
-                                        <!-- <td>{{user?.added_By?.fullname}}</td> -->
                                         <td>
                                             <b>Name : </b>{{ user.client_name | titlecase }} <br />
                                             <b>Number : </b>{{ user.client_number }} <br />
@@ -135,9 +130,6 @@
                                                     }}<span>,</span><br></span>
                                             </span>
                                         </td>
-                                        <!-- <td>
-                                            <span><b>Media: </b> {{ user?.media }}</span><br />
-                                        </td> -->
                                         <td>{{user?.comments}}</td>
                                         <td style="width: 12%;">
                                             <i class="fa fa-edit icon" (click)="setUserToEdit(user)"></i>
@@ -145,7 +137,7 @@
 
                                             <i class="fa fa-trash icon" (click)="confirmID(user._id)" data-toggle="modal" data-target="#exampleModal1"></i> &nbsp;&nbsp;
                                             <span><i class="fas fa-exchange-alt" data-toggle="modal"
-                                                    data-target="#myModal" (click)="setCurrentUser(user)"></i></span>
+                                                    data-target="#AgentAssign" (click)="setCurrentUser(user)"></i></span>
                                         </td>
                                         <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
@@ -184,11 +176,8 @@
     </div>
 </div>
 
-<div class="modal" id="myModal">
-    <div class="modal-dialog modal-dialog-scrollable">
-        <!-- <div class="modal-content" style="height: 500px; 
-        margin: 1.75rem auto; 
-        max-width: 600px;"> -->
+<div class="modal" id="AgentAssign">
+    <div class="modal-dialog modal-md" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="text-center">Agent Assignment</h4>
@@ -197,7 +186,7 @@
                 </button>
             </div>
 
-            <div class="modal-body" style="height: 300px;max-width: 500px;">
+            <div class="modal-body" style="height: 370px;max-width: 500px;">
                 <!-- <div class="modal-body"> -->
                 <div class="row">
                     <div class="col-md-5 col-sm-5">
@@ -266,7 +255,6 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <!-- <img alt="ASASA.com" class="logo" src="/assets/asasa/asasa_logo.png" /> -->
                 <h1>Filter</h1>
 
                 <h5 class="modal-title" id="searchFilterModalLabel"></h5>
@@ -349,13 +337,9 @@
         </div>
     </div>
 </div>
-<!-- Modal for Property Type Search Filter -->
 
 <div class="modal" id="Property_Type">
-    <div class="modal-dialog modal-dialog-scrollable">
-        <!-- <div class="modal-content" style="height: 500px; 
-        margin: 1.75rem auto; 
-        max-width: 600px;"> -->
+    <div class="modal-dialog modal-md" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="text-center">Property Type Filter</h4>
@@ -364,7 +348,7 @@
                 </button>
             </div>
 
-            <div class="modal-body" style="height: 250px;max-width: 500px;">
+            <div class="modal-body" style="height: 200px;max-width: 500px;">
                 <div class="row">
                     <div class="col-md-5 col-sm-5">
                         <div class="radio">
@@ -481,9 +465,10 @@
                     </div>
                 </div>
             </div>
+
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">
-                    OK
+                <button type="button" class="btn btn-danger reset" data-dismiss="modal" (click)="resetFilters()">
+                    <span class="fas fa-undo"></span> Reset
                 </button>
             </div>
         </div>

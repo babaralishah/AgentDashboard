@@ -10,12 +10,14 @@ import { AuthenticationService } from "src/app/services/Authentication/authentic
   styleUrls: ["./feedback.component.css"],
 })
 export class FeedbackComponent implements OnInit {
+  addNewContactNumber = (item) => ({ contact: item });
   @ViewChild("content") content: any;
   user: any;
   sendMessageForm: FormGroup;
   messageType: any = "agent";
   agentList: any = [];
   userContact: any[] = [];
+  contactNumber: any = [];
 
   constructor(
     public formBuilder: FormBuilder,
@@ -62,6 +64,10 @@ export class FeedbackComponent implements OnInit {
       message: [""],
     });
   }
+  changeContactNumber(number: any) {
+    console.log(this.contactNumber);
+  }
+
   setChangeType(type: any) {
     this.messageType = type;
     this.sendMessageForm.reset();
@@ -77,6 +83,26 @@ export class FeedbackComponent implements OnInit {
     this.sendMessageForm.patchValue({ phone: this.userContact });
   }
   sendMessage() {
+    console.log(this.sendMessageForm.value);
+
+    this.authService
+      .sendMessage(this.sendMessageForm.value)
+      .subscribe((data) => {
+        console.log(data);
+
+        this.toastr.success(data.message, "Success", {
+          timeOut: 5000,
+        });
+        this.sendMessageForm.reset();
+      });
+  }
+  sendNonAgentMessage() {
+    for (let i = 0; i < this.contactNumber.length; i++) {
+      this.contactNumber[i] = parseInt(this.contactNumber[i]);
+    }
+    console.log(this.contactNumber);
+
+    this.sendMessageForm.patchValue({ phone: this.contactNumber });
     console.log(this.sendMessageForm.value);
 
     this.authService

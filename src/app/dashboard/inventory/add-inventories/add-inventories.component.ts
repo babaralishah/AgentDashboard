@@ -240,7 +240,7 @@ export class AddInventoriesComponent implements OnInit {
 
   changedAssignedToSelf() {
     this.assignLeadData = [];
-    const fullname: any = this.token.fullname + ' ( Self )';
+    const fullname: any = this.token.fullname + " ( Self )";
     this.assignLeadData.push({
       userId: this.token.userId,
       fullname: fullname,
@@ -474,24 +474,26 @@ export class AddInventoriesComponent implements OnInit {
         console.log(this.selectedLocations);
         this.selectStringLocations = this.selectedLocations;
         this.addinventoryForm.patchValue({ location: this.user?.location });
-      } else this.selectStringLocations = "";
+      } else this.selectStringLocations = null;
     }
   }
-  changeLocation(location: any) {
+  changeLocation(location?: any) {
     this.userLocationMatched = false;
     this.selectAgentValue = null;
     console.log(location);
 
-    if (location) this.getsubLocations(location._id);
-    const loc = location;
-    loc.subLocations = [];
-    this.selectedLocations = loc?.location;
-    this.addinventoryForm.patchValue({ location: loc });
-    console.log(loc);
+    if (location) {
+      this.getsubLocations(location?._id);
+      const loc = location;
+      loc.subLocations = [];
+      this.selectedLocations = loc?.location;
+      this.addinventoryForm.patchValue({ location: loc });
+      console.log(loc);
+    }
     console.log(this.addinventoryForm.value);
   }
   changeSubLocation(subLocation: any) {
-    const location = this.addinventoryForm.get('location').value;
+    const location = this.addinventoryForm.get("location").value;
     location.subLocations.push(subLocation);
     this.addinventoryForm.patchValue({ location });
   }

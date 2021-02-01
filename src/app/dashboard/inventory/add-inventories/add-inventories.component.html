@@ -10,14 +10,14 @@
                     <div class="col-12 mb-4">
                         <form class="form-register" [formGroup]="addinventoryForm" (ngSubmit)="submitForm()">
 
-                            <h2 class="register-heading h3 mb-2 text-gray-800">Add {{form_title}}</h2>
+                            <h2 class="register-heading h3 text-gray-800">Add <b>{{form_title}}</b></h2>
                             <div class="row">
 
                                 <div class="col-md-5 col-sm-5 radio-mid">
 
                                     <div class="radio">
-                                        <div class="row ml-2">
-                                            <b class="steps">Form Title</b>
+                                        <div class="row">
+                                            <b class="steps ml-3">Form Title</b>
                                             <h5 class="require">*</h5>
                                         </div>
                                         <div class="btn-group btn-group-toggle">
@@ -51,13 +51,13 @@
                             <div>
                                 <div class="row" *ngIf="addinventoryForm.get('form_title').value !== 'Inventory'">
                                     <div class="col-md-5 col-sm-5"><br>
-                                        <div class="row ml-1">
-                                            <b class="steps">Purpose</b>
+                                        <div class="row">
+                                            <b class="steps ml-3">Purpose</b>
                                             <h5 class="require">*</h5>
                                         </div>
-                                        <div class="radio ml-1">
+                                        <div class="radio">
                                             <div class="btn-group btn-group-toggle">
-                                                <label style="margin-left: 0px;" class="btn btn-primary" [class.active]="addinventoryForm.get('property_purpose').value === 'Sell'">
+                                                <label class="btn btn-primary" [class.active]="addinventoryForm.get('property_purpose').value === 'Sell'">
                                                     <input type="radio" formControlName="property_purpose" value="Sell"> Sell
                                                 </label>
                                                 <label class="btn btn-primary" [class.active]="addinventoryForm.get('property_purpose').value === 'Buy'">
@@ -77,8 +77,8 @@
 
                                 <div class="row" *ngIf="addinventoryForm.get('form_title').value == 'Inventory'">
                                     <div class="col-md-5 col-sm-5"><br>
-                                        <div class="row ml-2 steps">
-                                            <b class="">Purpose</b>
+                                        <div class="row steps">
+                                            <b class="steps ml-3">Purpose</b>
                                             <h6 class="require">*</h6>
                                         </div>
                                         <div class="radio">
@@ -98,8 +98,8 @@
                                 <div class="row">
                                     <div class="col-3">
                                         <div class="form-group" *ngIf="!user">
-                                            <div class="row ml-3">
-                                                <b class="steps">City</b>
+                                            <div class="row">
+                                                <b class="steps ml-3">City</b>
                                                 <h5 class="require">*</h5>
                                             </div>
                                             <div>
@@ -111,8 +111,8 @@
                                             </div>
                                         </div>
                                         <div class="form-group" *ngIf="user">
-                                            <div class="row ml-3">
-                                                <b class="steps">City</b>
+                                            <div class="row">
+                                                <b class="steps ml-3">City</b>
                                                 <h5 class="require">*</h5>
                                             </div>
                                             <div>
@@ -126,8 +126,8 @@
                                     </div>
                                     <div class="col-3">
                                         <div class="form-group" *ngIf="user">
-                                            <div class="row ml-3">
-                                                <b class="steps">Location</b>
+                                            <div class="row">
+                                                <b class="steps ml-3">Location</b>
                                                 <h5 class="require">*</h5>
                                             </div>
                                             <div class="input-group">
@@ -137,12 +137,12 @@
                                         </div>
 
                                         <div class="form-group" *ngIf="!user">
-                                            <div class="row ml-3">
-                                                <b class="steps">Location</b>
+                                            <div class="row">
+                                                <b class="steps ml-3">Location</b>
                                                 <h5 class="require">*</h5>
                                             </div>
                                             <div>
-                                                <ng-select class="ng-select inputs2" [(ngModel)]="selectStringLocations" [ngModelOptions]="{standalone: true}" [items]="locations" bindLabel="location" bindValue="location" placeholder="Select Location" [ngClass]="{ 'is-invalid': submitted && f.location.errors }"
+                                                <ng-select class="ng-select inputs2" [(ngModel)]="selectStringLocations" [ngModelOptions]="{standalone: true}" [items]="locations" bindLabel="location" bindValue="location" placeholder="Select Location" [ngClass]="{ 'is-invalid': submitted && f.location?.errors }"
                                                     (change)="changeLocation($event)">
                                                 </ng-select>
                                                 <div *ngIf="submitted && f.location.errors" class="invalid-feedback">
@@ -153,18 +153,18 @@
                                     </div>
                                     <div class="col-3">
                                         <div class="form-group" *ngIf="!user">
-                                            <div class="row ml-3">
-                                                <b class="steps">Sub Location</b>
+                                            <div class="row">
+                                                <b class="steps ml-3">Sub Location</b>
                                                 <!-- <h5 class="require">*</h5> -->
                                             </div>
-                                            <div class="mt-3">
+                                            <div class="mt-2">
                                                 <ng-select class="ng-select inputs2" [items]="subLocation" bindLabel="subLocation" bindValue="subLocation" placeholder="Select Sub Location" (change)="changeSubLocation($event)">
                                                 </ng-select>
                                             </div>
                                         </div>
                                         <div class="form-group" *ngIf="user">
-                                            <div class="row ml-3">
-                                                <b class="steps">Sub Location</b>
+                                            <div class="row">
+                                                <b class="steps ml-3">Sub Location</b>
                                                 <!-- <h5 class="require">*</h5> -->
                                             </div>
                                             <div class="mt-3">
@@ -174,19 +174,20 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-3  mt-5">
-                                        <div class="form-group">
+                                    <!-- <div class="col-3">
+                                        <div class="row ml-1 mt-4"></div>
+                                        <div class="form-group mt-3">
                                             <button class="btn btn-primary" style="width: 150px;" routerLink="/add-location"> Add New Location</button>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
-                                <div class="row ml-1 ">
-                                    <b class="steps">Property Types</b>
+                                <div class="row">
+                                    <b class="steps ml-3">Property Types</b>
                                     <h5 class="require">*</h5>
                                 </div>
-                                <div class="row btn-group-toggle">
+                                <div class="row btn-group-toggle ml-0 mt-2">
 
-                                    <label class="btn btn-primary" style="margin-left: 15px;" [class.active]="addinventoryForm.get('property_type').value === 'home'||addinventoryForm.get('property_type').value === 'House' ||addinventoryForm.get('property_type').value === 'Apartment'||addinventoryForm.get('property_type').value === 'Farm House'||addinventoryForm.get('property_type').value === 'Penthouse'||addinventoryForm.get('property_type').value === 'Upper Portion'||addinventoryForm.get('property_type').value === 'Lower Portion'">
+                                    <label class="btn btn-primary" [class.active]="addinventoryForm.get('property_type').value === 'home'||addinventoryForm.get('property_type').value === 'House' ||addinventoryForm.get('property_type').value === 'Apartment'||addinventoryForm.get('property_type').value === 'Farm House'||addinventoryForm.get('property_type').value === 'Penthouse'||addinventoryForm.get('property_type').value === 'Upper Portion'||addinventoryForm.get('property_type').value === 'Lower Portion'">
                                         <input type="radio" formControlName="property_type" value="home"> Home
                                     </label>
                                     <label class="btn btn-primary" [class.active]="addinventoryForm.get('property_type').value === 'plot' || addinventoryForm.get('property_type').value === 'Residential Plot' || addinventoryForm.get('property_type').value === 'Commercial Plot'||addinventoryForm.get('property_type').value === 'Farm House Plot'"
@@ -198,7 +199,7 @@
                                     </label>
                                 </div>
                                 <br>
-                                <div class="row">
+                                <div class="row ml-0">
                                     <div class="tab-pane" id="home" *ngIf="addinventoryForm.get('property_type').value === 'home'||addinventoryForm.get('property_type').value === 'House' ||addinventoryForm.get('property_type').value === 'Apartment'||addinventoryForm.get('property_type').value === 'Farm House'||addinventoryForm.get('property_type').value === 'Penthouse'||addinventoryForm.get('property_type').value === 'Upper Portion'||addinventoryForm.get('property_type').value === 'Lower Portion'">
 
                                         <div class="btn-group btn-group-toggle">
@@ -280,8 +281,8 @@
                                 </div>
                             </div>
 
-                            <div class="row ml-1">
-                                <b class="steps">Plot/House #</b>
+                            <div class="row">
+                                <b class="steps ml-3">Plot/House #</b>
                                 <h5 class="require">*</h5>
                             </div>
                             <div class="row">
@@ -292,14 +293,14 @@
                             </div>
                             <div *ngIf="addinventoryForm.get('property_purpose').value === 'Buy' || addinventoryForm.get('property_purpose').value === 'Rent' ">
 
-                                <div style="color: red" *ngIf="isInvalidPrice">Please check your PRICE ranges</div>
+                                <!-- <div style="color: red" *ngIf="isInvalidPrice">Please check your PRICE ranges</div> -->
                                 <div class="row">
                                     <!-- <br> <b class="price">Price Range</b> -->
 
-                                    <div class="row ml-3">
-                                        <b class="steps">Price Range</b>
-                                        <!-- <h5 class="require">*</h5> -->
-                                    </div>
+                                    <!-- <div class="row"> -->
+                                    <b class="steps ml-3">Price Range</b>
+                                    <!-- <h5 class="require">*</h5> -->
+                                    <!-- </div> -->
                                 </div>
                                 <div class="row">
                                     <div class="col-md-3 col-sm-3">
@@ -380,14 +381,14 @@
 
                             </div>
                             <div *ngIf="addinventoryForm.get('property_purpose').value === 'Buy' || addinventoryForm.get('property_purpose').value === 'Rent' ">
-                                <div style="color: red" *ngIf="isInvalidArea">Please check your AREA ranges</div>
+                                <!-- <div style="color: red" *ngIf="isInvalidArea">Please check your AREA ranges</div> -->
                                 <div class="row">
                                     <!-- <br> <b class="price">Area Range</b> -->
 
-                                    <div class="row ml-3">
-                                        <b class="steps">Area Range</b>
-                                        <!-- <h5 class="require">*</h5> -->
-                                    </div>
+                                    <!-- <div class="row"> -->
+                                    <b class="steps ml-3">Area Range</b>
+                                    <!-- <h5 class="require">*</h5> -->
+                                    <!-- </div> -->
                                 </div>
                                 <div class="row">
                                     <div class="col-md-3 col-sm-3">
@@ -410,11 +411,11 @@
                             </div>
                             <div *ngIf="addinventoryForm.get('property_purpose').value === 'Buy' || addinventoryForm.get('property_purpose').value === 'Rent' ">
                                 <div class="row">
-                                    <div class="col-md-8 col-sm-4">
+                                    <div class="col-md-8 col-sm-4 mb-3">
 
-                                        <div class="row">
-                                            <b class="steps ml-3">Area Unit</b>
-                                        </div>
+                                        <!-- <div class="row"> -->
+                                        <b class="steps">Area Unit</b>
+                                        <!-- </div> -->
                                         <div class="radio mt-2">
                                             <div class="btn-group btn-group-toggle">
                                                 <label style="
@@ -445,10 +446,10 @@
                                     <div class="form-group">
                                         <!-- <b>Beds Number</b> -->
 
-                                        <div class="row ml-1">
-                                            <b class="steps">Beds Number</b>
-                                            <!-- <h5 class="require">*</h5> -->
-                                        </div>
+                                        <!-- <div class="row"> -->
+                                        <b class="steps">Beds Number</b>
+                                        <!-- <h5 class="require">*</h5> -->
+                                        <!-- </div> -->
                                         <input type="text" class="form-control" formControlName="beds_number" placeholder="Beds Number" autocomplete="off" [ngClass]="{ 'is-invalid': submitted && f.beds_number.errors }" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                                         />
                                         <!-- <b class="steps">Step 7: Select Number of Beds</b> -->
@@ -469,9 +470,9 @@
                                         </div>
                                     </div>
                                     <div class="col-md-5 col-sm-2">
-                                        <div class="row">
-                                            <b class="steps ml-3">Area Unit</b>
-                                        </div>
+                                        <!-- <div class="row"> -->
+                                        <b class="steps">Area Unit</b>
+                                        <!-- </div> -->
                                         <div class="radio mt-2">
                                             <div class="btn-group btn-group-toggle">
                                                 <label style="
@@ -502,37 +503,33 @@
 
 
                                 <div class="col-md-3 col-sm-3 form-group">
-                                    <div class="">
 
-                                        <div class="row ml-1">
-                                            <b class="steps">Client Name</b>
-                                            <h5 class="require">*</h5>
-                                        </div>
-                                        <input formControlName="client_name" class="form-control" type="text" placeholder="Client Name " [ngClass]="{ 'is-invalid': submitted && f.client_name.errors }" />
+                                    <div class="row">
+                                        <b class="steps ml-3">Client Name</b>
+                                        <h5 class="require">*</h5>
+                                    </div>
+                                    <input formControlName="client_name" class="form-control" type="text" placeholder="Client Name " [ngClass]="{ 'is-invalid': submitted && f.client_name.errors }" />
 
-                                        <div *ngIf="submitted && f.client_name.errors" class="invalid-feedback">
-                                            <div *ngIf="f.client_name.errors.required">Client Name is required</div>
-                                        </div>
+                                    <div *ngIf="submitted && f.client_name.errors" class="invalid-feedback">
+                                        <div *ngIf="f.client_name.errors.required">Client Name is required</div>
                                     </div>
                                 </div>
                                 <div class="col-md-3 col-sm-3 form-group">
-                                    <div class="">
-                                        <div class="row ml-1">
-                                            <b class="steps">Client Number</b>
-                                            <h5 class="require">*</h5>
-                                        </div>
-                                        <input formControlName="client_number" class="form-control" type="text" placeholder="Client Number" [ngClass]="{ 'is-invalid': submitted && f.client_number.errors }" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                        />
-                                        <div *ngIf="submitted && f.client_number.errors" class="invalid-feedback">
-                                            <div *ngIf="f.client_number.errors.required">Client Number is required</div>
-                                        </div>
+                                    <div class="row">
+                                        <b class="steps ml-3 mt-2">Client Number</b>
+                                        <h5 class="require">*</h5>
+                                    </div>
+                                    <input formControlName="client_number" class="form-control" type="text" placeholder="Client Number" [ngClass]="{ 'is-invalid': submitted && f.client_number.errors }" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                    />
+                                    <div *ngIf="submitted && f.client_number.errors" class="invalid-feedback">
+                                        <div *ngIf="f.client_number.errors.required">Client Number is required</div>
                                     </div>
                                 </div>
                             </div>
                             <div class="row mt-3">
                                 <div class="col-md-3 col-sm-3 form-group">
-                                    <div class="row ml-1">
-                                        <b class="steps">Client Type</b>
+                                    <div class="row">
+                                        <b class="steps ml-3">Client Type</b>
                                         <h5 class="require">*</h5>
                                     </div>
 
@@ -558,17 +555,17 @@
 
                             <b class="steps">Priority</b>
                             <div class="row mt-3">
-                                <label class="radio-inline priority-radio" style="color: #04615ecc;margin-left: 15px">
+                                <label class="radio-inline priority-radio" style="color: #04615ecc;margin-left: 10px">
                                     <input type="radio" formControlName="priority" name="priority" value="Normal">Normal</label>
-                                <label class="radio-inline priority-radio" style="color: brown;margin-left: 15px">
+                                <label class="radio-inline priority-radio" style="color: brown;margin-left: 55px">
                                     <input type="radio" formControlName="priority" name="priority" value="Hot">Hot</label>
-                                <label class="radio-inline priority-radio" style="color: red;">
+                                <label class="radio-inline priority-radio" style="color: red;margin-left: 55px">
                                     <input type="radio" formControlName="priority" name="priority" value="Super Hot">Super Hot
                                 </label>
                             </div>
 
                             <div class="row mt-3">
-                                <div class="col-md-5 col-sm-5">
+                                <div class="col-3">
                                     <b class="steps">Assign To</b>
                                     <div class="radio mt-3">
 
@@ -599,24 +596,28 @@
                             </div>
 
                             <br />
-                            <div class="row">
-                                <div *ngIf="addinventoryForm.get('assigned_type').value === 'city_admin'">
-                                    <ng-select class="ng-select inputs2" [(ngModel)]="cityAdminAssignedNames" [ngModelOptions]="{standalone: true}" [items]="cityAdminList" bindLabel="city.city" [multiple]="true" bindValue="fullname" placeholder="Select city admin" (change)="changeAssignedToCityAdmin($event)">
-                                    </ng-select>
-                                </div>
+                            <div class="row mt-3">
+                                <div class="col-3">
+                                    <div *ngIf="addinventoryForm.get('assigned_type').value === 'city_admin'">
+                                        <ng-select style="margin-left: 0px;" class="ng-select inputs2" [(ngModel)]="cityAdminAssignedNames" [ngModelOptions]="{standalone: true}" [items]="cityAdminList" bindLabel="city.city" [multiple]="true" bindValue="fullname" placeholder="Select city admin"
+                                            (change)="changeAssignedToCityAdmin($event)">
+                                        </ng-select>
+                                    </div>
 
-                                <div *ngIf="addinventoryForm.get('assigned_type').value === 'Admin'">
-                                    <ng-select class="ng-select inputs2" [(ngModel)]="superAdminAssignedNames" [ngModelOptions]="{standalone: true}" [items]="superAdminList" bindLabel="access" [multiple]="true" bindValue="access" placeholder="Select Admin" (change)="changeAssignedAdmin($event)">
-                                    </ng-select>
-                                </div>
+                                    <div *ngIf="addinventoryForm.get('assigned_type').value === 'Admin'">
+                                        <ng-select style="margin-left: 0px;" class="ng-select inputs2" [(ngModel)]="superAdminAssignedNames" [ngModelOptions]="{standalone: true}" [items]="superAdminList" bindLabel="access" [multiple]="true" bindValue="access" placeholder="Select Admin" (change)="changeAssignedAdmin($event)">
+                                        </ng-select>
+                                    </div>
 
-                                <div *ngIf="addinventoryForm.get('assigned_type').value === 'Agents'">
-                                    <ng-select #agentSelect class="ng-select inputs2" [(ngModel)]="agentAssignedNames" [ngModelOptions]="{standalone: true}" [items]="agentList" [multiple]="true" bindLabel="fullname" bindValue="fullname" placeholder="Select Agent" (change)="changeAssignedAgent($event)">
-                                    </ng-select>
+                                    <div *ngIf="addinventoryForm.get('assigned_type').value === 'Agents'">
+                                        <ng-select style="margin-left: 0px;" #agentSelect class="ng-select inputs2" [(ngModel)]="agentAssignedNames" [ngModelOptions]="{standalone: true}" [items]="agentList" [multiple]="true" bindLabel="fullname" bindValue="fullname" placeholder="Select Agent"
+                                            (change)="changeAssignedAgent($event)">
+                                        </ng-select>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group pull-right">
-                                <button type="submit" class="btn btn1 btn-primary">{{formSendingStatus}}</button>
+                            <div class="form-group mt-5">
+                                <button style="margin-left: 0px;" type="submit" class="btn btn1 btn-primary">{{formSendingStatus}}</button>
                             </div>
                         </form>
                     </div>

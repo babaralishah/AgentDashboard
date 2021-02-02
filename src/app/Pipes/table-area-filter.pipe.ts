@@ -16,7 +16,7 @@ export class TableAreaPipe implements PipeTransform {
 
     return data.filter((element) => {
       // if(element.area_unit !== areaUnit) {
-      //     return;
+      // return;
       // }
       const areaElementData = this.areaInSqFeet(
         element.area_unit,
@@ -26,34 +26,36 @@ export class TableAreaPipe implements PipeTransform {
       );
       console.log(areaElementData);
 
-      if (minArea && maxArea) {
+      if (areaSearchedData.minArea && areaSearchedData.maxArea) {
         if (areaElementData.minArea && areaElementData.maxArea) {
           if (
-            minArea <= areaElementData.minArea &&
-            maxArea >= areaElementData.maxArea
+            areaSearchedData.minArea <= areaElementData.minArea &&
+            areaSearchedData.maxArea >= areaElementData.maxArea
           )
             return element;
         } else {
           if (
-            minArea <= areaElementData.area &&
-            maxArea >= areaElementData.area
+            areaSearchedData.minArea <= areaElementData.area &&
+            areaSearchedData.maxArea >= areaElementData.area
           ) {
             return element;
           }
         }
-      } else if (minArea) {
+      } else if (areaSearchedData.minArea) {
         if (areaElementData.minArea) {
-          if (minArea <= areaElementData.minArea) return element;
+          if (areaSearchedData.minArea <= areaElementData.minArea)
+            return element;
         } else {
-          if (minArea <= areaElementData.area) {
+          if (areaSearchedData.minArea <= areaElementData.area) {
             return element;
           }
         }
-      } else if (maxArea) {
+      } else if (areaSearchedData.maxArea) {
         if (element.max_area) {
-          if (maxArea >= areaElementData.maxArea) return element;
+          if (areaSearchedData.maxArea >= areaElementData.maxArea)
+            return element;
         } else {
-          if (maxArea >= areaElementData.area) {
+          if (areaSearchedData.maxArea >= areaElementData.area) {
             return element;
           }
         }
@@ -80,13 +82,13 @@ export class TableAreaPipe implements PipeTransform {
       maxArea = maxArea * 5000;
       area = area * 5000;
       console.log(minArea, maxArea, area);
-    } else if (areaUnit == "Sq. Yard") {
+    } else if (areaUnit == "Sq.Yard") {
       console.log(minArea, maxArea, area);
       minArea = minArea * 9;
       maxArea = maxArea * 9;
       area = area * 9;
       console.log(minArea, maxArea, area);
-    } else if (areaUnit == "Sq. Feet") {
+    } else if (areaUnit == "Sq.Feet") {
       console.log(minArea, maxArea, area);
       minArea = minArea * 1;
       maxArea = maxArea * 1;

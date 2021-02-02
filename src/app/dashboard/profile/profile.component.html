@@ -11,15 +11,16 @@
                     <div class="col-xl-4 col-lg-5 col-md-6 mb-4 mt-3">
                         <div class="card">
                             <div class="firstinfo">
-                                <img *ngIf="!selectedFile" src="https://bootdey.com/img/Content/avatar/avatar6.png" />
-                                <img *ngIf="selectedFile" [src]="selectedFile.src" />
+                                <!-- <img *ngIf="!selectedFile" src="https://bootdey.com/img/Content/avatar/avatar6.png" /> -->
+                                <img *ngIf="!selectedFile" [src]="userData?.image" />
+                                <img *ngIf="selectedFile" [src]="this.url" />
                                 <div class="profileinfo">
-                                    <h1>{{tokendata?.fullname}}</h1>
-                                    <span class=" badge badge-warning mb-4">{{tokendata?.access | titlecase}}</span>
+                                    <h1>{{userData?.fullname}}</h1>
+                                    <span class=" badge badge-warning mb-4">{{userData?.access | titlecase}}</span>
 
                                     <div class="profile-details">
-                                        <b>Email :</b> &nbsp;&nbsp;&nbsp;&nbsp;{{tokendata?.email}} <br>
-                                        <b>Contact :</b> &nbsp;&nbsp;&nbsp;{{tokendata?.contact}}
+                                        <b>Email :</b> &nbsp;&nbsp;&nbsp;&nbsp;{{userData?.email}} <br>
+                                        <b>Contact :</b> &nbsp;&nbsp;&nbsp;{{userData?.contact}}
                                     </div>
 
                                 </div>
@@ -35,9 +36,9 @@
                                 <div class="upload-btn-wrapper  text-right input-container">
                                     <button (click)="file.click()" class="btn text-center mr-2" style="width: 100px;">
                     <i class="fa fa-camera" aria-hidden="true">&nbsp;</i>
-                    <span class="upload"><b>Upload</b></span>
+                    <span class="upload"><b>Choose</b></span>
                   </button>
-                                    <input #file type='file' class="fileField" (change)="onSelectFile($event)"><br><br>
+                                    <input #file type='file' class="fileField" accept="image/*" (change)="onSelectFile($event)"><br><br>
                                 </div>
                             </div>
                             <div class="col-6">

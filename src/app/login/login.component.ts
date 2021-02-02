@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
   email: string;
   errorMessage: any;
   tokendata: any;
+  userData: any;
   constructor(
     public formBuilder: FormBuilder, // Creating an instance of Formbuilder
     public authService: AuthenticationService, // Instance of Authentication services created in front end
@@ -65,10 +66,16 @@ export class LoginComponent implements OnInit {
         const msg = data.message;
         const token = data.token;
         const email = this.loginForm.value.email;
+        this.userData = data?.userData;
+        console.log("UserData", this.userData);
+
         this.toastr.success(msg, "Success", {
           timeOut: 5000,
         });
         this.authService.setToken(token);
+        this.authService.setuserData(this.userData);
+        // this.authService.setuserData("hello");
+        console.log(this.authService.getuserData());
         this.router.navigate(["/profile", email]);
       },
       (error) => {

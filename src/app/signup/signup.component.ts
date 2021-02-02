@@ -231,10 +231,12 @@ export class SignupComponent implements OnInit {
           const email = this.registerForm.value.email;
           const msg = data.message;
           const code = data.code;
+          const userData = data?.userData;
           if (code === 200) {
             this.toastr.success(msg, "Success", {
               timeOut: 5000,
             });
+            this.authService.setuserData(userData);
             this.router.navigateByUrl("/agents");
           } else {
             this.toastr.error(msg, "Error", {

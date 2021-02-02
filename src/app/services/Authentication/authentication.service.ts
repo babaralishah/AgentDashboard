@@ -179,6 +179,15 @@ export class AuthenticationService {
     return localStorage.getItem("token");
   }
 
+  setuserData(userData) {
+    // console.log(JSON.stringify(userData));
+    localStorage.setItem("userData", JSON.stringify(userData));
+  }
+  getuserData() {
+    let userData = localStorage.getItem("userData");
+    userData = JSON.parse(userData);
+    return userData;
+  }
   // API to delete the single inventory
   deleteInventory(id) {
     console.log("Calling deleteInventory", id);
@@ -201,11 +210,10 @@ export class AuthenticationService {
 
   // Api call to Update the already existed user/agent in the user component
   updateUser(id, data) {
-    console.log(data?.name);
     if (data instanceof File) {
       const formData = new FormData();
-      formData.append("images", data, data.name);
-      return this.httpClient.put(`${this.url}/users/${id}`, data, {
+      formData.append("image", data, data.name);
+      return this.httpClient.put(`${this.url}/users/${id}`, formData, {
         headers: new HttpHeaders().set("Authorization", this.getToken()),
       });
     }
@@ -266,6 +274,7 @@ export class AuthenticationService {
   ////////// Logout API ////////////////
   logout() {
     if (localStorage.removeItem("access_token") == null) {
+      localStorage.removeItem("userData");
       this.router.navigate(["users/login"]);
     }
   }

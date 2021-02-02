@@ -30,18 +30,10 @@ export class AppComponent {
 
   ngOnInit(): void {
     this.initialize();
-    // this.router.navigate(['profile']);
   }
   isLogin() {
     const token = this.authService.getToken();
-    // console.log(token);
     return token;
-    // if (token) {
-    //   return true;
-    // }
-    // else {
-    //   return false;
-    // }
   }
   logout() {
     localStorage.removeItem("token");
@@ -69,7 +61,6 @@ export class AppComponent {
     if (this.loginForm.invalid) {
       return;
     }
-    // console.log('user login data: ',this.loginForm.value);
     this.authService.login(this.loginForm.value).subscribe((data) => {
       console.log(data);
       const status = data.status;

@@ -2,17 +2,12 @@
     <ul>
 
         <div class="sidebar-header">
-            <!-- <div class="">
-                <div class="" style="margin-left: -10px;">
-                    <span class="user-role">{{ tokendata?.access | titlecase}}</span>
-                </div>
-            </div> -->
             <div class="user-pic">
                 <img class="img-responsive img-rounded" src="https://bootdey.com/img/Content/avatar/avatar6.png" />
             </div>
             <div class="user-info">
-                <span class="user-name" style="color: rgb(194, 201, 211);">{{ tokendata?.fullname | titlecase }} </span>
-                <span class="user-role">{{ tokendata?.access | titlecase}}</span>
+                <span class="user-name" style="color: rgb(194, 201, 211);">{{ userData?.fullname | titlecase }} </span>
+                <span class="user-role">{{ userData?.access | titlecase}}</span>
                 <span class="user-status">
                     <i class="fa fa-circle"></i>
                     <span>Online</span>
@@ -27,7 +22,7 @@
                 <span>User Profile</span>
             </a>
         </li>
-        <li class="nav-item" *ngIf="tokendata?.access  !== 'agent'">
+        <li class="nav-item" *ngIf="userData?.access  !== 'agent'">
             <a class="nav-link" routerLink="/agents">
                 <i class="fa fa-users"></i>
                 <span>Agents</span>
@@ -63,13 +58,13 @@
                 <span>Location</span>
             </a>
         </li>
-        <li class="nav-item" *ngIf="tokendata?.access  !== 'agent'">
+        <li class="nav-item" *ngIf="userData?.access  !== 'agent'">
             <a class="nav-link" routerLink="/feedback">
                 <i class="fas fa-exchange-alt"></i>
                 <span>FeedBack</span>
             </a>
         </li>
-        <li class="nav-item" *ngIf="tokendata?.access  !== 'agent'">
+        <li class="nav-item" *ngIf="userData?.access  !== 'agent'">
             <a class="nav-link" routerLink="/register">
                 <i class="fas fa-tachometer-alt"></i>
                 <span>Register</span>

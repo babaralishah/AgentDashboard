@@ -160,10 +160,10 @@ ng-select,
     }
 } */
 
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1220px) {
     .inventory {
         margin-left: -45px;
-        width: 114%;
+        width: 110%;
     }
 }
 

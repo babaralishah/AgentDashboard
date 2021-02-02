@@ -62,21 +62,28 @@ export class ProfileComponent implements OnInit {
     console.log(this.tokendata._id);
     this.authService
       .updateUser(this.tokendata._id, this.selectedFile)
-      .subscribe((data) => {
-        console.log(data);
-        let filePath: any;
-        filePath = data;
-        const message = filePath?.message;
-        // console.log("Subscribed data: ", filePath?.filePath);
-        let userData: any = this.authService.getuserData();
-        // console.log(userData);
-        userData.image = filePath?.filePath;
-        this.authService.setuserData(userData);
+      .subscribe(
+        (data) => {
+          console.log(data);
+          let filePath: any;
+          filePath = data;
+          const message = filePath?.message;
+          let userData: any = this.authService.getuserData();
+          userData.image = filePath?.filePath;
+          this.authService.setuserData(userData);
 
-        this.toastr.success(message, "Success", {
-          timeOut: 3000,
-        });
-      });
+          this.toastr.success(message, "Success", {
+            timeOut: 3000,
+          });
+        },
+        (error) => {
+          // console.error(error.error.message);
+          // const errorMessage = error;
+          this.toastr.error(error, "Error", {
+            timeOut: 3000,
+          });
+        }
+      );
   }
   contentWidthEmitted(value) {
     this.content.nativeElement.style.marginLeft = `${value}px`;

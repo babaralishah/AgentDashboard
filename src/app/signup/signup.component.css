@@ -76,9 +76,9 @@ a {
     color: #38baa2;
 }
 
-h2 {
+h1 {
     color: #38baa2;
-    font-weight: 600;
+    /* font-weight: 600; */
     margin-top: -10px;
 }
 

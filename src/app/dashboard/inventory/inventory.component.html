@@ -29,6 +29,13 @@
                         <ng-select class="ng-select inputs2" [(ngModel)]="selectedLocation" [items]="locations" bindLabel="location" bindValue="location" placeholder="Select Location" (change)="changeLocation($event)">
                         </ng-select>
                     </div>
+
+                    <div class="col-5">
+                        <button class="btn btn-primary" data-toggle="modal" style="
+                        width: 200px;
+                        color: black;
+                        background-color: #dcdcdc;" data-target="#Property_Type">Search By <b>Property Type</b></button>
+                    </div>
                     <!-- <div class="col-12 col-sm-6 col-lg-3 mb-3" *ngIf="currentLoginUser?.access !== 'agent'">
                         <ng-select class="ng-select inputs2" [items]="agentList" bindLabel="fullname" bindValue="fullname" placeholder="Select Added By" (change)="changeAssignedAgent($event)">
                         </ng-select>
@@ -62,7 +69,7 @@
                                 </thead>
 
                                 <tbody>
-                                    <tr *ngFor="let user of user | filterlist: selectedOption:refId | nameFilter: agentAssignedName | dateFilter: startDate:endDate | demandFilter: minDemand:maxDemand | areaFilter: area_unit:minArea:maxArea | tableFilter: city | LocationFilter:location |  orderBy: key: reverse | paginate:{itemsPerPage:50,currentPage:p}; ">
+                                    <tr *ngFor="let user of user | filterlist: selectedOption:refId  | property_type: property_type2| nameFilter: agentAssignedName | dateFilter: startDate:endDate | demandFilter: minDemand:maxDemand | areaFilter: area_unit:minArea:maxArea | tableFilter: city | LocationFilter:location |  orderBy: key: reverse | paginate:{itemsPerPage:50,currentPage:p}; ">
                                         <td>
                                             <span *ngIf="user?.priority == 'Super Hot'"><img class="super-hot"
                                                     src="\assets\icons\super_hot.svg"></span>
@@ -259,6 +266,144 @@
                 <button type="button" class="btn btn-primary filter-button" [disabled]="filterForm.invalid" data-dismiss="modal" (click)="filter()">
                 <span class="fas fa-check"></span>Search
             </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal" id="Property_Type">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="text-center">Property Type Filter</h4>
+                <button type="button" class="close" data-dismiss="modal">
+                    &times;
+                </button>
+            </div>
+
+            <div class="modal-body" style="height: 200px;max-width: 500px;">
+                <div class="row">
+                    <div class="col-md-5 col-sm-5">
+                        <div class="radio">
+                            <div class="btn-group btn-group-toggle">
+                                <label class="btn btn-primary" style="width: 139px" [class.active]="property_type === 'Home'">
+                                    <input type="radio" [(ngModel)]="property_type" value="Home" />
+                                    Home
+                                </label>
+
+                                <label class="btn btn-primary ml-3" style="width: 139px" [class.active]="property_type === 'Plot'">
+                                    <input type="radio" [(ngModel)]="property_type" value="Plot" />
+                                    Plot
+                                </label>
+
+                                <label class="btn btn-primary ml-3" style="width: 139px" [class.active]="property_type === 'Commercial'">
+                                    <input type="radio" [(ngModel)]="property_type" value="Commercial" />
+                                    Commercial
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-5" *ngIf="property_type === 'Home'">
+                    <div class="col-12">
+                        <div class="radio">
+                            <div class="btn-group btn-group-toggle">
+                                <label class="btn btn-primary" style="width: 139px" [class.active]="property_type2 === 'House'">
+                                    <input type="radio" [(ngModel)]="property_type2" value="House"/>
+                                    House
+                                </label>
+
+                                <label class="btn btn-primary ml-3" style="width: 139px" [class.active]="property_type2 === 'Apartment'">
+                                    <input type="radio" [(ngModel)]="property_type2" value="Apartment" />
+                                    Apartment
+                                </label>
+
+                                <label class="btn btn-primary ml-3" style="width: 139px" [class.active]="property_type2 === 'Farm House'">
+                                    <input type="radio" [(ngModel)]="property_type2" value="Farm House" />
+                                    Farm House
+                                </label>
+                            </div>
+                            <div class="mt-3 btn-group btn-group-toggle">
+                                <label class="btn btn-primary" style="width: 139px" [class.active]="property_type2 === 'Pent House'">
+                                    <input type="radio" [(ngModel)]="property_type2" value="Pent House" />
+                                    Pent House
+                                </label>
+
+                                <label class="btn btn-primary ml-3" style="width: 139px" [class.active]="property_type2 === 'Lower Portion'">
+                                    <input type="radio" [(ngModel)]="property_type2" value="Lower Portion" />
+                                    Lower Portion
+                                </label>
+
+                                <label class="btn btn-primary ml-3" style="width: 139px" [class.active]="property_type2 === 'Upper Portion'">
+                                    <input type="radio" [(ngModel)]="property_type2" value="Upper Portion" />
+                                    Upper Portion
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-5" *ngIf="property_type === 'Plot'">
+                    <div class="col-12">
+                        <div class="radio">
+                            <div class="btn-group btn-group-toggle">
+                                <label class="btn btn-primary" style="width: 139px" [class.active]="property_type2 === 'Residential Plot'">
+                                    <input type="radio" [(ngModel)]="property_type2" value="Residential Plot" />
+                                    Residential Plot
+                                </label>
+
+                                <label class="btn btn-primary ml-3" style="width: 139px" [class.active]="property_type2 === 'Commercial Plot'">
+                                    <input type="radio" [(ngModel)]="property_type2" value="Commercial Plot" />
+                                    Commercial Plot
+                                </label>
+
+                                <label class="btn btn-primary ml-3" style="width: 139px" [class.active]="property_type2 === 'Farm House Plot'">
+                                    <input type="radio" [(ngModel)]="property_type2" value="Farm House Plot" />
+                                    Farm House Plot
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-5" *ngIf="property_type === 'Commercial'">
+                    <div class="col-12">
+                        <div class="radio ml-3">
+                            <div class="row">
+                                <div class="btn-group btn-group-toggle">
+                                    <label class="btn btn-primary" style="width: 139px" [class.active]="property_type2 === 'Office'">
+                                    <input type="radio" [(ngModel)]="property_type2" value="Office" />
+                                    Office
+                                </label>
+
+                                    <label class="btn btn-primary ml-3" style="width: 139px" [class.active]="property_type2 === 'Shop'">
+                                    <input type="radio" [(ngModel)]="property_type2" value="Shop" />
+                                    Shop
+                                </label>
+
+                                    <label class="btn btn-primary ml-3" style="width: 139px" [class.active]="property_type2 === 'Plaza'">
+                                    <input type="radio" [(ngModel)]="property_type2" value="Plaza" />
+                                    Plaza
+                                </label>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mt-3 btn-group btn-group-toggle">
+                                    <label class="btn btn-primary" style="width: 139px" [class.active]="property_type2 === 'Floor'">
+                                    <input type="radio" [(ngModel)]="property_type2" value="Floor" />
+                                    Floor
+                                </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger reset" data-dismiss="modal" (click)="resetFilters()">
+                    <span class="fas fa-undo"></span> Reset
+                </button>
             </div>
         </div>
     </div>

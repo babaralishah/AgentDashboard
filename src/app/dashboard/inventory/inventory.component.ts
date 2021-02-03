@@ -25,6 +25,8 @@ export class InventoryComponent implements OnInit {
   city: any;
   location: any;
   selectedLocation: any;
+  property_type: any;
+  property_type2: any;
 
   constructor(
     private router: Router,
@@ -131,6 +133,8 @@ export class InventoryComponent implements OnInit {
     this.maxArea = null;
     this.startDate = null;
     this.endDate = null;
+    this.property_type = null;
+    this.property_type2 = null;
   }
 
   changeAssignedAgent(agent: any) {

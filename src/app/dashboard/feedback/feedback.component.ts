@@ -85,39 +85,73 @@ export class FeedbackComponent implements OnInit {
   }
   sendMessage() {
     console.log(this.sendMessageForm.value);
-
-    this.authService
-      .sendMessage(this.sendMessageForm.value)
-      .subscribe((data) => {
-        console.log(data);
-
-        this.toastr.success(data.message, "Success", {
-          timeOut: 5000,
-        });
-        this.sendMessageForm.reset();
-        this.agentsName = null;
+    const phone = this.sendMessageForm.get("phone").value;
+    const message = this.sendMessageForm.get("message").value;
+    if (phone === null) {
+      this.toastr.error("Phone Number is Missing", "Error", {
+        timeOut: 3000,
       });
+    } else if (message === "") {
+      this.toastr.error("Message Field is Empty", "Error", {
+        timeOut: 3000,
+      });
+    } else {
+      this.authService.sendMessage(this.sendMessageForm.value).subscribe(
+        (data) => {
+          console.log(data);
+
+          this.toastr.success(data.message, "Success", {
+            timeOut: 5000,
+          });
+          this.sendMessageForm.reset();
+          this.agentsName = null;
+        },
+        (error) => {
+          this.toastr.error(error, "Error", {
+            timeOut: 3000,
+          });
+        }
+      );
+    }
   }
   sendNonAgentMessage() {
-    for (let i = 0; i < this.contactNumber.length; i++) {
-      this.contactNumber[i] = parseInt(this.contactNumber[i]);
-    }
-    console.log(this.contactNumber);
-
-    this.sendMessageForm.patchValue({ phone: this.contactNumber });
     console.log(this.sendMessageForm.value);
+    if (this.contactNumber?.length > 0) {
+      console.log(this.contactNumber);
 
-    this.authService
-      .sendMessage(this.sendMessageForm.value)
-      .subscribe((data) => {
-        console.log(data);
-
-        this.toastr.success(data.message, "Success", {
-          timeOut: 5000,
-        });
-        this.sendMessageForm.reset();
-        this.contactNumber = null;
+      for (let i = 0; i < this.contactNumber?.length; i++) {
+        this.contactNumber[i] = parseInt(this.contactNumber[i]);
+      }
+      this.sendMessageForm.patchValue({ phone: this.contactNumber });
+    }
+    const phone = this.sendMessageForm.get("phone").value;
+    const message = this.sendMessageForm.get("message").value;
+    if (phone === null) {
+      this.toastr.error("Phone Number is Missing", "Error", {
+        timeOut: 3000,
       });
+    } else if (message === null) {
+      this.toastr.error("Message Field is Empty", "Error", {
+        timeOut: 3000,
+      });
+    } else {
+      this.authService.sendMessage(this.sendMessageForm.value).subscribe(
+        (data) => {
+          console.log(data);
+
+          this.toastr.success(data.message, "Success", {
+            timeOut: 5000,
+          });
+          this.sendMessageForm.reset();
+          this.contactNumber = null;
+        },
+        (error) => {
+          this.toastr.error(error, "Error", {
+            timeOut: 3000,
+          });
+        }
+      );
+    }
   }
   contentWidthEmitted(value) {
     this.content.nativeElement.style.marginLeft = `${value}px`;

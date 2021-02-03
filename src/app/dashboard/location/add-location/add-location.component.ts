@@ -11,7 +11,6 @@ import { elementAt } from "rxjs/operators";
   styleUrls: ["./add-location.component.css"],
 })
 export class AddLocationComponent implements OnInit {
-
   addNewSublocation = (item) => ({ subLocation: item });
   addNewSublocationUpdation = (item) => ({ subLocationsList: item });
 
@@ -33,7 +32,7 @@ export class AddLocationComponent implements OnInit {
     public authService: AuthenticationService,
     public router: Router,
     private toastr: ToastrService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.initialize();
@@ -160,7 +159,6 @@ export class AddLocationComponent implements OnInit {
     if (this.addLocationForm.get("city").value == "Peshawar")
       this.addLocationForm.patchValue({ cityId: 3 });
 
-
     if (this.subLocation.length > 0) {
       this.subLocation.forEach((element, index) => {
         this.subLocation[index] = { subLocation: element };
@@ -173,19 +171,32 @@ export class AddLocationComponent implements OnInit {
     console.log(this.addLocationForm.value);
 
     if (!this.user) {
-
-      this.authService
-        .addLocations(this.addLocationForm.value)
-        .subscribe((data) => {
-          console.log(data);
-          const code = data.code;
-          if (code === 200) {
-            this.toastr.success(data.message, "Success", {
-              timeOut: 5000,
-            });
-            this.router.navigate(["/location"]);
-          }
+      console.log(this.addLocationForm.value);
+      const city = this.addLocationForm.get("city").value;
+      const location = this.addLocationForm.get("location").value;
+      const subLocations = this.addLocationForm.get("subLocations").value;
+      if (city === null) {
+        this.toastr.error("City is Required", "Error", {
+          timeOut: 3000,
         });
+      } else if (location === null) {
+        this.toastr.error("Location Field is Empty", "Error", {
+          timeOut: 3000,
+        });
+      } else {
+        this.authService
+          .addLocations(this.addLocationForm.value)
+          .subscribe((data) => {
+            console.log(data);
+            const code = data.code;
+            if (code === 200) {
+              this.toastr.success(data.message, "Success", {
+                timeOut: 5000,
+              });
+              this.router.navigate(["/location"]);
+            }
+          });
+      }
     } else if (this.user) {
       console.log(this.user?._id);
 
@@ -215,13 +226,41 @@ export class AddLocationComponent implements OnInit {
     this.addLocationForm.patchValue({
       subLocations: this.subLocationsList,
     });
-    
-    this.authService
-      .addSubLocation(this.location?._id, this.addLocationForm.value)
-      .subscribe((data) => {
-        console.log(data);
-        this.router.navigate(["/location"]);
+    console.log(this.addLocationForm.value);
+    const city = this.addLocationForm.get("city").value;
+    const location = this.addLocationForm.get("location").value;
+    const subLocations = this.addLocationForm.get("subLocations").value;
+    if (city === null) {
+      this.toastr.error("City is Missing", "Error", {
+        timeOut: 3000,
       });
+    } else if (location === null) {
+      this.toastr.error("Location Field is Empty", "Error", {
+        timeOut: 3000,
+      });
+    }
+    // else if (subLocations?.length <= 0) {
+    //   this.toastr.error("SubLocation Field is Empty", "Error", {
+    //     timeOut: 3000,
+    //   });
+    // }
+    else {
+      this.authService
+        .addSubLocation(this.location?._id, this.addLocationForm.value)
+        .subscribe(
+          (data) => {
+            console.log(data);
+            this.router.navigate(["/location"]);
+          },
+          (error) => {
+            console.log(error);
+
+            this.toastr.error(error?.message, "Error", {
+              timeOut: 3000,
+            });
+          }
+        );
+    }
   }
 
   contentWidthEmitted(value) {

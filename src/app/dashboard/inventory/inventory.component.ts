@@ -57,11 +57,6 @@ export class InventoryComponent implements OnInit {
       name: "Filter By Beds",
       placeholder: "Beds",
     },
-    {
-      value: "property_type",
-      name: "Filter By Property Type",
-      placeholder: "Property Type",
-    },
   ];
   selectedOption = this.options[0].value;
   placeholder = this.options[0].placeholder;

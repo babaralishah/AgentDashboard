@@ -424,7 +424,7 @@ export class AddInventoriesComponent implements OnInit {
     if (this.user.city) {
       this.getLocations(this.user?.city[0]._id);
       console.log(this.user?.city[0]._id);
-      this.selectedCity = this.user?.city[0].city;
+      this.selectedCity = this.user?.city[0]?.city;
     }
   }
 
@@ -468,10 +468,8 @@ export class AddInventoriesComponent implements OnInit {
     this.locations = "";
     if (this.user) {
       if (this.selectedCity == city?.city) {
-        console.log("inside");
-
-        console.log(this.selectStringLocations);
-        console.log(this.selectedLocations);
+        // console.log(this.selectStringLocations);
+        // console.log(this.selectedLocations);
         this.selectStringLocations = this.selectedLocations;
         this.addinventoryForm.patchValue({ location: this.user?.location });
       } else this.selectStringLocations = null;

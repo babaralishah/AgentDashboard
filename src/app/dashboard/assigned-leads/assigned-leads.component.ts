@@ -34,6 +34,8 @@ export class AssignedLeadsComponent implements OnInit {
 
   currentLoginUser: any;
   filterForm: FormGroup;
+  cityNames: any = [];
+  selectedLocation: any;
 
   constructor(
     private router: Router,
@@ -96,21 +98,29 @@ export class AssignedLeadsComponent implements OnInit {
       minArea: [],
       maxArea: [],
       startDate: [],
-      endDate: []
+      endDate: [],
     });
   }
 
   filter() {
-    this.minDemand = this.filterForm.get('minPrice').value;
-    this.maxDemand = this.filterForm.get('maxPrice').value;
-    this.area_unit = this.filterForm.get('area').value;
-    this.minArea = this.filterForm.get('minArea').value;
-    this.maxArea = this.filterForm.get('maxArea').value;
-    if(this.filterForm.get('startDate').value) {
-      this.startDate = formatDate(new Date(this.filterForm.get('startDate').value), "yyyy-MM-dd", "en_US");
+    this.minDemand = this.filterForm.get("minPrice").value;
+    this.maxDemand = this.filterForm.get("maxPrice").value;
+    this.area_unit = this.filterForm.get("area").value;
+    this.minArea = this.filterForm.get("minArea").value;
+    this.maxArea = this.filterForm.get("maxArea").value;
+    if (this.filterForm.get("startDate").value) {
+      this.startDate = formatDate(
+        new Date(this.filterForm.get("startDate").value),
+        "yyyy-MM-dd",
+        "en_US"
+      );
     }
-    if(this.filterForm.get('endDate').value) {
-      this.endDate = formatDate(new Date(this.filterForm.get('endDate').value), "yyyy-MM-dd", "en_US");
+    if (this.filterForm.get("endDate").value) {
+      this.endDate = formatDate(
+        new Date(this.filterForm.get("endDate").value),
+        "yyyy-MM-dd",
+        "en_US"
+      );
     }
   }
 
@@ -186,15 +196,43 @@ export class AssignedLeadsComponent implements OnInit {
 
   getCities() {
     this.authService.getCities().subscribe(
-      (data) => {
-        console.log(data);
-        this.cities = data;
+      (cities) => {
+        if (
+          this.currentLoginUser?.access === "city_admin" ||
+          this.currentLoginUser?.access === "agent"
+        ) {
+          if (this.currentLoginUser?.city.city == "Islamabad") {
+            this.cityNames.push(cities[2]);
+            this.cities = this.cityNames;
+          } else if (this.currentLoginUser?.city.city == "Rawalpindi") {
+            this.cityNames.push(cities[1]);
+            this.cities = this.cityNames;
+          } else if (this.currentLoginUser?.city.city == "Peshawar") {
+            this.cityNames.push(cities[0]);
+          }
+        } else {
+          this.cities = cities;
+          console.log(this.cities);
+        }
       },
       (err) => {
         console.error(err);
       }
     );
+    console.log(this.cities);
   }
+
+  // getCities() {
+  //   this.authService.getCities().subscribe(
+  //     (data) => {
+  //       console.log(data);
+  //       this.cities = data;
+  //     },
+  //     (err) => {
+  //       console.error(err);
+  //     }
+  //   );
+  // }
   // Calling Api to get the Locations
   getLocations(selectedCity?) {
     this.authService.getLocations().subscribe(
@@ -214,6 +252,7 @@ export class AssignedLeadsComponent implements OnInit {
   }
 
   changeCity(city: any) {
+    this.selectedLocation = null;
     this.locations = [];
     this.location = "";
     this.city = city?.city;

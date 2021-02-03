@@ -13,9 +13,9 @@ export class TableFilter02Pipe implements PipeTransform {
     }
     return user?.filter((user) => {
       for (let i = 0; i < user?.locationName.length; i++) {
-        // console.log(user.locationName[i].toLowerCase(), ', ', locationName.toLowerCase());
+        console.log(user?.locationName[i]);
         if (
-          user.locationName[i]
+          user?.locationName[i]
             .toLowerCase()
             .indexOf(locationName.toLowerCase()) !== -1
         ) {

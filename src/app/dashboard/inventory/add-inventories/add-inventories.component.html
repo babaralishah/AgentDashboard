@@ -116,7 +116,7 @@
                                                 <h5 class="require">*</h5>
                                             </div>
                                             <div>
-                                                <ng-select [(ngModel)]="user.city[0].city" [ngModelOptions]="{standalone: true}" class="ng-select" [items]="cities" bindLabel="city" bindValue="city" placeholder="Select City" [ngClass]="{ 'is-invalid': submitted && f.city.errors }" (change)="changeCity($event)">
+                                                <ng-select [(ngModel)]="selectedCity" [ngModelOptions]="{standalone: true}" class="ng-select" [items]="cities" bindLabel="city" bindValue="city" placeholder="Select City" [ngClass]="{ 'is-invalid': submitted && f.city.errors }" (change)="changeCity($event)">
                                                 </ng-select>
                                                 <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
                                                     <div *ngIf="f.city.errors.required">City is required</div>

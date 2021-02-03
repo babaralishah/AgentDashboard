@@ -53,13 +53,15 @@ export class LeadsComponent implements OnInit {
   isCheckComment: boolean;
 
   filterForm: FormGroup;
+  selectedLocation: any;
+  cityNames: any = [];
 
   constructor(
     private authService: AuthenticationService,
     private router: Router,
     private toastr: ToastrService,
     private fb: FormBuilder
-  ) { }
+  ) {}
   general_search: string;
   // assigned_to: any;
   selectedUserLocation: any;
@@ -88,10 +90,8 @@ export class LeadsComponent implements OnInit {
   ngOnInit(): void {
     this.formdeclare();
     this.tokenization();
-    this.getUserDetails();
     this.getLeadsList();
     this.getCityAdminList();
-    this.tokenization();
     this.getCities();
   }
 
@@ -104,21 +104,29 @@ export class LeadsComponent implements OnInit {
       minArea: [],
       maxArea: [],
       startDate: [],
-      endDate: []
+      endDate: [],
     });
   }
 
   filter() {
-    this.minDemand = this.filterForm.get('minPrice').value;
-    this.maxDemand = this.filterForm.get('maxPrice').value;
-    this.area_unit = this.filterForm.get('area').value;
-    this.minArea = this.filterForm.get('minArea').value;
-    this.maxArea = this.filterForm.get('maxArea').value;
-    if(this.filterForm.get('startDate').value) {
-      this.startDate = formatDate(new Date(this.filterForm.get('startDate').value), "yyyy-MM-dd", "en_US");
+    this.minDemand = this.filterForm.get("minPrice").value;
+    this.maxDemand = this.filterForm.get("maxPrice").value;
+    this.area_unit = this.filterForm.get("area").value;
+    this.minArea = this.filterForm.get("minArea").value;
+    this.maxArea = this.filterForm.get("maxArea").value;
+    if (this.filterForm.get("startDate").value) {
+      this.startDate = formatDate(
+        new Date(this.filterForm.get("startDate").value),
+        "yyyy-MM-dd",
+        "en_US"
+      );
     }
-    if(this.filterForm.get('endDate').value) {
-      this.endDate = formatDate(new Date(this.filterForm.get('endDate').value), "yyyy-MM-dd", "en_US");
+    if (this.filterForm.get("endDate").value) {
+      this.endDate = formatDate(
+        new Date(this.filterForm.get("endDate").value),
+        "yyyy-MM-dd",
+        "en_US"
+      );
     }
   }
 
@@ -141,7 +149,7 @@ export class LeadsComponent implements OnInit {
     this.currentLoginUser = decodedToken.data;
     console.log(this.currentLoginUser);
   }
-  
+
   isComment() {
     this.isCheckComment = !this.isCheckComment;
   }
@@ -207,17 +215,46 @@ export class LeadsComponent implements OnInit {
     console.log(this.data);
   }
   // Calling Api to get the Cities
+
   getCities() {
     this.authService.getCities().subscribe(
-      (data) => {
-        console.log(data);
-        this.cities = data;
+      (cities) => {
+        if (
+          this.currentLoginUser?.access === "city_admin" ||
+          this.currentLoginUser?.access === "agent"
+        ) {
+          if (this.currentLoginUser?.city.city == "Islamabad") {
+            this.cityNames.push(cities[2]);
+            this.cities = this.cityNames;
+          } else if (this.currentLoginUser?.city.city == "Rawalpindi") {
+            this.cityNames.push(cities[1]);
+            this.cities = this.cityNames;
+          } else if (this.currentLoginUser?.city.city == "Peshawar") {
+            this.cityNames.push(cities[0]);
+          }
+        } else {
+          this.cities = cities;
+          console.log(this.cities);
+        }
       },
       (err) => {
         console.error(err);
       }
     );
+    console.log(this.cities);
   }
+
+  // getCities() {
+  //   this.authService.getCities().subscribe(
+  //     (data) => {
+  //       console.log(data);
+  //       this.cities = data;
+  //     },
+  //     (err) => {
+  //       console.error(err);
+  //     }
+  //   );
+  // }
   // Calling Api to get the Locations
   getLocations(selectedCity?) {
     this.authService.getLocations().subscribe(
@@ -238,6 +275,7 @@ export class LeadsComponent implements OnInit {
 
   //Function to change the city of --ng select city--
   changeCity(city: any) {
+    this.selectedLocation = null;
     this.locations = [];
     this.location = "";
     this.city = city?.city;
@@ -329,30 +367,32 @@ export class LeadsComponent implements OnInit {
         }
       );
   }
-
-  getUserDetails() {
-    this.token = this.authService.getToken();
-    this.token = this.authService.getDecodedToken(this.token).data;
-  }
   // Function to call User data table for Assigned_To Field of the add-inventory-form
   getCityAdminList() {
     this.authService.getUsers().subscribe(
       (data) => {
         this.usersList = [];
         data.forEach((element) => {
-          if (this.currentLoginUser.access === "city_admin") {
-            if (this.currentLoginUser.city.city !== element?.city?.city) {
+          if (this.currentLoginUser?.access === "city_admin") {
+            if (this.currentLoginUser?.city?.city != element?.city?.city) {
               return;
             }
           }
-
           this.usersList.push(element);
         });
-        console.log(this.agentList);
-
         for (var i = 0; i < data.length; i++) {
           if (data[i].access == "city_admin") {
-            this.cityAdminList.push(data[i]);
+            if (
+              this.currentLoginUser?.access == "city_admin" ||
+              this.currentLoginUser?.access === "agent"
+            ) {
+              if (this.currentLoginUser?.city?.city === data[i]?.city?.city) {
+                console.log(this.currentLoginUser?.city === data[i]?.city);
+
+                this.cityAdminList.push(data[i]);
+              }
+            } else if (this.currentLoginUser?.access == "super_admin")
+              this.cityAdminList.push(data[i]);
           } else if (data[i].access == "agent") {
             this.agentList.push(data[i]);
           } else if (data[i].access == "super_admin") {

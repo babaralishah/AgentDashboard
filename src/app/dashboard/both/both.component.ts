@@ -31,6 +31,8 @@ export class BothComponent implements OnInit {
 
   currentLoginUser: any;
   agentAssignedName: any;
+  cityNames: any = [];
+  selectedLocation: any;
 
   constructor(
     private router: Router,
@@ -218,6 +220,7 @@ export class BothComponent implements OnInit {
   }
 
   changeCity(city: any) {
+    this.selectedLocation = null;
     this.locations = [];
     this.location = "";
     this.city = city?.city;
@@ -232,17 +235,46 @@ export class BothComponent implements OnInit {
   }
 
   // Calling Api to get the Cities
+
   getCities() {
     this.authService.getCities().subscribe(
-      (data) => {
-        console.log(data);
-        this.cities = data;
+      (cities) => {
+        if (
+          this.currentLoginUser?.access === "city_admin" ||
+          this.currentLoginUser?.access === "agent"
+        ) {
+          if (this.currentLoginUser?.city.city == "Islamabad") {
+            this.cityNames.push(cities[2]);
+            this.cities = this.cityNames;
+          } else if (this.currentLoginUser?.city.city == "Rawalpindi") {
+            this.cityNames.push(cities[1]);
+            this.cities = this.cityNames;
+          } else if (this.currentLoginUser?.city.city == "Peshawar") {
+            this.cityNames.push(cities[0]);
+          }
+        } else {
+          this.cities = cities;
+          console.log(this.cities);
+        }
       },
       (err) => {
         console.error(err);
       }
     );
+    console.log(this.cities);
   }
+
+  // getCities() {
+  //   this.authService.getCities().subscribe(
+  //     (data) => {
+  //       console.log(data);
+  //       this.cities = data;
+  //     },
+  //     (err) => {
+  //       console.error(err);
+  //     }
+  //   );
+  // }
   // Calling Api to get the Locations
   getLocations(selectedCity?) {
     this.authService.getLocations().subscribe(

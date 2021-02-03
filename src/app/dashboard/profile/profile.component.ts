@@ -36,11 +36,11 @@ export class ProfileComponent implements OnInit {
   async tokenization() {
     const token = await this.authService.getToken();
     this.userData = this.authService.getuserData();
-    console.log(this.userData);
+    // console.log(this.userData);
 
     const decodedToken = await this.authService.getDecodedToken(token);
     this.tokendata = decodedToken.data;
-    console.log(this.tokendata);
+    // console.log(this.tokendata);
   }
 
   onSelectFile(event) {

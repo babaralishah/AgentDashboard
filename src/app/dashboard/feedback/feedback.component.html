@@ -27,8 +27,8 @@
                         <form class="form-register" [formGroup]="sendMessageForm">
                             <div *ngIf="messageType == 'agent'">
                                 <div class="row">
-                                    <div class="col-4 mt-4">
-                                        <ng-select class="ng-select" [items]="agentList" bindLabel="fullname" [multiple]="true" bindValue="fullname" placeholder="Select Agent" (change)="changeAssignedAgent($event)">
+                                    <div class="col-4 mt-4"> <b>Select Agents </b>
+                                        <ng-select class="ng-select" [(ngModel)]="agentsName" [ngModelOptions]="{standalone: true}" [items]="agentList" bindLabel="fullname" [multiple]="true" bindValue="fullname" placeholder="Select Agent" (change)="changeAssignedAgent($event)">
                                         </ng-select>
                                     </div>
                                 </div>

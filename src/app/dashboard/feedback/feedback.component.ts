@@ -18,6 +18,7 @@ export class FeedbackComponent implements OnInit {
   agentList: any = [];
   userContact: any[] = [];
   contactNumber: any = [];
+  agentsName: any;
 
   constructor(
     public formBuilder: FormBuilder,
@@ -94,6 +95,7 @@ export class FeedbackComponent implements OnInit {
           timeOut: 5000,
         });
         this.sendMessageForm.reset();
+        this.agentsName = null;
       });
   }
   sendNonAgentMessage() {
@@ -114,6 +116,7 @@ export class FeedbackComponent implements OnInit {
           timeOut: 5000,
         });
         this.sendMessageForm.reset();
+        this.contactNumber = null;
       });
   }
   contentWidthEmitted(value) {

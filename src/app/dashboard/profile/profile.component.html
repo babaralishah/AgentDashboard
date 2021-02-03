@@ -15,7 +15,7 @@
                                 <img *ngIf="!selectedFile" [src]="userData?.image" />
                                 <img *ngIf="selectedFile" [src]="this.url" />
                                 <div class="profileinfo">
-                                    <h1>{{userData?.fullname}}</h1>
+                                    <h1>{{userData?.fullname | titlecase}}</h1>
                                     <span class=" badge badge-warning mb-4">{{userData?.access | titlecase}}</span>
 
                                     <div class="profile-details">

@@ -1,0 +1,68 @@
+h2 {
+    font-weight: 600;
+    margin-top: -10px;
+}
+
+.ng-select .ng-select-container .ng-value-container .ng-placeholder {
+    color: #7a7e83;
+    font-size: 15px;
+}
+
+.ng-select.ng-select-single .ng-select-container {
+    height: 36px;
+    border: 1px solid #dc3545;
+}
+
+.ng-select .ng-select-container {
+    color: #333;
+    background-color: #fff;
+    border-radius: 30px !important;
+    border: 1px solid #ccc;
+    min-height: 42px;
+    align-items: center;
+    border: 1px solid #dc3545;
+}
+
+.btn {
+    background-color: #38baa2;
+    color: white;
+    border: 1px solid transparent;
+}
+
+#content {
+    margin: 120px 20px;
+}
+
+#content-wrapper {
+    margin-left: 100px;
+    transition: 0.5s all;
+}
+
+.table-container {
+    overflow-x: scroll;
+    box-shadow: 0px 0px 20px 5px rgba(200, 200, 200, 0.69);
+}
+
+.table {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    overflow: hidden;
+}
+
+.table tr:nth-child(even) {
+    background-color: #38baa21f;
+}
+
+.table tr:hover {
+    background-color: #e8e8e8;
+}
+
+.table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #38baa2;
+    font-size: 16px;
+    color: white;
+}

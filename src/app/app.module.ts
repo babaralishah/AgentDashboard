@@ -57,6 +57,7 @@ import { TableDemandPipe } from "./Pipes/table-demand-filter.pipe";
 import { RoleGuard } from "./services/guards/role.guard";
 import { TableAreaPipe } from "./Pipes/table-area-filter.pipe";
 import { FeedbackComponent } from "./dashboard/feedback/feedback.component";
+import { DealerslistComponent } from './dashboard/dealerslist/dealerslist.component';
 registerLocaleData(en);
 
 @NgModule({
@@ -99,6 +100,7 @@ registerLocaleData(en);
     LocationComponent,
     AddLocationComponent,
     FeedbackComponent,
+    DealerslistComponent,
   ],
   imports: [
     HttpClientModule,

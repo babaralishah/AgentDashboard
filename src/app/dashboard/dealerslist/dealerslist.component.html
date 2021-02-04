@@ -1,0 +1,112 @@
+<app-header></app-header>
+<div id="wrapper">
+    <app-dashboard (widthEmittedEvent)="contentWidthEmitted($event)"></app-dashboard>
+    <div id="content-wrapper" class="d-flex flex-column" #content>
+        <div id="content">
+
+            <div class="container-fluid">
+                <div *ngIf=isCsv>
+                    <b><h2 class="h3 mb-4 text-gray-600 ml-1">Add Csv File</h2></b>
+                </div>
+                <div *ngIf=isNewContact>
+                    <h2 class="h3 mb-4 text-gray-600 ml-1">Create New Contact</h2>
+                </div>
+                <div class="row">
+                    <div class="col-xl-5 col-lg-5 col-md-7 col-sm-9">
+                        <button class="btn btn-primary ml-1" (click)="createNewContact()"> Create Contact </button>
+                        <button class="btn btn-primary ml-3" (click)="getCsvFile()"> Add Csv File </button>
+                    </div>
+                </div>
+                <div class="row" *ngIf="!isCsv && isNewContact">
+                    <div class="col-12">
+
+                        <div class="row mt-5">
+
+                            <div class="ml-3 radio-mid">
+                                <b> Select City</b>
+
+                                <div class="radio mt-1">
+                                    <div class="btn-group btn-group-toggle">
+                                        <label class="btn btn-primary">
+                                            <input type="radio" value="Islamabad">
+                                            Islamabad
+                                        </label>
+                                        <label class="btn btn-primary ml-3">
+                                            <input type="radio" value="Rawalpindi">
+                                            Rawalpindi
+                                        </label>
+                                        <label class="btn btn-primary ml-3">
+                                            <input type="radio"  value="Peshawar">
+                                            Peshawar
+                                        </label>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="row"> -->
+                        <div class="row mt-4">
+                            <div class="col-4 form-group">
+                                <b>Select Location</b>
+
+                                <ng-select placeholder="Location">
+                                </ng-select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 form-group">
+                                <div> <b>Select Sub Location</b>
+                                    <ng-select placeholder="SubLocation">
+                                    </ng-select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 form-group">
+                                <div> <b>Enter Name</b>
+                                    <input class="form-control" type="text" placeholder="Name">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 form-group">
+                                <div> <b>Enter Number</b>
+                                    <input class="form-control" type="number" placeholder="Number">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row ml-1 mt-3">
+                            <button class="btn btn-primary">Add</button>
+                        </div>
+                        <!-- <div class="row"></div> -->
+                    </div>
+                </div>
+                <div class="form-group mt-5" *ngIf="isCsv && !isNewContact">
+                    <input type="file" (change)="onFileChange($event)" multiple="false" />
+
+                    <div class="table-container mt-5" *ngIf="contacts">
+                        <table class="table table-hover">
+                            <tbody>
+                                <!-- <tr> -->
+                                <!-- <th *ngFor="let column of data">
+                                        {{column}}
+                                    </th> -->
+                                <!-- </tr> -->
+                                <tr *ngFor="let row of contacts">
+                                    <!-- <th *ngFor="let column of row">
+                                        {{column}}
+                                    </th> -->
+                                    <td *ngFor="let val of row">
+                                        {{val}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- <button (click)="export()">Export!</button> -->
+                    <!-- <input type="file" class="form-control" (change)="addfile($event)" placeholder="Upload file" accept=".csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"> -->
+                    <!-- </div> -->
+                </div>
+            </div>
+        </div>
+    </div>

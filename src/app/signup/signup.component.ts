@@ -28,6 +28,7 @@ export class SignupComponent implements OnInit {
   selectedCity: any;
   selectStringLocations: any = [];
   checked: boolean;
+  tokendata: any;
 
   constructor(
     public formBuilder: FormBuilder,
@@ -36,12 +37,19 @@ export class SignupComponent implements OnInit {
     private toastr: ToastrService
   ) {}
   ngOnInit(): void {
+    this.tokenization();
     this.getUser();
     this.removeUser();
     this.initialize();
     if (this.user) {
       this.updatefields();
     }
+  }
+  async tokenization() {
+    const token = await this.authService.getToken();
+    const decodedToken = await this.authService.getDecodedToken(token);
+    this.tokendata = decodedToken?.data;
+    console.log(this.tokendata);
   }
 
   changePassword() {
@@ -232,11 +240,15 @@ export class SignupComponent implements OnInit {
           const msg = data.message;
           const code = data.code;
           const userData = data?.userData;
+          console.log(userData);
+
           if (code === 200) {
             this.toastr.success(msg, "Success", {
               timeOut: 5000,
             });
-            this.authService.setuserData(userData);
+            if (userData?._id == this.tokendata?._id) {
+              this.authService.setuserData(userData);
+            }
             this.router.navigateByUrl("/agents");
           } else {
             this.toastr.error(msg, "Error", {

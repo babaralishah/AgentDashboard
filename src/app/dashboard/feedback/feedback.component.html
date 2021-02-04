@@ -9,21 +9,21 @@
                 <div class="row">
                     <div class="col-12 col-md-10 mb-4 mt-4">
                         <div *ngIf="messageType == 'agent'">
-                            <h2 class="h3 mb-4 text-gray-600">Agent Message</h2>
+                            <h2 class="h2 mb-4 text-gray-600 ml-3">Agent Message</h2>
                         </div>
                         <div *ngIf="messageType == 'nonAgent'">
-                            <h2 class="h3 mb-4 text-gray-600">Non Agent Message</h2>
+                            <h2 class="h2 mb-4 text-gray-600 ml-3">Non Agent Message</h2>
                         </div>
-                        <div>
+                        <!-- <div> -->
 
-                            <div class="radio mb-5">
-                                <div class="btn-group btn-group-toggle col-4">
-                                    <button [class.active]="messageType === 'agent'" class="btn btn-primary" (click)="setChangeType('agent')">Agent</button>
-                                    <button [class.active]="messageType === 'nonAgent'" class="btn btn-primary ml-3" (click)="setChangeType('nonAgent')">Non Agent</button>
+                        <div class="radio mb-5">
+                            <div class="btn-group btn-group-toggle col-4">
+                                <button [class.active]="messageType === 'agent'" class="btn btn-primary" (click)="setChangeType('agent')">Agent</button>
+                                <button [class.active]="messageType === 'nonAgent'" class="btn btn-primary ml-3" (click)="setChangeType('nonAgent')">Non Agent</button>
 
-                                </div>
                             </div>
                         </div>
+                        <!-- </div> -->
                         <form class="form-register" [formGroup]="sendMessageForm">
                             <div *ngIf="messageType == 'agent'">
                                 <div class="row">

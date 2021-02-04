@@ -26,6 +26,7 @@ import { LocationComponent } from "./dashboard/location/location.component";
 import { AddLocationComponent } from "./dashboard/location/add-location/add-location.component";
 import { RoleGuard } from "./services/guards/role.guard";
 import { FeedbackComponent } from "./dashboard/feedback/feedback.component";
+import { DealerslistComponent } from "./dashboard/dealerslist/dealerslist.component";
 
 const routes: Routes = [
   {
@@ -149,6 +150,11 @@ const routes: Routes = [
     path: "add-inventories",
     canActivate: [IsLoginGuard],
     component: AddInventoriesComponent,
+  },
+  {
+    path: "dealers-list",
+    canActivate: [IsLoginGuard],
+    component: DealerslistComponent,
   },
   {
     path: "**",

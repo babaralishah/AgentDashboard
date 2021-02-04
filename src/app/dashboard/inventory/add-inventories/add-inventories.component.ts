@@ -171,21 +171,11 @@ export class AddInventoriesComponent implements OnInit {
     this.authService.getUsers().subscribe(
       (data) => {
         for (var i = 0; i < data.length; i++) {
-          if (this.token.access === "city_admin") {
+          if (this.token?.access === "city_admin") {
             if (data[i].access == "city_admin") {
-              if (this.token.city.city === data[i].city.city) {
-                this.cityAdminList.push(data[i]);
-              }
-            } else if (data[i].access == "agent") {
-              if (this.token.city.city === data[i].city.city) {
-                this.agentList.push(data[i]);
-              }
-            }
-          } else if (this.token.access === "agent") {
-            if (data[i].access == "city_admin") {
-              if (this.token.city.city === data[i].city.city) {
-                this.cityAdminList.push(data[i]);
-              }
+              // if (this.token.city.city === data[i].city.city) {
+              this.cityAdminList.push(data[i]);
+              // }
             } else if (data[i].access == "agent") {
               if (this.token.city.city === data[i].city.city) {
                 this.agentList.push(data[i]);
@@ -193,7 +183,19 @@ export class AddInventoriesComponent implements OnInit {
             } else if (data[i].access == "super_admin") {
               this.superAdminList.push(data[i]);
             }
-          } else if (this.token.access === "super_admin") {
+          } else if (this.token?.access === "agent") {
+            if (data[i].access == "city_admin") {
+              if (this.token.city.city === data[i].city.city) {
+                this.cityAdminList.push(data[i]);
+              }
+            } else if (data[i].access == "agent") {
+              if (this.token?.city.city === data[i].city.city) {
+                this.agentList.push(data[i]);
+              }
+            } else if (data[i].access == "super_admin") {
+              this.superAdminList.push(data[i]);
+            }
+          } else if (this.token?.access === "super_admin") {
             if (data[i].access == "city_admin") {
               this.cityAdminList.push(data[i]);
             } else if (data[i].access == "agent") {

@@ -60,6 +60,13 @@
             </a>
         </li>
         <li class="nav-item" *ngIf="userData?.access  !== 'agent'">
+            <a class="nav-link" routerLink="/dealers-list">
+                <!-- <i class="fas fa-exchange-alt"></i> -->
+                <i class="far fa-comments"></i>
+                <span>Dealers List</span>
+            </a>
+        </li>
+        <li class="nav-item" *ngIf="userData?.access  !== 'agent'">
             <a class="nav-link" routerLink="/feedback">
                 <!-- <i class="fas fa-exchange-alt"></i> -->
                 <i class="far fa-comments"></i>

@@ -334,7 +334,7 @@ export class LeadsComponent implements OnInit {
       (error) => {
         console.log(error);
 
-        if (error.error.code == 11000)
+        if (error?.error?.code == 11000)
           this.toastr.error(error.error.message, "Error", {
             timeOut: 5000,
           });
@@ -356,7 +356,7 @@ export class LeadsComponent implements OnInit {
         (error) => {
           console.log(error);
 
-          if (error.error.code == 11000)
+          if (error?.error?.code == 11000)
             this.toastr.error(
               "This Lead is Already Assigned to Another Agent",
               "Error",
@@ -380,22 +380,20 @@ export class LeadsComponent implements OnInit {
           }
           this.usersList.push(element);
         });
-        for (var i = 0; i < data.length; i++) {
-          if (data[i].access == "city_admin") {
-            if (
-              this.currentLoginUser?.access == "city_admin" ||
-              this.currentLoginUser?.access === "agent"
-            ) {
+        for (var i = 0; i < data?.length; i++) {
+          if (data[i]?.access == "city_admin") {
+            if (this.currentLoginUser?.access == "city_admin") {
+              this.cityAdminList.push(data[i]);
+            } else if (this.currentLoginUser?.access === "agent") {
               if (this.currentLoginUser?.city?.city === data[i]?.city?.city) {
-                console.log(this.currentLoginUser?.city === data[i]?.city);
-
                 this.cityAdminList.push(data[i]);
               }
             } else if (this.currentLoginUser?.access == "super_admin")
               this.cityAdminList.push(data[i]);
-          } else if (data[i].access == "agent") {
-            this.agentList.push(data[i]);
-          } else if (data[i].access == "super_admin") {
+          } else if (data[i]?.access == "agent") {
+            if (this.currentLoginUser?.city?.city === data[i]?.city?.city)
+              this.agentList.push(data[i]);
+          } else if (data[i]?.access == "super_admin") {
             this.superAdminList.push(data[i]);
           }
         }

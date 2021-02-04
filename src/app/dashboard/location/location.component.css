@@ -19,9 +19,6 @@
     overflow: hidden;
 }
 
-.table td,
-.table th {}
-
 .table tr:nth-child(even) {
     background-color: #38baa21f;
 }
@@ -93,12 +90,6 @@
     background-color: #3e8e41;
 }
 
-.inventory {
-    margin-left: 47px;
-    margin-top: 120px;
-    width: 100%;
-}
-
 .fa {
     margin-left: 10px;
 }
@@ -121,6 +112,7 @@
     margin-left: auto;
     margin-right: 12px;
 }
+
 .btn-container button {
     margin-left: 10px;
 }
@@ -136,7 +128,9 @@
     border-radius: 0.25rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
-ng-select, .form-control {
+
+ng-select,
+.form-control {
     font-size: 0.8rem;
     font-weight: 400;
 }
@@ -144,35 +138,4 @@ ng-select, .form-control {
 .form-control-borderless {
     border: none;
     border: 1px solid whitesmoke;
-}
-
-@media only screen and (max-width: 1650px) {
-    .inventory {
-        margin-left: 50px;
-    }
-}
-
-@media only screen and (min-width: 1200px) and (max-width: 1400px) {
-    .inventory {
-        margin-left: 80px;
-    }
-}
-
-@media only screen and (max-width: 1200px) {
-    .inventory {
-        margin-left: 100px;
-        overflow-x: auto;
-    }
-}
-
-@media only screen and (max-width: 1100px) {
-    .inventory {
-        margin-left: 120px;
-    }
-}
-
-@media only screen and (max-width: 992px) {
-    .inventory {
-        margin-left: -80px;
-    }
 }

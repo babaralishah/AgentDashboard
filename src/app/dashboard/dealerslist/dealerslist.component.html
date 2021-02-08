@@ -15,8 +15,16 @@
                     <div class="col-xl-5 col-lg-5 col-md-7 col-sm-9">
                         <button class="btn btn-primary ml-1" (click)="createNewContact()"> Create Contact </button>
                         <button class="btn btn-primary ml-3" (click)="getCsvFile()"> Add Csv File </button>
+                        <button *ngIf=isCsv class="btn btn-primary ml-3" (click)="sendMessage()"> Send Message </button>
                     </div>
                 </div>
+                <!-- <div class="row mt-1"> -->
+                <div class="col-4 form-group mt-3" *ngIf="isCsv && event">
+                    <b class="steps">Message</b>
+                    <label for="exampleFormControlTextarea1"></label>
+                    <textarea class="form-control" [(ngModel)]="message" placeholder="Text here" style="height: 200px;"></textarea>
+                </div>
+                <!-- </div> -->
                 <div class="row" *ngIf="!isCsv && isNewContact">
                     <div class="col-12">
 

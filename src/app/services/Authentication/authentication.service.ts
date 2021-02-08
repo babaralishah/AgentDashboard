@@ -22,6 +22,8 @@ export class AuthenticationService {
   constructor(private httpClient: HttpClient, public router: Router) {}
 
   sendMessage(user: any) {
+    console.log(user);
+
     return this.httpClient.post<any>(`${this.url}/messageApi`, user, {
       headers: new HttpHeaders().set("Authorization", this.getToken()),
     });

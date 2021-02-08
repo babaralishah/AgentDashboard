@@ -135,6 +135,7 @@ export class FeedbackComponent implements OnInit {
         timeOut: 3000,
       });
     } else {
+      console.log(this.sendMessageForm.value);
       this.authService.sendMessage(this.sendMessageForm.value).subscribe(
         (data) => {
           console.log(data);

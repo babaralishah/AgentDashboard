@@ -1,6 +1,9 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
+import { AuthenticationService } from "src/app/services/Authentication/authentication.service";
+import { ToastrService } from "ngx-toastr";
 
 import * as XLSX from "xlsx";
+import { Router } from "@angular/router";
 
 type AOA = any[][];
 @Component({
@@ -16,8 +19,14 @@ export class DealerslistComponent implements OnInit {
   isCsv: boolean;
   isNewContact: boolean = true;
   contactList: any = [];
+  message: any;
+  event: any;
 
-  constructor() {}
+  constructor(
+    public authService: AuthenticationService,
+    private toastr: ToastrService,
+    public router: Router
+  ) {}
 
   ngOnInit(): void {}
   getCsvFile() {
@@ -34,6 +43,7 @@ export class DealerslistComponent implements OnInit {
 
   onFileChange(evt: any) {
     /* wire up file reader */
+    this.event = evt;
     const target: DataTransfer = <DataTransfer>evt.target;
     if (target.files.length !== 1) throw new Error("Cannot use multiple files");
     const reader: FileReader = new FileReader();
@@ -50,16 +60,45 @@ export class DealerslistComponent implements OnInit {
       this.contacts = <AOA>XLSX.utils.sheet_to_json(ws, { header: 1 });
       console.log(this.contacts);
       console.log("Headers", this.contacts[0]);
-      for (let i = 0; i < this.contacts?.length - 1; i++) {
-        this.contactList[i] = parseInt(this.contacts[i + 1][3]);
-        // this.contactList[i] = this.contacts[i + 1][3];
-        // console.log("contact no. ", i, ":\t", this.contacts[i][3]);
-      }
-      console.log(this.contactList);
     };
     reader.readAsBinaryString(target.files[0]);
   }
+  sendMessage() {
+    for (let i = 0; i < this.contacts?.length - 1; i++) {
+      this.contactList[i] = parseInt(this.contacts[i + 1][1]);
+    }
+    console.log(this.contactList);
+    console.log(this.message);
 
+    const sendMessageForm = [
+      {
+        phone: ([] = this.contactList),
+        message: this.message,
+      },
+    ];
+    console.log(sendMessageForm[0]);
+
+    if (this.message != null) {
+      this.authService.sendMessage(sendMessageForm[0]).subscribe(
+        (data) => {
+          console.log(data);
+          this.toastr.success(data.message, "Success", {
+            timeOut: 5000,
+          });
+          this.message = null;
+          window.location.reload();
+          // this.router.navigateByUrl("/inventory");
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    } else if (this.message == null) {
+      this.toastr.error("Message Field is Empty", "Error", {
+        timeOut: 3000,
+      });
+    }
+  }
   export(): void {
     /* generate worksheet */
     const ws: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet(this.contacts);

@@ -20,7 +20,15 @@ export class AuthenticationService {
   genericId: any;
 
   constructor(private httpClient: HttpClient, public router: Router) {}
-
+  deleteRequest(id: any, user: any) {
+    return this.httpClient.put<any>(
+      `${this.url}/inventory/delete-request/${id}`,
+      user,
+      {
+        headers: new HttpHeaders().set("Authorization", this.getToken()),
+      }
+    );
+  }
   sendMessage(user: any) {
     console.log(user);
 

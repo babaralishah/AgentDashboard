@@ -57,8 +57,9 @@ import { TableDemandPipe } from "./Pipes/table-demand-filter.pipe";
 import { RoleGuard } from "./services/guards/role.guard";
 import { TableAreaPipe } from "./Pipes/table-area-filter.pipe";
 import { FeedbackComponent } from "./dashboard/feedback/feedback.component";
-import { DealerslistComponent } from './dashboard/dealerslist/dealerslist.component';
-import { DeleteRequestsComponent } from './dashboard/delete-requests/delete-requests.component';
+import { DealerslistComponent } from "./dashboard/dealerslist/dealerslist.component";
+import { DeleteRequestsComponent } from "./dashboard/delete-requests/delete-requests.component";
+import { AuthenticationService } from "./services/Authentication/authentication.service";
 registerLocaleData(en);
 
 @NgModule({
@@ -124,7 +125,7 @@ registerLocaleData(en);
     AngularEditorModule,
     // MaterialModule
   ],
-  providers: [RoleGuard],
+  providers: [RoleGuard,AuthenticationService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

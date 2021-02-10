@@ -16,18 +16,38 @@
                                     <th scope="col"> </th>
                                     <th scope="col">ID</th>
                                     <th scope="col">Title</th>
-                                    <th>Added By</th>
+                                    <!-- <th>Added By</th> -->
                                     <th scope="col">Purpose</th>
                                     <th scope="col">Client Details</th>
                                     <th scope="col">Location</th>
-                                    <th scope="col">Land Area</th>
-
-                                    <th scope="col">Demand</th>
+                                    <!-- <th scope="col">Demand</th>
                                     <th scope="col">Comment</th>
-                                    <th scope="col">Operations</th>
+                                    <th scope="col">Operations</th> -->
                                 </thead>
 
                                 <tbody>
+                                    <tr *ngFor="let user of user">
+                                        <td>
+                                            <span *ngIf="user?.priority == 'Super Hot'"><img class="super-hot"
+                                                    src="\assets\icons\super_hot.svg"></span>
+                                            <span *ngIf="user?.priority == 'Hot'"><img class="super-hot"
+                                                    src="\assets\icons\hot.svg"></span>
+                                            <span *ngIf="user?.priority == 'Normal'"><img class="normal"
+                                                    src="\assets\icons\normal.svg"></span>
+                                        </td>
+
+
+                                        <td>{{ user?.refId }}</td>
+                                        <td>{{user?.form_title}}</td>
+                                        <td>{{ user?.property_purpose }}</td>
+
+                                        <td><b>Name : </b>{{ user?.client_name | titlecase }} <br> <b>Number : </b>{{ user?.client_number}} <br>
+                                            <b> Client Type :</b> {{ user?.client_type }}
+                                        </td>
+
+                                        <td>{{ user?.property_type }}</td>
+
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

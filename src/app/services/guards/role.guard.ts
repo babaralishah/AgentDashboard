@@ -1,15 +1,12 @@
-import { 
-  ActivatedRouteSnapshot
-} from '@angular/router';
+import { ActivatedRouteSnapshot } from "@angular/router";
 
-import { CanActivate, Router } from '@angular/router';
+import { CanActivate, Router } from "@angular/router";
 
-import { AuthenticationService } from '../Authentication/authentication.service';
-import { Injectable } from '@angular/core';
+import { AuthenticationService } from "../Authentication/authentication.service";
+import { Injectable } from "@angular/core";
 
 @Injectable()
 export class RoleGuard implements CanActivate {
-
   constructor(public auth: AuthenticationService, public router: Router) {}
 
   canActivate(route: ActivatedRouteSnapshot) {
@@ -17,13 +14,10 @@ export class RoleGuard implements CanActivate {
     const token = this.auth.getToken();
     const tokenPayload = this.auth.getDecodedToken(token);
 
-    if (
-      !token || 
-      !expectedRole.includes(tokenPayload?.data?.access)
-    ) {
-      this.router.navigate(['/']);
+    if (!token || !expectedRole.includes(tokenPayload?.data?.access)) {
+      this.router.navigate(["/"]);
     } else {
-        return true;
+      return true;
     }
   }
 }

@@ -134,8 +134,11 @@
                                         <td style="width: 12%;">
                                             <i class="fa fa-edit icon" (click)="setUserToEdit(user)"></i>
                                             <a (click)="setUserToEdit(user)" role="button"></a>
-
-                                            <i class="fa fa-trash icon" (click)="confirmID(user._id)" data-toggle="modal" data-target="#exampleModal1"></i> &nbsp;&nbsp;
+                                            <span *ngIf="currentLoginUser?.access == 'agent' && !user?.isDeleted">
+                                            <i class="fa fa-trash icon" (click)="confirmID(user._id)" data-toggle="modal" data-target="#exampleModal1"></i>
+                                        </span>
+                                            <span *ngIf="currentLoginUser?.access != 'agent'">
+                                            <i class="fa fa-trash icon" (click)="confirmID(user._id)" data-toggle="modal" data-target="#exampleModal1"></i></span> &nbsp;&nbsp;
                                             <span><i class="fas fa-exchange-alt" data-toggle="modal"
                                                     data-target="#AgentAssign" (click)="setCurrentUser(user)"></i></span>
                                         </td>

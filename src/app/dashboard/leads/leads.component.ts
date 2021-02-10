@@ -156,10 +156,12 @@ export class LeadsComponent implements OnInit {
   getLeadsList() {
     this.authService.getLeads().subscribe(
       (data) => {
-        data = data.leads;
-        console.log(data);
+        this.data = data.leads;
+        console.log(this.data);
+        for (let i = 0; i < this.data?.length; i++)
+          console.log(this.data[i]?.isDeleted);
 
-        data.forEach((element) => {
+        this.data.forEach((element) => {
           element.assignedTo = [];
           element.added_ByName = element.added_By.fullname;
           element.cityName = element.city[0]?.city;
@@ -417,30 +419,43 @@ export class LeadsComponent implements OnInit {
   // Function to delete the single inventory
   deleteLead() {
     console.log(this.deleteId);
+    console.log(this.currentLoginUser?.access);
 
-    this.authService.deleteInventory(this.deleteId).subscribe(
-      (data) => {
-        console.log(data);
-        if (data.code === 200) {
+    if (this.currentLoginUser?.access == "agent") {
+      let message = "Deleting";
+      this.authService
+        .deleteRequest(this.deleteId, message)
+        .subscribe((data) => {
+          console.log(data);
           this.toastr.success(data.message, "Success", {
             timeOut: 5000,
           });
-          // this.getLeadsList();
-          for (let i = 0; i < this.user.length; i++) {
-            if (this.user[i]._id === this.deleteId) {
-              this.user.splice(i, 1);
-              i--;
+        });
+    } else {
+      this.authService.deleteInventory(this.deleteId).subscribe(
+        (data) => {
+          console.log(data);
+          if (data.code === 200) {
+            this.toastr.success(data.message, "Success", {
+              timeOut: 5000,
+            });
+            // this.getLeadsList();
+            for (let i = 0; i < this.user.length; i++) {
+              if (this.user[i]._id === this.deleteId) {
+                this.user.splice(i, 1);
+                i--;
+              }
             }
           }
+        },
+        (error) => {
+          console.error(error);
+          this.toastr.error(error.message, "Error", {
+            timeOut: 5000,
+          });
         }
-      },
-      (error) => {
-        console.error(error);
-        this.toastr.error(error.message, "Error", {
-          timeOut: 5000,
-        });
-      }
-    );
+      );
+    }
   }
 
   // Function to patch the value from ng select
@@ -455,7 +470,6 @@ export class LeadsComponent implements OnInit {
       date: new Date(),
     });
     console.log(this.assignLeadData);
-    // this.currentUser["assigned_to"] = this.assignLeadData;
   }
   // Function to patch the value from ng select
   changeAssignedAdmin(access: any) {
@@ -467,7 +481,6 @@ export class LeadsComponent implements OnInit {
       date: new Date(),
     });
     console.log(this.assignLeadData);
-    // this.currentUser["assigned_to"] = this.assignLeadData;
   }
 
   changeAssignAgent(agent: any) {
@@ -488,11 +501,8 @@ export class LeadsComponent implements OnInit {
         contact: element.contact,
         date: new Date(),
       });
-
-      // this.currentUser["assigned_to"] = this.assignLeadData;
     });
     console.log(this.assignLeadData);
-    // console.log(this.currentUser["assigned_to"]);
   }
   confirmID(id: any) {
     this.deleteId = id;

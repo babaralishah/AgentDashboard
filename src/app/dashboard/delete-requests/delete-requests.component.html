@@ -1,0 +1,40 @@
+<app-header></app-header>
+<div id="wrapper">
+    <app-dashboard (widthEmittedEvent)="contentWidthEmitted($event)"></app-dashboard>
+    <div id="content-wrapper" class="d-flex flex-column" #content>
+        <div id="content">
+
+            <div class="container-fluid">
+                <h1 class="h3 mb-2 text-gray-800">Delete Requests Table</h1>
+
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="table-container mb-5 mt-4">
+                            <table class="table table-hover">
+                                <thead>
+                                    <th scope="col"> </th>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Title</th>
+                                    <th>Added By</th>
+                                    <th scope="col">Purpose</th>
+                                    <th scope="col">Client Details</th>
+                                    <th scope="col">Location</th>
+                                    <th scope="col">Land Area</th>
+
+                                    <th scope="col">Demand</th>
+                                    <th scope="col">Comment</th>
+                                    <th scope="col">Operations</th>
+                                </thead>
+
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- <pagination-controls (pageChange)="p = $event"></pagination-controls> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -42,11 +42,13 @@ ul li a span {
     margin-left: 30px;
 }
 
-ul li:hover a span, .badge-logout {
+ul li:hover a span,
+.badge-logout {
     color: #9fa8aa;
 }
 
-ul li:hover a i, li a:hover:before {
+ul li:hover a i,
+li a:hover:before {
     color: #38baa2;
     text-shadow: 0px 0px 10px rgba(22, 199, 255, 0.5);
 }
@@ -139,7 +141,8 @@ ul .sidebar-divider {
 }
 
 .sidebar-footer {
-    position: absolute;
+    /* position: absolute; */
+    position: sticky;
     left: 0;
     right: 0;
     padding: 10px;

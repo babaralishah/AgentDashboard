@@ -27,6 +27,7 @@ import { AddLocationComponent } from "./dashboard/location/add-location/add-loca
 import { RoleGuard } from "./services/guards/role.guard";
 import { FeedbackComponent } from "./dashboard/feedback/feedback.component";
 import { DealerslistComponent } from "./dashboard/dealerslist/dealerslist.component";
+import { DeleteRequestsComponent } from "./dashboard/delete-requests/delete-requests.component";
 
 const routes: Routes = [
   {
@@ -155,6 +156,11 @@ const routes: Routes = [
     path: "dealers-list",
     canActivate: [IsLoginGuard],
     component: DealerslistComponent,
+  },
+  {
+    path: "delete-requests",
+    canActivate: [IsLoginGuard],
+    component: DeleteRequestsComponent,
   },
   {
     path: "**",

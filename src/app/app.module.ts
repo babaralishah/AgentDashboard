@@ -58,6 +58,7 @@ import { RoleGuard } from "./services/guards/role.guard";
 import { TableAreaPipe } from "./Pipes/table-area-filter.pipe";
 import { FeedbackComponent } from "./dashboard/feedback/feedback.component";
 import { DealerslistComponent } from './dashboard/dealerslist/dealerslist.component';
+import { DeleteRequestsComponent } from './dashboard/delete-requests/delete-requests.component';
 registerLocaleData(en);
 
 @NgModule({
@@ -101,6 +102,7 @@ registerLocaleData(en);
     AddLocationComponent,
     FeedbackComponent,
     DealerslistComponent,
+    DeleteRequestsComponent,
   ],
   imports: [
     HttpClientModule,

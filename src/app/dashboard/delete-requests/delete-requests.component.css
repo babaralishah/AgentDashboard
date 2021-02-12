@@ -1,3 +1,11 @@
+.tick {
+    color: green;
+}
+
+.cross {
+    color: red;
+}
+
 #content {
     margin: 120px 20px;
 }

@@ -11,6 +11,7 @@ import { AuthenticationService } from "src/app/services/Authentication/authentic
 export class DeleteRequestsComponent implements OnInit {
   @ViewChild("content") content: any;
   user: any = [];
+  deleteId: any;
 
   constructor(
     private router: Router,
@@ -40,7 +41,48 @@ export class DeleteRequestsComponent implements OnInit {
       }
     );
   }
-
+  confirmID(id) {
+    this.deleteId = id;
+  }
+  deleteRow() {
+    this.authService.deleteInventory(this.deleteId).subscribe(
+      (data) => {
+        console.log(data);
+        if (data.code === 200) {
+          this.toastr.success(data.message, "Success", {
+            timeOut: 5000,
+          });
+          // this.getLeadsList();
+          for (let i = 0; i < this.user.length; i++) {
+            if (this.user[i]?._id === this.deleteId) {
+              this.user.splice(i, 1);
+              i--;
+            }
+          }
+        }
+      },
+      (error) => {
+        console.error(error);
+        this.toastr.error(error.message, "Error", {
+          timeOut: 5000,
+        });
+      }
+    );
+  }
+  deleteRevert(id: any) {
+    this.authService.deleteRevert(id).subscribe((data) => {
+      console.log(data);
+      this.toastr.success(data?.message, "Success", {
+        timeOut: 5000,
+      });
+      for (let i = 0; i < this.user?.length; i++) {
+        if (this.user[i]?._id === id) {
+          this.user?.splice(i, 1);
+          i--;
+        }
+      }
+    });
+  }
   contentWidthEmitted(value) {
     this.content.nativeElement.style.marginLeft = `${value}px`;
   }

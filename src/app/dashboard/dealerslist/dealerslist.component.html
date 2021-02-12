@@ -91,8 +91,12 @@
                 </div>
                 <div class="form-group mt-5" *ngIf="isCsv && !isNewContact">
                     <input type="file" (change)="onFileChange($event)" multiple="false" />
-
-                    <div class="table-container mt-5" *ngIf="contacts">
+                    <div>
+                        <button *ngIf="event" class="btn btn-primary mt-3" (click)="showDataFile()">
+        Show File
+    </button>
+                    </div>
+                    <div class="table-container mt-5" *ngIf="contacts && isShowFile">
                         <table class="table table-hover">
                             <tbody>
                                 <!-- <tr> -->

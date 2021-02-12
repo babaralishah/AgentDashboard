@@ -21,6 +21,7 @@ export class DealerslistComponent implements OnInit {
   contactList: any = [];
   message: any;
   event: any;
+  isShowFile: boolean = false;
 
   constructor(
     public authService: AuthenticationService,
@@ -45,7 +46,16 @@ export class DealerslistComponent implements OnInit {
     /* wire up file reader */
     this.event = evt;
     const target: DataTransfer = <DataTransfer>evt.target;
-    if (target.files.length !== 1) throw new Error("Cannot use multiple files");
+    if (target?.files?.length !== 1) {
+      this.toastr.error("Cannot use multiple files", "Error", {
+        timeOut: 3000,
+      });
+      throw new Error("Cannot use multiple files");
+    } else {
+      this.toastr.success("File uploaded successfully!!", "Success", {
+        timeOut: 5000,
+      });
+    }
     const reader: FileReader = new FileReader();
     reader.onload = (e: any) => {
       /* read workbook */
@@ -62,6 +72,9 @@ export class DealerslistComponent implements OnInit {
       console.log("Headers", this.contacts[0]);
     };
     reader.readAsBinaryString(target.files[0]);
+  }
+  showDataFile() {
+    this.isShowFile = !this.isShowFile;
   }
   sendMessage() {
     for (let i = 0; i < this.contacts?.length - 1; i++) {
@@ -86,7 +99,7 @@ export class DealerslistComponent implements OnInit {
             timeOut: 5000,
           });
           this.message = null;
-          window.location.reload();
+          // window.location.reload();
           // this.router.navigateByUrl("/inventory");
         },
         (error) => {

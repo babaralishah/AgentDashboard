@@ -29,6 +29,16 @@ export class AuthenticationService {
       }
     );
   }
+  deleteRevert(id: any) {
+    let user: any;
+    return this.httpClient.put<any>(
+      `${this.url}/inventory/delete-request/${id}`,
+      user,
+      {
+        headers: new HttpHeaders().set("Authorization", this.getToken()),
+      }
+    );
+  }
   sendMessage(user: any) {
     console.log(user);
 

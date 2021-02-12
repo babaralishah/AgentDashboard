@@ -430,6 +430,10 @@ export class LeadsComponent implements OnInit {
           this.toastr.success(data.message, "Success", {
             timeOut: 5000,
           });
+          setTimeout(() => {
+            //<<<---using ()=> syntax
+            window.location.reload();
+          }, 500);
         });
     } else {
       this.authService.deleteInventory(this.deleteId).subscribe(

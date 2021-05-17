@@ -30,23 +30,25 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-xl-5 col-lg-6 col-md-8 mb-4 mt-3">
+                    <div class="col-5">
                         <div class="row">
-                            <div class="col-6">
-                                <div class="upload-btn-wrapper  text-right input-container">
-                                    <button (click)="file.click()" class="btn text-center mr-2" style="width: 100px;">
-                    <i class="fa fa-camera" aria-hidden="true">&nbsp;</i>
-                    <span class="upload"><b>Choose</b></span>
-                  </button>
-                                    <input #file type='file' class="fileField" accept="image/*" (change)="onSelectFile($event)"><br><br>
+                            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-8">
+                                <div class="">
+                                    <button nz-button nzType="primary" (click)="file.click()" style="background-color: #39bba2;border: #39bba2;" >
+                                        <i class="fa fa-camera" aria-hidden="true">&nbsp;</i>
+                                        <span class="upload"><b>Choose</b></span>
+                                    </button>
+                                    <input #file type='file' class="fileField" accept="image/*"
+                                        (change)="onSelectFile($event)"><br><br>
                                 </div>
                             </div>
-                            <div class="col-6">
-                                <div class="upload-btn-wrapper  text-left">
-                                    <button (click)="updateImage()" class="btn text-center mr-2" style="width: 100px;">
-                    <i class="fa fa-save">&nbsp;</i>
-                    <span class="upload"><b>Save</b></span>
-                  </button>
+                            <div class="col-3">
+                                <div class="">
+                                    <button nz-button nzType="primary" (click)="updateImage()" style="background-color: #39bba2;border: #39bba2;">
+                                        <i class="fa fa-save">&nbsp;</i>
+                                        <span class="upload"><b>Save</b></span>
+                                    </button>
+                                    <!-- <button nz-button nzType="primary">Primary</button> -->
                                 </div>
                             </div>
                         </div>

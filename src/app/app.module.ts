@@ -1,3 +1,5 @@
+import { NzSwitchModule } from 'ng-zorro-antd/switch';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 import { AngularEditorModule } from "@kolkov/angular-editor";
 import { Ng2OrderModule } from "ng2-order-pipe";
 import { NgxPaginationModule } from "ngx-pagination";
@@ -123,9 +125,11 @@ registerLocaleData(en);
     Ng2OrderModule,
     NgxPaginationModule,
     AngularEditorModule,
+    NzButtonModule,
+    NzSwitchModule,
     // MaterialModule
   ],
-  providers: [RoleGuard,AuthenticationService],
+  providers: [RoleGuard, AuthenticationService],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

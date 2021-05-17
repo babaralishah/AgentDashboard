@@ -10,31 +10,40 @@
                 <div class="row mb-3 mt-5">
                     <div class="col-12">
                         <button class="btn btn-primary" (click)="setFormTitle('Inventory')">Add New</button>
-                        <button class="btn btn-secondary ml-3" data-toggle="modal" data-target="#searchFilterModal">Filter</button>
+                        <button class="btn btn-secondary ml-3" data-toggle="modal"
+                            data-target="#searchFilterModal">Filter</button>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-12 col-sm-6 col-lg-3 mb-3">
-                        <ng-select [items]="options" bindLabel="name" bindValue="value" placeholder="Filter By" [(ngModel)]="selectedOption" (change)="optionChange($event)" [clearable]="false">
+                        <ng-select [items]="options" bindLabel="name" bindValue="value" placeholder="Filter By"
+                            [(ngModel)]="selectedOption" (change)="optionChange($event)" [clearable]="false">
                         </ng-select>
                     </div>
                     <div class="col-12 col-sm-6 col-lg-3 mb-3">
-                        <input type="text" class="form-control" placeholder="Search {{ placeholder }}" [(ngModel)]="refId" />
+                        <input type="text" class="form-control" placeholder="Search {{ placeholder }}"
+                            [(ngModel)]="refId" />
                     </div>
                     <div class="col-12 col-sm-6 col-lg-3 mb-3">
-                        <ng-select class="ng-select inputs2" [items]="cities" bindLabel="city" bindValue="city" placeholder="Select City" (change)="changeCity($event)">
+                        <ng-select class="ng-select inputs2" [items]="cities" bindLabel="city" bindValue="city"
+                            placeholder="Select City" (change)="changeCity($event)">
                         </ng-select>
                     </div>
                     <div class="col-12 col-sm-6 col-lg-3 mb-3">
-                        <ng-select class="ng-select inputs2" [(ngModel)]="selectedLocation" [items]="locations" bindLabel="location" bindValue="location" placeholder="Select Location" (change)="changeLocation($event)">
+                        <ng-select class="ng-select inputs2" [(ngModel)]="selectedLocation" [items]="locations"
+                            bindLabel="location" bindValue="location" placeholder="Select Location"
+                            (change)="changeLocation($event)">
                         </ng-select>
                     </div>
 
                     <div class="col-5">
-                        <button class="btn btn-primary" data-toggle="modal" style="
+                        <button nz-button nzType="primary" data-toggle="modal" style="
                         width: 200px;
                         color: black;
-                        background-color: #dcdcdc;" data-target="#Property_Type">Search By <b>Property Type</b></button>
+                        border:#39bba2;
+                        background-color: #dcdcdc;" data-target="#Property_Type">Search By <b>Property
+                                Type</b></button>
+                        <nz-switch nzUnCheckedChildren="search Property Type" data-target="#Property_Type"></nz-switch>
                     </div>
                     <div class="btn-container">
                         <button onclick="window.print()" class="btn btn-primary">Print</button>
@@ -63,7 +72,8 @@
                                 </thead>
 
                                 <tbody>
-                                    <tr *ngFor="let user of user | filterlist: selectedOption:refId  | property_type: property_type2| nameFilter: agentAssignedName | dateFilter: startDate:endDate | demandFilter: minDemand:maxDemand | areaFilter: area_unit:minArea:maxArea | tableFilter: city | LocationFilter:location |  orderBy: key: reverse | paginate:{itemsPerPage:50,currentPage:p}; ">
+                                    <tr
+                                        *ngFor="let user of user | filterlist: selectedOption:refId  | property_type: property_type2| nameFilter: agentAssignedName | dateFilter: startDate:endDate | demandFilter: minDemand:maxDemand | areaFilter: area_unit:minArea:maxArea | tableFilter: city | LocationFilter:location |  orderBy: key: reverse | paginate:{itemsPerPage:50,currentPage:p}; ">
                                         <td>
                                             <span *ngIf="user?.priority == 'Super Hot'"><img class="super-hot"
                                                     src="\assets\icons\super_hot.svg"></span>
@@ -81,7 +91,8 @@
                                         </td>
                                         <td>{{ user?.property_purpose }}</td>
                                         <td>
-                                            {{ user.city[0]?.city }}<span></span><br /><span class="badge badge-light" *ngFor="let loc of user?.location">{{ loc.location }},
+                                            {{ user.city[0]?.city }}<span></span><br /><span class="badge badge-light"
+                                                *ngFor="let loc of user?.location">{{ loc.location }},
                                             </span>
                                         </td>
 
@@ -107,8 +118,11 @@
                                             </td>
                                         </ng-template>
 
-                                        <td *ngIf="user?.min_price != null && user.max_price != null else elseBlockDemand">
-                                            <b>Max:</b> {{ user.max_price | currency :'Rs ' : 'symbol' : '1.0-0' }}<br /><b>Min:</b> {{ user.min_price | currency :'Rs ' : 'symbol' : '1.0-0' }}
+                                        <td
+                                            *ngIf="user?.min_price != null && user.max_price != null else elseBlockDemand">
+                                            <b>Max:</b> {{ user.max_price | currency :'Rs ' : 'symbol' : '1.0-0'
+                                            }}<br /><b>Min:</b> {{ user.min_price | currency :'Rs ' : 'symbol' : '1.0-0'
+                                            }}
                                         </td>
                                         <ng-template #elseBlockDemand>
                                             <td>{{ user.demand_price | currency :'Rs ' : 'symbol' : '1.0-0' }}</td>
@@ -137,16 +151,19 @@
                                             <i class="fa fa-edit icon" (click)="setUserToEdit(user)"></i>
                                             <a (click)="setUserToEdit(user)" role="button"></a>
 
-                                            <i class="fa fa-trash icon" (click)="confirmID(user?._id)" data-toggle="modal" data-target="#exampleModal1"></i>
+                                            <i class="fa fa-trash icon" (click)="confirmID(user?._id)"
+                                                data-toggle="modal" data-target="#exampleModal1"></i>
                                         </td>
-                                        <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
+                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title" id="exampleModalLabel">
                                                             Delete Confirmation
                                                         </h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
@@ -154,10 +171,12 @@
                                                         Are you sure you want to delete it?
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">
                                                             Close
                                                         </button>
-                                                        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteInventory()">
+                                                        <button type="button" class="btn btn-danger"
+                                                            data-dismiss="modal" (click)="deleteInventory()">
                                                             Delete
                                                         </button>
                                                     </div>
@@ -176,7 +195,8 @@
     </div>
 </div>
 
-<div class="modal fade" id="searchFilterModal" tabindex="-1" role="dialog" aria-labelledby="searchFilterModalLabel" aria-hidden="true">
+<div class="modal fade" id="searchFilterModal" tabindex="-1" role="dialog" aria-labelledby="searchFilterModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -197,13 +217,15 @@
                     <div class="row modal-rows">
                         <div class="col-sm-3 col-md-4">
                             <div class="form-group price">
-                                <input type="number" class="form-control" placeholder="Min Demand" formControlName="minPrice">
+                                <input type="number" class="form-control" placeholder="Min Demand"
+                                    formControlName="minPrice">
                             </div>
                         </div>
 
                         <div class="col-sm-3 col-md-4">
                             <div class="form-group price">
-                                <input type="number" class="form-control" placeholder="Max Demand" formControlName="maxPrice">
+                                <input type="number" class="form-control" placeholder="Max Demand"
+                                    formControlName="maxPrice">
                             </div>
                         </div>
                     </div>
@@ -214,13 +236,15 @@
                     <div class="row modal-rows">
                         <div class="col-sm-3 col-md-4">
                             <div class="form-group date">
-                                <input type="text" onfocus="(this.type='date')" class="form-control" placeholder="Start Date" formControlName="startDate">
+                                <input type="text" onfocus="(this.type='date')" class="form-control"
+                                    placeholder="Start Date" formControlName="startDate">
                             </div>
                         </div>
 
                         <div class="col-sm-3 col-md-4">
                             <div class="form-group date">
-                                <input type="text" onfocus="(this.type='date')" class="form-control" placeholder="End Date" formControlName="endDate">
+                                <input type="text" onfocus="(this.type='date')" class="form-control"
+                                    placeholder="End Date" formControlName="endDate">
                             </div>
                         </div>
                     </div>
@@ -230,13 +254,13 @@
                     <div class="row modal-rows">
                         <div class="com-sm-3 col-md-4">
                             <select class="form-control" formControlName="area">
-                            <option [ngValue]="null">Select Area</option>
-                            <option value="Kanal">Kanal</option>
-                            <option value="Marla">Marla</option>
+                                <option [ngValue]="null">Select Area</option>
+                                <option value="Kanal">Kanal</option>
+                                <option value="Marla">Marla</option>
 
-                            <option value="Sq.Yard">Square Yard</option>
-                            <option value="Sq.Feet">Square Feet</option>
-                        </select>
+                                <option value="Sq.Yard">Square Yard</option>
+                                <option value="Sq.Feet">Square Feet</option>
+                            </select>
                         </div>
 
                         <div class="col-sm-5 col-md-3">
@@ -253,11 +277,12 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger reset" data-dismiss="modal" (click)="resetFilters()">
-                <span class="fas fa-undo"></span> Reset
-            </button>
-                <button type="button" class="btn btn-primary filter-button" [disabled]="filterForm.invalid" data-dismiss="modal" (click)="filter()">
-                <span class="fas fa-check"></span>Search
-            </button>
+                    <span class="fas fa-undo"></span> Reset
+                </button>
+                <button type="button" class="btn btn-primary filter-button" [disabled]="filterForm.invalid"
+                    data-dismiss="modal" (click)="filter()">
+                    <span class="fas fa-check"></span>Search
+                </button>
             </div>
         </div>
     </div>
@@ -279,17 +304,20 @@
                     <div class="col-md-5 col-sm-5">
                         <div class="radio">
                             <div class="btn-group btn-group-toggle">
-                                <label class="btn btn-primary" style="width: 139px" [class.active]="property_type === 'Home'">
+                                <label class="btn btn-primary" style="width: 139px"
+                                    [class.active]="property_type === 'Home'">
                                     <input type="radio" [(ngModel)]="property_type" value="Home" />
                                     Home
                                 </label>
 
-                                <label class="btn btn-primary ml-3" style="width: 139px" [class.active]="property_type === 'Plot'">
+                                <label class="btn btn-primary ml-3" style="width: 139px"
+                                    [class.active]="property_type === 'Plot'">
                                     <input type="radio" [(ngModel)]="property_type" value="Plot" />
                                     Plot
                                 </label>
 
-                                <label class="btn btn-primary ml-3" style="width: 139px" [class.active]="property_type === 'Commercial'">
+                                <label class="btn btn-primary ml-3" style="width: 139px"
+                                    [class.active]="property_type === 'Commercial'">
                                     <input type="radio" [(ngModel)]="property_type" value="Commercial" />
                                     Commercial
                                 </label>
@@ -301,33 +329,39 @@
                     <div class="col-12">
                         <div class="radio">
                             <div class="btn-group btn-group-toggle">
-                                <label class="btn btn-primary" style="width: 139px" [class.active]="property_type2 === 'House'">
-                                    <input type="radio" [(ngModel)]="property_type2" value="House"/>
+                                <label class="btn btn-primary" style="width: 139px"
+                                    [class.active]="property_type2 === 'House'">
+                                    <input type="radio" [(ngModel)]="property_type2" value="House" />
                                     House
                                 </label>
 
-                                <label class="btn btn-primary ml-3" style="width: 139px" [class.active]="property_type2 === 'Apartment'">
+                                <label class="btn btn-primary ml-3" style="width: 139px"
+                                    [class.active]="property_type2 === 'Apartment'">
                                     <input type="radio" [(ngModel)]="property_type2" value="Apartment" />
                                     Apartment
                                 </label>
 
-                                <label class="btn btn-primary ml-3" style="width: 139px" [class.active]="property_type2 === 'Farm House'">
+                                <label class="btn btn-primary ml-3" style="width: 139px"
+                                    [class.active]="property_type2 === 'Farm House'">
                                     <input type="radio" [(ngModel)]="property_type2" value="Farm House" />
                                     Farm House
                                 </label>
                             </div>
                             <div class="mt-3 btn-group btn-group-toggle">
-                                <label class="btn btn-primary" style="width: 139px" [class.active]="property_type2 === 'Pent House'">
+                                <label class="btn btn-primary" style="width: 139px"
+                                    [class.active]="property_type2 === 'Pent House'">
                                     <input type="radio" [(ngModel)]="property_type2" value="Pent House" />
                                     Pent House
                                 </label>
 
-                                <label class="btn btn-primary ml-3" style="width: 139px" [class.active]="property_type2 === 'Lower Portion'">
+                                <label class="btn btn-primary ml-3" style="width: 139px"
+                                    [class.active]="property_type2 === 'Lower Portion'">
                                     <input type="radio" [(ngModel)]="property_type2" value="Lower Portion" />
                                     Lower Portion
                                 </label>
 
-                                <label class="btn btn-primary ml-3" style="width: 139px" [class.active]="property_type2 === 'Upper Portion'">
+                                <label class="btn btn-primary ml-3" style="width: 139px"
+                                    [class.active]="property_type2 === 'Upper Portion'">
                                     <input type="radio" [(ngModel)]="property_type2" value="Upper Portion" />
                                     Upper Portion
                                 </label>
@@ -339,17 +373,20 @@
                     <div class="col-12">
                         <div class="radio">
                             <div class="btn-group btn-group-toggle">
-                                <label class="btn btn-primary" style="width: 139px" [class.active]="property_type2 === 'Residential Plot'">
+                                <label class="btn btn-primary" style="width: 139px"
+                                    [class.active]="property_type2 === 'Residential Plot'">
                                     <input type="radio" [(ngModel)]="property_type2" value="Residential Plot" />
                                     Residential Plot
                                 </label>
 
-                                <label class="btn btn-primary ml-3" style="width: 139px" [class.active]="property_type2 === 'Commercial Plot'">
+                                <label class="btn btn-primary ml-3" style="width: 139px"
+                                    [class.active]="property_type2 === 'Commercial Plot'">
                                     <input type="radio" [(ngModel)]="property_type2" value="Commercial Plot" />
                                     Commercial Plot
                                 </label>
 
-                                <label class="btn btn-primary ml-3" style="width: 139px" [class.active]="property_type2 === 'Farm House Plot'">
+                                <label class="btn btn-primary ml-3" style="width: 139px"
+                                    [class.active]="property_type2 === 'Farm House Plot'">
                                     <input type="radio" [(ngModel)]="property_type2" value="Farm House Plot" />
                                     Farm House Plot
                                 </label>
@@ -362,29 +399,33 @@
                         <div class="radio ml-3">
                             <div class="row">
                                 <div class="btn-group btn-group-toggle">
-                                    <label class="btn btn-primary" style="width: 139px" [class.active]="property_type2 === 'Office'">
-                                    <input type="radio" [(ngModel)]="property_type2" value="Office" />
-                                    Office
-                                </label>
+                                    <label class="btn btn-primary" style="width: 139px"
+                                        [class.active]="property_type2 === 'Office'">
+                                        <input type="radio" [(ngModel)]="property_type2" value="Office" />
+                                        Office
+                                    </label>
 
-                                    <label class="btn btn-primary ml-3" style="width: 139px" [class.active]="property_type2 === 'Shop'">
-                                    <input type="radio" [(ngModel)]="property_type2" value="Shop" />
-                                    Shop
-                                </label>
+                                    <label class="btn btn-primary ml-3" style="width: 139px"
+                                        [class.active]="property_type2 === 'Shop'">
+                                        <input type="radio" [(ngModel)]="property_type2" value="Shop" />
+                                        Shop
+                                    </label>
 
-                                    <label class="btn btn-primary ml-3" style="width: 139px" [class.active]="property_type2 === 'Plaza'">
-                                    <input type="radio" [(ngModel)]="property_type2" value="Plaza" />
-                                    Plaza
-                                </label>
+                                    <label class="btn btn-primary ml-3" style="width: 139px"
+                                        [class.active]="property_type2 === 'Plaza'">
+                                        <input type="radio" [(ngModel)]="property_type2" value="Plaza" />
+                                        Plaza
+                                    </label>
 
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="mt-3 btn-group btn-group-toggle">
-                                    <label class="btn btn-primary" style="width: 139px" [class.active]="property_type2 === 'Floor'">
-                                    <input type="radio" [(ngModel)]="property_type2" value="Floor" />
-                                    Floor
-                                </label>
+                                    <label class="btn btn-primary" style="width: 139px"
+                                        [class.active]="property_type2 === 'Floor'">
+                                        <input type="radio" [(ngModel)]="property_type2" value="Floor" />
+                                        Floor
+                                    </label>
                                 </div>
                             </div>
                         </div>
